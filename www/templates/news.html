@@ -1,0 +1,20 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+  <ion-content>
+
+    <!-- news sources -->
+
+    <div class="bg-light pt20 pb20">
+		<h4 class="fw300 m0 p10 pt20">News Sources</h4> <!-- news feed sources -->
+		<div class="list">
+		    <a class="item item-avatar bg-white m5" ng-repeat="item in categories" href="#/app/newslist/{{item.id}}">
+		    	<img ng-src="{{item.img}}">
+		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
+			  <h4 class="fw300 m0 dark">{{item.description}}</h4>
+		    </a>
+		</div>
+	</div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+</ion-view>

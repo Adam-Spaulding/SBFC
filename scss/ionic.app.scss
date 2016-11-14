@@ -1,0 +1,262 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+
+$white:                           #ffffff !default;
+$light:                           #f5f5f5 !default;
+$stable:                          #dddddd !default;
+$positive:                        #c7d1dd !default;
+$calm:                            #f0f0f0 !default;
+$balanced:                        #51729a !default;
+$energized:                       #51729a !default;
+$assertive:                       #e2548d !default;
+$royal:                           #7740a2 !default;
+$dark:                            #636469 !default;
+$darker:                          #fff !default;
+
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+
+@import url(https://fonts.googleapis.com/css?family=Patua+One|Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic);
+
+
+
+
+/* BACKGROUND AND TEXT COLOR */
+.bg-white {
+	background-color: $white !important;
+}
+.bg-light {
+	background-color: $light !important;
+}
+.bg-stable {
+	background-color: $stable !important;
+}
+.bg-positive {
+	background-color: $positive !important;
+}
+.bg-calm {
+	background-color: $calm !important;
+}
+.bg-balanced {
+	background-color: $balanced !important;
+}
+.bg-energized {
+	background-color: $energized !important;
+}
+.bg-assertive {
+	background-color: $assertive !important;
+}
+.bg-royal {
+	background-color: $royal !important;
+}
+.bg-dark {
+	background-color: $dark !important;
+}
+.bg-darker {
+	background-color: $darker !important;
+}
+.bg-transparent {
+	background-color: transparent !important;
+}
+
+.text-white {
+	color: $white !important;
+}
+.text-light {
+	color: $light !important;
+}
+.text-stable {
+	color: $stable !important;
+}
+.text-positive {
+	color: $positive !important;
+}
+.text-calm {
+	color: $calm !important;
+}
+.text-balanced {
+	color: $balanced !important;
+}
+.text-energized {
+	color: $energized !important;
+}
+.text-assertive {
+	color: $assertive !important;
+}
+.text-royal {
+	color: $royal !important;
+}
+.text-dark {
+	color: $dark !important;
+}
+.text-darker {
+	color: $darker !important;
+}
+.text-transparent {
+	color: transparent !important;
+}
+/* //BACKGROUND AND TEXT COLOR */
+
+
+.pane {
+	background-color: $light;
+}
+
+* {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+a, a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+p {
+	line-height: 24px;
+}
+
+.scroll{
+	height: 100%;
+}
+.back-text {
+	display: none !important;
+}
+
+
+/* HEADER BAR */
+.bar {
+	border: 0px !important;
+	border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+}
+
+.bar .title {
+	color: $light;
+}
+/* //HEADER BAR */
+
+
+
+/* BUTTONS */
+.button {
+    border-radius: 0px;
+    border-width: 0px;
+    font-size: 14px;
+    line-height: 35px;
+    margin: 0;
+    min-height: 37px;
+    min-width: 42px;
+    padding: 0 16px;
+    font-weight: 600;
+}
+.button.button-outline {
+	border-width: 1px;
+}
+.button.button-round {
+	border-radius: 21px;
+}
+.button .icon {
+	color: $light;
+}
+/* //BUTTONS */
+
+
+
+/* LISTS AND FORMS */
+.list-inset, .item-complex .item-content, .item-radio .item-content, .item {
+	background-color: transparent;
+	border: 0px;
+}
+
+.input-transparent {
+	background-color: rgba(0,0,0,.5);
+	border: 0px;
+}
+.input-transparent input {
+	color: $light;
+}
+/* //LISTS AND FORMS */
+
+
+
+/* OWL CAROUSEL */
+.owl-prev, .owl-next  {
+	background-color: $light !important;
+	-webkit-border-radius: 0 !important;
+	border-radius: 0 !important;
+	font-size: 21px !important;
+	position: absolute !important;
+	top: 10px !important;
+}
+.owl-prev {
+	left: 10px !important;
+}
+.owl-next {
+	right: 10px !important;
+}
+/* //OWL CAROUSEL */
+
+
+
+/* ELEMENTS */
+.toggle .track {
+	width: 41px;
+    height: 21px;
+    border: solid 1px $stable;
+    border-radius: 20px;
+}
+.toggle .handle {
+	width: 17px;
+    height: 17px;
+    border-radius: 27px;
+    top: 7px;
+    left: 7px;
+}
+.toggle input:checked + .track {
+	background-color: transparent !important;
+}
+.checkbox input:before, .checkbox-icon:before {
+	width: 50%;
+	height: 50%;
+	margin-top: 7px;
+}
+
+
+/* BLOG */
+.blogPost img {
+	max-width: 100%;
+}
+
+
+
+
+/* ANIMATIONS */
+.animation-show-hide {
+  transition: all linear 0.3s;
+}
+
+.animation-show-hide.ng-hide {
+  opacity: 0;
+}

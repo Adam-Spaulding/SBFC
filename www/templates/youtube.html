@@ -1,0 +1,22 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+
+  <ion-content ng-init="getChannel()">
+
+<!-- youtube videos -->
+
+	<div class="bg-light pt20 pb20">
+		<!-- <h4 class="fw300 m0 p10 pt20">Youtube channel: {{channel}}</h4> <!-- news feed sources -->
+    <h4 class="fw300 m0 p10 pt20">Mac Photography Videos</h4>
+		<div class="list">
+		    <a class="item item-avatar bg-white m5" ng-repeat="item in videos" href="#/app/video/{{item.snippet.resourceId.videoId}}/{{$index}}">
+		    	<img ng-src="{{item.snippet.thumbnails.high.url}}">
+		      <h4 class="fw500 m0 dark pt5">{{item.snippet.title}}</h4>
+			  <h4 class="fw300 m0 dark">{{item.snippet.description}}</h4>
+		    </a>
+		</div>
+	</div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+</ion-view>

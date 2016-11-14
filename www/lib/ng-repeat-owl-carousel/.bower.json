@@ -1,0 +1,30 @@
+{
+  "name": "ng-repeat-owl-carousel",
+  "homepage": "https://github.com/mzaferyahsi/OwlCarouselNgRepeat",
+  "authors": [
+    "M. Zafer Yahsi <mzaferyahsi@gmail.com>"
+  ],
+  "description": "Directive for initializing Owl Carousel in AngularJS ng-repeat",
+  "keywords": [
+    "owl",
+    "owlcarousel",
+    "carousel"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "5e6145d0e3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5e6145d0e3192a70cf424b104e21c83f9996b701"
+  },
+  "_source": "https://github.com/mzaferyahsi/OwlCarouselNgRepeat.git",
+  "_target": "*",
+  "_originalSource": "ng-repeat-owl-carousel"
+}

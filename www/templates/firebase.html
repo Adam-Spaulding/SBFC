@@ -1,0 +1,51 @@
+<ion-view view-title="Firebase">
+
+  <ion-content class="text-center p20">
+
+  <img src="img/firebase.png">
+    
+    <h3 class="dark fw300 m0">Firebase starter functions (AngularFire)</h3>
+	<p class="dark fw900 mb20 up">read and update object (3-way data binding)</p>
+    <div class="list">
+     <!-- anything typed in here is magically saved to our Firebase database! -->
+     <label class="item item-input">
+	    <input type="text" placeholder="Update the Firebase object" ng-model="firebaseObject.text" class="bg-light p10 text-center">
+	  </label>
+    <!-- all changes from our Firebase database magically appear here! -->
+    </div>
+    <div class="card bg-energized">
+    <h4 class="text-white">Your Firebase object (realtime update)</h4>
+    	<h5 class="text-white">{{ firebaseObject.text }}</h5>
+    </div>
+
+    <div class="he50"></div>
+
+    <h3 class="dark fw300 m0">Firebase simple chat sample (AngularFire)</h3>
+	<p class="dark fw900 up">read and update arrays (3-way data binding)</p>
+	<p class="dark fw300 mb20 up">you can even edit the posted message realtime</p>
+	<p class="dark fw300 mb20 mt30 text-left up">messages list</p>
+    <ul>
+      <li ng-repeat="message in messages" class="text-right">
+      <!-- delete a message -->
+        <!-- edit a message -->
+        <a ng-click="messages.$remove(message)" class="absolute z-shi pt10"><i class="ti-trash energized"></i></a>
+        <div class="list">
+    		<label class="item item-input">
+        		<input type="text" ng-model="message.text" ng-change="messages.$save(message)" class="bg-dark text-light p10" />
+        	</label>
+        </div>
+      </li>
+    </ul>
+    <!-- push a new message onto the array -->
+    <p class="dark fw300 mb20 mt30 text-left up">write a new message</p>
+    <div class="list pt20">
+    	<label class="item item-input">
+      		<input type="text" placeholder="Write a new message" ng-model="newMessageText" class="bg-light p10 text-center">
+      	</label>
+      </div>
+      <a ng-click="addMessage(newMessageText)" class="button button-block button-energized up">Add Message</a>
+
+      <div class="he50"></div>
+
+  </ion-content>
+</ion-view>

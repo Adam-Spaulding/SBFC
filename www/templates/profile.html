@@ -1,0 +1,34 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+  <ion-content>
+
+  	<div class="list">
+		    <div class="item bg-white m5 text-center">
+		    	<img ng-src="img/users/3.jpg" class="round">
+		      <h3 class="fw500 dark p10">Email: {{userProfile.email}}</h3>
+			  <h3 class="fw300 dark p10" ng-show="userProfile.phone">Phone: {{userProfile.phone}}</h3>
+			  <!-- <a class="button button-energized up mt20">Edit profile</a> -->
+
+		    </div>
+		</div>
+
+		<p class="dark fw300 m0 pb20 pt40 text-center">Keep your contact information up to date below!</p>
+
+		<div class="item bg-white m5 text-center">
+			<label class="item item-input border-b-xs mt10 item-floating-label">
+			<span class="input-label">Full name</span>
+	              <input type="text" placeholder="Your name" ng-model="userProfile.name" ng-change="userProfile.$save(name)">
+	          </label>
+	          <label class="item item-input border-b-xs mt10 item-floating-label">
+	          <span class="input-label">Phone number</span>
+	              <input type="tel" placeholder="Phone" ng-model="userProfile.phone" ng-change="userProfile.$save(phone)">
+	          </label>
+	          <label class="item item-input border-b-xs mt10 item-floating-label">
+	          <span class="input-label">Location</span>
+	              <input type="text" placeholder="Location" ng-model="userProfile.location" ng-change="userProfile.$save(location)">
+	          </label>
+	          </div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+</ion-view>

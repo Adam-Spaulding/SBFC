@@ -1,0 +1,35 @@
+<ion-view view-title="{{post.title}}">
+  <ion-content>
+
+<!-- blog post -->
+	<div class="blogPost" ng-init="getPost()">
+		<img ng-src="{{post.attachments[0].url}}" class="img-full">
+		<h3 class="mt-70 pb30 fw300 pl30 pr30 light">{{post.title}}</h3>
+		<h5 class="pl20">By {{post.author.nickname}}</h5>
+		<div class="button-bar pl50 pr50">
+			<a class="button button-clear button-positive" ng-click="shareFacebook(post.title, post.attachments[0].url)">
+				<i class="ti-facebook font-xl"></i>
+			</a>
+			<a class="button button-clear button-positive" ng-click="shareTwitter(post.title, post.attachments[0].url)">
+				<i class="ti-twitter font-xl op7"></i>
+			</a>
+			<a class="button button-clear button-calm" ng-click="shareWhatsApp(post.title, post.attachments[0].url)">
+				<i class="fa fa-whatsapp font-xl"></i>
+			</a>
+		</div>
+		<div class="p20" ng-bind-html="post.content"></div>
+		<div class="p20">
+		<h4 class="fw300 m0 pb20" ng-show="post.comments != ''">Comments:</h4>
+			<ul>
+				<li ng-repeat="comment in post.comments">
+				<h5>{{comment.author.nickname}}</h5>
+				<p ng-bind-html="comment.content"></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+</ion-view>

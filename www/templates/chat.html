@@ -1,0 +1,26 @@
+<ion-view view-title="Welcome {{user}}" ng-init="getMessages()">
+  <ion-content>
+
+<!-- chat window -->
+	
+	<div class="list">
+	    <a class="item item-avatar" ng-repeat="message in messages" ng-click="">
+	      <img ng-src="{{message.avatar}}">
+	      <h2>{{message.email}}</h2>
+	      <p>{{message.text}}</p>
+	    </a>
+	</div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+  <div class="bar bar-footer item-input-inset">
+	  	<label class="item-input-wrapper">
+		    <i class="ti-thought placeholder-icon"></i>
+		    <input type="text" placeholder="Type your message here..." ng-model="message">
+		  </label>
+		  <button class="button button-energized" ng-click="send(message)">
+		    <i class="ti-control-forward text-white"></i>
+		  </button>
+	</div>
+</ion-view>

@@ -1,0 +1,35 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+  <ion-content class="bg-light text-center p20">
+
+  <h3 class="dark fw300 m0">Post to SBFC</h3>
+  <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
+
+  <div class="card">
+    	<div class="list">
+        <!-- Need Image Uploader. Something like this perhaps? https://market.ionic.io/plugins/angular-imgcache-preloader -->
+  	  <label class="item item-input item-floating-label">
+  	    <span class="input-label">Post Title</span>
+  	    <input type="text" placeholder="Post Title" required>
+  	  </label>
+      <label class="item item-input item-floating-label">
+  	    <span class="input-label">Body</span>
+  	    <textarea rows="5" cols="20" placeholder="Body" required></textarea>
+  	  </label>
+      <ion-item>
+      <select required="">
+        <option value="baby-photo">Baby Photo</option>
+        <option value="ask-an-expert">Ask an Expert</option>
+        <option value="marketplace">Marketplace</option>
+        <option value="diognostic-ultrasound">Diognostic Ultrasound</option>
+        <option value="bbne">BBNE</option>
+      </select>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Published Date</span>
+        <input type="date" name="published-date">
+      </label>
+      <p>Select a date that you would like this post to go out to your users. The alert will be sent on this date as well.</p>
+  	</div>
+  </div>
+
+  </ion-content>
+</ion-view>

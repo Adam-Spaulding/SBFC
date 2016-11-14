@@ -1,0 +1,26 @@
+<ion-view view-title="Home" hide-nav-bar="true">
+
+  <!-- animated background -->
+  <div class="img-cover z-lo">
+      <img src="img/animated-bg.gif">
+  </div>
+
+  <ion-content>
+
+	<div class="relative z-hi text-center p20 pt70 ml40 mr40 pb70">
+		<h1 class="fw300 m0 light">Reset</h1>
+		<h4 class="fw300 m0 light">my password</h4>
+		<div class="list list-inset mt120">
+          <label class="item item-input input-transparent">
+              <input type="email" placeholder="Email" ng-model="email">
+          </label>
+      </div>
+      <div class="p10">
+        <button class="button button-block button-energized up" ng-click="reset(email)">Reset</button>
+        <a class="button button-block button-clear button-light up" ng-click="back()">Back</a>
+      </div>
+	</div>
+
+
+  </ion-content>
+</ion-view>

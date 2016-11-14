@@ -1,0 +1,50 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+  <!-- map background -->
+  <div class="">
+      <!-- <div map-lazy-load="https://maps.google.com/maps/api/js"> -->
+		  <ng-map center="165 Lafayette Rd North Hampton, NH" zoom="16" class="" style="height:100vh" pan-control="false" zoom-control="false" scale-control="true">
+        <marker
+          id="sbfc"
+          position="165 Lafayette Rd North Hampton, NH"
+          on-click="map.showInfoWindow('info')"
+          title="You are here"
+          centered="true"></marker>
+          <info-window id="info" visible-on-marker="sbfc">
+            <div ng-non-bindable>
+              <div id="siteNotice"></div>
+              <p id="firstHeading" class="firstHeading">Seacoast Birth & Family Connection</p>
+              <div id="bodyContent">
+                <p>165 Lafayette Rd North Hampton, NH</p>
+              </div>
+            </div>
+          </info-window>
+      </ng-map>
+		</div>
+  </div>
+
+  <!-- <ion-content>
+
+	<div class="relative z-hi text-center p20 pt70 ml40 mr40">
+		<h1 class="fw300 m0 light">Get in touch</h1>
+		<h4 class="fw300 m0 light">say hello</h4>
+		<div class="list list-inset mt50">
+          <label class="item item-input input-transparent">
+              <input type="email" placeholder="Email" ng-model="email">
+          </label>
+          <label class="item item-input input-transparent mt10">
+              <input type="text" placeholder="Your message" ng-model="message">
+          </label>
+      </div>
+      <div class="p10">
+        <button class="button button-block button-energized up" ng-click="sendMessage(email, message)">Submit</button>
+        <h3 class="light mt50">Want to meet us?</h3>
+        <h4 class="light">Headquarters</h4>
+            <p class="light"><strong>Google Inc.</strong><br>
+              1600 Amphitheatre Parkway<br>
+              Mountain View, CA 94043<br>
+              USA</p>
+      </div>
+	</div>
+
+  </ion-content> -->
+</ion-view>

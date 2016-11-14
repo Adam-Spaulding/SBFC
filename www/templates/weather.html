@@ -1,0 +1,22 @@
+<ion-view view-title="Weather">
+
+	<!-- animated background -->
+  <div class="img-cover z-lo">
+      <img src="img/bg/weather.png">
+  </div>
+
+  <ion-content>
+
+<!-- weather screen -->
+	<div class="p30" ng-init="getWeather()">
+		<h1 class="text-white fw300">{{weather.main.temp}} &#8451;</h1>
+		<p class="text-white fw600 m0">Weather: {{weather.weather[0].description}}</p>
+		<p class="text-white fw600 m0">Area: {{weather.name}}</p>
+		<p class="text-white fw600 m0">Humidity: {{weather.main.humidity}} %</p>
+		<p class="text-white fw600 m0">Pressure: {{weather.main.pressure}} kPa</p>
+	</div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+</ion-view>
