@@ -66,19 +66,19 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
   $scope.data = {
     showDelete: false
   };
-  
+
   $scope.edit = function(item) {
     alert('Edit Item: ' + item.id);
   };
   $scope.share = function(item) {
     alert('Share Item: ' + item.id);
   };
-  
+
   $scope.moveItem = function(item, fromIndex, toIndex) {
     $scope.notifications.splice(fromIndex, 1);
     $scope.notifications.splice(toIndex, 0, item);
   };
-  
+
   $scope.onItemDelete = function(item) {
     $scope.notifications.splice($scope.notifications.indexOf(item), 1);
   };
@@ -168,7 +168,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
       $state.go('app.login');
     }).catch(function(error) {
       console.error("Error: ", error);
-    });  
+    });
 
   }
 
@@ -180,7 +180,7 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
 
   $ionicSideMenuDelegate.canDragContent(true);
 
-  
+
   // TABS
   $scope.tab = 1;
   $scope.activeMenu = 1;
@@ -243,7 +243,7 @@ app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList
 
 app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, FeedSources, FeedList) {
 
-  // NEWS SELECTED SOURCE INFORMATION 
+  // NEWS SELECTED SOURCE INFORMATION
   $scope.source = FeedSources[$stateParams.id];
 
   // NEWS FEED
@@ -257,12 +257,12 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, Fee
         }
         $ionicLoading.hide();
         })
-      
+
     }
     getNews(10);
 
     $scope.openUrl = function(link) {
-      window.open(link, '_system', 'location=yes'); 
+      window.open(link, '_system', 'location=yes');
       return false;
     }
 
@@ -298,7 +298,7 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
     }
   )
 
-   
+
 
 
 // WORDPRESS POSTS
@@ -327,7 +327,7 @@ $scope.getPost = function() {
 }
 
 
-// SHARE 
+// SHARE
 $scope.shareTwitter = function(message, image) {
   $cordovaSocialSharing
     .shareViaTwitter(message, image, 'linkhere')
@@ -381,7 +381,7 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
   // synchronize the object with a three-way data binding
   syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
     $ionicLoading.hide();
-  
+
 
   // array
   var refArray = firebase.database().ref().child("messages");
@@ -403,7 +403,7 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
 
 
 app.controller('ElementsCtrl', function($scope) {
-  
+
 })
 
 
@@ -412,7 +412,7 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
 
 
 
-  // toast message 
+  // toast message
   $scope.showToast = function() {
 $ionicPlatform.ready(function() {
     $cordovaToast.showLongBottom('Here is a toast message').then(function(success) {
@@ -428,9 +428,9 @@ $ionicPlatform.ready(function() {
 
   // rate my app
   $scope.showApprate = function() {
-    
+
 $ionicPlatform.ready(function() {
-   
+
   $cordovaAppRate.promptForRating(true).then(function (result) {
         // success
     });
@@ -443,9 +443,9 @@ $ionicPlatform.ready(function() {
 
    // barcode scanner
   $scope.showBarcode = function() {
-    
+
 $ionicPlatform.ready(function() {
-   
+
   $cordovaBarcodeScanner
       .scan()
       .then(function(barcodeData) {
@@ -467,9 +467,9 @@ $ionicPlatform.ready(function() {
 
     // device info
   $scope.showDeviceinfo = function() {
-    
+
 $ionicPlatform.ready(function() {
-   
+
     var device = $cordovaDevice.getDevice();
     var cordova = $cordovaDevice.getCordova();
     var model = $cordovaDevice.getModel();
@@ -510,11 +510,54 @@ document.addEventListener("deviceready", function () {
 
 
 
-app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser) {
+app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
 
   $scope.getUserStatus();
 
+  $scope.message = 'Test';
+
+  $scope.showToolbar = true;
+
+  /*$scope.translations = angular.extend({}, ngQuillConfig.translations, {
+    15: 'smallest'
+  });*/
+
+  /*$scope.toggle = function() {
+    $scope.showToolbar = !$scope.showToolbar;
+  };*/
+  // Own callback after Editor-Creation
+  /*$scope.editorCallback = function (editor, name) {
+    console.log('createCallback', editor, name);
+  };*/
+
+  $scope.readOnly = false;
+
+  $scope.isReadonly = function () {
+    return $scope.readOnly;
+  };
+
+  $scope.clear = function () {
+    return $scope.message = '';
+  };
+
+  // Event after an editor is created --> gets the editor instance on optional the editor name if set
+  $scope.$on('editorCreated', function (event, editor, name) {
+    console.log('createEvent', editor, name);
+  });
+
+  $timeout(function () {
+    $scope.message = 'Body Type your text here';
+    console.log($scope.message);
+  }, 3000);
   $scope.getMessages = function() {
+
+    //$scope.version = textAngularManager.getVersion();
+    //$scope.versionNumber = $scope.version.substring(1);
+    /*$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><img class="ta-insert-video" ta-insert-video="http://www.youtube.com/embed/2maA1-mvicY" src="" allowfullscreen="true" width="300" frameborder="0" height="250"/></p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE9+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p><h4>Supports non-latin Characters</h4><p>昮朐 魡 燚璒瘭 譾躒鑅, 皾籈譧 紵脭脧 逯郹酟 煃 瑐瑍, 踆跾踄 趡趛踠 顣飁 廞 熥獘 豥 蔰蝯蝺 廦廥彋 蕍蕧螛 溹溦 幨懅憴 妎岓岕 緁, 滍 蘹蠮 蟷蠉蟼 鱐鱍鱕, 阰刲 鞮鞢騉 烳牼翐 魡 骱 銇韎餀 媓幁惁 嵉愊惵 蛶觢, 犝獫 嶵嶯幯 縓罃蔾 魵 踄 罃蔾 獿譿躐 峷敊浭, 媓幁 黐曮禷 椵楘溍 輗 漀 摲摓 墐墆墏 捃挸栚 蛣袹跜, 岓岕 溿 斶檎檦 匢奾灱 逜郰傃</p>';
+    $scope.htmlcontent = $scope.orightml;*/
+    //$scope.disabled = false;
+
+
     $timeout(function() {
       // set firebase refference for messages - if user is logged in, set to match user uid, if there is no user, show public messages
       var refArray = firebase.database().ref().child("chat/"+$rootScope.userUid);
@@ -561,7 +604,7 @@ app.controller('WeatherCtrl', function($scope, $ionicLoading, weatherService) {
 
 app.controller('ContactCtrl', function($scope) {
 
- 
+
 })
 
 
@@ -571,7 +614,7 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
                $ionicLoading.show({
                                   template: 'Loading videos...'
                                   });
-               
+
         $window.initGapi = function() {
             $scope.$apply($scope.getChannel);
         };
@@ -605,14 +648,14 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
 
 app.controller('MapsCtrl', function($scope) {
 
- 
+
 })
 
 
 app.controller('AdmobCtrl', function($scope) {
 
-               
-               $scope.showBanner = function() {               
+
+               $scope.showBanner = function() {
                 if(AdMob) AdMob.showBanner();
                }
                $scope.hideBanner = function() {
@@ -621,9 +664,9 @@ app.controller('AdmobCtrl', function($scope) {
                $scope.showInterstitial = function() {
                if(AdMob) AdMob.showInterstitial();
                }
-               
 
-                              
- 
+
+
+
 })
 

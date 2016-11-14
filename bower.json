@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "angularfire": "^2.0.1",
-    "ng-repeat-owl-carousel": "*"
+    "ng-repeat-owl-carousel": "*",
+    "ngQuill": "ngquill#^1.5.3"
   }
 }
