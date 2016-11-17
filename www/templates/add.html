@@ -5,17 +5,33 @@
     <h3 class="dark fw300 m0">Post to SBFC</h3>
     <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
 
-    <div class="card">
-      <div class="list">
+
+
+    <div class="card" style="text-align:left;">
+      <div class="list" style="margin: 0 5%;">
         <!-- Need Image Uploader. Something like this perhaps? https://market.ionic.io/plugins/angular-imgcache-preloader -->
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Post Title</span>
-          <input type="text" placeholder="Post Title" required>
+        <label class="item item-input item-floating-label title">
+          <span class="input-label" style="color:#51729a;">Post Title</span>
+          <input type="text" placeholder="Post Title" required style="border-bottom:2px solid #51729a;">
         </label>
-        <div style="">
-          <ng-quill-editor name="editor1" callback="editorCallback(editor, name)" ng-model="message" translations="translations" toolbar="true" show-toolbar="showToolbar" link-tooltip="true" image-tooltip="true" toolbar-entries="font size bold list bullet italic underline strike align color background link image" editor-required="true" required="" read-only="isReadonly()" error-class="input-error"
-                           fontsize-options="fontsizeOptions" ></ng-quill-editor>
-        </div>
+        <!-- <div style="text-align:left;"> -->
+          <ng-quill-editor
+            name="editor1"
+            callback="editorCallback(editor, name)"
+            ng-model="message"
+            translations="translations"
+            toolbar="true"
+            show-toolbar="showToolbar"
+            link-tooltip="true"
+            image-tooltip="true"
+            toolbar-entries="bold list bullet italic underline align color background link"
+            editor-required="true"
+            required=""
+            read-only="isReadonly()"
+            error-class="input-error"
+            fontsize-options="fontsizeOptions">
+          </ng-quill-editor>
+        <!-- </div> -->
 
         <!--<b>current value</b><pre>{{message}}</pre>-->
 
@@ -23,7 +39,8 @@
           <span class="input-label">Body</span>
           <textarea rows="5" cols="20" placeholder="Body" ng-model="editor1" required></textarea>
         </label>-->
-        <ion-item>
+
+        <ion-item>Category:
           <select required="">
             <option value="baby-photo">Baby Photo</option>
             <option value="ask-an-expert">Ask an Expert</option>
@@ -31,14 +48,23 @@
             <option value="diognostic-ultrasound">Diognostic Ultrasound</option>
             <option value="bbne">BBNE</option>
           </select>
-          <label class="item item-input item-floating-label">
-            <span class="input-label">Published Date</span>
-            <input type="date" name="published-date">
-          </label>
-          <p>Select a date that you would like this post to go out to your users. The alert will be sent on this date as well.</p>
+        </ion-item>
+        <ion-item>
+          <div class="item item-input" style="padding-left:0px; width:400px;">
+            Published Date: <input type="date" name="published-date">
+          </div>
+          <!-- <p>Select a date that you would like this post to go out to your users. The alert will be sent on this date as well.</p> -->
+        </ion-item>
+        <ion-item style="max-width:200px; padding-left:0px;">
+          <ion-toggle ng-model="airplaneMode" toggle-class="toggle">Published</ion-toggle>
+        </ion-item>
+
       </div>
+
     </div>
 
+      <button class="btn button-positive">Save</button>
+      <button class="btn button-warning">Delete</button>
 
   </ion-content>
 </ion-view>

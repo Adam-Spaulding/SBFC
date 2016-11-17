@@ -1,1 +1,24 @@
 /* Empty. Add your own CSS if you like */
+.btn {
+  border-radius: 0px;
+  font-size: 16px;
+  text-transform: uppercase;
+  border:0px solid transparent;
+  margin: 0 5px;
+  padding: 5px 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.button-positive {
+  background-color: #C7D1DD;
+  color: #fff;
+}
+
+.button-warning {
+  background-color: #F0B898;
+  color: #fff;
+}
+
+.btn:active {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}

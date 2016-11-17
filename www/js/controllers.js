@@ -546,7 +546,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
   });
 
   $timeout(function () {
-    $scope.message = 'Body Type your text here';
+    $scope.message = 'Body';
     console.log($scope.message);
   }, 3000);
   $scope.getMessages = function() {
@@ -669,4 +669,3 @@ app.controller('AdmobCtrl', function($scope) {
 
 
 })
-
