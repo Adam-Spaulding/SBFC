@@ -594,15 +594,15 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     $scope.message = '';
   };
 
-  $scope.addData = function(user){
+  $scope.storeImageToDB = function(file){
 
-    var file = document.querySelector('input[type=file]').files[0];
-    console.log(file);
+    /*var file = document.querySelector('input[type=file]').files[0];
+    console.log(file);*/
     var storageRef = firebase.storage().ref().child('images');
     // Get a reference to store file at photos/<FILENAME>.jpg
     var photoRef = storageRef.child(file.name);
     // Upload file to Firebase Storage
-    var uploadTask = photoRef.put(file);
+    var uploadTask = photoRef.putString(file.base64);
     uploadTask.on('state_changed', null, null, function(snapshot) {
       console.log('success');
       console.log(snapshot);
@@ -613,9 +613,27 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     });
   };
 
-  $scope.saveData = function (user,msg) {
+  $scope.saveData = function (user,msg,b64) {
     console.log(user,msg);
+    imgObj.base64 = b64;
+    $scope.storeImageToDB(imgObj)
   }
+  var imgObj = {}
+  $scope.myImage='';
+  $scope.myCroppedImage='';
+
+  var handleFileSelect=function(evt) {
+    var file=evt.currentTarget.files[0];
+    imgObj.name = file.name;
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope){
+        $scope.myImage=evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
 })
 

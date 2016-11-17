@@ -7,6 +7,9 @@
   "dependencies": {
     "angularfire": "^2.0.1",
     "ng-repeat-owl-carousel": "*",
-    "textAngular": "^1.5.13"
+    "textAngular": "^1.5.13",
+    "ng-img-crop": "ngImgCrop#^0.3.2",
+    "firebase": "^3.6.1",
+    "ngQuill": "ngquill#^1.5.3"
   }
 }
