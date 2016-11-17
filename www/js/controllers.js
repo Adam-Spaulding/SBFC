@@ -514,6 +514,12 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
 
   $scope.getUserStatus();
 
+  $scope.user = {
+    airplaneMode:'',
+    date:'',
+    title:''
+  }
+
   $scope.message = 'Test';
 
   $scope.showToolbar = true;
@@ -564,7 +570,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
       // create a synchronized array
       $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
     }, 100)
-  }
+  };
 
   $scope.getMessages();
 
@@ -586,6 +592,29 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
       avatar: $scope.avatar
     });
     $scope.message = '';
+  };
+
+  $scope.addData = function(user){
+
+    var file = document.querySelector('input[type=file]').files[0];
+    console.log(file);
+    var storageRef = firebase.storage().ref().child('images');
+    // Get a reference to store file at photos/<FILENAME>.jpg
+    var photoRef = storageRef.child(file.name);
+    // Upload file to Firebase Storage
+    var uploadTask = photoRef.put(file);
+    uploadTask.on('state_changed', null, null, function(snapshot) {
+      console.log('success');
+      console.log(snapshot);
+      // When the image has successfully uploaded, we get its download URL
+      var downloadUrl = uploadTask.snapshot.downloadURL;
+      // Set the download URL to the message box, so that the user can send it to the database
+      //$scope.userDisplayPic = downloadUrl;
+    });
+  };
+
+  $scope.saveData = function (user,msg) {
+    console.log(user,msg);
   }
 
 })

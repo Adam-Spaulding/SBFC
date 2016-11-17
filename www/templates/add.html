@@ -12,7 +12,7 @@
         <!-- Need Image Uploader. Something like this perhaps? https://market.ionic.io/plugins/angular-imgcache-preloader -->
         <label class="item item-input item-floating-label title">
           <span class="input-label" style="color:#51729a;">Post Title</span>
-          <input type="text" placeholder="Post Title" required style="border-bottom:2px solid #51729a;">
+          <input type="text" placeholder="Post Title" ng-model="user.title" required style="border-bottom:2px solid #51729a;">
         </label>
         <!-- <div style="text-align:left;"> -->
           <ng-quill-editor
@@ -39,7 +39,11 @@
           <span class="input-label">Body</span>
           <textarea rows="5" cols="20" placeholder="Body" ng-model="editor1" required></textarea>
         </label>-->
-
+        <label>
+            <span>Image</span>
+            <input type="file" id="img"/>
+          </label>
+        <button ng-click="addData()">Add</button>
         <ion-item>Category:
           <select required="">
             <option value="baby-photo">Baby Photo</option>
@@ -51,19 +55,19 @@
         </ion-item>
         <ion-item>
           <div class="item item-input" style="padding-left:0px; width:400px;">
-            Published Date: <input type="date" name="published-date">
+            Published Date: <input type="date" name="published-date"  ng-model="user.date">
           </div>
           <!-- <p>Select a date that you would like this post to go out to your users. The alert will be sent on this date as well.</p> -->
         </ion-item>
         <ion-item style="max-width:200px; padding-left:0px;">
-          <ion-toggle ng-model="airplaneMode" toggle-class="toggle">Published</ion-toggle>
+          <ion-toggle ng-model="user.airplaneMode"  toggle-class="toggle">Published</ion-toggle>
         </ion-item>
 
       </div>
 
     </div>
 
-      <button class="btn button-positive">Save</button>
+      <button class="btn button-positive" ng-click="saveData(user,message)">Save</button>
       <button class="btn button-warning">Delete</button>
 
   </ion-content>
