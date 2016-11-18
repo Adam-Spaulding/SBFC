@@ -54,12 +54,15 @@
         <!--<div>Cropped Image:</div>-->
         <!--<div><img ng-src="{{myCroppedImage}}" /></div>-->
         <ion-item>Category:
-          <select required="">
+          <!--<select required="">
             <option value="baby-photo">Baby Photo</option>
             <option value="ask-an-expert">Ask an Expert</option>
             <option value="marketplace">Marketplace</option>
             <option value="diognostic-ultrasound">Diognostic Ultrasound</option>
             <option value="bbne">BBNE</option>
+          </select>-->
+          <select name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
+            <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
         <ion-item>

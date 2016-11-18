@@ -522,7 +522,20 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
 
   $scope.message = 'Test';
 
+  var downloadUrl = '';
+
   $scope.showToolbar = true;
+
+  $scope.categoryDropDown = {
+    selected:null,
+    categoryOptions: [
+      {id:0,name:'Baby Photo',value:'baby-photo'},
+      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
+      {id:2,name:'Marketplace',value:'marketplace'},
+      {id:3,name:'Diognostic Ultrasound',value:'diognostic-ultrasound'},
+      {id:4,name:'BBNE',value:'bbne'}
+    ]
+  };
 
   /*$scope.translations = angular.extend({}, ngQuillConfig.translations, {
    15: 'smallest'
@@ -594,7 +607,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     $scope.message = '';
   };
 
-  $scope.storeImageToDB = function(file){
+  $scope.storeImageToDB = function(file, resolve){
 
     /*var file = document.querySelector('input[type=file]').files[0];
     console.log(file);*/
@@ -602,25 +615,43 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     // Get a reference to store file at photos/<FILENAME>.jpg
     var photoRef = storageRef.child(file.name);
     // Upload file to Firebase Storage
-    var fileBased64 = file.base64.split(';')[1].split(',')[1]
     var uploadTask = photoRef.putString(file.base64,'data_url');
-    uploadTask.on('state_changed', null, null, function(snapshot) {
+    uploadTask.on('state_changed', null, null, function (snapshot) {
       console.log('success');
       console.log(snapshot);
       // When the image has successfully uploaded, we get its download URL
-      var downloadUrl = uploadTask.snapshot.downloadURL;
+      downloadUrl = uploadTask.snapshot.downloadURL;
       console.log(downloadUrl);
+      resolve(downloadUrl);
       // Set the download URL to the message box, so that the user can send it to the database
       //$scope.userDisplayPic = downloadUrl;
     });
   };
 
   $scope.saveData = function (user,msg,b64) {
+    var userData = {};
+    userData = user;
     console.log(user,msg);
+    userData.message = msg;
+    userData.category = $scope.categoryDropDown.selected;
+
     imgObj.base64 = b64;
-    $scope.storeImageToDB(imgObj)
-  }
-  var imgObj = {}
+
+    var uploadPromiseImgs = new Promise(function(resolve, reject) {
+      $scope.storeImageToDB(imgObj,resolve);
+  });
+    Promise.all([uploadPromiseImgs]).then(function (data) {
+      userData.img = downloadUrl;
+      var ref = firebase.database().ref().child("userInfo");
+      var userNode = $firebaseArray(ref);
+      userNode.$add(userData).then(function (success) {
+        console.log(success);
+      });
+    }).catch(function (err) {
+        console.log(err);
+      })
+  };
+  var imgObj = {};
   $scope.myImage='';
   $scope.myCroppedImage='';
 
