@@ -602,12 +602,14 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     // Get a reference to store file at photos/<FILENAME>.jpg
     var photoRef = storageRef.child(file.name);
     // Upload file to Firebase Storage
-    var uploadTask = photoRef.putString(file.base64);
+    var fileBased64 = file.base64.split(';')[1].split(',')[1]
+    var uploadTask = photoRef.putString(file.base64,'data_url');
     uploadTask.on('state_changed', null, null, function(snapshot) {
       console.log('success');
       console.log(snapshot);
       // When the image has successfully uploaded, we get its download URL
       var downloadUrl = uploadTask.snapshot.downloadURL;
+      console.log(downloadUrl);
       // Set the download URL to the message box, so that the user can send it to the database
       //$scope.userDisplayPic = downloadUrl;
     });
