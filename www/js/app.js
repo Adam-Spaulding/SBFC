@@ -6,8 +6,18 @@
 // 'starter.controllers' is found in controllers.js
 app = angular.module('revolution', ['ionic', 'revolution.controllers', 'textAngular', 'ngQuill', 'ngImgCrop'])
 
-app.run(function($ionicPlatform) {
+app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
+
+    $rootScope.$on('$locationChangeSuccess', function() {
+      ChatService.checkAuthStatus($rootScope.user, function (succ) {
+        console.log('route to SUCCESS');
+        //$state.go('app.home');
+      }, function (err) {
+        console.log('route to LOGIN');
+        $state.go('app.login');
+      });
+    })
 
 
      // Enable to debug issues.
@@ -66,6 +76,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         'menuContent': {
           templateUrl: 'templates/register.html',
           controller: 'UserCtrl'
+
         }
       }
     })
@@ -75,7 +86,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html',
-          controller: 'UserCtrl'
+          controller: 'UserCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -85,7 +97,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/forgot.html',
-          controller: 'UserCtrl'
+          controller: 'UserCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -95,7 +108,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/home.html',
-          controller: 'HomeCtrl'
+          controller: 'HomeCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -105,7 +119,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/news.html',
-          controller: 'NewsCtrl'
+          controller: 'NewsCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -115,7 +130,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/newslist.html',
-          controller: 'NewslistCtrl'
+          controller: 'NewslistCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -125,7 +141,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/blog.html',
-          controller: 'BlogCtrl'
+          controller: 'BlogCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -135,7 +152,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/post.html',
-          controller: 'BlogCtrl'
+          controller: 'BlogCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -145,7 +163,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/firebase.html',
-          controller: 'FirebaseCtrl'
+          controller: 'FirebaseCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -155,7 +174,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/elements.html',
-          controller: 'ElementsCtrl'
+          controller: 'ElementsCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -165,7 +185,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/plugins.html',
-          controller: 'PluginsCtrl'
+          controller: 'PluginsCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -176,7 +197,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/chat.html',
-          controller: 'ChatCtrl'
+          controller: 'ChatCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -187,7 +209,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/add.html',
-          controller: 'ChatCtrl'
+          controller: 'ChatCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -198,7 +221,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/weather.html',
-          controller: 'WeatherCtrl'
+          controller: 'WeatherCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -208,7 +232,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/contact.html',
-          controller: 'ContactCtrl'
+          controller: 'ContactCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -218,7 +243,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/youtube.html',
-          controller: 'YoutubeCtrl'
+          controller: 'YoutubeCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -228,7 +254,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/youtubevideo.html',
-          controller: 'YoutubeCtrl'
+          controller: 'YoutubeCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -238,7 +265,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/maps.html',
-          controller: 'MapsCtrl'
+          controller: 'MapsCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
@@ -248,14 +276,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/admob.html',
-          controller: 'AdmobCtrl'
+          controller: 'AdmobCtrl',
+          resolve: { authenticate: authenticate }
         }
       }
     })
 
+  function authenticate($rootScope,ChatService, $state){
+    ChatService.checkAuthStatus($rootScope.user, function (succ) {
+      console.log('route to home');
+      return true
+    }, function (err) {
+      console.log('route to LOGIN');
+      $state.go('app.login');
+    })
+  }
+
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/login');
 })
 
 app.config(function (ngQuillConfigProvider) {

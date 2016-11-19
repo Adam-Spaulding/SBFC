@@ -119,7 +119,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
 
   $scope.start = function() {
     $state.go('app.home');
-  }
+  };
 
   $scope.authObj = $firebaseAuth();
 
@@ -145,14 +145,15 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
     }).catch(function(error) {
       console.error("Error: ", error);
     });
-  }
+  };
 
 
   // firebase login
   $scope.login = function(email, password) {
     $scope.authObj.$signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
-      alert("Signed in!");
+      //alert("Signed in!");
       $scope.getUserStatus();
+      console.log($rootScope.user);
       // redirect to home screen
       $state.go('app.home');
     }).catch(function(error) {
@@ -515,8 +516,8 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
   $scope.getUserStatus();
 
   $scope.user = {
-    airplaneMode:'',
-    date:'',
+    published:'',
+    publish_date:'',
     title:''
   }
 
@@ -630,9 +631,10 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
 
   $scope.saveData = function (user,msg,b64) {
     var userData = {};
-    userData = user;
+    userData = $scope.user;
     console.log(user,msg);
-    userData.message = msg;
+    userData.body = msg;
+    userData.author = $rootScope.user;
     userData.category = $scope.categoryDropDown.selected;
 
     imgObj.base64 = b64;

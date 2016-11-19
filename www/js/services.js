@@ -66,6 +66,23 @@ app.service('Firebase', function() {
 });
 
 
+// Chat SERVICES
+
+app.service('ChatService', function() {
+    this.checkAuthStatus = function(user,success,failure) {
+      if(user){
+        if(user == 'Anonymous'){
+          failure(false)
+        }else{
+          success(true)
+        }
+      }else{
+        failure(false)
+      }
+    };
+});
+
+
 
 
 // FIREBASE USER MANAGEMENT

@@ -10,6 +10,7 @@
     "ng-img-crop": "ngImgCrop#^0.3.2",
     "firebase": "^3.6.1",
     "ngQuill": "ngquill#^1.5.3",
-    "angularfire": "^2.1.0"
+    "angularfire": "^2.1.0",
+    "angular": "^1.5.8"
   }
 }
