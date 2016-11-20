@@ -17,16 +17,25 @@ app.factory('FeedSources', function ($resource) {
         return feedSources;
 });
 
-app.service('FeedList', function ($rootScope, FeedLoader, $q) {
+app.service('FeedList', function ($rootScope, FeedLoader, $q, $firebaseArray) {
     this.get = function(source, num) {
         var feeds = [];
         var deferred= $q.defer();
-        var feedSources = source;
+      var usersRef = firebase.database().ref('userInfo');
+      var list = $firebaseArray(usersRef);
+      list.$loaded()
+        .then(function (feed) {
+          deferred.resolve(feed);
+        }).catch(function(error) {
+          console.log("Error:", error);
+          deferred.reject('err while updating user');
+        });
+        /*var feedSources = source;
                 FeedLoader.fetch({q: feedSources, num: num}, {}, function (data) {
                     var feed = data.responseData.feed;
                     feeds.push(feed);
                     deferred.resolve(feeds);
-                });
+                });*/
 
         return deferred.promise;
     };

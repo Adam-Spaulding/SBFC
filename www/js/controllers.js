@@ -251,8 +251,8 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, Fee
   var getNews = function(num) {
 
       $scope.news = [];
-      FeedList.get($scope.source.url, num).then(function(feeddata){
-        var data = feeddata[0].entries;
+      FeedList.get().then(function(feeddata){
+        var data = feeddata;
         for(x=0;x<data.length;x++) {
           $scope.news = data;
         }
