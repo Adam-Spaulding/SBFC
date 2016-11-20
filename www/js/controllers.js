@@ -521,6 +521,16 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     title:''
   }
 
+/* datepicker */
+  $scope.valuationDate = new Date();
+  $scope.valuationDatePickerIsOpen = false;
+
+  $scope.valuationDatePickerOpen = function () {
+
+    $scope.valuationDatePickerIsOpen = true;
+  };
+  /* /datepicker */
+
   $scope.message = 'Test';
 
   var downloadUrl = '';
@@ -634,6 +644,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     userData = $scope.user;
     console.log(user,msg);
     userData.body = msg;
+    userData.publish_date = $scope.valuationDate+'';
     userData.author = $rootScope.user;
     userData.category = $scope.categoryDropDown.selected;
 

@@ -65,16 +65,16 @@
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
-        <ion-item>
-          <div class="item item-input" style="padding-left:0px; width:400px;">
-            Published Date: <input type="date" name="published-date"  ng-model="user.publish_date">
-          </div>
-          <!-- <p>Select a date that you would like this post to go out to your users. The alert will be sent on this date as well.</p> -->
-        </ion-item>
+        <input type="text" class="form-control"
+               datepicker-popup="mediumDate"
+               is-open="valuationDatePickerIsOpen"
+               ng-click="valuationDatePickerOpen()"
+               ng-model="valuationDate" />
         <ion-item style="max-width:200px; padding-left:0px;">
           <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
         </ion-item>
 
+<div ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
       </div>
 
     </div>
