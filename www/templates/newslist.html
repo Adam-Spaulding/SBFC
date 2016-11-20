@@ -11,15 +11,15 @@
 
 	<div class="bg-light pt20 pb20"> <!-- news feed list for selected source -->
 		<div class="list">
-		    <a class="item bg-white m5" ng-repeat="item in news" ng-click="openUrl(item.link)">
-		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
-			  <h4 class="fw300 m0 dark">{{item.contentSnippet}}</h4>
+		    <a class="item bg-white m5" ng-click="openUrl(item.link)">
+		      <h4 class="fw500 m0 dark pt5">{{news.title}}</h4>
+			  <div ng-bind-html="news.message"></div>
 			  <div class="row p0">
 			  	<div class="col pl0">
-			  		<p class="fw300 m0 dark">{{item.author}}</p>
+			  		<p class="fw300 m0 dark">{{news.author}}</p>
 			  	</div>
 			  	<div class="col pr0 text-right">
-			  		<p class="fw300 m0 dark">{{item.publish_date | limitTo:16}}</p>
+			  		<p class="fw300 m0 dark">{{news.publish_date || news.date | limitTo:16}}</p>
 			  	</div>
 			  </div>
 		    </a>

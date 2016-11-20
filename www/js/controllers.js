@@ -236,7 +236,9 @@ app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList
     });
 
   // NEWS SOURCES - from services
-  $scope.categories = FeedSources;
+  FeedSources.getFeed().then(function (feed) {
+    $scope.categories = feed;
+  });
 
   $ionicLoading.hide();
 
@@ -251,21 +253,21 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, Fee
   var getNews = function(num) {
 
       $scope.news = [];
-      FeedList.get().then(function(feeddata){
-        var data = feeddata;
-        for(x=0;x<data.length;x++) {
+      FeedList.get($stateParams.id).then(function(feeddata){
+        $scope.news = feeddata;
+        /*for(x=0;x<data.length;x++) {
           $scope.news = data;
-        }
+        }*/
         $ionicLoading.hide();
         })
 
     }
     getNews(10);
 
-    $scope.openUrl = function(link) {
+    /*$scope.openUrl = function(link) {
       window.open(link, '_system', 'location=yes');
       return false;
-    }
+    }*/
 
 
 })
