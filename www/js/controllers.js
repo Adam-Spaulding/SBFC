@@ -231,9 +231,9 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
 
 app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList) {
 
-  $ionicLoading.show({
-      template: 'Loading news...'
-    });
+  // $ionicLoading.show({
+  //     template: 'Loading news...'
+  //   });
 
   // NEWS SOURCES - from services
   FeedSources.getFeed().then(function (feed) {
@@ -272,6 +272,46 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, Fee
 
 })
 
+app.controller('smbCtrl', function($scope, $ionicLoading, wordpressSources, wordpressList) {
+
+  $ionicLoading.show({
+      template: 'Loading news...'
+    });
+
+  // NEWS SOURCES - from services
+  $scope.categories = wordpressSources;
+
+  $ionicLoading.hide();
+
+})
+
+app.controller('smblistCtrl', function($scope, $ionicLoading, $stateParams, wordpressSources, wordpressList) {
+
+  // NEWS SELECTED SOURCE INFORMATION
+  $scope.source = wordpressSources[$stateParams.id];
+
+  // NEWS FEED
+  var getNews = function(num) {
+
+      $scope.news = [];
+      wordpressList.get($scope.source.url, num).then (function(wordpressdata){
+        var data = rssdata[0].entries;
+        for(x=0;x<data.length;x++) {
+          $scope.news = data;
+        }
+        $ionicLoading.hide();
+        })
+
+    }
+    getNews(20);
+
+    $scope.openUrl = function(link) {
+      window.open(link, '_system', 'location=yes');
+      return false;
+    }
+
+
+})
 
 app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $cordovaSocialSharing) {
 

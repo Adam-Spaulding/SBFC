@@ -4,12 +4,12 @@
     <!-- news sources -->
 
     <div class="bg-light pt20 pb20">
-		<h4 class="fw300 m0 p10 pt20">News Sources</h4> <!-- news feed sources -->
+		<h4 class="fw300 m0 p10 pt20">Articles</h4> <!-- news feed sources -->
 		<div class="list">
 		    <a class="item item-avatar bg-white m5" ng-repeat="item in categories" href="#/app/newslist/{{item.$id}}">
 		    	<img ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
-			  <h4 class="fw300 m0 dark">{{item.description}}</h4>
+			  <h4 class="fw300 m0 dark" ng-bind-html="item.body | limitTo: 116">{{ item.message }}</h4>
 		    </a>
 		</div>
 	</div>

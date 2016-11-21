@@ -48,3 +48,13 @@
   height:350px;
   margin:20px auto;
 }
+
+/*h3.post-title {
+  background-color: #eee !important;
+  padding: 10px;
+  color: #fff;
+}*/
+
+.row {
+  margin:auto 0px !important;
+}

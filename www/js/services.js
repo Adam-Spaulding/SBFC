@@ -32,13 +32,13 @@ app.service('FeedSources', function ($resource, $firebaseArray, $q) {
 
     return deferred.promise;
   };
-  /*
-    var feedSources = [
-            {id: 0, title: 'Time', url: 'http://time.com/feed/', description: 'Current & Breaking News | National & World Updates', img: 'https://pbs.twimg.com/profile_images/1700796190/Picture_24.png'},
-            {id: 1, title: 'Mashable', url: 'http://mashable.com/feed/', description: 'Mashable is a global, multi-platform media and entertainment company.', img: 'http://instacurity.com/wp-content/uploads/2013/10/mashable-logo.png'},
-            {id: 2, title: 'Wordpress', url: 'https://en.blog.wordpress.com/feed/', description: 'The latest news on WordPress.com and the WordPress community.', img: 'https://s.w.org/about/images/logos/wordpress-logo-notext-rgb.png'}
-        ];
-        return feedSources;*/
+
+    // var feedSources = [
+    //         {id: 0, title: 'Time', url: 'http://time.com/feed/', description: 'Current & Breaking News | National & World Updates', img: 'https://pbs.twimg.com/profile_images/1700796190/Picture_24.png'},
+    //         {id: 1, title: 'Mashable', url: 'http://mashable.com/feed/', description: 'Mashable is a global, multi-platform media and entertainment company.', img: 'http://instacurity.com/wp-content/uploads/2013/10/mashable-logo.png'},
+    //         {id: 2, title: 'Wordpress', url: 'https://en.blog.wordpress.com/feed/', description: 'The latest news on WordPress.com and the WordPress community.', img: 'https://s.w.org/about/images/logos/wordpress-logo-notext-rgb.png'}
+    //     ];
+    //     return feedSources;
 });
 
 app.service('FeedList', function ($rootScope, FeedLoader, $q, $firebaseObject) {
@@ -68,8 +68,9 @@ app.service('FeedList', function ($rootScope, FeedLoader, $q, $firebaseObject) {
 
 // WORDPRESS FEED SERVICES
 
+
 app.service('Blog', function($http) {
-    var address = 'http://seacoast.citymomsblog.com/wp/api/';
+    var address = 'http://seacoast.citymomsblog.com/';
     this.categories = function() {
         var url = address + "get_category_index?callback=JSON_CALLBACK";
         return $http.jsonp(url);
@@ -211,7 +212,7 @@ app.service('googleService', ['$http', '$q', function ($http, $q) {
         gapi.client.load('youtube', 'v3', function() {
             var request = gapi.client.youtube.playlistItems.list({
                 part: 'snippet',
-                playlistId: 'PLfhH-72g-AanqXu9hz2fS2lTt6G0U4HOx',  // your playlist id here
+                playlistId: 'PLonzNEfEob9SEtavgsRHmqMTIzqOuGpcz',  // your playlist id here
                 maxResults: 21
             });
             request.execute(function(response) {
