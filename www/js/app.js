@@ -126,22 +126,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('app.news', {
-      url: '/news',
+      url: '/articles',
       views: {
         'menuContent': {
-          templateUrl: 'templates/news.html',
-          controller: 'NewsCtrl',
+          templateUrl: 'templates/articles.html',
+          controller: 'FirebaseCtrl',
           resolve: { authenticate: authenticate }
         }
       }
     })
 
     .state('app.newslist', {
-      url: '/newslist/:id',
+      url: '/articleslist/:id',
       views: {
         'menuContent': {
-          templateUrl: 'templates/newslist.html',
-          controller: 'NewslistCtrl',
+          templateUrl: 'templates/articleslist.html',
+          controller: 'FirebaseCtrl',
           resolve: { authenticate: authenticate }
         }
       }

@@ -3,9 +3,9 @@
 
     <!-- blog post -->
     	<div class="blogPost" ng-init="getPost()">
-    		<img ng-src="{{news.img}}" class="img-full">
-    		<h3 class="post-title" style="padding:10px 20px;">{{news.title}}</h3>
-    		<h5 class="pl20">Posted {{news.publish_date}}</h5>
+    		<img ng-src="{{article.img}}" class="img-full">
+    		<h3 class="post-title" style="padding:10px 20px;">{{article.title}}</h3>
+    		<h5 class="pl20">Posted {{article.publish_date}}</h5>
     		<div class="button-bar pl50 pr50">
     			<a class="button button-clear button-positive" ng-click="shareFacebook(post.title, post.attachments[0].url)">
     				<i style="color:#363636;" class="ti-facebook font-xl"></i>

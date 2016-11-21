@@ -229,92 +229,9 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
 })
 
 
-app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList) {
 
-  // $ionicLoading.show({
-  //     template: 'Loading news...'
-  //   });
-
-  // NEWS SOURCES - from services
-  FeedSources.getFeed().then(function (feed) {
-    $scope.categories = feed;
-  });
-
-  $ionicLoading.hide();
-
-})
-
-app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, FeedSources, FeedList) {
-
-  // NEWS SELECTED SOURCE INFORMATION
-  $scope.source = FeedSources[$stateParams.id];
-
-  // NEWS FEED
-  var getNews = function(num) {
-
-      $scope.news = [];
-      FeedList.get($stateParams.id).then(function(feeddata){
-        $scope.news = feeddata;
-        /*for(x=0;x<data.length;x++) {
-          $scope.news = data;
-        }*/
-        $ionicLoading.hide();
-        })
-
-    }
-    getNews(10);
-
-    /*$scope.openUrl = function(link) {
-      window.open(link, '_system', 'location=yes');
-      return false;
-    }*/
-
-
-})
-
-app.controller('smbCtrl', function($scope, $ionicLoading, wordpressSources, wordpressList) {
-
-  $ionicLoading.show({
-      template: 'Loading news...'
-    });
-
-  // NEWS SOURCES - from services
-  $scope.categories = wordpressSources;
-
-  $ionicLoading.hide();
-
-})
-
-app.controller('smblistCtrl', function($scope, $ionicLoading, $stateParams, wordpressSources, wordpressList) {
-
-  // NEWS SELECTED SOURCE INFORMATION
-  $scope.source = wordpressSources[$stateParams.id];
-
-  // NEWS FEED
-  var getNews = function(num) {
-
-      $scope.news = [];
-      wordpressList.get($scope.source.url, num).then (function(wordpressdata){
-        var data = rssdata[0].entries;
-        for(x=0;x<data.length;x++) {
-          $scope.news = data;
-        }
-        $ionicLoading.hide();
-        })
-
-    }
-    getNews(20);
-
-    $scope.openUrl = function(link) {
-      window.open(link, '_system', 'location=yes');
-      return false;
-    }
-
-
-})
 
 app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $cordovaSocialSharing) {
-
 
   $ionicLoading.show({
       template: 'Loading posts...'
@@ -361,7 +278,7 @@ $scope.getPosts = function() {
 $scope.getPost = function() {
   Blog.post($stateParams.id).then(
     function(data){
-      $scope.post = data.data.post;
+      $scope.post = firebase(ref.userInfo(id));
       $ionicLoading.hide();
     },
     function(error){
@@ -440,8 +357,21 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
 
   };
 
-})
+// array
+var refArray = firebase.database().ref().child("userInfo");
+// create a synchronized array
+$scope.articles = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+// add new items to the array
+// the message is automatically added to our Firebase database!
+$scope.addMessage = function(message) {
+  $scope.newMessageText = null;
+  $scope.articles.$add({
+    text: message
+  });
 
+};
+
+})
 
 
 

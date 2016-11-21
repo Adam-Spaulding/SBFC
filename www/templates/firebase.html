@@ -3,7 +3,7 @@
   <ion-content class="text-center p20">
 
   <img src="img/firebase.png">
-    
+
     <h3 class="dark fw300 m0">Firebase starter functions (AngularFire)</h3>
 	<p class="dark fw900 mb20 up">read and update object (3-way data binding)</p>
     <div class="list">
@@ -17,7 +17,7 @@
     <h4 class="text-white">Your Firebase object (realtime update)</h4>
     	<h5 class="text-white">{{ firebaseObject.text }}</h5>
     </div>
-
+    <div ng-repeat="article in articles" class="text-left">{{article.category}}</div>
     <div class="he50"></div>
 
     <h3 class="dark fw300 m0">Firebase simple chat sample (AngularFire)</h3>
@@ -28,10 +28,10 @@
       <li ng-repeat="message in messages" class="text-right">
       <!-- delete a message -->
         <!-- edit a message -->
-        <a ng-click="messages.$remove(message)" class="absolute z-shi pt10"><i class="ti-trash energized"></i></a>
+        <a ng-click="article.$remove(message)" class="absolute z-shi pt10"><i class="ti-trash energized"></i></a>
         <div class="list">
     		<label class="item item-input">
-        		<input type="text" ng-model="message.text" ng-change="messages.$save(message)" class="bg-dark text-light p10" />
+        		<input type="text" ng-model="article.category" ng-change="article.$save(body)" class="bg-dark text-light p10" />
         	</label>
         </div>
       </li>
