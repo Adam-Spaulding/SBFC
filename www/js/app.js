@@ -15,7 +15,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
         //$state.go('app.home');
       }, function (err) {
         console.log('route to LOGIN');
-        $state.go('app.login');
+        // $state.go('app.login');
       });
     })
 
@@ -341,7 +341,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       return true
     }, function (err) {
       console.log('route to LOGIN');
-      $state.go('app.login');
+      // $state.go('app.login');
     })
   }
 

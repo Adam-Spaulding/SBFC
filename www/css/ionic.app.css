@@ -3340,7 +3340,7 @@ body,
   word-wrap: break-word;
   font-size: 14px;
   font-family: -apple-system;
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Roboto", "Segoe UI", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -9845,7 +9845,7 @@ a.button {
   background-color: #7740a2 !important; }
 
 .bg-dark {
-  background-color: #636469 !important; }
+  background-color: #51729a !important; }
 
 .bg-darker {
   background-color: #fff !important; }
@@ -9891,7 +9891,7 @@ a.button {
 
 /* //BACKGROUND AND TEXT COLOR */
 .pane {
-  background-color: #f5f5f5; }
+  background-color: #f0f0f0; }
 
 * {
   font-family: 'Source Sans Pro', sans-serif; }
