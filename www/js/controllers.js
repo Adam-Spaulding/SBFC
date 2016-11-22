@@ -177,6 +177,47 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
 
 })
 
+app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList) {
+
+  $ionicLoading.show({
+      template: 'Loading news...'
+    });
+
+  // NEWS SOURCES - from services
+  $scope.categories = FeedSources;
+
+  $ionicLoading.hide();
+
+});
+
+app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, FeedSources, FeedList) {
+
+  // NEWS SELECTED SOURCE INFORMATION
+  $scope.source = FeedSources[$stateParams.id];
+
+  // NEWS FEED
+  var getNews = function(num) {
+
+      $scope.news = [];
+      FeedList.get($scope.source.url, num).then(function(feeddata){
+        var data = feeddata[0].entries;
+        for(x=0;x<data.length;x++) {
+          $scope.news = data;
+        }
+        $ionicLoading.hide();
+        })
+
+    }
+    getNews(10);
+
+    $scope.openUrl = function(link) {
+      window.open(link, '_system', 'location=yes');
+      return false;
+    }
+
+
+})
+
 app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegate, $ionicScrollDelegate) {
 
   $ionicSideMenuDelegate.canDragContent(true);
@@ -322,7 +363,7 @@ $scope.shareWhatsApp = function(message, image) {
 })
 
 
-app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $firebaseObject, $firebaseArray) {
+app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
 
 
   $ionicLoading.show({
@@ -372,7 +413,6 @@ $scope.addMessage = function(message) {
 };
 
 })
-
 
 
 app.controller('ElementsCtrl', function($scope) {

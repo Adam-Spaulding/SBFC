@@ -125,7 +125,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('app.news', {
+    .state('app.articles', {
       url: '/articles',
       views: {
         'menuContent': {
@@ -136,12 +136,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('app.newslist', {
+    .state('app.articleslist', {
       url: '/articleslist/:id',
       views: {
         'menuContent': {
           templateUrl: 'templates/articleslist.html',
           controller: 'FirebaseCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.news', {
+      url: '/news',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/news.html',
+          controller: 'NewsCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.newslist', {
+      url: '/newslist/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/newslist.html',
+          controller: 'NewslistCtrl',
           resolve: { authenticate: authenticate }
         }
       }
