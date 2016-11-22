@@ -2,10 +2,10 @@
   <ion-content>
 
     <!-- blog post -->
-    	<div class="blogPost" ng-init="getPost()">
-    		<img ng-src="{{article.img}}" class="img-full">
-    		<h3 class="post-title" style="padding:10px 20px;">{{article.title}}</h3>
-    		<h5 class="pl20">Posted {{article.publish_date}}</h5>
+    	<div class="blogPost">
+    		<img ng-src="{{articles.img}}" class="img-full">
+    		<h3 class="post-title" style="padding:10px 20px;">{{articles.title}}</h3>
+    		<h5 class="pl20">Posted {{articles.publish_date}}</h5>
     		<div class="button-bar pl50 pr50">
     			<a class="button button-clear button-positive" ng-click="shareFacebook(post.title, post.attachments[0].url)">
     				<i style="color:#363636;" class="ti-facebook font-xl"></i>
@@ -29,7 +29,6 @@
     			</ul>
     		</div> -->
     	</div>
-
     	<div class="he50"></div>
 
   </ion-content>

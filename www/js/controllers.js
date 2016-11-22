@@ -370,6 +370,7 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
       template: 'Loading Firebase data...'
     });
 
+  $scope.articleId = $stateParams.id;
 
   // FIREBASE
 
@@ -385,7 +386,7 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
 
 
   // array
-  var refArray = firebase.database().ref().child("messages");
+  var refArray = firebase.database().ref().child("userInfo").child($scope.articleId);
   // create a synchronized array
   $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
   // add new items to the array
@@ -399,9 +400,17 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
   };
 
 // array
-var refArray = firebase.database().ref().child("userInfo");
+ var currentArticle = $firebaseObject(refArray);
+  currentArticle.$loaded()
+  .then(function(x) {
+    console.log(x)
+      $scope.articles = x;
+  })
+  .catch(function(error) {
+    console.log("Error:", error);
+  });
 // create a synchronized array
-$scope.articles = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+//$scope.articles = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
 // add new items to the array
 // the message is automatically added to our Firebase database!
 $scope.addMessage = function(message) {
