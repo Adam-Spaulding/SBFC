@@ -3340,7 +3340,7 @@ body,
   word-wrap: break-word;
   font-size: 14px;
   font-family: -apple-system;
-  font-family: "Roboto", "Segoe UI", sans-serif;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -9891,7 +9891,7 @@ a.button {
 
 /* //BACKGROUND AND TEXT COLOR */
 .pane {
-  background-color: #f0f0f0; }
+  background-color: #f5f5f5; }
 
 * {
   font-family: 'Source Sans Pro', sans-serif; }

@@ -8,15 +8,15 @@
 
     <div class="card" style="text-align:left;">
       <div class="list" style="margin: 0 5%;">
-        <div class="cropArea">
+        <div class="cropArea hidden-xs hidden-sm hidden-md">
           <img-crop
             image="myImage"
             area-type="square"
             result-image="myCroppedImage">
           </img-crop>
         </div>
-        <div>Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
-        <label class="item item-input item-floating-label title">
+        <div class="hidden-xs hidden-sm hidden-md">Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
+        <label class="item item-input item-floating-label title hidden-xs hidden-sm hidden-md">
           <span class="input-label" style="color:#51729a;">Post Title</span>
           <input type="text" placeholder="Post Title" ng-model="user.title" required style="border-bottom:2px solid #51729a;">
         </label>
@@ -53,7 +53,7 @@
 
         <!--<div>Cropped Image:</div>-->
         <!--<div><img ng-src="{{myCroppedImage}}" /></div>-->
-        <ion-item>Category:
+        <ion-item class="hidden-xs hidden-sm hidden-md">Category:
           <!--<select required="">
             <option value="baby-photo">Baby Photo</option>
             <option value="ask-an-expert">Ask an Expert</option>
@@ -61,21 +61,21 @@
             <option value="diognostic-ultrasound">Diognostic Ultrasound</option>
             <option value="bbne">BBNE</option>
           </select>-->
-          <select name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
+          <select class="hidden-xs hidden-sm hidden-md" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
-        <input type="text" class="form-control"
+        <input type="text" class="form-control hidden-xs hidden-sm hidden-md"
                datepicker-popup="mediumDate"
                min-date
                is-open="valuationDatePickerIsOpen"
                ng-click="valuationDatePickerOpen()"
                ng-model="valuationDate" />
-        <ion-item style="max-width:200px; padding-left:0px;">
+        <ion-item class="hidden-xs hidden-sm hidden-md" style="max-width:200px; padding-left:0px;">
           <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
         </ion-item>
 
-<div ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
+        <div class="hidden-xs hidden-sm hidden-md" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
       </div>
 
     </div>
