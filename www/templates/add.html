@@ -20,7 +20,6 @@
           <span class="input-label" style="color:#51729a;">Post Title</span>
           <input type="text" placeholder="Post Title" ng-model="user.title" required style="border-bottom:2px solid #51729a;">
         </label>
-        <!-- <div style="text-align:left;"> -->
           <ng-quill-editor
             name="editor1"
             callback="editorCallback(editor, name)"
@@ -37,30 +36,7 @@
             error-class="input-error"
             fontsize-options="fontsizeOptions">
           </ng-quill-editor>
-        <!-- </div> -->
-
-        <!--<b>current value</b><pre>{{message}}</pre>-->
-
-        <!--<label class="item item-input item-floating-label">
-          <span class="input-label">Body</span>
-          <textarea rows="5" cols="20" placeholder="Body" ng-model="editor1" required></textarea>
-        </label>-->
-        <!--<label>
-          <span>Image</span>
-          <input type="file" id="img"/>
-        </label>
-        <button ng-click="addData()">Add</button>-->
-
-        <!--<div>Cropped Image:</div>-->
-        <!--<div><img ng-src="{{myCroppedImage}}" /></div>-->
         <ion-item class="hidden-xs hidden-sm hidden-md">Category:
-          <!--<select required="">
-            <option value="baby-photo">Baby Photo</option>
-            <option value="ask-an-expert">Ask an Expert</option>
-            <option value="marketplace">Marketplace</option>
-            <option value="diognostic-ultrasound">Diognostic Ultrasound</option>
-            <option value="bbne">BBNE</option>
-          </select>-->
           <select class="hidden-xs hidden-sm hidden-md" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
@@ -69,27 +45,6 @@
           <span class="input-label">Publish Date</span>
           <input type="date" width="200px" data-date-format="miliseconds" style="width:200px !important;">
         </label>
-        <!-- <input type="date" class="form1"
-  value="{{date | date:MM/dd/yyyy}}"
-  ng-model="valuationDate"
-  name="id"
-  validatedateformat
-  data-date-format="mm/dd/yyyy"
-  maxlength="10"
-  id="id"
-  calendar
-  maxdate="todays"
-  ng-click="openCalendar('id')">
-    <span class="input-group-addon">
-      <span class="glyphicon glyphicon-calendar" ng-click="openCalendar('id')"></span>
-    </span>
-</input> -->
-        <!-- <input type="text" class="form-control hidden-xs hidden-sm hidden-md"
-               datepicker-popup="mediumDate"
-               min-date
-               is-open="valuationDatePickerIsOpen"
-               ng-click="valuationDatePickerOpen()"
-               ng-model="valuationDate" /> -->
         <ion-item class="hidden-xs hidden-sm hidden-md" style="max-width:200px; padding-left:0px;">
           <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
         </ion-item>
