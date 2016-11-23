@@ -558,6 +558,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
 
     $scope.valuationDatePickerIsOpen = true;
   };
+
   /* /datepicker */
 
   $scope.message = 'Test';

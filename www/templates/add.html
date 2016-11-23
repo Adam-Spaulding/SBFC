@@ -65,12 +65,31 @@
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
-        <input type="text" class="form-control hidden-xs hidden-sm hidden-md"
+        <label class="item item-input">
+          <span class="input-label">Publish Date</span>
+          <input type="date" width="200px" data-date-format="miliseconds" style="width:200px !important;">
+        </label>
+        <!-- <input type="date" class="form1"
+  value="{{date | date:MM/dd/yyyy}}"
+  ng-model="valuationDate"
+  name="id"
+  validatedateformat
+  data-date-format="mm/dd/yyyy"
+  maxlength="10"
+  id="id"
+  calendar
+  maxdate="todays"
+  ng-click="openCalendar('id')">
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar" ng-click="openCalendar('id')"></span>
+    </span>
+</input> -->
+        <!-- <input type="text" class="form-control hidden-xs hidden-sm hidden-md"
                datepicker-popup="mediumDate"
                min-date
                is-open="valuationDatePickerIsOpen"
                ng-click="valuationDatePickerOpen()"
-               ng-model="valuationDate" />
+               ng-model="valuationDate" /> -->
         <ion-item class="hidden-xs hidden-sm hidden-md" style="max-width:200px; padding-left:0px;">
           <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
         </ion-item>
