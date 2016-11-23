@@ -1,5 +1,5 @@
 function init() {
-    window.initGapi(); // Calls the init function defined on the window
+  window.initGapi(); // Calls the init function defined on the window
 }
 
 var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource']);
@@ -8,15 +8,15 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
 
   // side menu open/closed - changing navigation icons
   $scope.$watch(function () {
-    return $ionicSideMenuDelegate.getOpenRatio();
-  },
+      return $ionicSideMenuDelegate.getOpenRatio();
+    },
     function (ratio) {
       if (ratio === 1 || ratio === -1){
         $scope.isActive= true;
       } else{
-          $scope.isActive = false;
-    }
-  });
+        $scope.isActive = false;
+      }
+    });
 
 
   // go back button
@@ -53,11 +53,11 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
   }
 
 
-      // USER PROFILE
+  // USER PROFILE
   $scope.getUserProfile = function(uid) {
-      var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
-      $scope.userProfile = $firebaseObject(refArray);
-      $state.go('app.profile');
+    var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
+    $scope.userProfile = $firebaseObject(refArray);
+    $state.go('app.profile');
   }
 
 
@@ -127,24 +127,24 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
   // firebase register
   $scope.register = function(email, password, phone) {
     $scope.authObj.$createUserWithEmailAndPassword(email, password)
-    .then(function(firebaseUser) {
+      .then(function(firebaseUser) {
 
-      // create 'user' array same id - to store user profile
-      var refArray = firebase.database().ref().child("users").child(firebaseUser.uid);
-      var users = $firebaseObject(refArray);
-      users.email = firebaseUser.email;
-      users.phone = phone;
-      users.$save().then(function(ref) {
+        // create 'user' array same id - to store user profile
+        var refArray = firebase.database().ref().child("users").child(firebaseUser.uid);
+        var users = $firebaseObject(refArray);
+        users.email = firebaseUser.email;
+        users.phone = phone;
+        users.$save().then(function(ref) {
 
-      }, function(error) {
-        console.log("Error:", error);
+        }, function(error) {
+          console.log("Error:", error);
+        });
+
+        alert('User created! You are signed in.');
+        $state.go('app.home');
+      }).catch(function(error) {
+        console.error("Error: ", error);
       });
-
-      alert('User created! You are signed in.');
-      $state.go('app.home');
-    }).catch(function(error) {
-      console.error("Error: ", error);
-    });
   };
 
 
@@ -162,7 +162,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
   }
 
 
-   // reset password
+  // reset password
   $scope.reset = function(email) {
     $scope.authObj.$sendPasswordResetEmail(email).then(function() {
       alert("Password reset email sent successfully!");
@@ -180,8 +180,8 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
 app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList) {
 
   $ionicLoading.show({
-      template: 'Loading news...'
-    });
+    template: 'Loading news...'
+  });
 
   // NEWS SOURCES - from services
   $scope.categories = FeedSources;
@@ -198,22 +198,22 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, Fee
   // NEWS FEED
   var getNews = function(num) {
 
-      $scope.news = [];
-      FeedList.get($scope.source.url, num).then(function(feeddata){
-        var data = feeddata[0].entries;
-        for(x=0;x<data.length;x++) {
-          $scope.news = data;
-        }
-        $ionicLoading.hide();
-        })
+    $scope.news = [];
+    FeedList.get($scope.source.url, num).then(function(feeddata){
+      var data = feeddata[0].entries;
+      for(x=0;x<data.length;x++) {
+        $scope.news = data;
+      }
+      $ionicLoading.hide();
+    })
 
-    }
-    getNews(10);
+  }
+  getNews(10);
 
-    $scope.openUrl = function(link) {
-      window.open(link, '_system', 'location=yes');
-      return false;
-    }
+  $scope.openUrl = function(link) {
+    window.open(link, '_system', 'location=yes');
+    return false;
+  }
 
 
 })
@@ -227,44 +227,44 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
   $scope.tab = 1;
   $scope.activeMenu = 1;
 
-    $scope.setTab = function(newTab){
-      $scope.tab = newTab;
-      $scope.activeMenu = newTab;
-    };
+  $scope.setTab = function(newTab){
+    $scope.tab = newTab;
+    $scope.activeMenu = newTab;
+  };
 
-    $scope.isSet = function(tabNum){
-        return $scope.tab === tabNum;
-    };
+  $scope.isSet = function(tabNum){
+    return $scope.tab === tabNum;
+  };
 
 
-    // ACCORDIONS
+  // ACCORDIONS
   // initiate an array to hold all active tabs
-    $scope.activeTabs = [];
+  $scope.activeTabs = [];
 
-    // check if the tab is active
-    $scope.isOpenTab = function (tab) {
-        // check if this tab is already in the activeTabs array
-        if ($scope.activeTabs.indexOf(tab) > -1) {
-            // if so, return true
-            return true;
-        } else {
-            // if not, return false
-            return false;
-        }
+  // check if the tab is active
+  $scope.isOpenTab = function (tab) {
+    // check if this tab is already in the activeTabs array
+    if ($scope.activeTabs.indexOf(tab) > -1) {
+      // if so, return true
+      return true;
+    } else {
+      // if not, return false
+      return false;
     }
+  }
 
-    // function to 'open' a tab
-    $scope.openTab = function (tab) {
-        // check if tab is already open
-        if ($scope.isOpenTab(tab)) {
-            //if it is, remove it from the activeTabs array
-            $scope.activeTabs.splice($scope.activeTabs.indexOf(tab), 1);
-        } else {
-            // if it's not, add it!
-            $scope.activeTabs = [];
-            $scope.activeTabs.push(tab);
-        }
+  // function to 'open' a tab
+  $scope.openTab = function (tab) {
+    // check if tab is already open
+    if ($scope.isOpenTab(tab)) {
+      //if it is, remove it from the activeTabs array
+      $scope.activeTabs.splice($scope.activeTabs.indexOf(tab), 1);
+    } else {
+      // if it's not, add it!
+      $scope.activeTabs = [];
+      $scope.activeTabs.push(tab);
     }
+  }
 
 
 })
@@ -275,8 +275,8 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
 app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $cordovaSocialSharing) {
 
   $ionicLoading.show({
-      template: 'Loading posts...'
-    });
+    template: 'Loading posts...'
+  });
 
 
   $scope.categShow = false;
@@ -303,59 +303,59 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 
 
 // WORDPRESS POSTS
-$scope.getPosts = function() {
-  Blog.posts($stateParams.id).then(
-    function(data){
-      $scope.posts = data.data.posts;
-      $ionicLoading.hide();
-    },
-    function(error){
-    }
-  )
-}
+  $scope.getPosts = function() {
+    Blog.posts($stateParams.id).then(
+      function(data){
+        $scope.posts = data.data.posts;
+        $ionicLoading.hide();
+      },
+      function(error){
+      }
+    )
+  }
 
 
 // WORDPRESS SINGLE POST
-$scope.getPost = function() {
-  Blog.post($stateParams.id).then(
-    function(data){
-      $scope.post = firebase(ref.userInfo(id));
-      $ionicLoading.hide();
-    },
-    function(error){
-    }
-  )
-}
+  $scope.getPost = function() {
+    Blog.post($stateParams.id).then(
+      function(data){
+        $scope.post = firebase(ref.userInfo(id));
+        $ionicLoading.hide();
+      },
+      function(error){
+      }
+    )
+  }
 
 
 // SHARE
-$scope.shareTwitter = function(message, image) {
-  $cordovaSocialSharing
-    .shareViaTwitter(message, image, 'linkhere')
-    .then(function(result) {
-      // Success!
-    }, function(err) {
-      // An error occurred. Show a message to the user
-    });
-}
-$scope.shareFacebook = function(message, image) {
-  $cordovaSocialSharing
-    .shareViaFacebook(message, image, 'link')
-    .then(function(result) {
-      // Success!
-    }, function(err) {
-      // An error occurred. Show a message to the user
-    });
-}
-$scope.shareWhatsApp = function(message, image) {
-  $cordovaSocialSharing
-    .shareViaWhatsApp(message, image, 'link')
-    .then(function(result) {
-      // Success!
-    }, function(err) {
-      // An error occurred. Show a message to the user
-    });
-}
+  $scope.shareTwitter = function(message, image) {
+    $cordovaSocialSharing
+      .shareViaTwitter(message, image, 'linkhere')
+      .then(function(result) {
+        // Success!
+      }, function(err) {
+        // An error occurred. Show a message to the user
+      });
+  }
+  $scope.shareFacebook = function(message, image) {
+    $cordovaSocialSharing
+      .shareViaFacebook(message, image, 'link')
+      .then(function(result) {
+        // Success!
+      }, function(err) {
+        // An error occurred. Show a message to the user
+      });
+  }
+  $scope.shareWhatsApp = function(message, image) {
+    $cordovaSocialSharing
+      .shareViaWhatsApp(message, image, 'link')
+      .then(function(result) {
+        // Success!
+      }, function(err) {
+        // An error occurred. Show a message to the user
+      });
+  }
 
 
 
@@ -367,27 +367,30 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
 
 
   $ionicLoading.show({
-      template: 'Loading Firebase data...'
-    });
+    template: 'Loading Firebase data...'
+  });
 
 
   // FIREBASE
 
+  $scope.articleID = $stateParams.id;
+  $scope.selectedArticle = {};
   // object
   var URL = Firebase.url();
 
-  var refObject = firebase.database().ref().child("data"); // work with firebase url + object named 'data'
+  /*var refObject = firebase.database().ref().child("data"); // work with firebase url + object named 'data'
   // download the data into a local object
   var syncObject = $firebaseObject(refObject);
   // synchronize the object with a three-way data binding
   syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
-    $ionicLoading.hide();
+  */
+  $ionicLoading.hide();
 
 
   // array
-  var refArray = firebase.database().ref().child("messages");
+  var refArrayMessages = firebase.database().ref().child("messages");
   // create a synchronized array
-  $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+  $scope.messages = $firebaseArray(refArrayMessages); // $scope.messages is your firebase array, you can add/remove/edit
   // add new items to the array
   // the message is automatically added to our Firebase database!
   $scope.addMessage = function(message) {
@@ -399,18 +402,32 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
   };
 
 // array
-var refArray = firebase.database().ref().child("userInfo");
+  var refArray = firebase.database().ref().child("userInfo");
 // create a synchronized array
-$scope.articles = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+  var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
 // add new items to the array
 // the message is automatically added to our Firebase database!
-$scope.addMessage = function(message) {
-  $scope.newMessageText = null;
-  $scope.articles.$add({
-    text: message
-  });
+  articleListRef.$loaded()
+    .then(function(x) {
+      $scope.articles = x;
+      if($scope.articleID){
+        $scope.articles.forEach(function (d, i) {
+          if(d.$id == $scope.articleID){
+            $scope.selectedArticle = d;
+          }
+        })
+      }
+    })
+    .catch(function(error) {
+      console.log("Error:", error);
+    });
+  $scope.addMessage = function(message) {
+    $scope.newMessageText = null;
+    $scope.articles.$add({
+      text: message
+    });
 
-};
+  };
 
 })
 
@@ -427,14 +444,14 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
 
   // toast message
   $scope.showToast = function() {
-$ionicPlatform.ready(function() {
-    $cordovaToast.showLongBottom('Here is a toast message').then(function(success) {
+    $ionicPlatform.ready(function() {
+      $cordovaToast.showLongBottom('Here is a toast message').then(function(success) {
         // success
       }, function (error) {
         // error
       });
-})
-    }
+    })
+  }
 
 
 
@@ -442,57 +459,57 @@ $ionicPlatform.ready(function() {
   // rate my app
   $scope.showApprate = function() {
 
-$ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function() {
 
-  $cordovaAppRate.promptForRating(true).then(function (result) {
+      $cordovaAppRate.promptForRating(true).then(function (result) {
         // success
-    });
-
-})
-
-  }
-
-
-
-   // barcode scanner
-  $scope.showBarcode = function() {
-
-$ionicPlatform.ready(function() {
-
-  $cordovaBarcodeScanner
-      .scan()
-      .then(function(barcodeData) {
-        // Success! Barcode data is here
-            alert(barcodeData.text);
-            console.log("Barcode Format -> " + barcodeData.format);
-            console.log("Cancelled -> " + barcodeData.cancelled);
-      }, function(error) {
-        // An error occurred
-            console.log("An error happened -> " + error);
       });
 
-})
+    })
+
+  }
+
+
+
+  // barcode scanner
+  $scope.showBarcode = function() {
+
+    $ionicPlatform.ready(function() {
+
+      $cordovaBarcodeScanner
+        .scan()
+        .then(function(barcodeData) {
+          // Success! Barcode data is here
+          alert(barcodeData.text);
+          console.log("Barcode Format -> " + barcodeData.format);
+          console.log("Cancelled -> " + barcodeData.cancelled);
+        }, function(error) {
+          // An error occurred
+          console.log("An error happened -> " + error);
+        });
+
+    })
 
   }
 
 
 
 
-    // device info
+  // device info
   $scope.showDeviceinfo = function() {
 
-$ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function() {
 
-    var device = $cordovaDevice.getDevice();
-    var cordova = $cordovaDevice.getCordova();
-    var model = $cordovaDevice.getModel();
-    var platform = $cordovaDevice.getPlatform();
-    var uuid = $cordovaDevice.getUUID();
-    var version = $cordovaDevice.getVersion();
+      var device = $cordovaDevice.getDevice();
+      var cordova = $cordovaDevice.getCordova();
+      var model = $cordovaDevice.getModel();
+      var platform = $cordovaDevice.getPlatform();
+      var uuid = $cordovaDevice.getUUID();
+      var version = $cordovaDevice.getVersion();
 
-    alert('Your device has ' + platform);
+      alert('Your device has ' + platform);
 
-})
+    })
 
   }
 
@@ -505,21 +522,21 @@ $ionicPlatform.ready(function() {
 // rate my app preferences
 app.config(function ($cordovaAppRateProvider) {
 
-document.addEventListener("deviceready", function () {
+  document.addEventListener("deviceready", function () {
 
-   var prefs = {
-     language: 'en',
-     appName: 'MY APP',
-     iosURL: '<my_app_id>',
-     androidURL: 'market://details?id=<package_name>',
-     windowsURL: 'ms-windows-store:Review?name=<...>'
-   };
+    var prefs = {
+      language: 'en',
+      appName: 'MY APP',
+      iosURL: '<my_app_id>',
+      androidURL: 'market://details?id=<package_name>',
+      windowsURL: 'ms-windows-store:Review?name=<...>'
+    };
 
-   $cordovaAppRateProvider.setPreferences(prefs)
+    $cordovaAppRateProvider.setPreferences(prefs)
 
- }, false);
+  }, false);
 
- })
+})
 
 
 
@@ -533,7 +550,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     title:''
   }
 
-/* datepicker */
+  /* datepicker */
   $scope.valuationDate = new Date();
   $scope.valuationDatePickerIsOpen = false;
 
@@ -633,7 +650,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
   $scope.storeImageToDB = function(file, resolve){
 
     /*var file = document.querySelector('input[type=file]').files[0];
-    console.log(file);*/
+     console.log(file);*/
     var storageRef = firebase.storage().ref().child('images');
     // Get a reference to store file at photos/<FILENAME>.jpg
     var photoRef = storageRef.child(file.name);
@@ -664,7 +681,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
 
     var uploadPromiseImgs = new Promise(function(resolve, reject) {
       $scope.storeImageToDB(imgObj,resolve);
-  });
+    });
     Promise.all([uploadPromiseImgs]).then(function (data) {
       userData.img = downloadUrl;
       var ref = firebase.database().ref().child("userInfo");
@@ -673,8 +690,8 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
         console.log(success);
       });
     }).catch(function (err) {
-        console.log(err);
-      })
+      console.log(err);
+    })
   };
   var imgObj = {};
   $scope.myImage='';
@@ -716,38 +733,38 @@ app.controller('ContactCtrl', function($scope) {
 
 app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $stateParams, $ionicLoading) {
 
-               $ionicLoading.show({
-                                  template: 'Loading videos...'
-                                  });
+  $ionicLoading.show({
+    template: 'Loading videos...'
+  });
 
-        $window.initGapi = function() {
-            $scope.$apply($scope.getChannel);
-        };
+  $window.initGapi = function() {
+    $scope.$apply($scope.getChannel);
+  };
 
-        $scope.getChannel = function () {
-            googleService.googleApiClientReady().then(function (data) {
-                $scope.videos = data.items;
-                $scope.channel = data.items[0].snippet.channelTitle;
-                                                      $ionicLoading.hide();
-            }, function (error) {
-                console.log('Failed: ' + error)
-            });
-        };
-
-        $scope.getVideoId = function() {
-          $ionicLoading.show({
-                                  template: 'Loading video...'
-                                  });
-          document.getElementById('video').src = 'https://www.youtube.com/embed/'+$stateParams.id;
-          googleService.googleApiClientReady().then(function (data) {
-            $scope.video = data.items[$stateParams.index];
-                                                    $ionicLoading.hide();
-          }, function (error) {
-              console.log('Failed: ' + error)
-          });
-        }
-
+  $scope.getChannel = function () {
+    googleService.googleApiClientReady().then(function (data) {
+      $scope.videos = data.items;
+      $scope.channel = data.items[0].snippet.channelTitle;
+      $ionicLoading.hide();
+    }, function (error) {
+      console.log('Failed: ' + error)
     });
+  };
+
+  $scope.getVideoId = function() {
+    $ionicLoading.show({
+      template: 'Loading video...'
+    });
+    document.getElementById('video').src = 'https://www.youtube.com/embed/'+$stateParams.id;
+    googleService.googleApiClientReady().then(function (data) {
+      $scope.video = data.items[$stateParams.index];
+      $ionicLoading.hide();
+    }, function (error) {
+      console.log('Failed: ' + error)
+    });
+  }
+
+});
 
 
 
@@ -760,15 +777,15 @@ app.controller('MapsCtrl', function($scope) {
 app.controller('AdmobCtrl', function($scope) {
 
 
-               $scope.showBanner = function() {
-                if(AdMob) AdMob.showBanner();
-               }
-               $scope.hideBanner = function() {
-                if(AdMob) AdMob.hideBanner();
-               }
-               $scope.showInterstitial = function() {
-               if(AdMob) AdMob.showInterstitial();
-               }
+  $scope.showBanner = function() {
+    if(AdMob) AdMob.showBanner();
+  }
+  $scope.hideBanner = function() {
+    if(AdMob) AdMob.hideBanner();
+  }
+  $scope.showInterstitial = function() {
+    if(AdMob) AdMob.showInterstitial();
+  }
 
 
 
