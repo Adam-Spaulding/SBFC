@@ -540,13 +540,13 @@ app.config(function ($cordovaAppRateProvider) {
 
 
 
-app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
+app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
 
   $scope.getUserStatus();
 
   $scope.user = {
     published:'',
-    publish_date:'',
+    publish_date: new Date(),
     title:''
   }
 
@@ -674,7 +674,199 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout, $ionicLoading,
     userData = $scope.user;
     console.log(user,msg);
     userData.body = msg;
-    userData.publish_date = $scope.valuationDate+'';
+    userData.publish_date = new Date(userData.publish_date).getTime();
+    userData.author = $rootScope.user;
+    userData.category = $scope.categoryDropDown.selected;
+
+    imgObj.base64 = b64;
+
+    var uploadPromiseImgs = new Promise(function(resolve, reject) {
+      $scope.storeImageToDB(imgObj,resolve);
+    });
+    Promise.all([uploadPromiseImgs]).then(function (data) {
+      userData.img = downloadUrl;
+      var ref = firebase.database().ref().child("userInfo");
+      var userNode = $firebaseArray(ref);
+      userNode.$add(userData).then(function (success) {
+        var addedObjDetails = success.path.o;
+        var addedObj = addedObjDetails[1];
+        $state.go('app.edit',{'id': addedObj})
+        console.log(success);
+        console.log(addedObj[1]);
+      });
+    }).catch(function (err) {
+      console.log(err);
+    })
+  };
+  var imgObj = {};
+  $scope.myImage='';
+  $scope.myCroppedImage='';
+
+  var handleFileSelect=function(evt) {
+    var file=evt.currentTarget.files[0];
+    imgObj.name = file.name;
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope){
+        $scope.myImage=evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+})
+
+
+app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig) {
+
+
+  $scope.articleID = $stateParams.id;
+  $scope.getUserStatus();
+
+  $scope.user = {
+    published:'',
+    publish_date: new Date(),
+    title:''
+  }
+
+  // array
+  var refArray = firebase.database().ref().child("userInfo").child($scope.articleID);
+// create a synchronized array
+  var articleListRef = $firebaseObject(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+// add new items to the array
+// the message is automatically added to our Firebase database!
+  articleListRef.$loaded()
+    .then(function(x) {
+      $scope.user = x;
+      $scope.categoryDropDown.selected = $scope.user.category;
+      $scope.message = $scope.user.body;
+    })
+    .catch(function(error) {
+      console.log("Error:", error);
+    });
+
+  /* datepicker */
+  $scope.valuationDate = new Date();
+  $scope.valuationDatePickerIsOpen = false;
+
+  $scope.valuationDatePickerOpen = function () {
+
+    $scope.valuationDatePickerIsOpen = true;
+  };
+
+  /* /datepicker */
+
+  $scope.message = 'Test';
+
+  var downloadUrl = '';
+
+  $scope.showToolbar = true;
+
+  $scope.categoryDropDown = {
+    selected:null,
+    categoryOptions: [
+      {id:0,name:'Baby Photo',value:'baby-photo'},
+      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
+      {id:2,name:'Marketplace',value:'marketplace'},
+      {id:3,name:'Diognostic Ultrasound',value:'diognostic-ultrasound'},
+      {id:4,name:'BBNE',value:'bbne'}
+    ]
+  };
+
+  /*$scope.translations = angular.extend({}, ngQuillConfig.translations, {
+   15: 'smallest'
+   });*/
+
+  /*$scope.toggle = function() {
+   $scope.showToolbar = !$scope.showToolbar;
+   };*/
+  // Own callback after Editor-Creation
+  /*$scope.editorCallback = function (editor, name) {
+   console.log('createCallback', editor, name);
+   };*/
+
+  $scope.readOnly = false;
+
+  $scope.isReadonly = function () {
+    return $scope.readOnly;
+  };
+
+  $scope.clear = function () {
+    return $scope.message = '';
+  };
+
+  // Event after an editor is created --> gets the editor instance on optional the editor name if set
+  $scope.$on('editorCreated', function (event, editor, name) {
+    console.log('createEvent', editor, name);
+  });
+
+  $scope.getMessages = function() {
+
+    //$scope.version = textAngularManager.getVersion();
+    //$scope.versionNumber = $scope.version.substring(1);
+    /*$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><img class="ta-insert-video" ta-insert-video="http://www.youtube.com/embed/2maA1-mvicY" src="" allowfullscreen="true" width="300" frameborder="0" height="250"/></p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE9+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p><h4>Supports non-latin Characters</h4><p>昮朐 魡 燚璒瘭 譾躒鑅, 皾籈譧 紵脭脧 逯郹酟 煃 瑐瑍, 踆跾踄 趡趛踠 顣飁 廞 熥獘 豥 蔰蝯蝺 廦廥彋 蕍蕧螛 溹溦 幨懅憴 妎岓岕 緁, 滍 蘹蠮 蟷蠉蟼 鱐鱍鱕, 阰刲 鞮鞢騉 烳牼翐 魡 骱 銇韎餀 媓幁惁 嵉愊惵 蛶觢, 犝獫 嶵嶯幯 縓罃蔾 魵 踄 罃蔾 獿譿躐 峷敊浭, 媓幁 黐曮禷 椵楘溍 輗 漀 摲摓 墐墆墏 捃挸栚 蛣袹跜, 岓岕 溿 斶檎檦 匢奾灱 逜郰傃</p>';
+     $scope.htmlcontent = $scope.orightml;*/
+    //$scope.disabled = false;
+
+
+    $timeout(function() {
+      // set firebase refference for messages - if user is logged in, set to match user uid, if there is no user, show public messages
+      var refArray = firebase.database().ref().child("chat/"+$rootScope.userUid);
+      // create a synchronized array
+      $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+    }, 100)
+  };
+
+  $scope.getMessages();
+
+  // send message
+  $scope.send = function(message) {
+
+    $scope.getMessages();
+
+    // set a random image as user avatar - change this to match your structure
+    var randomIndex = Math.round( Math.random() * (4) );
+    randomIndex++;
+    $scope.avatar = 'img/users/'+randomIndex+'.jpg';
+    // add new items to the array
+    // the message is automatically added to our Firebase database!
+    $scope.messages.$add({
+      text: message,
+      email: $rootScope.user,
+      user: $rootScope.userUid,
+      avatar: $scope.avatar
+    });
+    $scope.message = '';
+  };
+
+  $scope.storeImageToDB = function(file, resolve){
+
+    /*var file = document.querySelector('input[type=file]').files[0];
+     console.log(file);*/
+    var storageRef = firebase.storage().ref().child('images');
+    // Get a reference to store file at photos/<FILENAME>.jpg
+    var photoRef = storageRef.child(file.name);
+    // Upload file to Firebase Storage
+    var uploadTask = photoRef.putString(file.base64,'data_url');
+    uploadTask.on('state_changed', null, null, function (snapshot) {
+      console.log('success');
+      console.log(snapshot);
+      // When the image has successfully uploaded, we get its download URL
+      downloadUrl = uploadTask.snapshot.downloadURL;
+      console.log(downloadUrl);
+      resolve(downloadUrl);
+      // Set the download URL to the message box, so that the user can send it to the database
+      //$scope.userDisplayPic = downloadUrl;
+    });
+  };
+
+  $scope.saveData = function (user,msg,b64) {
+    var userData = {};
+    userData = $scope.user;
+    console.log(user,msg);
+    userData.body = msg;
+    userData.publish_date = new Date(userData.publish_date).getTime();
     userData.author = $rootScope.user;
     userData.category = $scope.categoryDropDown.selected;
 

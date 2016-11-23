@@ -268,6 +268,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
+    .state('app.edit', {
+      cache: false,
+      url: '/edit/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/edit.html',
+          controller: 'EditCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
     .state('app.weather', {
       cache: false,
       url: '/weather',
