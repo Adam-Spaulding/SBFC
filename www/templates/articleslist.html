@@ -1,4 +1,4 @@
-<ion-view view-title="{{source.title}}">
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
   <ion-content>
 
     <!-- blog post -->
@@ -17,7 +17,7 @@
     				<i style="color:#363636;" class="fa fa-whatsapp font-xl"></i>
     			</a>
     		</div>
-        <div class="card" style="padding:10px 10px;" ng-bind-html="news.body">{{news.body}}</div>
+        <div class="card" style="padding:10px 10px;" ng-bind-html="selectedArticle.body">{{selectedArticle.body}}</div>
     		<!-- <div class="p20" ng-bind-html="post.content"></div>
     		<div class="p20">
     		<h4 class="fw300 m0 pb20" ng-show="post.comments != ''">Comments:</h4>
