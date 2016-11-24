@@ -893,6 +893,13 @@ app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, 
       console.log(err);
     })*/
   };
+  $scope.deleteEdited = function () {
+    articleListRef.$remove().then(function(ref) {
+      console.log("Successfully removed the Object:", ref);
+    }, function(error) {
+      console.log("Error:", error);
+    });
+  }
   var imgObj = {};
   $scope.myImage='';
   $scope.myCroppedImage='';
