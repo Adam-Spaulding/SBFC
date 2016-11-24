@@ -27,8 +27,8 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
     console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
   };
 
-  window.plugins.OneSignal.init("Onesignal App ID here",
-                                 {googleProjectNumber: "***Google Sender/Project ID here***"},
+  window.plugins.OneSignal.init("7fe9fa6d-c066-4c9d-8583-8d931cfacb07",
+                                 {googleProjectNumber: "906792644102"},
                                  notificationOpenedCallback);
 
   // Show an alert box if a notification comes in when the user is in your app.

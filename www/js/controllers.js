@@ -717,7 +717,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
 })
 
 
-app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig) {
+app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig) {
 
 
   $scope.articleID = $stateParams.id;
@@ -896,6 +896,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, 
   $scope.deleteEdited = function () {
     articleListRef.$remove().then(function(ref) {
       console.log("Successfully removed the Object:", ref);
+      $state.go('app.home')
     }, function(error) {
       console.log("Error:", error);
     });
