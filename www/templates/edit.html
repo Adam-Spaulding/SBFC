@@ -40,7 +40,7 @@
         </ion-item>
         <label class="item item-input">
           <span class="input-label">Publish Date</span>
-          <input type="date" width="200px" data-date-format="miliseconds" style="width:200px !important;">
+          <input type="date" width="200px" ng-model="user.publish_date" data-date-format="miliseconds" style="width:200px !important;">
         </label>
         <ion-item class="" style="max-width:200px; padding-left:0px;">
           <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
@@ -51,7 +51,7 @@
 
     </div>
 
-    <button class="btn button-positive" ng-click="saveData(user,message,myCroppedImage)">Save</button>
+    <button class="btn button-positive" ng-click="saveData(user,myCroppedImage)">Save</button>
     <button class="btn button-warning">Delete</button>
 
   </ion-content>

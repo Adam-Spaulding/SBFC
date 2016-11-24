@@ -739,6 +739,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, 
     .then(function(x) {
       $scope.user = x;
       $scope.categoryDropDown.selected = $scope.user.category;
+      $scope.user.publish_date = new Date($scope.user.publish_date);
       $scope.message = $scope.user.body;
     })
     .catch(function(error) {
@@ -756,7 +757,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, 
 
   /* /datepicker */
 
-  $scope.message = 'Test';
+  $scope.message = 'Your Body Text ';
 
   var downloadUrl = '';
 
@@ -864,14 +865,21 @@ app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, 
     var userData = {};
     userData = $scope.user;
     console.log(user,msg);
-    userData.body = msg;
+    //userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
     userData.author = $rootScope.user;
     userData.category = $scope.categoryDropDown.selected;
-
+    articleListRef = userData;
     imgObj.base64 = b64;
+    articleListRef.$save().then(function(ref) {
+       // true
+      console.log('Successfully updates the object',ref);
+    }, function(error) {
+      console.log("Error:", error);
+    });
 
-    var uploadPromiseImgs = new Promise(function(resolve, reject) {
+
+    /*var uploadPromiseImgs = new Promise(function(resolve, reject) {
       $scope.storeImageToDB(imgObj,resolve);
     });
     Promise.all([uploadPromiseImgs]).then(function (data) {
@@ -883,7 +891,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $stateParams, $timeout, 
       });
     }).catch(function (err) {
       console.log(err);
-    })
+    })*/
   };
   var imgObj = {};
   $scope.myImage='';
