@@ -386,7 +386,6 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $fireba
   */
   $ionicLoading.hide();
 
-
   // array
   var refArrayMessages = firebase.database().ref().child("messages");
   // create a synchronized array

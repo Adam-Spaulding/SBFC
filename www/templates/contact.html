@@ -1,5 +1,41 @@
 <ion-view view-title='<img src="img/logo.png" alt="Calander" height="50" class="">'>
   <ion-content>
-    <iframe src="https://calendar.google.com/calendar/embed?src=seacoastbirthandfamily%40gmail.com&ctz=America/New_York" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+    <!-- <iframe src="https://calendar.google.com/calendar/embed?src=seacoastbirthandfamily%40gmail.com&ctz=America/New_York" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe> -->
+<div class="p20">
+	<h4 class="fw900 m0 dark text-center pt20 pb20">Contact Information</h4>
+        <div class="">
+            <h5 class="bg-stable text-dark fw600 p10" ng-click="openTab(1)">Mac Photography
+            	<i class="ti-angle-down inline align-right" ng-hide="isOpenTab(1)"></i>
+            	<i class="ti-angle-up inline align-right" ng-show="isOpenTab(1)"></i></h5>
+            <div class="animation-show-hide text-dark p20" ng-show="isOpenTab(1)">
+              <p><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:603-964-0060" target="_blank">  603-964-0060</a></p>
+              <p><i class="fa fa-laptop" aria-hidden="true"></i><a href="http://www.mac-photography.com/" target="_blank">  mac-photography.com</a></p>
+              <p><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:portrait@mac-photography.com" target="_blank">  portrait@mac-photography.com</a></p>
+            </div>
+        </div>
+        <!-- .accordion__tab -->
+        <div class="">
+            <h5 class="bg-stable text-dark fw600 p10" ng-click="openTab(2)">Baby Beginnings New England
+            	<i class="ti-angle-down inline align-right" ng-hide="isOpenTab(2)"></i>
+            	<i class="ti-angle-up inline align-right" ng-show="isOpenTab(2)"></i></h5>
+            <div class="animation-show-hide text-dark p20" ng-show="isOpenTab(2)">
+              <p><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:978-494-4490" target="_blank">  978-494-4490</a></p>
+              <p><i class="fa fa-laptop" aria-hidden="true"></i><a href="http://www.babybeginningsne.com/" target="_blank">  babybeginningsnewengland.com</p>
+              <p><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:info@babybeginningsNE.com"><span>  info@babybeginningsNE.com</span></a></p>
+            </div>
+        </div>
+        <!-- .accordion__tab -->
+        <div class="">
+            <h5 class="bg-stable text-dark fw600 p10" ng-click="openTab(3)">Diagnostic Ultrasound Suite
+            	<i class="ti-angle-down inline align-right" ng-hide="isOpenTab(3)"></i>
+            	<i class="ti-angle-up inline align-right" ng-show="isOpenTab(3)"></i></h5>
+            <div class="animation-show-hide text-dark p20" ng-show="isOpenTab(3)">
+              <p><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:603-767-9736" target="_blank">  603-767-9736</a></p>
+              <p><i class="fa fa-laptop" aria-hidden="true"></i><a href="http://ultrasoundsuite.com/" target="_blank">  ultrasoundsuite.com</a></p>
+              <p><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:Jessica@UltrasoundSuite.com" target="_blank">  Jessica@UltrasoundSuite.com</a></p>
+            </div>
+        </div>
+        <!-- .accordion__tab -->
+    </div>
   </ion-content>
 </ion-view>

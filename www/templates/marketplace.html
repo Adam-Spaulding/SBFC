@@ -1,0 +1,20 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+  <ion-content>
+    <!-- <a class="button button-block button-positive" href="#/app/add">
+      Ask a Question
+    </a> -->
+    <!-- news sources -->
+
+    <div class="bg-light pt20 pb20">
+		<h4 class="fw300 m0 p10 pt20">The Marketplace</h4> <!-- news feed sources -->
+		<div class="list">
+		    <a ng-repeat="item in articles | filter:{ published: 'true' , category: 'marketplace' }" href="#/app/articleslist/{{item.$id}}">
+		    	<img class="card p5 col-xs-6 m0" ng-src="{{item.img}}">
+		    </a>
+		</div>
+	</div>
+
+	<div class="he50"></div>
+
+  </ion-content>
+</ion-view>

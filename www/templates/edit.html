@@ -8,22 +8,23 @@
 
     <div class="card" style="text-align:left;">
       <div class="list" style="margin: 0 5%;">
-        <div class="cropArea hidden-xs hidden-sm hidden-md">
+        <div class="cropArea">
           <img ng-src="{{user.img}}"/>
         </div>
-        <div class="hidden-xs hidden-sm hidden-md">Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
-        <label class="item item-input item-floating-label title hidden-xs hidden-sm hidden-md">
+        <div class="">Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
+        <label class="item item-input item-floating-label title ">
           <span class="input-label" style="color:#51729a;">Post Title</span>
           <input type="text" placeholder="Post Title" ng-model="user.title" required style="border-bottom:2px solid #51729a;">
         </label>
         <ng-quill-editor
           name="editor1"
           callback="editorCallback(editor, name)"
-          ng-model="message"
+          ng-model="user.body"
           translations="translations"
           toolbar="true"
           show-toolbar="showToolbar"
           link-tooltip="true"
+
           image-tooltip="true"
           toolbar-entries="bold list bullet italic underline align color background link"
           editor-required="true"
@@ -32,8 +33,8 @@
           error-class="input-error"
           fontsize-options="fontsizeOptions">
         </ng-quill-editor>
-        <ion-item class="hidden-xs hidden-sm hidden-md">Category:
-          <select class="hidden-xs hidden-sm hidden-md" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
+        <ion-item class="">Category:
+          <select class="" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
@@ -41,11 +42,11 @@
           <span class="input-label">Publish Date</span>
           <input type="date" width="200px" data-date-format="miliseconds" style="width:200px !important;">
         </label>
-        <ion-item class="hidden-xs hidden-sm hidden-md" style="max-width:200px; padding-left:0px;">
+        <ion-item class="" style="max-width:200px; padding-left:0px;">
           <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
         </ion-item>
 
-        <div class="hidden-xs hidden-sm hidden-md" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
+        <div class="" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
       </div>
 
     </div>

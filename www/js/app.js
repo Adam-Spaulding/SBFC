@@ -125,11 +125,33 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('app.articles', {
-      url: '/articles',
+    .state('app.ask-an-expert', {
+      url: '/ask-an-expert',
       views: {
         'menuContent': {
-          templateUrl: 'templates/articles.html',
+          templateUrl: 'templates/ask-an-expert.html',
+          controller: 'FirebaseCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.babypicture', {
+      url: '/babypicture',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/babypicture.html',
+          controller: 'FirebaseCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.marketplace', {
+      url: '/marketplace',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/marketplace.html',
           controller: 'FirebaseCtrl',
           resolve: { authenticate: authenticate }
         }
@@ -157,6 +179,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
+
 
     .state('app.newslist', {
       url: '/newslist/:id',
@@ -216,6 +239,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/firebase.html',
+          controller: 'FirebaseCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.submit', {
+      url: '/submit',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/submit-ask-an-expert.html',
           controller: 'FirebaseCtrl',
           resolve: { authenticate: authenticate }
         }
@@ -297,7 +331,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/contact.html',
-          controller: 'ContactCtrl',
+          controller: 'HomeCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.calendar', {
+      url: '/home/calendar',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/calendar.html',
+          controller: 'HomeCtrl',
           resolve: { authenticate: authenticate }
         }
       }

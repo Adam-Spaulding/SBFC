@@ -9845,7 +9845,7 @@ a.button {
   background-color: #7740a2 !important; }
 
 .bg-dark {
-  background-color: #636469 !important; }
+  background-color: #51729a !important; }
 
 .bg-darker {
   background-color: #fff !important; }
@@ -9940,7 +9940,8 @@ p {
   border-radius: 21px; }
 
 .button .icon {
-  color: #f5f5f5; }
+  color: #636469;
+  padding: 0 10px; }
 
 /* //BUTTONS */
 /* LISTS AND FORMS */

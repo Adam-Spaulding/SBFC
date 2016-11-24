@@ -70,7 +70,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	background-color: $royal !important;
 }
 .bg-dark {
-	background-color: $dark !important;
+	background-color: $energized !important;
 }
 .bg-darker {
 	background-color: $darker !important;
@@ -178,7 +178,8 @@ p {
 	border-radius: 21px;
 }
 .button .icon {
-	color: $light;
+	color: $dark;
+	padding:0 10px;
 }
 /* //BUTTONS */
 
