@@ -58,3 +58,30 @@
 .row {
   margin:auto 0px !important;
 }
+
+.float-btn-right {
+  z-index: 999;
+  position:fixed;
+  right:0;
+  bottom:0;
+  margin: 0 20px 20px 0;
+  height: 60px;
+  width: 60px;
+  border-radius: 45px;
+}
+
+.float-btn-right .fa {
+  color: #fff;
+  font-size: 35px;
+  margin: 10px 0 0 0;
+}
+
+.ask-an-expert-input {
+  background-color: #fff;
+}
+
+.ask-an-expert-input textarea {
+  font-size: 17px;
+  padding: 15px 40px 0 15px;
+  width:110%;
+}

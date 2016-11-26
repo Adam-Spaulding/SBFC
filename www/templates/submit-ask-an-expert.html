@@ -1,16 +1,21 @@
-<ion-view view-title="Firebase">
-
-  <ion-content class="text-center p20">
-
-
-    <!-- push a new message onto the array -->
-  <a ng-click="addMessage(newMessageText)" class="button button-block button-energized up">Submit</a>
-    	<label class="item item-input">
-      	<input type="text" placeholder="Write a new message" rows="10" ng-model="newMessageText" class="darker p10">
-      </label>
+<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+  <ion-content style="  background-color: #fff;">
 
 
-      <div class="he50"></div>
+	<div class="ask-an-expert-input">
+    <textarea type="text" required placeholder="Type your question here..." ng-model="user.title" rows="10"></textarea>
+	</div>
 
+
+    <select class="" hidden name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
+      <option ng-repeat="option in categoryDropDown.categoryOptions" value="ask-an-expert" selected ng-options="option.ask-an-expert">ask</option>
+    </select>
+
+    <!-- <input value="img/logo.png" style="color:#000;"></input> -->
+	   <div class="he50"></div>
   </ion-content>
+  <button class="float-btn-right bg-dark button" ng-click="saveData(user,message,myCroppedImage)">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+
 </ion-view>

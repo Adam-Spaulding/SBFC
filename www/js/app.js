@@ -245,16 +245,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('app.submit', {
-      url: '/submit',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/submit-ask-an-expert.html',
-          controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
-        }
-      }
-    })
+    // .state('app.submit', {
+    //   url: '/submit',
+    //   views: {
+    //     'menuContent': {
+    //       templateUrl: 'templates/submit-ask-an-expert.html',
+    //       controller: 'FirebaseCtrl',
+    //       resolve: { authenticate: authenticate }
+    //     }
+    //   }
+    // })
 
     .state('app.elements', {
       url: '/elements',
@@ -296,6 +296,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/add.html',
+          controller: 'ChatCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.submit-ask-an-expert', {
+      cache: false,
+      url: '/submit-ask-an-expert',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/submit-ask-an-expert.html',
           controller: 'ChatCtrl',
           resolve: { authenticate: authenticate }
         }

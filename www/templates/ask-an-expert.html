@@ -1,9 +1,5 @@
 <ion-view view-title='<img src="img/logo.png" height="50" class="">'>
   <ion-content>
-    <a class="button button-block button-positive" href="#/app/submit">
-      Ask a Question
-    </a>
-    <!-- news sources -->
 
     <div class="bg-light pt20 pb20">
 		<h4 class="fw300 m0 p10 pt20">Ask An Expert!</h4> <!-- news feed sources -->
@@ -16,8 +12,12 @@
 		    </a>
 		</div>
 	</div>
-
 	<div class="he50"></div>
 
   </ion-content>
 </ion-view>
+<a ui-sref="app.submit-ask-an-expert">
+  <button class="float-btn-right bg-dark button" href="#/app/home">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+</a>
