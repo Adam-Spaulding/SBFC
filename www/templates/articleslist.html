@@ -3,7 +3,7 @@
 
     <!-- blog post -->
     	<div class="blogPost">
-    		<img ng-src="{{selectedArticle.img}}" class="img-full">
+    		<img ng-src="{{selectedArticle.img}}" class="img-full" style="max-width:500px;">
         <a href="#/app/edit/{{selectedArticle.$id}}" class="pull-right p20 dark hidden-xs hidden-sm hidden-md"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
     		<h3 class="post-title" style="padding:10px 20px;">{{selectedArticle.title}}</h3>
     		<p class="fw500 m0 dark p20">Posted on <span class="fw500 m0 dark pt5" ng-bind="selectedArticle.publish_date | date : 'MMMM dd, yyyy'">{{selectedArticle.publish_date | date : 'MMM dd, yyyy'}}</span></p>

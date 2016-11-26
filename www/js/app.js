@@ -308,7 +308,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/submit-ask-an-expert.html',
-          controller: 'ChatCtrl',
+          controller: 'AskanexpertCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
+    .state('app.questions', {
+      cache: false,
+      url: '/questions',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/questions.html',
+          controller: 'AskanexpertCtrl',
           resolve: { authenticate: authenticate }
         }
       }

@@ -15,10 +15,10 @@
             result-image="myCroppedImage">
           </img-crop>
         </div>
-        <div class="">Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
+        <div class="load-image">Select an image file: <input type="file" class="bg-dark" id="fileInput" accept='image/*' /></div>
         <label class="item item-input item-floating-label title ">
           <span class="input-label" style="color:#51729a;">Post Title</span>
-          <input type="text" placeholder="Post Title" ng-model="user.title" required style="border-bottom:2px solid #51729a;">
+          <input type="text" placeholder="Post Title" ng-model="user.title" required>
         </label>
           <ng-quill-editor
             name="editor1"

@@ -525,7 +525,7 @@ app.config(function ($cordovaAppRateProvider) {
 
     var prefs = {
       language: 'en',
-      appName: 'MY APP',
+      appName: 'SBFC',
       iosURL: '<my_app_id>',
       androidURL: 'market://details?id=<package_name>',
       windowsURL: 'ms-windows-store:Review?name=<...>'
@@ -536,8 +536,6 @@ app.config(function ($cordovaAppRateProvider) {
   }, false);
 
 })
-
-
 
 app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
 
@@ -560,7 +558,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
 
   /* /datepicker */
 
-  $scope.message = 'Test';
+  $scope.message = '';
 
   var downloadUrl = '';
 
@@ -605,7 +603,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
   });
 
   $timeout(function () {
-    $scope.message = 'Body';
+    $scope.message = '';
     console.log($scope.message);
   }, 3000);
   $scope.getMessages = function() {
@@ -997,5 +995,49 @@ app.controller('AdmobCtrl', function($scope) {
 
 
 
+
+})
+
+app.controller('AskanexpertCtrl', function($scope, $rootScope, $ionicLoading, FirebaseUser, Firebase, $firebaseObject, $firebaseArray) {
+
+
+  $ionicLoading.show({
+      template: 'Loading Firebase data...'
+    });
+
+    if (!Date.now) {
+    Date.now = function() { return new Date().getTime(); }
+}
+
+  // FIREBASE
+
+  // object
+  var URL = Firebase.url();
+
+  var refObject = firebase.database().ref().child("questions"); // work with firebase url + object named 'data'
+  // download the data into a local object
+  var syncObject = $firebaseObject(refObject);
+  // synchronize the object with a three-way data binding
+  syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
+    $ionicLoading.hide();
+
+
+    // array
+    var refArray = firebase.database().ref().child("questions");
+    // create a synchronized array
+    $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+    // add new items to the array
+    // the message is automatically added to our Firebase database!
+    $scope.addMessage = function(message) {
+      $scope.newMessageText = null;
+      $scope.messages.$add({
+        question: message,
+        email: $rootScope.user,
+        date: Date(),
+        user: $rootScope.userUid
+      });
+
+
+    };
 
 })

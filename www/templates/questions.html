@@ -1,0 +1,44 @@
+<ion-view view-title="Firebase">
+
+  <ion-content class="p20">
+    <h3>Submitted Questions</h3>
+    <ul>
+      <li ng-repeat="question in messages" class="text-left">
+        <div class="card" style="padding:10px 10px;">
+          <span class="questions-actions">
+              <a ng-click="mailto:{{question.email}}?Subject=SBFC%20Question&body=Your Question: {{question.question}}" target="_top">
+              <i class="fa fa-envelope energized" aria-hidden="true"></i>
+              </a>
+              <a ng-click="messages.$remove(question)">
+              <i class="fa fa-trash energized" aria-hidden="true"></i>
+              </a>
+
+          </span>
+          <p>Submitted on {{question.date}}</p>
+          <h4>Submitted by {{question.email}}</h4>
+          <p>{{question.question}}</p>
+        </div>
+
+
+        <!-- <div class="list">
+    		    <div class="item bg-white m5">
+    		      <h4 class="fw500 dark">{{question.question}}</h4>
+              <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">{{question.date | date : 'MMMM dd, yyyy'}}</h4>
+    			  <h4 class="fw300 m0 dark" ng-bind-html="item.body | limitTo: 116">{{ question.author }}</h4>
+            <a ng-click="messages.$remove(question)" class="absolute z-shi pt10"><i class="ti-trash energized"></i></a>
+          </div>
+    		</div> -->
+        <!-- <div class="list">
+    		<label class="item item-input card">
+            <p>{{question.question}}</p>
+        		<input disabled type="text" ng-model="question.question" ng-change="questions.$save(question)" class="p10" />
+        	</label>
+        </div> -->
+      </li>
+    </ul>
+    <!-- push a new message onto the array -->
+
+      <div class="he50"></div>
+
+  </ion-content>
+</ion-view>

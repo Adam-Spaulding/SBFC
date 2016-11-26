@@ -85,3 +85,21 @@
   padding: 15px 40px 0 15px;
   width:110%;
 }
+
+span.questions-actions {
+  text-align: right;
+  right: 0;
+  margin-right:10px;
+  position: absolute;
+}
+
+span.questions-actions a {
+  margin: 40px 0px;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+
+.load-image input {
+  width: 100%;
+  color:#fff;
+}

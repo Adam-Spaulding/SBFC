@@ -1,21 +1,15 @@
 <ion-view view-title='<img src="img/logo.png" height="50" class="">'>
   <ion-content style="  background-color: #fff;">
 
-
 	<div class="ask-an-expert-input">
-    <textarea type="text" required placeholder="Type your question here..." ng-model="user.title" rows="10"></textarea>
+    <textarea type="text" required placeholder="Type your question here..." ng-model="newMessageText" rows="10"></textarea>
 	</div>
-
-
-    <select class="" hidden name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
-      <option ng-repeat="option in categoryDropDown.categoryOptions" value="ask-an-expert" selected ng-options="option.ask-an-expert">ask</option>
-    </select>
-
-    <!-- <input value="img/logo.png" style="color:#000;"></input> -->
+  <a ng-click="addMessage(newMessageText)" ui-sref="app.ask-an-expert">
+    <button class="float-btn-right bg-dark button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </a>
 	   <div class="he50"></div>
   </ion-content>
-  <button class="float-btn-right bg-dark button" ng-click="saveData(user,message,myCroppedImage)">
-    <i class="fa fa-plus" aria-hidden="true"></i>
-  </button>
 
 </ion-view>
