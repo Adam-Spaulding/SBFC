@@ -1,4 +1,9 @@
 /* Empty. Add your own CSS if you like */
+.view-container {
+  max-width: 900px;
+  margin: auto;
+}
+
 .btn {
   border-radius: 0px;
   font-size: 16px;
@@ -102,4 +107,10 @@ span.questions-actions a {
 .load-image input {
   width: 100%;
   color:#fff;
+}
+
+@media screen and (max-width: 880px) {
+    .hidden-admin {
+        display: none !important;
+    }
 }

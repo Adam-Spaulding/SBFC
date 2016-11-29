@@ -512,7 +512,51 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
 
   }
 
+  $ionicSideMenuDelegate.canDragContent(true);
 
+
+  // TABS
+  $scope.tab = 1;
+  $scope.activeMenu = 1;
+
+  $scope.setTab = function(newTab){
+    $scope.tab = newTab;
+    $scope.activeMenu = newTab;
+  };
+
+  $scope.isSet = function(tabNum){
+    return $scope.tab === tabNum;
+  };
+
+
+  // ACCORDIONS
+  // initiate an array to hold all active tabs
+  $scope.activeTabs = [];
+
+  // check if the tab is active
+  $scope.isOpenTab = function (tab) {
+    // check if this tab is already in the activeTabs array
+    if ($scope.activeTabs.indexOf(tab) > -1) {
+      // if so, return true
+      return true;
+    } else {
+      // if not, return false
+      return false;
+    }
+  }
+
+  // function to 'open' a tab
+  $scope.openTab = function (tab) {
+    // check if tab is already open
+    if ($scope.isOpenTab(tab)) {
+      //if it is, remove it from the activeTabs array
+      $scope.activeTabs.splice($scope.activeTabs.indexOf(tab), 1);
+    } else {
+      // if it's not, add it!
+      $scope.activeTabs = [];
+      $scope.activeTabs.push(tab);
+    }
+  }
 
 
 });
