@@ -76,7 +76,7 @@
           Plugins
         </ion-item> -->
         <ion-item menu-close href="#/app/home/calendar" class="border-b-xs">
-          Calander
+          Calendar
         </ion-item>
         <ion-item menu-close href="#/app/home/contact" class="border-b-xs">
           Contact
@@ -99,6 +99,7 @@
       </ion-list>
       <div class="he50"></div>
     </ion-content>
+
     <div class="bar bar-footer bg-dark">
       <div class="title font-xs text-left">Copyright <span class="fw900">Seacoast Birth & Family Connection</span> 2017</div>
     </div>
@@ -116,7 +117,7 @@
       <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
 
         <ion-item ng-repeat="item in notifications" item="item" class="item-remove-animate item-avatar border-b-xs">
-          <img src="img/users/{{item.img}}">
+          <!-- <img src="img/users/{{item.img}}"> -->
       <h3 class="light m0 fw300">{{item.user}}</h3>
       <p class="light m0">{{item.text}}</p>
           <ion-delete-button class="ion-minus-circled"

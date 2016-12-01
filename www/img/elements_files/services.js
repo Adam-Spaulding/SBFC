@@ -3,7 +3,7 @@
 var feeds = [];
 
 app.factory('FeedLoader', function ($resource) {
-    return $resource('http://ajax.googleapis.com/ajax/services/feed/load', {}, {
+    return $resource('https://ajax.googleapis.com/ajax/services/feed/load', {}, {
         fetch: { method: 'JSONP', params: {v: '1.0', callback: 'JSON_CALLBACK'} }
     });
 });
@@ -35,14 +35,14 @@ app.service('FeedList', function ($rootScope, FeedLoader, $q) {
 // WORDPRESS FEED SERVICES
 
 app.service('Posts', function($http) {
-    this.get = function() { 
+    this.get = function() {
         var url = "http://swepps.com/wp/api/get_recent_posts?callback=JSON_CALLBACK";
         return $http.jsonp(url);
     };
 });
 
 app.service('Post', function($http) {
-    this.get = function(id) { 
+    this.get = function(id) {
         var url = "http://swepps.com/wp/api/get_post?post_id="+id+"&callback=JSON_CALLBACK";
         return $http.jsonp(url);
     };
@@ -53,7 +53,7 @@ app.service('Post', function($http) {
 // FIREBASE SERVICES
 
 app.service('Firebase', function() {
-    this.url = function(id) { 
+    this.url = function(id) {
         var url = "https://ionicrevolution-77640.firebaseio.com";
         return url;
     };
@@ -101,8 +101,3 @@ app.directive('owlCarouselItem', function() {
         }
     };
 });
-
-
-
-
-  

@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "SBFC",
   "app_id": "d135a648",
   "gulpStartupTasks": [
     "sass",

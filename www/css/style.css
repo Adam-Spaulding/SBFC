@@ -114,3 +114,8 @@ span.questions-actions a {
         display: none !important;
     }
 }
+
+.card, .wrapping-list  {
+    overflow: initial;
+    white-space: initial;
+}

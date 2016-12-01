@@ -198,22 +198,22 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, Fee
   // NEWS FEED
   var getNews = function(num) {
 
-    $scope.news = [];
-    FeedList.get($scope.source.url, num).then(function(feeddata){
-      var data = feeddata[0].entries;
-      for(x=0;x<data.length;x++) {
-        $scope.news = data;
-      }
-      $ionicLoading.hide();
-    })
+      $scope.news = [];
+      FeedList.get($scope.source.url, num).then(function(feeddata){
+        var data = feeddata[0].entries;
+        for(x=0;x<data.length;x++) {
+          $scope.news = data;
+        }
+        $ionicLoading.hide();
+        })
 
-  }
-  getNews(10);
+    }
+    getNews(10);
 
-  $scope.openUrl = function(link) {
-    window.open(link, '_system', 'location=yes');
-    return false;
-  }
+    $scope.openUrl = function(link) {
+      window.open(link, '_system', 'location=yes');
+      return false;
+    }
 
 
 })
@@ -363,15 +363,16 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 })
 
 
-app.controller('FirebaseCtrl', function($scope, $ionicLoading, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
+app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
 
 
   $ionicLoading.show({
     template: 'Loading Firebase data...'
   });
 
-
   // FIREBASE
+
+
 
   $scope.articleID = $stateParams.id;
   $scope.selectedArticle = {};
@@ -611,9 +612,9 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
   $scope.categoryDropDown = {
     selected:null,
     categoryOptions: [
-      {id:0,name:'Baby Photo',value:'baby-photo'},
-      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
-      {id:2,name:'Marketplace',value:'marketplace'},
+      {id:0,name:'Baby Photo',value:'Cute Baby Photo of the Month'},
+      {id:1,name:'Ask an Expert',value:'Ask an Expert'},
+      {id:2,name:'Marketplace',value:'Marketplace'},
       {id:3,name:'Diognostic Ultrasound',value:'diognostic-ultrasound'},
       {id:4,name:'BBNE',value:'bbne'}
     ]

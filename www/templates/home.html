@@ -1,125 +1,28 @@
 <ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
-  <ion-content>
-
-    <!-- ionic slider -->
-	<ion-slide-box>
-	  <ion-slide ng-repeat="item in articles | filter:{ published: 'true' , category: 'marketplace' }" style="height:200px;">
-      <a href="#/app/articleslist/{{item.$id}}">
-        <div class="">
-  		    <div class="overlay-center p30">
-  		    	<h3 class="light fw300 m0 text-shadow-dark">{{item.title}}</h3>
-  		    	<p class="light fw900 up text-shadow-dark" ng-bind-html="item.body | limitTo: 116"></p>
-  		    </div>
-  	    	<img src="{{item.img}}" class="img-full">
-  	    </div>
-      </a>
-	  </ion-slide>
-	</ion-slide-box>
-
-	<div class="he5 bg-light"></div>
 
 
-	<div class="text-center p20 pt40">
-		<h2 class="fw300 dark">Welcome!</h2>
-		<p class="dark">The Seacoast Birth and Family Connection is your local guide to the best in pregnancy and beyond in the Seacoast, NH area</p>
-	</div>
-
-	<div class="he5 bg-light"></div>
-
-	<!-- Banner + content -->
-	<div class="row row-center p0 bg-energized">
-	  <div class="col p0">
-	  	<img src="img/banners/1.png" class="img-full">
-	  </div>
-	  <div class="col p10">
-	  	<h4 class="fw900 m0 text-white text-shadow-dark">Have questions? We have answers</h4>
-		<p class="text-white">Post questions and get answers from the experts.</p>
-    <a class="button button-energized assertive up"  href="#/app/ask-an-expert">Read More</a>
-	  </div>
-	</div>
-
-	<div class="he5 bg-light"></div>
-
-	<div class="row pt20">
-    <!-- <a class="col card text-center p20" href="#/app/home/macphotography">
-      <i class="fa fa-camera fa-3x energized" style="height:60px;" aria-hidden="true"></i>
-      <h4 class="dark fw300 font-md">Mac Photography</h4>
-      <p class="dark">Capturing life, love, and family</p>
+<ion-content padding="true" class="has-header">
+  <form id="home3-form5" class="list" style="background-color:#fff;">
+    <label class="item item-input" id="home3-input14">
+      <input type="text" placeholder="Search the headlines" ng-model="search.title">
+    </label>
+  </form>
+  <div class="list card" id="home3-card26" ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true'} | filter:search">
+    <ion-item id="home3-list-item16">{{item.category}}
+      <span class="item-note" ng-bind="item.publish_date | date : 'MMM dd, yy'">{{item.publish_date | date : 'MMM dd, yyyy'}}</span>
+    </ion-item>
+    <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+      <img class="" ng-src="{{item.img}}" style="width:100%; vertical-align: middle;"></img>
+    </div>
+    <a href="#/app/articleslist/{{item.$id}}">
+      <ion-item class="item-icon-right" id="home3-list-item21">
+        {{item.title}}
+        <p ng-bind-html="item.body | limitTo: 116">{{ item.body }}</p>
+        <i class="icon ion-chevron-right"></i>
+      </ion-item>
     </a>
-    <a class="col card text-center p20" href="#/app/newslist/2">
-      <img src="img/smb.jpg" style="max-width:60px;"></img>
-      <h4 class="dark fw300 font-md">Seacoast Mom's Blog</h4>
-      <p class="dark">Purchase revolution now and start planning your app</p>
-    </a> -->
-		<!-- <div class="col text-center p20">
-			<i class="fa fa-camera fa-4x energized"></i>
-			<h4 class="dark fw900">Mac Photography</h4>
-			<p class="dark">Use the elements and plugins to create the awesomeness</p>
-		</div> -->
-		<div class="col text-center p20">
-			<img src="img/smb.jpg" style="max-width:60px;"></img>
-			<h4 class="dark fw900">The Seacoast Moms Blog</h4>
-			<p class="dark">Passionate about the community and the moms who live here</p>
-      <a class="button button-energized assertive up" href="#/app/newslist/2">Read the latest posts</a>
-		</div>
-	</div>
-
-	<div class="he5 bg-light"></div>
-
-	<!-- Banner separator -->
-	<div class="he320 ov-hidden text-center">
-		<div class="text-center absolute w100 pt40">
-			<h4 class="fw900 m0 dark text-shadow-light">Mac Photograpy</h4>
-			<p class="dark">Capturing life, love, and family</p>
-      <a class="button button-energized assertive up" href="#/app/home/macphotography">Learn More</a>
-		</div>
-		<img src="img/banners/3.png" class="" width="100%">
-	</div>
-
-	<div class="he5 bg-light"></div>
-
-	<!-- Team carousel -->
-
-	<!-- <div class="">
-		<h4 class="fw900 dark p30 text-center">Meet the team</h4>
-
-		<data-owl-carousel class="owl-carousel" data-options="{navigation: true, pagination: false, lazyLoad : true, rewindNav : false, items : 10, itemsMobile : [479,3], singleItem : true, autoHeight : true, navigationText: ['<i class=\'ti-control-backward energized\'></i>', '<i class=\'ti-control-forward energized\'></i>']}">
-	      <div owl-carousel-item="" ng-repeat="item in notifications" class="carousel-item text-center">
-	      	<img ng-src="img/users/{{item.img}}" class="round" width="50">
-	      	<p class="dark text-center fw700">{{item.user}}</p>
-	        <p class="dark text-center pl90 pr90">{{item.text}}</p>
-	        <div class="text-center m20">
-	        	<i class="ti-email font-xl m10 stable"></i>
-	        	<i class="ti-mobile font-xl m10 stable"></i>
-	        	<i class="ti-twitter font-xl m10 stable"></i>
-	        	<i class="ti-sharethis font-xl m10 stable"></i>
-	        </div>
-	      </div>
-	    </data-owl-carousel>
-	</div> -->
-
-
-    <!-- <div class="he5 bg-light"></div> -->
-
-    <!-- Banner + content on top -->
-
-
-    <!-- footer -->
-      <div class="bg-darker text-center p30">
-      	<img src="img/logo.png" width="120">
-      	<p class="stable dark">Your local guide to the best in pregnancy and beyond in the Seacoast, NH area</p>
-      	<div class="text-center">
-            <a href="https://www.facebook.com/SeacoastBirthFamilyConnection/"><i class="fa fa-facebook fa-2x m10 stable" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/SBFC_NH"><i class="fa fa-twitter fa-2x m10 stable" aria-hidden="true"></i></a>
-            <!-- <a href=""><i class="fa fa-envelope fa-2x m10 stable" aria-hidden="true"></i></a> -->
-            <a href="https://www.instagram.com/sbfconnection/"><i class="fa fa-instagram fa-2x m10 stable" aria-hidden="true"></i></a>
-            <a href="https://www.pinterest.com/seacoastbirthfa/"><i class="fa fa-pinterest fa-2x m10 stable" aria-hidden="true"></i></a>
-            <!-- <a href=""><i class="fa fa-mobile fa-2x m10 stable" aria-hidden="true"></i></a> -->
-            <a href="#/app/home/calendar"><i class="fa fa-calendar fa-2x m10 stable" aria-hidden="true"></i></a>
-            <a href="https://www.google.com/maps/place/165+Lafayette+Rd,+North+Hampton,+NH+03862/@42.9897841,-70.8221567,17z/data=!3m1!4b1!4m5!3m4!1s0x89e2e9f8ece6178d:0xd482232f2872995d!8m2!3d42.9897841!4d-70.819968"><i class="fa fa-map-marker fa-2x m10 stable" aria-hidden="true"></i></a>
-          </div>
-      	<div class="font-xs stable dark">Copyright <span class="energized fw900">Seacoast Birth & Family Connection</span> 2017</div>
-      </div>
+  </div>
+</ion-content>
 
   </ion-content>
 </ion-view>
