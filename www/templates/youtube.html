@@ -1,4 +1,4 @@
-<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
 
   <ion-content ng-init="getChannel()">
 
@@ -6,7 +6,6 @@
 
 	<div class="bg-light pt20 pb20">
 		<!-- <h4 class="fw300 m0 p10 pt20">Youtube channel: {{channel}}</h4> <!-- news feed sources -->
-    <h4 class="fw300 m0 p10 pt20">Mac Photography Videos</h4>
 		<div class="list">
 		    <a class="item item-avatar bg-white m5" ng-repeat="item in videos" href="#/app/video/{{item.snippet.resourceId.videoId}}/{{$index}}">
 		    	<img ng-src="{{item.snippet.thumbnails.high.url}}">

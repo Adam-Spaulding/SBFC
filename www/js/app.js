@@ -107,7 +107,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/home',
       views: {
         'menuContent': {
-          templateUrl: 'templates/home.html',
+          templateUrl: 'templates/home-tiles.html',
           controller: 'FirebaseCtrl',
           resolve: { authenticate: authenticate }
         }

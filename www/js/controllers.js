@@ -612,11 +612,9 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
   $scope.categoryDropDown = {
     selected:null,
     categoryOptions: [
-      {id:0,name:'Baby Photo',value:'Cute Baby Photo of the Month'},
-      {id:1,name:'Ask an Expert',value:'Ask an Expert'},
-      {id:2,name:'Marketplace',value:'Marketplace'},
-      {id:3,name:'Diognostic Ultrasound',value:'diognostic-ultrasound'},
-      {id:4,name:'BBNE',value:'bbne'}
+      {id:0,name:'Baby Photo',value:'baby-photo'},
+      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
+      {id:2,name:'Marketplace',value:'marketplace'}
     ]
   };
 

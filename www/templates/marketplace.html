@@ -1,4 +1,4 @@
-<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
   <ion-content>
     <!-- <a class="button button-block button-positive" href="#/app/add">
       Ask a Question
@@ -8,7 +8,7 @@
     <div ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true' , category: 'marketplace' }" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
       <div class="card" id="">
       <ion-item id="">
-        <span class="item-note" ng-bind="item.publish_date | date : 'MMM dd, yy'">{{item.publish_date | date : 'MMM dd, yyyy'}}</span>
+        <!-- <span class="item-note" ng-bind="item.publish_date | date : 'MMM dd, yy'"></span> -->
       </ion-item>
       <div style="margin: 0px; text-align: center;">
         <img class="" ng-src="{{item.img}}" style="width:100%;"></img>

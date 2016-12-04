@@ -1,4 +1,4 @@
-<ion-view view-title='<img src="img/logo.png" height="50" class="">'>
+<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
   <ion-content>
     <!-- <a class="button button-block button-positive" href="#/app/add">
       Ask a Question
@@ -8,7 +8,7 @@
     <div class="bg-light pt20 pb20">
 		<h4 class="fw300 m0 p10 pt20">Cute Baby Photo of the Month</h4> <!-- news feed sources -->
 		<div class="list">
-		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles | filter:{ published: 'true' , category: 'baby-photo' }" href="#/app/articleslist/{{item.$id}}">
+		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true' , category: 'baby-photo' }" href="#/app/articleslist/{{item.$id}}">
 		    	<img ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
           <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">{{item.publish_date | date : 'MMMM dd, yyyy'}}</h4>
