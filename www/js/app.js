@@ -139,6 +139,17 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+    .state('app.allcontent', {
+      url: '/allcontent',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/all-content.html',
+          controller: 'FirebaseCtrl',
+          resolve: { authenticate: authenticate }
+        }
+      }
+    })
+
     .state('app.babypicture', {
       url: '/babypicture',
       views: {

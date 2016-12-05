@@ -5,7 +5,7 @@
     </a> -->
     <!-- news sources -->
 
-    <div class="bg-light pt20 pb20">
+    <div class="pt20 pb20">
 		<h4 class="fw300 m0 p10 pt20">Cute Baby Photo of the Month</h4> <!-- news feed sources -->
 		<div class="list">
 		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true' , category: 'baby-photo' }" href="#/app/articleslist/{{item.$id}}">

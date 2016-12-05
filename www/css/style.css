@@ -197,3 +197,28 @@ input.date-picker {
   width: 100% !important;
   display: block;
 }
+
+.list a i {
+  top: 0;
+  position: absolute;
+  right: 0;
+  margin: 10px 10px 0 0;
+  font-size: 30px;
+  color: #eee;
+}
+
+.list a i.true {
+  color: #2ecc71;
+}
+
+.list a i.false {
+  color: #eee;
+}
+
+.add-button {
+  background-color: #2ecc71;
+  color: #fff;
+  top: 10px;
+  position: absolute;
+  right: 0;
+}
