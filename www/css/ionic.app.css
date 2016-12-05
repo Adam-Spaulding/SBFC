@@ -8074,8 +8074,8 @@ input:checked + .checkbox-icon:after {
   margin: -5px;
   padding: 5px; }
   .toggle input:checked + .track {
-    border-color: #51729A;
-    background-color: #51729A; }
+    border-color: #4cd964;
+    background-color: #4cd964; }
   .toggle.dragging .handle {
     background-color: #f2f2f2 !important; }
 
@@ -9988,7 +9988,7 @@ p {
   left: 7px; }
 
 .toggle input:checked + .track {
-  background-color: #51729A !important; }
+  background-color: #86B1C2 !important; }
 
 .checkbox input:before, .checkbox-icon:before {
   width: 50%;

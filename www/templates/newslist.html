@@ -9,17 +9,18 @@
 			  <h4 class="fw300 m0 dark">{{source.description}}</h4>
 		    </div>
 
-	<div class="bg-light pt20 pb20"> <!-- news feed list for selected source -->
+	<div class="pt20 pb20"> <!-- news feed list for selected source -->
 		<div class="list">
-		    <a class="item bg-white m5" ng-repeat="item in news" ng-click="openUrl(item.link)">
-		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
-			  <h4 class="fw300 m0 dark">{{item.contentSnippet}}</h4>
+		    <a class="item bg-white m5" ng-repeat="item in news" href="{{item.link}}" target="_self">
+          <h2 class="fw500 dark pt5">{{item.title}}</h2>
+          <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.content">{{item.content}}</h4>
+          <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.contentSnippt">{{item.contentSnippt}}</h4>
 			  <div class="row p0">
 			  	<div class="col pl0">
 			  		<p class="fw300 m0 dark">{{item.author}}</p>
 			  	</div>
 			  	<div class="col pr0 text-right">
-			  		<p class="fw300 m0 dark">{{item.publishedDate | limitTo:46}}</p>
+			  		<p class="fw300 m0 dark">{{item.publishedDate | limitTo:16}}</p>
 			  	</div>
 			  </div>
 		    </a>
