@@ -13,10 +13,10 @@
             result-image="myCroppedImage">
           </img-crop>
         </div>
-        <div class="load-image">Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
-        <label class="item item-input item-floating-label title ">
+        <div class="load-image">Load an image: <input type="file" class="" id="fileInput" accept='image/*' /></div>
+        <label class="item item-input item-floating-label title p0">
           <span class="input-label" style="color:#51729a;">Post Title</span>
-          <input type="text" placeholder="Post Title" ng-model="user.title" required>
+          <input type="text" placeholder="Post Title" ng-model="user.title" required  style="border-bottom:2px solid #51729A;">
         </label>
           <ng-quill-editor
             name="editor1"
@@ -34,24 +34,24 @@
             error-class="input-error"
             fontsize-options="fontsizeOptions">
           </ng-quill-editor>
-        <ion-item class="">Category:
+        <ion-item class="category-select bold">Category:
           <select class="" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
-        <label class="item item-input">
-          <span class="input-label">Publish Date</span>
-          <input type="date" width="200px" ng-model="user.publish_date" data-date-format="miliseconds" style="width:200px !important;">
+        <label class="item item-input" style="padding-left:0px; margin: auto 0px">
+          <span class="">Publish Date:</span>
+          <input class="date-picker" type="date" ng-model="user.publish_date" data-date-format="miliseconds" style="width:200px !important;">
         </label>
-        <ion-item class="" style="max-width:200px; padding-left:0px;">
-          <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
-        </ion-item>
+        <!-- <ion-item style="max-width:200px; padding-left:0px; margin: auto 0px !important;"> -->
+          <ion-toggle ng-model="user.published" toggle-class="toggle" style="max-width:200px; padding-left:0px; margin: auto 0px !important; height:50px;">Published: </ion-toggle>
+        <!-- </ion-item> -->
 
         <div class="" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
       </div>
       <div style="text-align:center;">
         <button class="btn button-positive p20" ng-click="saveData(user,message,myCroppedImage)">Save</button>
-        <button class="btn button-warning p20">Cancel</button>
+        <button class="btn button-warning p20" ui-sref="app.home">Cancel</button>
       </div>
       <div class="he20"></div>
     </div>

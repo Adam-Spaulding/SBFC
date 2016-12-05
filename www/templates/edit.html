@@ -1,5 +1,5 @@
 <ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
-  <ion-content class="bg-light text-center p20" overflow-scroll="true">
+  <ion-content class="text-center p20" overflow-scroll="true">
 
     <h3 class="dark fw300 m0">Post to SBFC</h3>
     <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
@@ -24,7 +24,7 @@
           toolbar="true"
           show-toolbar="showToolbar"
           link-tooltip="true"
-
+          placeholder="Inser your text here"
           image-tooltip="true"
           toolbar-entries="bold list bullet italic underline align color background link"
           editor-required="true"
@@ -33,26 +33,35 @@
           error-class="input-error"
           fontsize-options="fontsizeOptions">
         </ng-quill-editor>
-        <ion-item class="">Category:
+        <ion-item class="category-select bold">Category:
           <select class="" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
           </select>
         </ion-item>
-        <label class="item item-input">
-          <span class="input-label">Publish Date</span>
-          <input type="date" width="200px" ng-model="user.publish_date" data-date-format="miliseconds" style="width:200px !important;">
+        <label class="item item-input" style="padding-left:0px; margin: auto 0px">
+          <span class="">Publish Date:</span>
+          <input class="date-picker" type="date" ng-model="user.publish_date" data-date-format="miliseconds" style="width:200px !important;">
         </label>
-        <ion-item class="" style="max-width:200px; padding-left:0px;">
-          <ion-toggle ng-model="user.published"  toggle-class="toggle">Published</ion-toggle>
-        </ion-item>
+        <!-- <ion-item style="max-width:200px; padding-left:0px; margin: auto 0px !important;"> -->
+          <ion-toggle ng-model="user.published" toggle-class="toggle" style="max-width:200px; padding-left:0px; margin: auto 0px !important; height:50px;">Published: </ion-toggle>
+        <!-- </ion-item> -->
 
         <div class="" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
       </div>
 
+        <div class="" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
+        <div style="text-align:center;">
+          <button class="btn button-positive p20" ng-click="saveData(user,myCroppedImage)">Save</button>
+          <button class="btn button-warning p20" ng-click="deleteEdited()">Delete</button>
+        </div>
+          <div class="he20"></div>
+      </div>
+
+
     </div>
 
-    <button class="btn button-positive" ng-click="saveData(user,myCroppedImage)">Save</button>
-    <button class="btn button-warning" ng-click="deleteEdited()">Delete</button>
 
+  <div class="he100"></div>
   </ion-content>
+
 </ion-view>

@@ -120,6 +120,54 @@ span.questions-actions a {
     white-space: initial;
 }
 
-ion-tabs {
+.advanced-wrapper {
+  border: 2px solid #51729A;
+  margin: 20px 0 0 0;
+}
 
+.ql-toolbar {
+  background-color: #eee;
+}
+
+.ql-editor {
+  border:none;
+  min-height: 200px;
+}
+
+.category-select {
+    padding: 0;
+    margin: 20px 0;
+    overflow: hidden;
+    background-color: #fff;
+    width: 400px;
+}
+
+.category-select:hover {
+    background: #fff url("/img/arrowdown.gif") no-repeat 90% 50%;
+}
+
+.category-select select {
+    padding: 5px 8px;
+    width: 300px;
+    color: #51729A;
+    font-size:16px;
+    border: none;
+    border-bottom: 2px solid #51729A;
+    border-radius: 0px;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+
+}
+
+input.date-picker {
+  max-width: 300px;
+  padding-right: 0px !important;
+  border-bottom:2px solid #51729A;
+  font-size: 16px;
+  color: #51729A;
+  margin: 0px 0 0 10px;
 }

@@ -4601,7 +4601,7 @@ a.subdued {
     color: #f5f5f5;
     border-style: solid;
     border-width: 2px 0 0 0;
-    border-color: transparent; }
+    border-color: #f5f5f5; }
 
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -8074,8 +8074,8 @@ input:checked + .checkbox-icon:after {
   margin: -5px;
   padding: 5px; }
   .toggle input:checked + .track {
-    border-color: #4cd964;
-    background-color: #4cd964; }
+    border-color: #51729A;
+    background-color: #51729A; }
   .toggle.dragging .handle {
     background-color: #f2f2f2 !important; }
 
@@ -9988,7 +9988,7 @@ p {
   left: 7px; }
 
 .toggle input:checked + .track {
-  background-color: #86B1C2 !important; }
+  background-color: #51729A !important; }
 
 .checkbox input:before, .checkbox-icon:before {
   width: 50%;
