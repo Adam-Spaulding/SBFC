@@ -1,7 +1,7 @@
 <ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
   <ion-content>
 
-    <div class=" pt20 pb20">
+    <div class="pt20 pb20">
 		<h4 class="fw300 m0 p10 pt20">Ask An Expert!</h4> <!-- news feed sources -->
 		<div class="list">
 		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true' , category: 'ask-an-expert' }" href="#/app/articleslist/{{item.$id}}">
@@ -13,11 +13,10 @@
 		</div>
 	</div>
 	<div class="he50"></div>
-
+  <a ui-sref="app.submit-ask-an-expert">
+    <button class="float-btn-right bg-dark button" href="#/app/home">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </a>
   </ion-content>
 </ion-view>
-<a ui-sref="app.submit-ask-an-expert">
-  <button class="round bg-dark button" href="#/app/home">
-    <i class="fa fa-plus" aria-hidden="true"></i>
-  </button>
-</a>

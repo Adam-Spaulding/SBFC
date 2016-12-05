@@ -19,7 +19,6 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
       });
     })
 
-
      // Enable to debug issues.
   // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
@@ -430,6 +429,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
 })
+
+
 
 app.config(function (ngQuillConfigProvider) {
   ngQuillConfigProvider.set([{

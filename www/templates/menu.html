@@ -1,8 +1,7 @@
 <ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content>
     <ion-nav-bar class="bg-darker shadow-small">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+      <ion-nav-back-button></ion-nav-back-button>
 
       <ion-nav-buttons side="left">
         <i ng-hide="isActive" class="ti-align-justify text-black font-xl p10" menu-toggle="left"></i>
@@ -14,7 +13,13 @@
         <i ng-show="isActive" class="ti-close text-black font-xl p10" menu-toggle="right"></i>
       </ion-nav-buttons>
 
+      <ion-tabs class="tabs-balanced tabs-icon-top" ng-show="user != 'Anonymous'">
+        <ion-tab title="Home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ui-sref="app.home"></ion-tab>
+        <ion-tab title="Marketplace" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline" ui-sref="app.marketplace"></ion-tab>
+      </ion-tabs>
+
     </ion-nav-bar>
+
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
