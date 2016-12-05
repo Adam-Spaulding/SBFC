@@ -4601,7 +4601,7 @@ a.subdued {
     color: #f5f5f5;
     border-style: solid;
     border-width: 2px 0 0 0;
-    border-color: #f5f5f5; }
+    border-color: transparent; }
 
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }

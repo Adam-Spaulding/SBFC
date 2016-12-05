@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
-.view-container {
-  max-width: 900px;
+ion-content {
+  max-width: 750px;
   margin: auto;
 }
 
@@ -118,4 +118,8 @@ span.questions-actions a {
 .card, .wrapping-list  {
     overflow: initial;
     white-space: initial;
+}
+
+ion-tabs {
+
 }

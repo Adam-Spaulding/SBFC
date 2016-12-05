@@ -1,10 +1,8 @@
 <ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
-  <ion-content class="bg-light text-center p20" overflow-scroll="true">
+  <ion-content class="text-center p20" overflow-scroll="true">
 
     <h3 class="dark fw300 m0">Post to SBFC</h3>
     <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
-
-
 
     <div class="card" style="text-align:left;">
       <div class="list" style="margin: 0 5%;">
@@ -15,7 +13,7 @@
             result-image="myCroppedImage">
           </img-crop>
         </div>
-        <div class="load-image">Select an image file: <input type="file" class="bg-dark" id="fileInput" accept='image/*' /></div>
+        <div class="load-image">Select an image file: <input type="file" id="fileInput" accept='image/*' /></div>
         <label class="item item-input item-floating-label title ">
           <span class="input-label" style="color:#51729a;">Post Title</span>
           <input type="text" placeholder="Post Title" ng-model="user.title" required>
@@ -51,11 +49,14 @@
 
         <div class="" ng-show="valuationDatePickerIsOpen" style="height: 180px;width: 50px"></div>
       </div>
-
+      <div style="text-align:center;">
+        <button class="btn button-positive p20" ng-click="saveData(user,message,myCroppedImage)">Save</button>
+        <button class="btn button-warning p20">Cancel</button>
+      </div>
+      <div class="he20"></div>
     </div>
 
-      <button class="btn button-positive p20" ng-click="saveData(user,message,myCroppedImage)">Save</button>
-      <button class="btn button-warning p20">Delete</button>
-	<div class="he50"></div>
+
+	<div class="he100"></div>
   </ion-content>
 </ion-view>

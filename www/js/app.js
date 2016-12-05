@@ -6,6 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 app = angular.module('revolution', ['ionic', 'revolution.controllers', 'ngSanitize', 'textAngular', 'ngQuill', 'ngImgCrop'])
 
+
+
 app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
 
@@ -48,7 +50,9 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   });
 })
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+$ionicConfigProvider.tabs.position('bottom');
+
 
   $stateProvider
 
