@@ -759,7 +759,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
 })
 
 
-app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig) {
+app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
 
 
   $scope.articleID = $stateParams.id;
@@ -820,6 +820,15 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     ]
   };
 
+  $scope.showToast = function(){
+    <!-- ionicToast.show(message, position, stick, time); -->
+    ionicToast.show('This is a toast at the top.', 'top', false, 2500);
+  };
+
+  $scope.hideToast = function(){
+    ionicToast.hide();
+  };
+
   /*$scope.translations = angular.extend({}, ngQuillConfig.translations, {
    15: 'smallest'
    });*/
@@ -842,11 +851,6 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
   $scope.clear = function () {
     return $scope.message = '';
   };
-
-  // Event after an editor is created --> gets the editor instance on optional the editor name if set
-  $scope.$on('editorCreated', function (event, editor, name) {
-    console.log('createEvent', editor, name);
-  });
 
   $scope.getMessages = function() {
 
@@ -920,6 +924,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     imgObj.base64 = b64;
     articleListRef.$save().then(function(ref) {
        // true
+      ionicToast.show('Form has been Edited.', 'top', false, 2500);
       console.log('Successfully updates the object',ref);
     }, function(error) {
       console.log("Error:", error);

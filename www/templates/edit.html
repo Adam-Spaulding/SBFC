@@ -20,7 +20,7 @@
           name="editor1"
           callback="editorCallback(editor, name)"
           ng-model="user.body"
-          backgroundColor: '#ccc',
+          backgroundColor='#ccc'
           translations="translations"
           toolbar="true"
           show-toolbar="showToolbar"
@@ -35,6 +35,7 @@
           error-class="input-error"
           fontsize-options="fontsizeOptions">
         </ng-quill-editor>
+
         <ion-item class="category-select bold">Category:
           <select class="" name="repeatSelect" id="repeatSelect" ng-model="categoryDropDown.selected">
             <option ng-repeat="option in categoryDropDown.categoryOptions" value="{{option.value}}">{{option.name}}</option>
