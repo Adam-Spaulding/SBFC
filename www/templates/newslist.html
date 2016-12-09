@@ -13,8 +13,8 @@
 		<div class="list">
 		    <a class="item bg-white" ng-repeat="item in news" href="{{item.link}}" target="_self" style="margin-bottom:25px;">
           <h2 class="fw500 m0 dark pt5">{{item.title}}</h2>
-          <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.content">{{item.content}}</h4>
-          <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.contentSnippt">{{item.contentSnippt}}</h4>
+            <!-- <h4 class="fw300 m0 dark">{{item.contentSnippet}}</h4> -->
+          <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.contentSnippet">{{item.contentSnippet}}</h4>
 			  <div class="row p0">
 			  	<div class="col pl0">
 			  		<p class="fw300 m0 dark">{{item.author}}</p>
