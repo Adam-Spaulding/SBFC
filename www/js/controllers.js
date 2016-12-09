@@ -783,10 +783,15 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
       $scope.categoryDropDown.selected = $scope.user.category;
       $scope.user.publish_date = new Date($scope.user.publish_date);
       $scope.message = $scope.user.body;
+      ngQuillConfig.setHTML($scope.user.body);
     })
     .catch(function(error) {
       console.log("Error:", error);
     });
+
+  $scope.$on("editorCreated", function (event, quillEditor) {
+    quillEditor.setHTML($scope.user.body);
+  });
 
   /* datepicker */
   $scope.valuationDate = new Date();
