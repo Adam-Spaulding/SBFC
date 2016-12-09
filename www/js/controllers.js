@@ -924,7 +924,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     imgObj.base64 = b64;
     articleListRef.$save().then(function(ref) {
        // true
-      ionicToast.show('Form has been Edited.', 'top', false, 2500);
+      ionicToast.show('Success!.', 'bottom', false, 2500);
       console.log('Successfully updates the object',ref);
     }, function(error) {
       console.log("Error:", error);
