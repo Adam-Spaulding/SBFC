@@ -827,6 +827,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
    console.log('createCallback', editor, name);
    };*/
 
+
   $scope.readOnly = false;
 
   $scope.isReadonly = function () {
