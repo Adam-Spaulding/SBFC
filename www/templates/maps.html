@@ -9,6 +9,11 @@
           on-click="map.showInfoWindow('info')"
           title="You are here"
           centered="true"></marker>
+          <custom-control id="home" position="TOP_RIGHT" index="1" on-click="vm.click()">
+            <div class="btn round bg-dark">
+              <i class="fa fa-paper-plane bg-dark" aria-hidden="true"></i>
+            </div>
+          </custom-control>
           <info-window id="info" visible-on-marker="sbfc">
             <div ng-non-bindable>
               <div id="siteNotice"></div>
