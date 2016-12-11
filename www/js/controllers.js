@@ -141,7 +141,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
         });
 
         alert('User created! You are signed in.');
-        $state.go('app.home');
+        $state.go('app.nhome');
       }).catch(function(error) {
         console.error("Error: ", error);
       });
@@ -155,7 +155,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
       $scope.getUserStatus();
       console.log($rootScope.user);
       // redirect to home screen
-      $state.go('app.home');
+      $state.go('app.nhome');
     }).catch(function(error) {
       console.error("Authentication failed:", error);
     });
@@ -601,6 +601,10 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     $scope.valuationDatePickerIsOpen = true;
   };
 
+  var pdfDoc = angular.element( document.querySelector('#fileInput'));
+
+
+
   /* /datepicker */
 
   $scope.message = '';
@@ -709,8 +713,29 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
       //$scope.userDisplayPic = downloadUrl;
     });
   };
+  $scope.storePDFDocToDB = function(file, resolve){
+
+    /*var file = document.querySelector('input[type=file]').files[0];
+     console.log(file);*/
+    var storageRef = firebase.storage().ref().child('pdf');
+    // Get a reference to store file at photos/<FILENAME>.jpg
+    var photoRef = storageRef.child(file.name);
+    // Upload file to Firebase Storage
+    var uploadTask = photoRef.put(file);
+    uploadTask.on('state_changed', null, null, function (snapshot) {
+      console.log('success');
+      console.log(snapshot);
+      // When the image has successfully uploaded, we get its download URL
+      downloadUrl = uploadTask.snapshot.downloadURL;
+      console.log(downloadUrl);
+      resolve(downloadUrl);
+      // Set the download URL to the message box, so that the user can send it to the database
+      //$scope.userDisplayPic = downloadUrl;
+    });
+  };
 
   $scope.saveData = function (user,msg,b64) {
+    var pdfIsTrue = false;
     var userData = {};
     userData = $scope.user;
     console.log(user,msg);
@@ -720,9 +745,20 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     userData.category = $scope.categoryDropDown.selected;
 
     imgObj.base64 = b64;
+    pdfDoc = pdfDoc[0].files[0];
+    if(pdfDoc){
+      if (pdfDoc.name.indexOf('pdf') > -1) {
+        pdfIsTrue = true;
+      }
+    }
+    console.log(pdfDoc);
 
     var uploadPromiseImgs = new Promise(function(resolve, reject) {
-      $scope.storeImageToDB(imgObj,resolve);
+      if(pdfIsTrue){
+        $scope.storePDFDocToDB(pdfDoc,resolve);
+      }else{
+        $scope.storeImageToDB(imgObj,resolve);
+      }
     });
     Promise.all([uploadPromiseImgs]).then(function (data) {
       userData.img = downloadUrl;
@@ -948,7 +984,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
   $scope.deleteEdited = function () {
     articleListRef.$remove().then(function(ref) {
       console.log("Successfully removed the Object:", ref);
-      $state.go('app.home')
+      $state.go('app.nhome')
     }, function(error) {
       console.log("Error:", error);
     });

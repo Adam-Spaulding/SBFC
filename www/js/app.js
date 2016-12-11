@@ -11,7 +11,7 @@ app = angular.module('revolution', ['ionic', 'revolution.controllers', 'ngSaniti
 app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
 
-    $rootScope.$on('$locationChangeSuccess', function() {
+    /*$rootScope.$on('$locationChangeSuccess', function() {
       ChatService.checkAuthStatus($rootScope.user, function (succ) {
         console.log('route to SUCCESS');
         //$state.go('app.home');
@@ -19,7 +19,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
         console.log('route to LOGIN');
         // $state.go('app.login');
       });
-    })
+    })*/
 
      // Enable to debug issues.
   // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
@@ -48,11 +48,18 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
       StatusBar.styleDefault();
     }
   });
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus($rootScope.user)) { //Assuming the AuthService holds authentication logic
+      // User isn’t authenticated
+      $state.transitionTo("app.login");
+      event.preventDefault();
+    }
+  });
 })
 
 app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 $ionicConfigProvider.tabs.position('bottom');
-
+  $urlRouterProvider.otherwise('/app/admob');
 
   $stateProvider
 
@@ -60,7 +67,8 @@ $ionicConfigProvider.tabs.position('bottom');
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+    controller: 'AppCtrl',
+      authRequired: false
   })
 
     .state('app.login', {
@@ -68,7 +76,8 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/login.html',
-          controller: 'UserCtrl'
+          controller: 'UserCtrl',
+          authRequired: false
         }
       }
     })
@@ -78,8 +87,21 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/register.html',
-          controller: 'UserCtrl'
+          controller: 'UserCtrl',
+          authRequired: false
 
+        }
+      }
+    })
+
+    .state('app.nhome', {
+      //cache: false,
+      url: '/home',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/home-tiles.html',
+          controller: 'FirebaseCtrl',
+          authRequired: true
         }
       }
     })
@@ -90,7 +112,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/profile.html',
           controller: 'UserCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -101,18 +123,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/forgot.html',
           controller: 'UserCtrl',
-          resolve: { authenticate: authenticate }
-        }
-      }
-    })
-
-    .state('app.home', {
-      url: '/home',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/home-tiles.html',
-          controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -123,7 +134,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/macphotography.html',
           controller: 'HomeCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -134,7 +145,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/ask-an-expert.html',
           controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -145,7 +156,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/all-content.html',
           controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -156,7 +167,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/babypicture.html',
           controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -167,7 +178,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/marketplace.html',
           controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -178,7 +189,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/articleslist.html',
           controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -189,7 +200,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/news.html',
           controller: 'NewsCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -201,7 +212,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/newslist.html',
           controller: 'NewslistCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -232,7 +243,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/blog.html',
           controller: 'BlogCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -243,7 +254,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/post.html',
           controller: 'BlogCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -254,7 +265,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/firebase.html',
           controller: 'FirebaseCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -265,7 +276,7 @@ $ionicConfigProvider.tabs.position('bottom');
     //     'menuContent': {
     //       templateUrl: 'templates/submit-ask-an-expert.html',
     //       controller: 'FirebaseCtrl',
-    //       resolve: { authenticate: authenticate }
+    //       authRequired: true
     //     }
     //   }
     // })
@@ -276,7 +287,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/elements.html',
           controller: 'ElementsCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -287,7 +298,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/plugins.html',
           controller: 'PluginsCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -299,7 +310,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/chat.html',
           controller: 'ChatCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -311,7 +322,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/add.html',
           controller: 'ChatCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -323,7 +334,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/submit-ask-an-expert.html',
           controller: 'AskanexpertCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -335,7 +346,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/questions.html',
           controller: 'AskanexpertCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -347,7 +358,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/edit.html',
           controller: 'EditCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -359,7 +370,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/weather.html',
           controller: 'WeatherCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -370,7 +381,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/contact.html',
           controller: 'HomeCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -381,7 +392,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/calendar.html',
           controller: 'HomeCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -392,7 +403,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/youtube.html',
           controller: 'YoutubeCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -403,7 +414,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/youtubevideo.html',
           controller: 'YoutubeCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -414,7 +425,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/maps.html',
           controller: 'MapsCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
@@ -425,21 +436,20 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/admob.html',
           controller: 'AdmobCtrl',
-          resolve: { authenticate: authenticate }
+          authRequired: true
         }
       }
     })
 
-  function authenticate($rootScope,ChatService, $state){
-    ChatService.checkAuthStatus($rootScope.user, function (succ) {
+  function authenticate($rootScope, ChatService, $location) {
+    return ChatService.checkAuthStatus($rootScope.user, function (succ) {
       console.log('route to home');
       return true
     }, function (err) {
       console.log('route to LOGIN');
-      // $state.go('app.login');
+       $location.path('/login');
     })
   }
-
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
