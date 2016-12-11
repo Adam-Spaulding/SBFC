@@ -70,12 +70,12 @@ app.service('ChatService', function() {
     this.checkAuthStatus = function(user,success,failure) {
       if(user){
         if(user == 'Anonymous'){
-          failure(false)
+          return(true)
         }else{
-          success(true)
+          return(false)
         }
       }else{
-        failure(false)
+        return(true)
       }
     };
 });

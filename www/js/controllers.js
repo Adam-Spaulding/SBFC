@@ -141,7 +141,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
         });
 
         alert('User created! You are signed in.');
-        $state.go('app.home');
+        $state.go('app.nhome');
       }).catch(function(error) {
         console.error("Error: ", error);
       });
@@ -155,7 +155,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
       $scope.getUserStatus();
       console.log($rootScope.user);
       // redirect to home screen
-      $state.go('app.home');
+      $state.go('app.nhome');
     }).catch(function(error) {
       console.error("Authentication failed:", error);
     });
@@ -984,7 +984,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
   $scope.deleteEdited = function () {
     articleListRef.$remove().then(function(ref) {
       console.log("Successfully removed the Object:", ref);
-      $state.go('app.home')
+      $state.go('app.nhome')
     }, function(error) {
       console.log("Error:", error);
     });
