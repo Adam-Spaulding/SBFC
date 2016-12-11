@@ -96,7 +96,7 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.nhome', {
       //cache: false,
-      url: '/nhome',
+      url: '/home',
       views: {
         'menuContent': {
           templateUrl: 'templates/home-tiles.html',
