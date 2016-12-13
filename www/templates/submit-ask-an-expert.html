@@ -1,14 +1,19 @@
-<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
+<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button=''>
   <ion-content style="  background-color: #fff;">
 
 	<div class="ask-an-expert-input">
     <textarea type="text" required placeholder="Type your question here..." ng-model="newMessageText" rows="10"></textarea>
 	</div>
-  <a ng-click="addMessage(newMessageText)" ui-sref="app.ask-an-expert">
+  <!-- <a ng-click="addMessage(newMessageText)" ui-sref="app.ask-an-expert">
     <button class="float-btn-right round bg-dark button">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
-  </a>
+  </a> -->
+  <div class="button-bar">
+    <a class="button button-clear"> </a>
+    <a class="button button-clear"> </a>
+    <a class="button button-energized float-btn-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+  </div>
 	   <div class="he50"></div>
   </ion-content>
 

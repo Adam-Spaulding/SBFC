@@ -9898,7 +9898,11 @@ a.button {
 
 a, a:hover {
   text-decoration: none;
-  color: inherit; }
+  color: #3498db; }
+
+.tabs-balanced a, .tabs-balanced a:hover {
+    text-decoration: none;
+    color: #fff; }
 
 p {
   line-height: 24px; }
