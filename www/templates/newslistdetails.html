@@ -1,0 +1,7 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button=''>
+  <ion-content>
+        <h2 class="fw300 m0 dark">{{itemDetails.author}}</h2>
+              <p class="fw300 m0 dark">{{itemDetails.publishedDate | limitTo:16}}</p>
+              <p class="fw300 m0 dark" ng-bind-html="itemDetails.content">{{itemDetails.content}}</p>
+  </ion-content>
+</ion-view>

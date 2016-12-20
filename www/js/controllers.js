@@ -190,10 +190,15 @@ app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList
 
 });
 
-app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
+app.controller('NewslistCtrl', function($scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
 
   // NEWS SELECTED SOURCE INFORMATION
   $scope.source = FeedSources[$stateParams.id];
+  $scope.itemDetails = {};
+  var currentRoute = $state.current.name;
+  if (currentRoute.indexOf('newslistdetails') > -1) {
+    $scope.itemDetails = JSON.parse(sessionStorage.itemDetails)
+  }
 
   // NEWS FEED
   var getNews = function(num) {
@@ -208,12 +213,20 @@ app.controller('NewslistCtrl', function($scope, $ionicLoading, $stateParams, $io
         })
 
     }
+  if (currentRoute.indexOf('newslistdetails') < 0) {
     getNews(10);
+  }
 
     $scope.openUrl = function(link) {
       window.open(link, '_system', 'location=yes');
       return false;
     }
+
+    $scope.openLink = function (item) {
+      console.log(item);
+      sessionStorage.itemDetails = JSON.stringify(item);
+      $state.go('app.newslistdetails')
+    };
 
     $ionicModal.fromTemplateUrl('templates/my-modal.html', {
         scope: $scope,

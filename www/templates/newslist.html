@@ -11,7 +11,7 @@
 
 	<div class="pt20 pb20"> <!-- news feed list for selected source -->
 		<div class="list" ng-repeat="item in news">
-		    <a class="item bg-white" ng-click="showStatus=!showStatus" target="_self">
+		    <a class="item bg-white" ng-click="openLink(item)">
           <div ng-hide="showStatus">
             <h2 class="fw500 m0 dark pt5">{{item.title}}</h2>
               <!-- <h4 class="fw300 m0 dark">{{item.contentSnippet}}</h4> -->

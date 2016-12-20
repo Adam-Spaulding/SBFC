@@ -217,6 +217,18 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+
+    .state('app.newslistdetails', {
+      url: '/newslistdetails',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/newslistdetails.html',
+          controller: 'NewslistCtrl',
+          authRequired: true
+        }
+      }
+    })
+
     .state('app.smb', {
       url: '/smb',
       views: {
