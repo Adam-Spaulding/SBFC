@@ -178,11 +178,13 @@ input.date-picker {
   display: block;
 }
 
-.wp-list img {
-  /*height: 60px;
-  width: 60px;*/
-  width: 100%;
-  /*border-radius: 45px;*/
+.wp-list p img {
+  width: 100% !important;
+  height: 320px !important;
+}
+
+.wp-list p {
+  float: left !important;
 }
 
 .wp-list p:nth-child(1) {
