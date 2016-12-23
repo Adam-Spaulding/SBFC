@@ -12,11 +12,12 @@
 	<div class="pt20 pb20"> <!-- news feed list for selected source -->
 		<div class="list" ng-repeat="item in news">
 		    <a class="item bg-white" ng-click="openLink(item)">
-          <div ng-hide="showStatus">
+          <div class="list-item">
+            <!-- <span class="list-content" ng-bind-html="item.content | filter:img">{{item.content | filter:img}}</span> -->
+            <!-- <span class="list-content" ng-bind-html="item.content">{{item.content}}</span> -->
             <h2 class="fw500 m0 dark pt5">{{item.title}}</h2>
               <!-- <h4 class="fw300 m0 dark">{{item.contentSnippet}}</h4> -->
             <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.contentSnippet">{{item.contentSnippet}}</h4>
-            <!-- <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.content">{{item.content}}</h4> -->
     			  <div class="row p0">
     			  	<div class="col pl0">
     			  		<p class="fw300 m0 dark">{{item.author}}</p>
@@ -26,31 +27,7 @@
     			  	</div>
     			  </div>
           </div>
-          <!-- <ion-modal-view ng-show="showStatus">
-            <ion-header-bar>
-              <h1 class="title">My Modal title</h1>
-            </ion-header-bar>
-            <ion-content>
-              Hello!
-              <p class="fw300 m0 dark" ng-bind-html="item.content">{{item.content}}</p>
-            </ion-content>
-          </ion-modal-view> -->
-
-
 		    </a>
-        <div ng-show="showStatus" class="blog-article">
-          <ion-modal-view>
-            <ion-header-bar>
-              <h1 class="title">My Modal title</h1>
-              <div class="buttons"><a ng-click="showStatus=!showStatus" class="">CLOSE<i class="fa fa-window-close-o" aria-hidden="false" style="color:#363636;"></i></a></div>
-            </ion-header-bar>
-            <ion-content>
-              <h2 class="fw300 m0 dark">{{item.author}}</h2>
-              <p class="fw300 m0 dark">{{item.publishedDate | limitTo:16}}</p>
-              <p class="fw300 m0 dark" ng-bind-html="item.content">{{item.content}}</p>
-            </ion-content>
-          </ion-modal-view>
-        </div>
 		</div>
 	</div>
 

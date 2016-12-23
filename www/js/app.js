@@ -11,15 +11,15 @@ app = angular.module('revolution', ['ionic', 'revolution.controllers', 'ngSaniti
 app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
 
-    /*$rootScope.$on('$locationChangeSuccess', function() {
+    $rootScope.$on('$locationChangeSuccess', function() {
       ChatService.checkAuthStatus($rootScope.user, function (succ) {
         console.log('route to SUCCESS');
-        //$state.go('app.home');
+        $state.go('app.home');
       }, function (err) {
         console.log('route to LOGIN');
-        // $state.go('app.login');
+         $state.go('app.login');
       });
-    })*/
+    })
 
      // Enable to debug issues.
   // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
@@ -94,7 +94,7 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
-    .state('app.nhome', {
+    .state('app.home', {
       //cache: false,
       url: '/home',
       views: {
