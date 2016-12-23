@@ -3,12 +3,12 @@
   <ion-content class="p20">
     <h3>Submitted Questions</h3>
     <ul>
-      <li ng-repeat="question in messages" class="text-left">
+      <li ng-repeat="question in messages.slice().reverse()" class="text-left">
         <div class="card" style="padding:10px 10px;">
           <span class="questions-actions">
-              <a ng-click="mailto:{{question.email}}?Subject=SBFC%20Question&body=Your Question: {{question.question}}" target="_top">
+              <!-- <a ng-click="mailto:{{question.email}}?Subject=SBFC%20Question&body=Your Question: {{question.question}}" target="_top">
               <i class="fa fa-envelope energized" aria-hidden="true"></i>
-              </a>
+              </a> -->
               <a ng-click="messages.$remove(question)">
               <i class="fa fa-trash energized" aria-hidden="true"></i>
               </a>
