@@ -285,3 +285,8 @@ ion-modal-view ion-content p {
 .wp-content .content p:first-child {
   display: none;
 }
+
+.wp-content img {
+  width: 100% !important;
+  height: auto !important;
+}
