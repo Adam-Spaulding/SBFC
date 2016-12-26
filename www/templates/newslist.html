@@ -4,7 +4,7 @@
     <!-- news feed -->
 
     <div class="item item-avatar bg-white m5">
-		    	<img ng-src="{{source.img}}">
+		    	<img src="img/smb-grey.png">
 		      <h4 class="fw500 m0 dark pt5">{{source.title}}</h4>
 			  <h4 class="fw300 m0 dark">{{source.description}}</h4>
 		    </div>
@@ -14,7 +14,9 @@
 		    <a class="item bg-white" ng-click="openLink(item)">
           <div class="list-item">
             <!-- <span class="list-content" ng-bind-html="item.content | filter:img">{{item.content | filter:img}}</span> -->
-            <!-- <span class="list-content" ng-bind-html="item.content">{{item.content}}</span> -->
+            <div class="list-content">
+              <div class="" ng-bind-html="item.content">{{item.content}}</div>
+            </div>
             <h2 class="fw500 m0 dark pt5">{{item.title}}</h2>
               <!-- <h4 class="fw300 m0 dark">{{item.contentSnippet}}</h4> -->
             <h4 class="wp-list fw300 m0 dark" ng-bind-html="item.contentSnippet">{{item.contentSnippet}}</h4>
@@ -35,3 +37,7 @@
 
   </ion-content>
 </ion-view>
+
+<script>
+  $('.list-content').find('p:first').show()
+</script>

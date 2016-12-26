@@ -253,6 +253,8 @@ app.controller('NewslistCtrl', function($scope, $state, $ionicLoading, $statePar
         // Execute action
       });
 
+
+
 })
 
 app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegate, $ionicScrollDelegate) {

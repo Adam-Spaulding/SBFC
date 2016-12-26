@@ -290,3 +290,36 @@ ion-modal-view ion-content p {
   width: 100% !important;
   height: auto !important;
 }
+
+/*.list-content p, .list-content h2, .list-content span, .list-content ul, .list-content blockquote {
+  height: 0px;
+}*/
+
+/*.list-content p {
+  height: 0px;
+}*/
+
+.list-content p:first-child {
+  display:block;
+  float: none !important;
+  width: 100% !important;
+  height: auto;
+}
+
+.list-content p:first-child img{
+  /*display:block;
+  float: none !important;*/
+  width: 100% !important;
+  height: auto;
+}
+
+.list-content *:not(:first-child) {
+  display: none;
+}
+
+/*.list-content p:first-child {
+  display: block !important;
+  background-color: red;
+  float: none !important;
+  height: 200px;
+}*/
