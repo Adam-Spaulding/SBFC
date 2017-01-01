@@ -64670,7 +64670,7 @@ IonicModule
         var sideMenuCtrl = $element.inheritedData('$ionSideMenusController');
         if (sideMenuCtrl) {
           $ionicHistory.nextViewOptions({
-            historyRoot: true,
+            historyRoot: false,
             disableAnimate: true,
             expire: 300
           });
