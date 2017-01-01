@@ -64,7 +64,7 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
 // RIGHT SIDE MENU NOTIFICATIONS
 
   $scope.data = {
-    showDelete: false
+    showDelete: true
   };
 
   $scope.edit = function(item) {
@@ -410,7 +410,6 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
   });
 
   // FIREBASE
-
 
 
   $scope.articleID = $stateParams.id;

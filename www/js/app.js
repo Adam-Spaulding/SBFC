@@ -18,7 +18,8 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
       }, function (err) {
         console.log('route to LOGIN');
          $state.go('app.login');
-      });
+      }
+    );
     })
 
      // Enable to debug issues.
@@ -68,7 +69,7 @@ $ionicConfigProvider.tabs.position('bottom');
     abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl',
-      authRequired: false
+      authRequired: true
   })
 
     .state('app.login', {
@@ -464,7 +465,7 @@ $ionicConfigProvider.tabs.position('bottom');
   }
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/home');
 })
 
 

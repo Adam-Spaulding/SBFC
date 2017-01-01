@@ -37,7 +37,6 @@
       <a class="ti-share light font-xl pr10" href="#/app/login" ng-show="user == 'Anonymous'" menu-close></a>
     </div>
 
-
     </ion-header-bar>
     <ion-content class="">
       <ion-list>
@@ -50,14 +49,14 @@
         <ion-item menu-close href="#/app/marketplace" class="border-b-xs">
           Marketplace
         </ion-item>
-        <ion-item menu-close href="#/app/ask-an-expert" class="border-b-xs">
+        <ion-item menu-close enable-menu-with-back-views="false" href="#/app/ask-an-expert" class="border-b-xs">
           Ask an Expert
         </ion-item>
-        <ion-item menu-close href="#/app/home/macphotography" class="border-b-xs">
-          MAC Photography
+        <ion-item menu-close class="border-b-xs">
+          <a href="#/app/home/macphotography">MAC Photography</a>
         </ion-item>
-        <ion-item menu-close href="#/app/newslist/2" class="border-b-xs">
-          Seacoast Moms Blog
+        <ion-item   class="border-b-xs">
+          <a menu-close href="#/app/newslist/2">Seacoast Moms Blog</a>
         </ion-item>
         <!-- <ion-item menu-close href="#/app/firebase" class="border-b-xs">
           Firebase
