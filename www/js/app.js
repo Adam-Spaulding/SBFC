@@ -64,7 +64,7 @@ $ionicConfigProvider.tabs.position('bottom');
 
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',

@@ -18,7 +18,6 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
       }
     });
 
-
   // go back button
   $scope.back = function() {
     $ionicHistory.goBack();
@@ -403,7 +402,6 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 
 
 app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
-
 
   $ionicLoading.show({
     template: 'Loading Firebase data...'

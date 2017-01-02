@@ -13,8 +13,29 @@
         <i ng-show="isActive" class="ti-close text-black font-xl p10" menu-toggle="right"></i>
       </ion-nav-buttons>
 
+      <!-- <ion-tabs class="tabs-balanced tabs-icon-top" ng-show="user != 'Anonymous'">
+
+        <ion-tab title="Home" icon="ion-home" href="#/app/home">
+          <ion-nav-view name="home-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Marketplace" icon="ion-ios-information" href="#/app/marketplace">
+          <ion-nav-view name="marketplace-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="ask" icon="ion-help" href="#/app/ask-an-expert">
+          <ion-nav-view name="ask-tab"></ion-nav-view>
+        </ion-tab>
+
+      </ion-tabs> -->
+
       <ion-tabs class="tabs-balanced tabs-icon-top" ng-show="user != 'Anonymous'">
-        <ion-tab title="Home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ui-sref="app.home"></ion-tab>
+        <ion-tab title="Home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ui-sref="app.home"><ion-nav-view name="home-tab"></ion-nav-view></ion-tab>
+        <ion-tab title="ask" ui-sref="app.ask-an-expert" hidden="true"></ion-tab>
+        <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
+        <ion-tab title="maps" ui-sref="app.maps" hidden="true"></ion-tab>
+        <ion-tab title="newslist" ui-sref="app.newslist" hidden="true"></ion-tab>
+        <ion-tab title="calendar" ui-sref="app.calendar" hidden="true"></ion-tab>
         <ion-tab title="Marketplace" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline" ui-sref="app.marketplace"></ion-tab>
       </ion-tabs>
 
@@ -55,7 +76,7 @@
         <ion-item menu-close href="#/app/home/macphotography" class="border-b-xs">
           MAC Photography
         </ion-item>
-        <ion-item menu-close href="#/app/newslist/2" class="border-b-xs">
+        <ion-item menu-close href="#/app/home/newslist/2" class="border-b-xs">
           Seacoast Moms Blog
         </ion-item>
         <!-- <ion-item menu-close href="#/app/firebase" class="border-b-xs">
