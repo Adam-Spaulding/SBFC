@@ -8,7 +8,7 @@
     		<h3 class="post-title" style="padding:10px 20px;">{{selectedArticle.title}}</h3>
     		<p class="fw500 m0 dark p20">Posted on <span class="fw500 m0 dark pt5" ng-bind="selectedArticle.publish_date | date : 'MMMM dd, yyyy'">{{selectedArticle.publish_date | date : 'MMM dd, yyyy'}}</span></p>
 
-        <div class="card" style="padding:10px;" ng-bind-html="selectedArticle.body">{{selectedArticle.body}}</div>
+        <div class="card" style="padding:10px;" ng-bind-html="selectedArticle.body"></div>
     		<!-- <div class="p20" ng-bind-html="post.content"></div>
     		<div class="p20">
     		<h4 class="fw300 m0 pb20" ng-show="post.comments != ''">Comments:</h4>

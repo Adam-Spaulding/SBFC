@@ -770,10 +770,19 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     });
   };
 
+  function extractLinkFromBody(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+      return '<a href="' + url + '">' + url + '</a>';
+    });
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
   $scope.saveData = function (user,msg,b64) {
     var pdfIsTrue = false;
     var userData = {};
     userData = $scope.user;
+    userData.body = extractLinkFromBody(userData.body)
     console.log(user,msg);
     userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
@@ -831,7 +840,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
 })
 
 
-app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
+app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
 
 
   $scope.articleID = $stateParams.id;
@@ -984,9 +993,37 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     });
   };
 
+  function extractLinkFromBody(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+      return '<a href="' + url + '">' + url + '</a>';
+    });
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
+  var optionsForInApp = {
+    location: 'yes',
+    clearcache: 'yes',
+    toolbar: 'yes',
+    closebuttoncaption: 'DONE?'
+  };
+  function openlink(url) {
+    /*$cordovaInAppBrowser.open(url, '_blank', optionsForInApp)
+      .then(function(event) {
+        // success
+      })
+      .catch(function(event) {
+        // error
+      });*/
+    console.log('lala kaka');
+  };
+
   $scope.saveData = function (user,msg,b64) {
     var userData = {};
     userData = $scope.user;
+    if(userData.body.indexOf('<a>') == -1){
+      userData.body = extractLinkFromBody(userData.body);
+    }
     console.log(user,msg);
     //userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
@@ -994,13 +1031,13 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     userData.category = $scope.categoryDropDown.selected;
     articleListRef = userData;
     imgObj.base64 = b64;
-    articleListRef.$save().then(function(ref) {
+    /*articleListRef.$save().then(function(ref) {
        // true
       ionicToast.show('Success!.', 'bottom', false, 2500);
       console.log('Successfully updates the object',ref);
     }, function(error) {
       console.log("Error:", error);
-    });
+    });*/
 
 
     /*var uploadPromiseImgs = new Promise(function(resolve, reject) {
