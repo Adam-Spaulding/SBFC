@@ -1,4 +1,13 @@
 /* Empty. Add your own CSS if you like */
+
+/*tables for file transfer*/
+.coloredCol {
+  text-align:center;
+  /*
+  background-color:#eeeeee;
+  border:thin gray solid;*/
+}
+
 ion-content {
   max-width: 750px;
   margin: auto;

@@ -97,17 +97,6 @@
     <!-- your app's js -->
     <script src="js/jquery.js"></script>
     <script src="js/app.js"></script>
-    <script>
-      document.onclick = function (e) {
-        e = e ||  window.event;
-        var element = e.target || e.srcElement;
-
-        if (element.tagName == 'A') {
-          window.open(element.href, "_blank", "location=yes");
-          return false; // prevent default action and stop event propagation
-        }
-      };
-    </script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/onezone-datepicker.min.js"></script>

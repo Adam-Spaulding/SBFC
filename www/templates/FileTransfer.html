@@ -1,0 +1,33 @@
+<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button=''>
+  <ion-content>
+    <!-- <a class="button button-block button-positive" href="#/app/add">
+      Ask a Question
+    </a> -->
+    <!-- news sources -->
+
+    <div class="pt20 pb20">
+      <h3 class="dark fw300 m0">Share files with users</h3>
+      <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
+      <button class="btn add-button p20" ui-sref="app.addfolder">Add Folder</button>
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="Search" ng-model="query">
+        </label>
+      </div>
+      <div class="row responsive-sm card">
+        <div class="col coloredCol"><h2>Username</h2></div>
+        <div class="col coloredCol"><h2>Email</h2></div>
+        <div class="col coloredCol"><h2>Active</h2></div>
+      </div>
+      <div class="row responsive-sm card" ng-repeat="user in usersFroFileTransfer | filter:query">
+        <div class=" " style="line-height: 1.5;"><i class="icon ion-android-folder" style="font-size: 2.5em;"></i></div>
+        <div class="col coloredCol"><h4>{{user.name}}</h4></div>
+        <div class="col coloredCol"><h4>{{user.email}}</h4></div>
+        <div class="col coloredCol"><h4>{{user.active}}</h4></div>
+      </div>
+    </div>
+
+    <div class="he50"></div>
+
+  </ion-content>
+</ion-view>
