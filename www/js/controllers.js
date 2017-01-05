@@ -487,8 +487,7 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
 
   $(document).on('click', function(evt) {
       if($(evt.target).is('label')) {
-          alert(gLink);
-          window.open(gLink, "_blank", "location=yes");
+          var ref = cordova.InAppBrowser.open(gLink, '_blank');
       }
   });
 
