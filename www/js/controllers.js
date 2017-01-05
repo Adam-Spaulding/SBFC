@@ -400,6 +400,7 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 
 })
 
+var gLink = "";
 
 app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
@@ -442,10 +443,15 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
 
   };
 
+  String.prototype.replaceAll = function(search, replacement) {
+      var target = this;
+      return target.replace(new RegExp(search, 'g'), replacement);
+  };
 // array
   var refArray = firebase.database().ref().child("userInfo");
 // create a synchronized array
   var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+
 // add new items to the array
 // the message is automatically added to our Firebase database!
   articleListRef.$loaded()
@@ -455,6 +461,15 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
         $scope.articles.forEach(function (d, i) {
           if(d.$id == $scope.articleID){
             $scope.selectedArticle = d;
+            var body = d.body;
+            var tempBody = d.body;
+            body = body.replaceAll('href.*"', "");            
+            gLink = tempBody.match(/href="([^"]*)/)[1];
+            body = body.replace("<a" , "<label");
+            body = body.replace("</a>","</label>");
+            $scope.selectedArticle.body = body;
+            console.log(gLink);
+            //$scope.selectedArticle.body = "<a href='http://www.google.com' target='_blank'>Post</a>";
           }
         })
       }
@@ -462,13 +477,20 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
     .catch(function(error) {
       console.log("Error:", error);
     });
+
   $scope.addMessage = function(message) {
     $scope.newMessageText = null;
     $scope.articles.$add({
       text: message
     });
-
   };
+
+  $(document).on('click', function(evt) {
+      if($(evt.target).is('label')) {
+          window.open(gLink, "_blank", "location=yes");
+      }
+  });
+
 
 })
 
