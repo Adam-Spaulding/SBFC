@@ -12,6 +12,9 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
 
     window.open("http://www.google.com", '_blank', 'location=yes');
+    alert(cordova.InAppBrowser);
+    alert(cordova.InAppBrowser.open);
+    var ref = cordova.InAppBrowser.open('http://apache.org', '_system', 'location=yes');
 
     $rootScope.$on('$locationChangeSuccess', function() {
       ChatService.checkAuthStatus($rootScope.user, function (succ) {
