@@ -73,4 +73,5 @@
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
   <allow-navigation href="*" />
+  <plugin name="cordova-plugin-inappbrowser" spec="1.0.1" source="pgb" />
 </widget>
