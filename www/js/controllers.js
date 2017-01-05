@@ -401,7 +401,7 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 })
 
 
-app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
+app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
   $ionicLoading.show({
     template: 'Loading Firebase data...'
@@ -422,6 +422,11 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
   syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
   */
   $ionicLoading.hide();
+
+  //to sanitize html
+  $scope.sanitizeMe = function(text) {
+    return $sce.trustAsHtml(text)
+  };
 
   // array
   var refArrayMessages = firebase.database().ref().child("messages");
@@ -773,7 +778,11 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
   function extractLinkFromBody(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
-      return '<a href="' + url + '">' + url + '</a>';
+      var indexOfATag = url.indexOf('<');
+      var slicedUrl = url.slice(0,indexOfATag);
+      /*console.log(slicedUrl)
+       return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+      return '<a href="' + slicedUrl + '" onClick="window.open("'+slicedUrl+'");return false;">' + slicedUrl + '</a>';
     });
     // or alternatively
     // return text.replace(urlRegex, '<a href="$1">$1</a>')
@@ -996,7 +1005,11 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
   function extractLinkFromBody(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
-      return '<a href="' + url + '">' + url + '</a>';
+      var indexOfATag = url.indexOf('<');
+      var slicedUrl = url.slice(0,indexOfATag);
+      /*console.log(slicedUrl)
+      return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+      return '<a href="' + slicedUrl + '" onClick="window.open("'+slicedUrl+'");return false;">' + slicedUrl + '</a>';
     });
     // or alternatively
     // return text.replace(urlRegex, '<a href="$1">$1</a>')
@@ -1031,13 +1044,13 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     userData.category = $scope.categoryDropDown.selected;
     articleListRef = userData;
     imgObj.base64 = b64;
-    /*articleListRef.$save().then(function(ref) {
+    articleListRef.$save().then(function(ref) {
        // true
       ionicToast.show('Success!.', 'bottom', false, 2500);
       console.log('Successfully updates the object',ref);
     }, function(error) {
       console.log("Error:", error);
-    });*/
+    });
 
 
     /*var uploadPromiseImgs = new Promise(function(resolve, reject) {
@@ -1081,6 +1094,251 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
 
 })
 
+app.controller('FileTransferCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
+
+
+
+  // array
+  var refArray = firebase.database().ref().child("users");
+// create a synchronized array
+  var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+// add new items to the array
+// the message is automatically added to our Firebase database!
+  articleListRef.$loaded()
+    .then(function(alluser) {
+      $scope.usersFroFileTransfer = alluser;
+    })
+    .catch(function(error) {
+      console.log("Error:", error);
+    });
+
+
+})
+
+app.controller('AddFolderCtrl', function($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
+
+  $scope.getUserStatus();
+
+  $scope.user = {
+    published:'',
+    publish_date: new Date(),
+    title:''
+  }
+
+  /* datepicker */
+  $scope.valuationDate = new Date();
+  $scope.valuationDatePickerIsOpen = false;
+
+  $scope.valuationDatePickerOpen = function () {
+
+    $scope.valuationDatePickerIsOpen = true;
+  };
+
+  var pdfDoc = angular.element( document.querySelector('#fileInput'));
+
+
+
+  /* /datepicker */
+
+  $scope.message = '';
+
+  var downloadUrl = '';
+
+  $scope.showToolbar = true;
+
+  $scope.categoryDropDown = {
+    selected:null,
+    categoryOptions: [
+      {id:0,name:'No Category',value:''},
+      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
+      {id:2,name:'Marketplace',value:'marketplace'},
+      {id:3,name:'Baby Photo',value:'baby-photo'}
+    ]
+  };
+
+  /*$scope.translations = angular.extend({}, ngQuillConfig.translations, {
+   15: 'smallest'
+   });*/
+
+  /*$scope.toggle = function() {
+   $scope.showToolbar = !$scope.showToolbar;
+   };*/
+  // Own callback after Editor-Creation
+  /*$scope.editorCallback = function (editor, name) {
+   console.log('createCallback', editor, name);
+   };*/
+
+  $scope.readOnly = false;
+
+  $scope.isReadonly = function () {
+    return $scope.readOnly;
+  };
+
+  $scope.clear = function () {
+    return $scope.message = '';
+  };
+
+  // Event after an editor is created --> gets the editor instance on optional the editor name if set
+  $scope.$on('editorCreated', function (event, editor, name) {
+    console.log('createEvent', editor, name);
+  });
+
+  $timeout(function () {
+    $scope.message = '';
+    console.log($scope.message);
+  }, 3000);
+  $scope.getMessages = function() {
+
+    //$scope.version = textAngularManager.getVersion();
+    //$scope.versionNumber = $scope.version.substring(1);
+    /*$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><img class="ta-insert-video" ta-insert-video="http://www.youtube.com/embed/2maA1-mvicY" src="" allowfullscreen="true" width="300" frameborder="0" height="250"/></p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE9+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p><h4>Supports non-latin Characters</h4><p>昮朐 魡 燚璒瘭 譾躒鑅, 皾籈譧 紵脭脧 逯郹酟 煃 瑐瑍, 踆跾踄 趡趛踠 顣飁 廞 熥獘 豥 蔰蝯蝺 廦廥彋 蕍蕧螛 溹溦 幨懅憴 妎岓岕 緁, 滍 蘹蠮 蟷蠉蟼 鱐鱍鱕, 阰刲 鞮鞢騉 烳牼翐 魡 骱 銇韎餀 媓幁惁 嵉愊惵 蛶觢, 犝獫 嶵嶯幯 縓罃蔾 魵 踄 罃蔾 獿譿躐 峷敊浭, 媓幁 黐曮禷 椵楘溍 輗 漀 摲摓 墐墆墏 捃挸栚 蛣袹跜, 岓岕 溿 斶檎檦 匢奾灱 逜郰傃</p>';
+     $scope.htmlcontent = $scope.orightml;*/
+    //$scope.disabled = false;
+
+
+    $timeout(function() {
+      // set firebase refference for messages - if user is logged in, set to match user uid, if there is no user, show public messages
+      var refArray = firebase.database().ref().child("chat/"+$rootScope.userUid);
+      // create a synchronized array
+      $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+    }, 100)
+  };
+
+  $scope.getMessages();
+
+  // send message
+  $scope.send = function(message) {
+
+    $scope.getMessages();
+
+    // set a random image as user avatar - change this to match your structure
+    var randomIndex = Math.round( Math.random() * (4) );
+    randomIndex++;
+    $scope.avatar = 'img/users/'+randomIndex+'.jpg';
+    // add new items to the array
+    // the message is automatically added to our Firebase database!
+    $scope.messages.$add({
+      text: message,
+      email: $rootScope.user,
+      user: $rootScope.userUid,
+      avatar: $scope.avatar
+    });
+    $scope.message = '';
+  };
+
+  $scope.storeImageToDB = function(file, resolve){
+
+    /*var file = document.querySelector('input[type=file]').files[0];
+     console.log(file);*/
+    var storageRef = firebase.storage().ref().child('images');
+    // Get a reference to store file at photos/<FILENAME>.jpg
+    var photoRef = storageRef.child(file.name);
+    // Upload file to Firebase Storage
+    var uploadTask = photoRef.putString(file.base64,'data_url');
+    uploadTask.on('state_changed', null, null, function (snapshot) {
+      console.log('success');
+      console.log(snapshot);
+      // When the image has successfully uploaded, we get its download URL
+      downloadUrl = uploadTask.snapshot.downloadURL;
+      console.log(downloadUrl);
+      resolve(downloadUrl);
+      // Set the download URL to the message box, so that the user can send it to the database
+      //$scope.userDisplayPic = downloadUrl;
+    });
+  };
+  $scope.storePDFDocToDB = function(file, resolve){
+
+    /*var file = document.querySelector('input[type=file]').files[0];
+     console.log(file);*/
+    var storageRef = firebase.storage().ref().child('pdf');
+    // Get a reference to store file at photos/<FILENAME>.jpg
+    var photoRef = storageRef.child(file.name);
+    // Upload file to Firebase Storage
+    var uploadTask = photoRef.put(file);
+    uploadTask.on('state_changed', null, null, function (snapshot) {
+      console.log('success');
+      console.log(snapshot);
+      // When the image has successfully uploaded, we get its download URL
+      downloadUrl = uploadTask.snapshot.downloadURL;
+      console.log(downloadUrl);
+      resolve(downloadUrl);
+      // Set the download URL to the message box, so that the user can send it to the database
+      //$scope.userDisplayPic = downloadUrl;
+    });
+  };
+
+  function extractLinkFromBody(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+      var indexOfATag = url.indexOf('<');
+      var slicedUrl = url.slice(0,indexOfATag);
+      /*console.log(slicedUrl)
+       return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+      return '<a href="' + slicedUrl + '" onClick="window.open("'+slicedUrl+'");return false;">' + slicedUrl + '</a>';
+    });
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
+  $scope.saveData = function (user,msg,b64) {
+    var pdfIsTrue = false;
+    var userData = {};
+    userData = $scope.user;
+    userData.body = extractLinkFromBody(userData.body)
+    console.log(user,msg);
+    userData.body = msg;
+    userData.publish_date = new Date(userData.publish_date).getTime();
+    userData.author = $rootScope.user;
+    userData.category = $scope.categoryDropDown.selected;
+
+    imgObj.base64 = b64;
+    pdfDoc = pdfDoc[0].files[0];
+    if(pdfDoc){
+      if (pdfDoc.name.indexOf('pdf') > -1) {
+        pdfIsTrue = true;
+      }
+    }
+    console.log(pdfDoc);
+
+    var uploadPromiseImgs = new Promise(function(resolve, reject) {
+      if(pdfIsTrue){
+        $scope.storePDFDocToDB(pdfDoc,resolve);
+      }else{
+        $scope.storeImageToDB(imgObj,resolve);
+      }
+    });
+    Promise.all([uploadPromiseImgs]).then(function (data) {
+      userData.img = downloadUrl;
+      var ref = firebase.database().ref().child("userInfo");
+      var userNode = $firebaseArray(ref);
+      userNode.$add(userData).then(function (success) {
+        var addedObjDetails = success.path.o;
+        var addedObj = addedObjDetails[1];
+        $state.go('app.edit',{'id': addedObj})
+        console.log(success);
+        console.log(addedObj[1]);
+      });
+    }).catch(function (err) {
+      console.log(err);
+    })
+  };
+  var imgObj = {};
+  $scope.myImage='';
+  $scope.myCroppedImage='';
+
+  var handleFileSelect=function(evt) {
+    var file=evt.currentTarget.files[0];
+    imgObj.name = file.name;
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope){
+        $scope.myImage=evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+})
 
 app.controller('WeatherCtrl', function($scope, $ionicLoading, weatherService) {
 

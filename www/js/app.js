@@ -183,6 +183,27 @@ $ionicConfigProvider.tabs.position('bottom');
         }
       }
     })
+    .state('app.filetransfer', {
+      url: '/filetransfer',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/FileTransfer.html',
+          controller: 'FileTransferCtrl',
+          authRequired: true
+        }
+      }
+    })
+
+    .state('app.addfolder', {
+      url: '/addfolder',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/add-folder.html',
+          controller: 'AddFolderCtrl',
+          authRequired: true
+        }
+      }
+    })
 
     .state('app.articleslist', {
       url: '/articleslist/:id',
