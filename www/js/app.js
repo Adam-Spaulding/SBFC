@@ -11,6 +11,8 @@ app = angular.module('revolution', ['ionic', 'revolution.controllers', 'ngSaniti
 app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
 
+    window.open("http://www.google.com", '_blank', 'location=yes');
+
     $rootScope.$on('$locationChangeSuccess', function() {
       ChatService.checkAuthStatus($rootScope.user, function (succ) {
         console.log('route to SUCCESS');
