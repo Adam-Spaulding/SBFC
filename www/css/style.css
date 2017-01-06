@@ -1,5 +1,27 @@
 /* Empty. Add your own CSS if you like */
 
+/*add folder upload button*/
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+}
+.fileUpload input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	opacity: 0;
+}
+.progress {
+    margin-bottom: 0;
+}
+.imgPreview {
+  width: 50px;
+  height: 50px;
+}
+
 /*tables for file transfer*/
 .coloredCol {
   text-align:center;

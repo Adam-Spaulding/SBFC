@@ -1165,6 +1165,7 @@ app.controller('AddFolderCtrl', function($scope, $rootScope, $state, $timeout, $
   $scope.message = '';
 
   var downloadUrl = '';
+  var thumbnailImage;
 
   $scope.showToolbar = true;
 
@@ -1225,6 +1226,107 @@ app.controller('AddFolderCtrl', function($scope, $rootScope, $state, $timeout, $
       $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
     }, 100)
   };
+
+//This will contain our files  
+var data = Array();
+
+//Function to check whether or not this will work
+var supported = function () {
+    
+  //All of the stuff we need
+  if (window.File && window.FileReader && window.FileList && window.Blob && window.XMLHttpRequest) {   
+    return true;  
+  } else {
+    return false;
+  }
+};
+
+//The Input File has Been Loaded Into Memory!
+var loaded = function(event) {
+  //Push the data into our array
+  //But don't start uploading just yet        
+    thumbnailImage = event.target.result;
+  data.push(event.target.result);
+};
+
+var uploadFile = function(event) {
+  //Needs a Better Way to
+  //Link Data to Button
+  var id = $(this).attr('data');
+  $.ajax({
+    type: "POST",
+    //JSFiddle Echo Server
+    url: "/echo/html/",
+    
+    data: {
+      "html": "<li><a target=\"_blank\" href=\"" + data[id] + "\">link</a></li>"
+    },
+    success: function(data) {
+      $("#ajax").append(data);
+    },
+      dataType: 'html'
+    });
+};
+
+var processFiles = function(event) {
+    
+  //If not supported tell them to get a better browser
+  if(!supported) {
+      alert('upgrade your browser');
+      return; 
+  }
+   
+  //Our iterator's up here? as specified by JSLint      
+  var i;  
+    
+  //Get the FileList Object - http://goo.gl/AkgYa
+  var files = event.target.files;
+  
+  //Loop through our files  
+  for (i = 0; i < files.length; i += 1) {
+    
+    //Just for Clarity Create a New Variable
+    var file = files[i]; 
+    
+    //A New Reader for Each File  
+    var reader = new FileReader();
+    //Done reading the file?.. Push the data to the data array
+    reader.onload = loaded;
+       
+    // Read in the image file as base64
+    // You could do it in binary or text - http://goo.gl/4hYSd
+    reader.readAsDataURL(file);
+    /*
+    
+                     //Make Upload Button
+                     "<button class=\"upload\" data=\"",
+                     i,
+                     "\">Upload</button>",
+                     //Get Size in Kilobytes 
+                     "<span>",
+                     file.size / 1024,
+                     " kb</span>",
+    */
+     
+    //Build the File Info HTML  
+    var fileInfo = ["<li>",
+    "<img src=\"" + thumbnailImage + "\" class='imgPreview'>",
+    
+                     file.name,
+                     "</li>"].join(''); 
+      
+    //Add the Info to the list
+    $("#list").append(fileInfo);
+     
+     
+  }
+  //Add a Click Listener OUTSIDE of the loop
+    $(".upload").on("click", uploadFile);    
+};
+
+//When the Input Changes Reprocess Files
+$("#fileInput").on("change", processFiles);
+
 
   $scope.getMessages();
 
@@ -1300,6 +1402,9 @@ app.controller('AddFolderCtrl', function($scope, $rootScope, $state, $timeout, $
     });
     // or alternatively
     // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
+  $scope.saveFolder = function (folderInfo) {
+    console.log(folderInfo,data)
   }
   $scope.saveData = function (user,msg,b64) {
     var pdfIsTrue = false;
