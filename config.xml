@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.app981535" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>app</name>
+  <name>SBFC</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Seacoast Birth and Family Connection
     </description>
   <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+      Adam Spaulding
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -82,5 +82,5 @@
   <allow-intent href="geo:*" />
   <allow-intent href="itms:*" />
   <allow-intent href="itms-apps:*" />
-  <!-- <plugin name="cordova-plugin-inappbrowser" spec="1.6.1" source="pgb" /> -->
+
 </widget>
