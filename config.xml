@@ -82,5 +82,5 @@
   <allow-intent href="geo:*" />
   <allow-intent href="itms:*" />
   <allow-intent href="itms-apps:*" />
-  <plugin name="cordova-plugin-inappbrowser" spec="1.0.1" source="pgb" />
+  <plugin name="cordova-plugin-inappbrowser" spec="1.6.1" source="pgb" />
 </widget>
