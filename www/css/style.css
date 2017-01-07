@@ -30,11 +30,6 @@
   border:thin gray solid;*/
 }
 
-ion-content {
-  max-width: 750px;
-  margin: auto;
-}
-
 .btn {
   border-radius: 0px;
   font-size: 16px;
@@ -85,11 +80,12 @@ ion-content {
   margin:20px auto;
 }
 
-/*h3.post-title {
-  background-color: #eee !important;
+h3.post-title {
+  background-color: #363636 !important;
   padding: 10px;
   color: #fff;
-}*/
+  margin: -5px 0px !important;
+}
 
 .row {
   margin:auto 0px !important;
@@ -357,4 +353,9 @@ ion-modal-view ion-content p {
 
 ion-view.home-nav button {
   display: none;
+}
+
+.scroll {
+  max-width: 750px;
+  margin:auto;
 }

@@ -1,14 +1,18 @@
+<base target="_blank" name="that">
+
 <ion-view view-title='<img src="img/logo.png" height="50" class="">'>
   <ion-content>
 
     <!-- blog post -->
-    	<div class="blogPost">
-    		<img ng-src="{{selectedArticle.img}}" class="img-full" style="max-width:500px;">
-        <a href="#/app/edit/{{selectedArticle.$id}}" class="pull-right p20 dark hidden-admin"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-    		<h3 class="post-title" style="padding:10px 20px;">{{selectedArticle.title}}</h3>
-    		<p class="fw500 m0 dark p20">Posted on <span class="fw500 m0 dark pt5" ng-bind="selectedArticle.publish_date | date : 'MMMM dd, yyyy'">{{selectedArticle.publish_date | date : 'MMM dd, yyyy'}}</span></p>
 
-        <div class="card" style="padding:10px;" ng-bind-html="sanitizeMe(selectedArticle.body)"></div>
+    	<div class="blogPost">
+    		<img ng-src="{{selectedArticle.img}}" class="img-full" style="max-width:500px;margin:auto;">
+        <!-- <a href="#/app/edit/{{selectedArticle.$id}}" class="pull-right p20 dark hidden-admin"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a> -->
+
+        <h3 class="post-title" style="padding:10px 20px;">{{selectedArticle.title}}</h3>
+        <div class="" style="padding:10px;background-color:#fff;">
+          <p class="fw500 m0 dark">Posted on <span class="fw500 m0 dark pt5" ng-bind="selectedArticle.publish_date | date : 'MMMM dd, yyyy'">{{selectedArticle.publish_date | date : 'MMM dd, yyyy'}}</span></p>
+          <div class="" ng-bind-html="selectedArticle.body">{{selectedArticle.body}}</div>
     		<!-- <div class="p20" ng-bind-html="post.content"></div>
     		<div class="p20">
     		<h4 class="fw300 m0 pb20" ng-show="post.comments != ''">Comments:</h4>
@@ -19,6 +23,7 @@
     				</li>
     			</ul>
     		</div> -->
+      </div>
     	</div>
     	<div class="he50"></div>
 
