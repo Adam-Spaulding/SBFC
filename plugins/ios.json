@@ -16,9 +16,6 @@
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.app981535"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
