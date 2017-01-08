@@ -1,5 +1,7 @@
 /* Empty. Add your own CSS if you like */
-
+body {
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif !important;
+}
 /*add folder upload button*/
 .fileUpload {
 	position: relative;
@@ -448,6 +450,33 @@ h3.post-title {
 }
 
 .article-body a {
-  color: #3498db !important;
+  color: #2895F1 !important;
   font-weight: bold;
+}
+
+.bg-positive i, .tab-title {
+  /*background-color: #68809d;*/
+  color: #68809d;
+  /*border-radius: 4px;*/
+}
+
+.footer i {
+  color: #68809d;
+}
+
+.custom-tab {
+  background-repeat: no-repeat;
+  background-position:center;
+  background-image: url('../img/logo.png');
+  background-size: 90% 90%;
+  height: 70px;
+  margin-top: -30px;
+  background-color: #c7d1dd;
+  opacity: 1;
+  border-radius: 50%;
+  padding-top: 30px;
+}
+
+.tabs-standard, .bar-header {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }

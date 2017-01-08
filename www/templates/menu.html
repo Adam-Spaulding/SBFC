@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content>
-    <ion-nav-bar class="bg-darker shadow-small">
+    <ion-nav-bar class="bg-positive shadow-small">
       <ion-nav-back-button></ion-nav-back-button>
 
       <ion-nav-buttons side="left">
@@ -29,9 +29,10 @@
 
       </ion-tabs> -->
 
-      <ion-tabs class="tabs-balanced tabs-icon-top" ng-show="user != 'Anonymous'">
+      <ion-tabs class="tabs-positive tabs-icon-top" ng-show="user != 'Anonymous'">
         <ion-tab title="Home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ui-sref="app.home"><ion-nav-view name="home-tab"></ion-nav-view></ion-tab>
-        <ion-tab title="ask" ui-sref="app.ask-an-expert" hidden="true"></ion-tab>
+        <ion-tab ui-sref="app.home" class="custom-tab"></ion-tab>
+        <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
         <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
         <ion-tab title="maps" ui-sref="app.maps" hidden="true"></ion-tab>
         <ion-tab title="newslist" ui-sref="app.newslist" hidden="true"></ion-tab>
@@ -44,7 +45,7 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left" class="bg-darker">
+  <ion-side-menu side="left" class="bg-light">
     <ion-header-bar class="bg-dark row row-center">
     <!-- <div class="col col-20">
       <img src="img/user.jpg" width="35" height="35" class="round inline border-xs-white ml10 mt5">

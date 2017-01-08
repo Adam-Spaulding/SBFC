@@ -3339,8 +3339,7 @@ body,
   color: #000;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: -apple-system;
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -3594,9 +3593,9 @@ cite {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  color: #000;
+  /*color: #000;*/
   font-weight: 500;
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
   .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
@@ -5121,7 +5120,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   white-space: nowrap;
   font-weight: 400;
   font-size: 14px;
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
     cursor: pointer; }
@@ -5700,7 +5699,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
 .item {
   border-color: #ddd;
   background-color: #f5f5f5;
-  color: #444;
+  color: #68809d;
   position: relative;
   z-index: 2;
   display: block;
@@ -6645,9 +6644,11 @@ button.item.item-button-right {
 .card,
 .list-inset {
   overflow: hidden;
-  margin: 20px 10px;
+  margin: 5px;
   border-radius: 2px;
-  background-color: #fff; }
+  background-color: #fafafa;
+  color: #68809d !important;
+}
 
 .card {
   padding-top: 1px;
@@ -7551,7 +7552,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
+  font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif; }
 
 .item-input {
   display: -webkit-box;
@@ -9528,7 +9529,7 @@ a.button {
   border-color: #d7d7d7; }
 
 .assertive, a.assertive {
-  color: #e2548d; }
+  color: rgba(54, 54, 54, 0.6); }
 
 .assertive-bg {
   background-color: #e2548d; }
@@ -9821,7 +9822,7 @@ a.button {
   background-color: #ffffff !important; }
 
 .bg-light {
-  background-color: #f5f5f5 !important; }
+  background-color: #fefefe !important; }
 
 .bg-stable {
   background-color: #dddddd !important; }
@@ -9845,10 +9846,10 @@ a.button {
   background-color: #7740a2 !important; }
 
 .bg-dark {
-  background-color: #51729a !important; }
+  background-color: #68809d !important; }
 
 .bg-darker {
-  background-color: #fff !important; }
+  background-color: rgba(54, 54, 54, 0.6); !important; }
 
 .bg-transparent {
   background-color: transparent !important; }
@@ -9857,7 +9858,7 @@ a.button {
   color: #ffffff !important; }
 
 .text-light {
-  color: #f5f5f5 !important; }
+  color: rgba(0, 0, 0, 0.5); !important; }
 
 .text-stable {
   color: #dddddd !important; }
@@ -9891,7 +9892,7 @@ a.button {
 
 /* //BACKGROUND AND TEXT COLOR */
 .pane {
-  background-color: #c7d1dd; }
+  background-color: #ebeef3; }
 
 * {
   font-family: 'Source Sans Pro', sans-serif; }
@@ -9918,7 +9919,11 @@ p {
   border-bottom: none !important; }
 
 .bar .title {
-  color: #f5f5f5; }
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: light;
+  /*font-size: 24px;*/
+  /*text-shadow: 1px 1px rgba(0, 0, 0, 0.5);*/
+}
 
 /* //HEADER BAR */
 /* BUTTONS */

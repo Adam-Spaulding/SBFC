@@ -1,4 +1,4 @@
-<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button=''>
+<ion-view view-title='Ask an Expert' hide-back-button=''>
   <ion-content>
 
     <div class="pt20 pb20">
@@ -17,7 +17,7 @@
 		    	<img ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
           <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">{{item.publish_date | date : 'MMMM dd, yyyy'}}</h4>
-			  <h4 class="fw300 m0 dark" ng-bind-html="item.body | limitTo: 116">{{ item.body }}</h4>
+			  <!-- <h4 class="fw300 m0 dark" ng-bind-html="trustedHtml(item.body | limitTo:10)"></h4> -->
 		    </a>
 		</div>
 

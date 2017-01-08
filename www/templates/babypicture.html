@@ -1,4 +1,4 @@
-<ion-view view-title='<img src="img/logo.png" height="50" class="">' hide-back-button=''>
+<ion-view view-title='Cute Baby Photo' hide-back-button=''>
   <ion-content>
     <!-- <a class="button button-block button-positive" href="#/app/add">
       Ask a Question
@@ -12,7 +12,7 @@
 		    	<img ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
           <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">{{item.publish_date | date : 'MMMM dd, yyyy'}}</h4>
-			  <h4 class="fw300 m0 dark" ng-bind-html="item.body | limitTo: 116">{{ item.body }}</h4>
+			  <!-- <h4 class="fw300 m0 dark" ng-bind-html="item.body | limitTo: 116">{{ item.body }}</h4> -->
 		    </a>
 		</div>
 	</div>
