@@ -35,6 +35,12 @@
 <!--<input type="file" id="fileInput" name="files[]" multiple/>-->
 <ul id="list"></ul>
 <ul id="ajax"></ul>
+<ul>
+  <li ng-repeat="fle in folderArray">
+    <img src="{{fle.thumbnailImage}}" alt="fle.name" class="imgPreview">
+    {{fle.name}}
+  </li>
+</ul>
 
       </div>
       <div style="text-align:center;">
