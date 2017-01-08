@@ -9,13 +9,34 @@
       <h3 class="dark fw300 m0">Post to SBFC</h3>
       <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
     <button class="btn add-button p20" ui-sref="app.add">Add Item</button>
-		<div class="list">
-		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse()" href="#/app/edit/{{item.$id}}">
+    <div class="filters">
+      <label class="item item-input title-filter">
+        <div class="input-label">
+          Search for a Title
+        </div>
+        <input type="text" placeholder="Search Titles" ng-model="search.title">
+      </label>
+
+      <label class="item item-input item-select category-filter">
+        <div class="input-label">
+          Filter by Category
+        </div>
+        <select ng-model="select.category">
+            <option selected="selected"  value="!!">All Categories</option>
+            <option value="ask-an-expert">Ask an Expert</option>
+            <option value="baby-photo">Baby Photo of the Month</option>
+            <option value="marketplace">Marketplace</option>
+        </select>
+      </label>
+      </div>
+
+		<div class="list content">
+		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:search | filter:select" href="#/app/edit/{{item.$id}}">
 		    	<img ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
           <h4 class="fw500 m0 dark pt5">Category: {{item.category}}</h4>
           <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">Published Date: {{item.publish_date | date : 'MMMM dd, yyyy'}}</h4>
-			    <h4 class="fw300 m0 dark" ng-bind-html="item.body | limitTo: 116">{{ item.body }}</h4>
+			    <h4 class="fw300 m0 dark" ng-bind-html="trustedHtml(item.body | limitTo: 116)"></h4>
           <i class="fa fa-check-square {{item.published}}" aria-hidden="true"></i>
 		    </a>
 		</div>

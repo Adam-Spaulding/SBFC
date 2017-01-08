@@ -249,10 +249,13 @@ input.date-picker {
   top: 10px;
   position: absolute;
   right: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .btn:hover {
   cursor: pointer;
+  color: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -362,4 +365,50 @@ ion-view.home-nav button {
 
 .ql-link-tooltip a.change {
   display: none !important;
+}
+
+.filters input {
+
+}
+
+.filters input, .filters select {
+  background-color: #fff;
+  width: 100%;
+  position: absolute;
+    max-width: 65%;
+  top: 5px;
+  bottom: 0;
+  right: 10px;
+  text-align: left !important;
+  height: 40px;
+  border-radius: 0px;
+  padding: 5px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.filters select  {
+  direction: ltr;
+}
+
+.filters {
+    background-color: #fafafa;
+    /*border-radius: 5px;*/
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 15px;
+}
+
+.list.content a {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.list.content a:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.list.content {
+  background-color: #fafafa;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
