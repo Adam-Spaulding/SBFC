@@ -359,3 +359,7 @@ ion-view.home-nav button {
   max-width: 750px;
   margin:auto;
 }
+
+.ql-link-tooltip a.change {
+  display: none !important;
+}

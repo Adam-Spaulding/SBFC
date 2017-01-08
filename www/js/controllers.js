@@ -401,14 +401,29 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 })
 
 
-app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
+app.controller('FirebaseCtrl', function($scope, $ionicLoading, $sce, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
 
   $ionicLoading.show({
     template: 'Loading Firebase data...'
   });
 
   // FIREBASE
+// $scope.body = $sce.trustAsHtml(htmlBody);
 
+$scope.trustedHtml = function (plainText) {
+            return $sce.trustAsHtml(plainText);
+        };
+
+// document.getElementById("InAppBrowser_link")
+//   document.onclick = function(e) {
+//       e = e || window.event;
+//       var element = e.target || e.srcElement;
+//       if(element.tagName = "A") {
+//         window.open(element.href, "_blank", "location=yes");
+//         return true;
+//       }
+//
+//     };;
 
   $scope.articleID = $stateParams.id;
   $scope.selectedArticle = {};
@@ -464,6 +479,7 @@ app.controller('FirebaseCtrl', function($scope, $ionicLoading, $filter, $ionicSl
     });
 
   };
+
 
 })
 
