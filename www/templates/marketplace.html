@@ -7,17 +7,18 @@
 
     <div ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true' , category: 'marketplace' }" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
       <a href="#/app/articleslist/{{item.$id}}">
-        <div class="card" id="">
-        <ion-item id="">
-          <!-- <span class="item-note" ng-bind="item.publish_date | date : 'MMM dd, yy'"></span> -->
-        </ion-item>
+        <div class="marketplace-tile" id="">
+        <!-- <ion-item id="">
+          <span class="item-note" ng-bind="item.publish_date | date : 'MMM dd, yy'"></span>
+        </ion-item> -->
         <div style="margin: 0px; text-align: center;">
           <img class="" ng-src="{{item.img}}" style="width:100%;"></img>
+          <span class="wrapping-list" id="">
+            {{item.title}}
+            <!-- <i class="icon ion-chevron-right"></i> -->
+          </span>
         </div>
-        <ion-item class="wrapping-list" id="">
-          {{item.title}}
-          <!-- <i class="icon ion-chevron-right"></i> -->
-        </ion-item>
+
       </a>
     </div>
   </div>
