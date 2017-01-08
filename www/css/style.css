@@ -80,13 +80,6 @@
   margin:20px auto;
 }
 
-h3.post-title {
-  background-color: #363636 !important;
-  padding: 10px;
-  color: #fff;
-  margin: -5px 0px !important;
-}
-
 .row {
   margin:auto 0px !important;
 }
@@ -422,7 +415,7 @@ ion-view.home-nav button {
 }
 
 .marketplace-tile .wrapping-list {
-  background-color: rgba(54, 54, 54, 0.8);
+  background-color: rgba(54, 54, 54, 0.6);
   color: #fff;
   position: absolute;
   bottom: 0;
@@ -430,4 +423,31 @@ ion-view.home-nav button {
   display: block;
   width: 100%;
   min-height: 50px;
+}
+
+.blogPost  {
+  position: relative;
+}
+
+h3.post-title {
+  background-color: rgba(54, 54, 54, 0.6);
+  padding: 10px;
+  color: #fff;
+  margin: -5px 0px !important;
+  position: absolute;
+  bottom: 10px;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  min-height: 70px;
+}
+
+.article-body {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.article-body a {
+  color: #3498db !important;
+  font-weight: bold;
 }
