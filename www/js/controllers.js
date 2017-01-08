@@ -4,29 +4,29 @@ function init() {
 
 var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource']);
 
-app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicLoading, $ionicSideMenuDelegate, $ionicHistory, FirebaseUser, $firebaseAuth, $firebaseObject) {
+app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $state, $ionicLoading, $ionicSideMenuDelegate, $ionicHistory, FirebaseUser, $firebaseAuth, $firebaseObject) {
 
   // side menu open/closed - changing navigation icons
   $scope.$watch(function () {
-      return $ionicSideMenuDelegate.getOpenRatio();
-    },
+    return $ionicSideMenuDelegate.getOpenRatio();
+  },
     function (ratio) {
-      if (ratio === 1 || ratio === -1){
-        $scope.isActive= true;
-      } else{
+      if (ratio === 1 || ratio === -1) {
+        $scope.isActive = true;
+      } else {
         $scope.isActive = false;
       }
     });
 
   // go back button
-  $scope.back = function() {
+  $scope.back = function () {
     $ionicHistory.goBack();
   }
 
-  $scope.getUserStatus = function() {
+  $scope.getUserStatus = function () {
     // get firebase user
     var user = FirebaseUser.status();
-    if(user) {
+    if (user) {
       $rootScope.user = user.email;
       $rootScope.userUid = user.uid;
     } else {
@@ -36,16 +36,16 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
   }
 
   $scope.$watch(
-    function( $scope ) {
-      return( $scope.getUserStatus() );
+    function ($scope) {
+      return ($scope.getUserStatus());
     },
-    function( newValue ) {
+    function (newValue) {
     }
   );
 
-  $scope.logout = function() {
+  $scope.logout = function () {
     $firebaseAuth().$signOut();
-    $timeout(function() {
+    $timeout(function () {
       $scope.getUserStatus();
       $state.go('app.login');
     }, 100)
@@ -53,32 +53,32 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
 
 
   // USER PROFILE
-  $scope.getUserProfile = function(uid) {
+  $scope.getUserProfile = function (uid) {
     var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
     $scope.userProfile = $firebaseObject(refArray);
     $state.go('app.profile');
   }
 
 
-// RIGHT SIDE MENU NOTIFICATIONS
+  // RIGHT SIDE MENU NOTIFICATIONS
 
   $scope.data = {
     showDelete: true
   };
 
-  $scope.edit = function(item) {
+  $scope.edit = function (item) {
     alert('Edit Item: ' + item.id);
   };
-  $scope.share = function(item) {
+  $scope.share = function (item) {
     alert('Share Item: ' + item.id);
   };
 
-  $scope.moveItem = function(item, fromIndex, toIndex) {
+  $scope.moveItem = function (item, fromIndex, toIndex) {
     $scope.notifications.splice(fromIndex, 1);
     $scope.notifications.splice(toIndex, 0, item);
   };
 
-  $scope.onItemDelete = function(item) {
+  $scope.onItemDelete = function (item) {
     $scope.notifications.splice($scope.notifications.indexOf(item), 1);
   };
 
@@ -87,22 +87,22 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
     user: 'Janice Burke',
     text: 'Lorem ipsum dolor sit amet, per veri petentium iudicabit in.',
     img: '1.jpg'
-  },{
+  }, {
     id: 2,
     user: 'Raymond Powell',
     text: 'Per tale expetendis signiferumque eu, mea partem causae vocent id.',
     img: '2.jpg'
-  },{
+  }, {
     id: 3,
     user: 'Danielle Beck',
     text: 'Velit malorum eos ne, his ut probo possit contentiones.',
     img: '3.jpg'
-  },{
+  }, {
     id: 4,
     user: 'Ronald Hall',
     text: 'Posse petentium imperdiet nec ex, ea sed detraxit molestiae.',
     img: '4.jpg'
-  },{
+  }, {
     id: 5,
     user: 'Catherine Hunt',
     text: 'Semper urbanitas ullamcorper ut eam. Sint summo consequuntur ad nam, vix cu mucius alienum detracto, et eum zril labores abhorreant.',
@@ -112,11 +112,11 @@ app.controller('AppCtrl', function($scope, $rootScope, $timeout, $state, $ionicL
 
 })
 
-app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth) {
+app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth) {
 
   $ionicSideMenuDelegate.canDragContent(false);
 
-  $scope.start = function() {
+  $scope.start = function () {
     $state.go('app.home');
   };
 
@@ -124,49 +124,49 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
 
 
   // firebase register
-  $scope.register = function(email, password, phone) {
+  $scope.register = function (email, password, phone) {
     $scope.authObj.$createUserWithEmailAndPassword(email, password)
-      .then(function(firebaseUser) {
+      .then(function (firebaseUser) {
 
         // create 'user' array same id - to store user profile
         var refArray = firebase.database().ref().child("users").child(firebaseUser.uid);
         var users = $firebaseObject(refArray);
         users.email = firebaseUser.email;
         users.phone = phone;
-        users.$save().then(function(ref) {
+        users.$save().then(function (ref) {
 
-        }, function(error) {
+        }, function (error) {
           console.log("Error:", error);
         });
 
         alert('User created! You are signed in.');
         $state.go('app.home');
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.error("Error: ", error);
       });
   };
 
 
   // firebase login
-  $scope.login = function(email, password) {
-    $scope.authObj.$signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
+  $scope.login = function (email, password) {
+    $scope.authObj.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
       //alert("Signed in!");
       $scope.getUserStatus();
       console.log($rootScope.user);
       // redirect to home screen
       $state.go('app.home');
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.error("Authentication failed:", error);
     });
   }
 
 
   // reset password
-  $scope.reset = function(email) {
-    $scope.authObj.$sendPasswordResetEmail(email).then(function() {
+  $scope.reset = function (email) {
+    $scope.authObj.$sendPasswordResetEmail(email).then(function () {
       alert("Password reset email sent successfully!");
       $state.go('app.login');
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.error("Error: ", error);
     });
 
@@ -176,7 +176,7 @@ app.controller('UserCtrl', function($scope, $rootScope, $state, $ionicLoading, $
 
 })
 
-app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList) {
+app.controller('NewsCtrl', function ($scope, $ionicLoading, FeedSources, FeedList) {
 
   $ionicLoading.show({
     template: 'Loading news...'
@@ -189,7 +189,7 @@ app.controller('NewsCtrl', function($scope, $ionicLoading, FeedSources, FeedList
 
 });
 
-app.controller('NewslistCtrl', function($scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
+app.controller('NewslistCtrl', function ($scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
 
   // NEWS SELECTED SOURCE INFORMATION
   $scope.source = FeedSources[$stateParams.id];
@@ -200,63 +200,63 @@ app.controller('NewslistCtrl', function($scope, $state, $ionicLoading, $statePar
   }
 
   // NEWS FEED
-  var getNews = function(num) {
+  var getNews = function (num) {
 
-      $scope.news = [];
-      FeedList.get($scope.source.url, num).then(function(feeddata){
-        var data = feeddata[0].entries;
-        for(x=0;x<data.length;x++) {
-          $scope.news = data;
-        }
-        $ionicLoading.hide();
-        })
+    $scope.news = [];
+    FeedList.get($scope.source.url, num).then(function (feeddata) {
+      var data = feeddata[0].entries;
+      for (x = 0; x < data.length; x++) {
+        $scope.news = data;
+      }
+      $ionicLoading.hide();
+    })
 
-    }
+  }
   if (currentRoute.indexOf('newslistdetails') < 0) {
     getNews(10);
   }
 
-    $scope.openUrl = function(link) {
-      window.open(link, '_system', 'location=yes');
-      return false;
-    }
+  $scope.openUrl = function (link) {
+    window.open(link, '_system', 'location=yes');
+    return false;
+  }
 
-    $scope.openLink = function (item) {
-      console.log(item);
-      sessionStorage.itemDetails = JSON.stringify(item);
-      $state.go('app.newslistdetails')
-    };
+  $scope.openLink = function (item) {
+    console.log(item);
+    sessionStorage.itemDetails = JSON.stringify(item);
+    $state.go('app.newslistdetails')
+  };
 
-    $ionicModal.fromTemplateUrl('templates/my-modal.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal = modal;
-      });
-      $scope.openModal = function() {
-        $scope.modal.show();
-      };
-      $scope.closeModal = function() {
-        $scope.modal.hide();
-      };
-      // Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.modal.remove();
-      });
-      // Execute action on hide modal
-      $scope.$on('modal.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove modal
-      $scope.$on('modal.removed', function() {
-        // Execute action
-      });
+  $ionicModal.fromTemplateUrl('templates/my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function () {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function () {
+    $scope.modal.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function () {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function () {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function () {
+    // Execute action
+  });
 
 
 
 })
 
-app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegate, $ionicScrollDelegate) {
+app.controller('HomeCtrl', function ($scope, $ionicLoading, $ionicSideMenuDelegate, $ionicScrollDelegate) {
 
   $ionicSideMenuDelegate.canDragContent(true);
 
@@ -265,12 +265,12 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
   $scope.tab = 1;
   $scope.activeMenu = 1;
 
-  $scope.setTab = function(newTab){
+  $scope.setTab = function (newTab) {
     $scope.tab = newTab;
     $scope.activeMenu = newTab;
   };
 
-  $scope.isSet = function(tabNum){
+  $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
   };
 
@@ -310,7 +310,7 @@ app.controller('HomeCtrl', function($scope, $ionicLoading, $ionicSideMenuDelegat
 
 
 
-app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $cordovaSocialSharing) {
+app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, $cordovaSocialSharing) {
 
   $ionicLoading.show({
     template: 'Loading posts...'
@@ -318,8 +318,8 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 
 
   $scope.categShow = false;
-  $scope.showCategories = function() {
-    if($scope.categShow == false) {
+  $scope.showCategories = function () {
+    if ($scope.categShow == false) {
       $scope.categShow = true;
     } else {
       $scope.categShow = false;
@@ -327,70 +327,70 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
   }
 
 
-// WORDPRESS CATEGORIES
+  // WORDPRESS CATEGORIES
   Blog.categories().then(
-    function(data){
+    function (data) {
       $scope.categories = data.data.categories;
       $ionicLoading.hide();
     },
-    function(error){
+    function (error) {
     }
   )
 
 
 
 
-// WORDPRESS POSTS
-  $scope.getPosts = function() {
+  // WORDPRESS POSTS
+  $scope.getPosts = function () {
     Blog.posts($stateParams.id).then(
-      function(data){
+      function (data) {
         $scope.posts = data.data.posts;
         $ionicLoading.hide();
       },
-      function(error){
+      function (error) {
       }
     )
   }
 
 
-// WORDPRESS SINGLE POST
-  $scope.getPost = function() {
+  // WORDPRESS SINGLE POST
+  $scope.getPost = function () {
     Blog.post($stateParams.id).then(
-      function(data){
+      function (data) {
         $scope.post = firebase(ref.userInfo(id));
         $ionicLoading.hide();
       },
-      function(error){
+      function (error) {
       }
     )
   }
 
 
-// SHARE
-  $scope.shareTwitter = function(message, image) {
+  // SHARE
+  $scope.shareTwitter = function (message, image) {
     $cordovaSocialSharing
       .shareViaTwitter(message, image, 'linkhere')
-      .then(function(result) {
+      .then(function (result) {
         // Success!
-      }, function(err) {
+      }, function (err) {
         // An error occurred. Show a message to the user
       });
   }
-  $scope.shareFacebook = function(message, image) {
+  $scope.shareFacebook = function (message, image) {
     $cordovaSocialSharing
       .shareViaFacebook(message, image, 'link')
-      .then(function(result) {
+      .then(function (result) {
         // Success!
-      }, function(err) {
+      }, function (err) {
         // An error occurred. Show a message to the user
       });
   }
-  $scope.shareWhatsApp = function(message, image) {
+  $scope.shareWhatsApp = function (message, image) {
     $cordovaSocialSharing
       .shareViaWhatsApp(message, image, 'link')
-      .then(function(result) {
+      .then(function (result) {
         // Success!
-      }, function(err) {
+      }, function (err) {
         // An error occurred. Show a message to the user
       });
   }
@@ -400,8 +400,9 @@ app.controller('BlogCtrl', function($scope, $ionicLoading, $stateParams, Blog, $
 
 })
 
+var gLink = "";
 
-app.controller('FirebaseCtrl', function($scope, $ionicLoading, $sce, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams) {
+app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
   $ionicLoading.show({
     template: 'Loading Firebase data...'
@@ -438,13 +439,18 @@ $scope.trustedHtml = function (plainText) {
   */
   $ionicLoading.hide();
 
+  //to sanitize html
+  $scope.sanitizeMe = function (text) {
+    return $sce.trustAsHtml(text)
+  };
+
   // array
   var refArrayMessages = firebase.database().ref().child("messages");
   // create a synchronized array
   $scope.messages = $firebaseArray(refArrayMessages); // $scope.messages is your firebase array, you can add/remove/edit
   // add new items to the array
   // the message is automatically added to our Firebase database!
-  $scope.addMessage = function(message) {
+  $scope.addMessage = function (message) {
     $scope.newMessageText = null;
     $scope.messages.$add({
       text: message
@@ -452,52 +458,71 @@ $scope.trustedHtml = function (plainText) {
 
   };
 
-// array
+  String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+  };
+  // array
   var refArray = firebase.database().ref().child("userInfo");
-// create a synchronized array
+  // create a synchronized array
   var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
-// add new items to the array
-// the message is automatically added to our Firebase database!
+
+  // add new items to the array
+  // the message is automatically added to our Firebase database!
   articleListRef.$loaded()
-    .then(function(x) {
+    .then(function (x) {
       $scope.articles = x;
-      if($scope.articleID){
+      if ($scope.articleID) {
         $scope.articles.forEach(function (d, i) {
-          if(d.$id == $scope.articleID){
+          if (d.$id == $scope.articleID) {
             $scope.selectedArticle = d;
+            var body = d.body;
+            var tempBody = d.body;
+            body = body.replaceAll('href.*"', "");
+            gLink = tempBody.match(/href="([^"]*)/)[1];
+            body = body.replace("<a", "<label");
+            body = body.replace("</a>", "</label>");
+            $scope.selectedArticle.body = body;
+            console.log(gLink);
+            //$scope.selectedArticle.body = "<a href='http://www.google.com' target='_blank'>Post</a>";
           }
         })
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log("Error:", error);
     });
-  $scope.addMessage = function(message) {
+
+  $scope.addMessage = function (message) {
     $scope.newMessageText = null;
     $scope.articles.$add({
       text: message
     });
-
   };
 
+  $(document).on('click', function (evt) {
+    if ($(evt.target).is('label')) {
+      var ref = cordova.InAppBrowser.open(gLink, '_blank');
+    }
+  });
 
 })
 
 
-app.controller('ElementsCtrl', function($scope) {
+app.controller('ElementsCtrl', function ($scope) {
 
 })
 
 
-app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $cordovaToast, $cordovaAppRate, $cordovaBarcodeScanner, $cordovaDevice) {
+app.controller('PluginsCtrl', function ($scope, $ionicLoading, $ionicPlatform, $cordovaToast, $cordovaAppRate, $cordovaBarcodeScanner, $cordovaDevice) {
 
 
 
 
   // toast message
-  $scope.showToast = function() {
-    $ionicPlatform.ready(function() {
-      $cordovaToast.showLongBottom('Here is a toast message').then(function(success) {
+  $scope.showToast = function () {
+    $ionicPlatform.ready(function () {
+      $cordovaToast.showLongBottom('Here is a toast message').then(function (success) {
         // success
       }, function (error) {
         // error
@@ -509,9 +534,9 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
 
 
   // rate my app
-  $scope.showApprate = function() {
+  $scope.showApprate = function () {
 
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
       $cordovaAppRate.promptForRating(true).then(function (result) {
         // success
@@ -524,18 +549,18 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
 
 
   // barcode scanner
-  $scope.showBarcode = function() {
+  $scope.showBarcode = function () {
 
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
       $cordovaBarcodeScanner
         .scan()
-        .then(function(barcodeData) {
+        .then(function (barcodeData) {
           // Success! Barcode data is here
           alert(barcodeData.text);
           console.log("Barcode Format -> " + barcodeData.format);
           console.log("Cancelled -> " + barcodeData.cancelled);
-        }, function(error) {
+        }, function (error) {
           // An error occurred
           console.log("An error happened -> " + error);
         });
@@ -548,9 +573,9 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
 
 
   // device info
-  $scope.showDeviceinfo = function() {
+  $scope.showDeviceinfo = function () {
 
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
 
       var device = $cordovaDevice.getDevice();
       var cordova = $cordovaDevice.getCordova();
@@ -572,12 +597,12 @@ app.controller('PluginsCtrl', function($scope, $ionicLoading, $ionicPlatform, $c
   $scope.tab = 1;
   $scope.activeMenu = 1;
 
-  $scope.setTab = function(newTab){
+  $scope.setTab = function (newTab) {
     $scope.tab = newTab;
     $scope.activeMenu = newTab;
   };
 
-  $scope.isSet = function(tabNum){
+  $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
   };
 
@@ -634,14 +659,14 @@ app.config(function ($cordovaAppRateProvider) {
 
 })
 
-app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
+app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
 
   $scope.getUserStatus();
 
   $scope.user = {
-    published:'',
+    published: '',
     publish_date: new Date(),
-    title:''
+    title: ''
   }
 
   /* datepicker */
@@ -653,7 +678,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     $scope.valuationDatePickerIsOpen = true;
   };
 
-  var pdfDoc = angular.element( document.querySelector('#fileInput'));
+  var pdfDoc = angular.element(document.querySelector('#fileInput'));
 
 
 
@@ -666,12 +691,12 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
   $scope.showToolbar = true;
 
   $scope.categoryDropDown = {
-    selected:null,
+    selected: null,
     categoryOptions: [
-      {id:0,name:'No Category',value:''},
-      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
-      {id:2,name:'Marketplace',value:'marketplace'},
-      {id:3,name:'Baby Photo',value:'baby-photo'}
+      { id: 0, name: 'No Category', value: '' },
+      { id: 1, name: 'Ask an Expert', value: 'ask-an-expert' },
+      { id: 2, name: 'Marketplace', value: 'marketplace' },
+      { id: 3, name: 'Baby Photo', value: 'baby-photo' }
     ]
   };
 
@@ -706,7 +731,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     $scope.message = '';
     console.log($scope.message);
   }, 3000);
-  $scope.getMessages = function() {
+  $scope.getMessages = function () {
 
     //$scope.version = textAngularManager.getVersion();
     //$scope.versionNumber = $scope.version.substring(1);
@@ -715,9 +740,9 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     //$scope.disabled = false;
 
 
-    $timeout(function() {
+    $timeout(function () {
       // set firebase refference for messages - if user is logged in, set to match user uid, if there is no user, show public messages
-      var refArray = firebase.database().ref().child("chat/"+$rootScope.userUid);
+      var refArray = firebase.database().ref().child("chat/" + $rootScope.userUid);
       // create a synchronized array
       $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
     }, 100)
@@ -726,14 +751,14 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
   $scope.getMessages();
 
   // send message
-  $scope.send = function(message) {
+  $scope.send = function (message) {
 
     $scope.getMessages();
 
     // set a random image as user avatar - change this to match your structure
-    var randomIndex = Math.round( Math.random() * (4) );
+    var randomIndex = Math.round(Math.random() * (4));
     randomIndex++;
-    $scope.avatar = 'img/users/'+randomIndex+'.jpg';
+    $scope.avatar = 'img/users/' + randomIndex + '.jpg';
     // add new items to the array
     // the message is automatically added to our Firebase database!
     $scope.messages.$add({
@@ -745,7 +770,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     $scope.message = '';
   };
 
-  $scope.storeImageToDB = function(file, resolve){
+  $scope.storeImageToDB = function (file, resolve) {
 
     /*var file = document.querySelector('input[type=file]').files[0];
      console.log(file);*/
@@ -753,7 +778,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     // Get a reference to store file at photos/<FILENAME>.jpg
     var photoRef = storageRef.child(file.name);
     // Upload file to Firebase Storage
-    var uploadTask = photoRef.putString(file.base64,'data_url');
+    var uploadTask = photoRef.putString(file.base64, 'data_url');
     uploadTask.on('state_changed', null, null, function (snapshot) {
       console.log('success');
       console.log(snapshot);
@@ -765,7 +790,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
       //$scope.userDisplayPic = downloadUrl;
     });
   };
-  $scope.storePDFDocToDB = function(file, resolve){
+  $scope.storePDFDocToDB = function (file, resolve) {
 
     /*var file = document.querySelector('input[type=file]').files[0];
      console.log(file);*/
@@ -786,11 +811,24 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     });
   };
 
-  $scope.saveData = function (user,msg,b64) {
+  function extractLinkFromBody(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function (url) {
+      var indexOfATag = url.indexOf('<');
+      var slicedUrl = url.slice(0, indexOfATag);
+      /*console.log(slicedUrl)
+       return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+      return '<a href="' + slicedUrl + '" onClick="window.open("' + slicedUrl + '");return false;">' + slicedUrl + '</a>';
+    });
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
+  $scope.saveData = function (user, msg, b64) {
     var pdfIsTrue = false;
     var userData = {};
     userData = $scope.user;
-    console.log(user,msg);
+    userData.body = extractLinkFromBody(userData.body)
+    console.log(user, msg);
     userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
     userData.author = $rootScope.user;
@@ -798,18 +836,18 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
 
     imgObj.base64 = b64;
     pdfDoc = pdfDoc[0].files[0];
-    if(pdfDoc){
+    if (pdfDoc) {
       if (pdfDoc.name.indexOf('pdf') > -1) {
         pdfIsTrue = true;
       }
     }
     console.log(pdfDoc);
 
-    var uploadPromiseImgs = new Promise(function(resolve, reject) {
-      if(pdfIsTrue){
-        $scope.storePDFDocToDB(pdfDoc,resolve);
-      }else{
-        $scope.storeImageToDB(imgObj,resolve);
+    var uploadPromiseImgs = new Promise(function (resolve, reject) {
+      if (pdfIsTrue) {
+        $scope.storePDFDocToDB(pdfDoc, resolve);
+      } else {
+        $scope.storeImageToDB(imgObj, resolve);
       }
     });
     Promise.all([uploadPromiseImgs]).then(function (data) {
@@ -819,7 +857,7 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
       userNode.$add(userData).then(function (success) {
         var addedObjDetails = success.path.o;
         var addedObj = addedObjDetails[1];
-        $state.go('app.edit',{'id': addedObj})
+        $state.go('app.edit', { 'id': addedObj })
         console.log(success);
         console.log(addedObj[1]);
       });
@@ -828,52 +866,52 @@ app.controller('ChatCtrl', function($scope, $rootScope, $state, $timeout, $ionic
     })
   };
   var imgObj = {};
-  $scope.myImage='';
-  $scope.myCroppedImage='';
+  $scope.myImage = '';
+  $scope.myCroppedImage = '';
 
-  var handleFileSelect=function(evt) {
-    var file=evt.currentTarget.files[0];
+  var handleFileSelect = function (evt) {
+    var file = evt.currentTarget.files[0];
     imgObj.name = file.name;
     var reader = new FileReader();
     reader.onload = function (evt) {
-      $scope.$apply(function($scope){
-        $scope.myImage=evt.target.result;
+      $scope.$apply(function ($scope) {
+        $scope.myImage = evt.target.result;
       });
     };
     reader.readAsDataURL(file);
   };
-  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+  angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
 
 })
 
 
-app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
+app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
 
 
   $scope.articleID = $stateParams.id;
   $scope.getUserStatus();
 
   $scope.user = {
-    published:'',
+    published: '',
     publish_date: new Date(),
-    title:''
+    title: ''
   }
 
   // array
   var refArray = firebase.database().ref().child("userInfo").child($scope.articleID);
-// create a synchronized array
+  // create a synchronized array
   var articleListRef = $firebaseObject(refArray); // $scope.messages is your firebase array, you can add/remove/edit
-// add new items to the array
-// the message is automatically added to our Firebase database!
+  // add new items to the array
+  // the message is automatically added to our Firebase database!
   articleListRef.$loaded()
-    .then(function(x) {
+    .then(function (x) {
       $scope.user = x;
       $scope.categoryDropDown.selected = $scope.user.category;
       $scope.user.publish_date = new Date($scope.user.publish_date);
       $scope.message = $scope.user.body;
-      // ngQuillConfig.setHTML($scope.user.body);
+      ngQuillConfig.setHTML($scope.user.body);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log("Error:", error);
     });
 
@@ -899,21 +937,21 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
   $scope.showToolbar = true;
 
   $scope.categoryDropDown = {
-    selected:null,
+    selected: null,
     categoryOptions: [
-      {id:0,name:'No Category',value:''},
-      {id:1,name:'Ask an Expert',value:'ask-an-expert'},
-      {id:2,name:'Marketplace',value:'marketplace'},
-      {id:3,name:'Baby Photo',value:'baby-photo'}
+      { id: 0, name: 'No Category', value: '' },
+      { id: 1, name: 'Ask an Expert', value: 'ask-an-expert' },
+      { id: 2, name: 'Marketplace', value: 'marketplace' },
+      { id: 3, name: 'Baby Photo', value: 'baby-photo' }
     ]
   };
 
-  $scope.showToast = function(){
-    <!-- ionicToast.show(message, position, stick, time); -->
-    ionicToast.show('This is a toast at the top.', 'top', false, 2500);
+  $scope.showToast = function () {
+    <!--ionicToast.show(message, position, stick, time); -->
+      ionicToast.show('This is a toast at the top.', 'top', false, 2500);
   };
 
-  $scope.hideToast = function(){
+  $scope.hideToast = function () {
     ionicToast.hide();
   };
 
@@ -940,7 +978,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     return $scope.message = '';
   };
 
-  $scope.getMessages = function() {
+  $scope.getMessages = function () {
 
     //$scope.version = textAngularManager.getVersion();
     //$scope.versionNumber = $scope.version.substring(1);
@@ -949,9 +987,9 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     //$scope.disabled = false;
 
 
-    $timeout(function() {
+    $timeout(function () {
       // set firebase refference for messages - if user is logged in, set to match user uid, if there is no user, show public messages
-      var refArray = firebase.database().ref().child("chat/"+$rootScope.userUid);
+      var refArray = firebase.database().ref().child("chat/" + $rootScope.userUid);
       // create a synchronized array
       $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
     }, 100)
@@ -960,14 +998,14 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
   $scope.getMessages();
 
   // send message
-  $scope.send = function(message) {
+  $scope.send = function (message) {
 
     $scope.getMessages();
 
     // set a random image as user avatar - change this to match your structure
-    var randomIndex = Math.round( Math.random() * (4) );
+    var randomIndex = Math.round(Math.random() * (4));
     randomIndex++;
-    $scope.avatar = 'img/users/'+randomIndex+'.jpg';
+    $scope.avatar = 'img/users/' + randomIndex + '.jpg';
     // add new items to the array
     // the message is automatically added to our Firebase database!
     $scope.messages.$add({
@@ -979,7 +1017,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     $scope.message = '';
   };
 
-  $scope.storeImageToDB = function(file, resolve){
+  $scope.storeImageToDB = function (file, resolve) {
 
     /*var file = document.querySelector('input[type=file]').files[0];
      console.log(file);*/
@@ -987,7 +1025,7 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     // Get a reference to store file at photos/<FILENAME>.jpg
     var photoRef = storageRef.child(file.name);
     // Upload file to Firebase Storage
-    var uploadTask = photoRef.putString(file.base64,'data_url');
+    var uploadTask = photoRef.putString(file.base64, 'data_url');
     uploadTask.on('state_changed', null, null, function (snapshot) {
       console.log('success');
       console.log(snapshot);
@@ -1000,21 +1038,53 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     });
   };
 
-  $scope.saveData = function (user,msg,b64) {
+  function extractLinkFromBody(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function (url) {
+      var indexOfATag = url.indexOf('<');
+      var slicedUrl = url.slice(0, indexOfATag);
+      /*console.log(slicedUrl)
+      return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+      return '<a href="' + slicedUrl + '" onClick="window.open("' + slicedUrl + '");return false;">' + slicedUrl + '</a>';
+    });
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
+  var optionsForInApp = {
+    location: 'yes',
+    clearcache: 'yes',
+    toolbar: 'yes',
+    closebuttoncaption: 'DONE?'
+  };
+  function openlink(url) {
+    /*$cordovaInAppBrowser.open(url, '_blank', optionsForInApp)
+      .then(function(event) {
+        // success
+      })
+      .catch(function(event) {
+        // error
+      });*/
+    console.log('lala kaka');
+  };
+
+  $scope.saveData = function (user, msg, b64) {
     var userData = {};
     userData = $scope.user;
-    console.log(user,msg);
+    if (userData.body.indexOf('<a>') == -1) {
+      userData.body = extractLinkFromBody(userData.body);
+    }
+    console.log(user, msg);
     //userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
     userData.author = $rootScope.user;
     userData.category = $scope.categoryDropDown.selected;
     articleListRef = userData;
     imgObj.base64 = b64;
-    articleListRef.$save().then(function(ref) {
-       // true
+    articleListRef.$save().then(function (ref) {
+      // true
       ionicToast.show('Success!.', 'bottom', false, 2500);
-      console.log('Successfully updates the object',ref);
-    }, function(error) {
+      console.log('Successfully updates the object', ref);
+    }, function (error) {
       console.log("Error:", error);
     });
 
@@ -1034,37 +1104,393 @@ app.controller('EditCtrl', function($scope, $rootScope, $state, $stateParams, $t
     })*/
   };
   $scope.deleteEdited = function () {
-    articleListRef.$remove().then(function(ref) {
+    articleListRef.$remove().then(function (ref) {
       console.log("Successfully removed the Object:", ref);
       $state.go('app.home')
-    }, function(error) {
+    }, function (error) {
       console.log("Error:", error);
     });
   }
   var imgObj = {};
-  $scope.myImage='';
-  $scope.myCroppedImage='';
+  $scope.myImage = '';
+  $scope.myCroppedImage = '';
 
-  var handleFileSelect=function(evt) {
-    var file=evt.currentTarget.files[0];
+  var handleFileSelect = function (evt) {
+    var file = evt.currentTarget.files[0];
     imgObj.name = file.name;
     var reader = new FileReader();
     reader.onload = function (evt) {
-      $scope.$apply(function($scope){
-        $scope.myImage=evt.target.result;
+      $scope.$apply(function ($scope) {
+        $scope.myImage = evt.target.result;
       });
     };
     reader.readAsDataURL(file);
   };
-  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+  angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
 
 })
 
+app.controller('FileTransferCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
 
-app.controller('WeatherCtrl', function($scope, $ionicLoading, weatherService) {
 
-  $scope.getWeather = function() {
-    weatherService.get().then(function(data) {
+
+  // array
+  var refArray = firebase.database().ref().child("users");
+  // create a synchronized array
+  var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+  // add new items to the array
+  // the message is automatically added to our Firebase database!
+  articleListRef.$loaded()
+    .then(function (alluser) {
+      $scope.usersFroFileTransfer = alluser;
+    })
+    .catch(function (error) {
+      console.log("Error:", error);
+    });
+
+
+})
+
+app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, $q) {
+
+  $scope.getUserStatus();
+
+  $scope.user = {
+    published: '',
+    publish_date: new Date(),
+    title: ''
+  }
+
+  /* datepicker */
+  $scope.valuationDate = new Date();
+  $scope.valuationDatePickerIsOpen = false;
+
+  $scope.valuationDatePickerOpen = function () {
+
+    $scope.valuationDatePickerIsOpen = true;
+  };
+
+  var pdfDoc = angular.element(document.querySelector('#fileInput'));
+
+  var folderRef = firebase.database().ref().child("folder");
+
+
+  /* /datepicker */
+
+  $scope.message = '';
+
+  var downloadUrl = '';
+  var downloadUrlArray = [];
+  var thumbnailImage;
+  var file;
+  $scope.folderArray = [];
+
+  $scope.showToolbar = true;
+
+  $scope.categoryDropDown = {
+    selected: null,
+    categoryOptions: [
+      { id: 0, name: 'No Category', value: '' },
+      { id: 1, name: 'Ask an Expert', value: 'ask-an-expert' },
+      { id: 2, name: 'Marketplace', value: 'marketplace' },
+      { id: 3, name: 'Baby Photo', value: 'baby-photo' }
+    ]
+  };
+
+  /*$scope.translations = angular.extend({}, ngQuillConfig.translations, {
+   15: 'smallest'
+   });*/
+
+  /*$scope.toggle = function() {
+   $scope.showToolbar = !$scope.showToolbar;
+   };*/
+  // Own callback after Editor-Creation
+  /*$scope.editorCallback = function (editor, name) {
+   console.log('createCallback', editor, name);
+   };*/
+
+  $scope.readOnly = false;
+
+  $scope.isReadonly = function () {
+    return $scope.readOnly;
+  };
+
+  $scope.clear = function () {
+    return $scope.message = '';
+  };
+
+  // Event after an editor is created --> gets the editor instance on optional the editor name if set
+  $scope.$on('editorCreated', function (event, editor, name) {
+    console.log('createEvent', editor, name);
+  });
+
+  $timeout(function () {
+    $scope.message = '';
+    console.log($scope.message);
+  }, 3000);
+  $scope.getMessages = function () {
+
+    //$scope.version = textAngularManager.getVersion();
+    //$scope.versionNumber = $scope.version.substring(1);
+    /*$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><img class="ta-insert-video" ta-insert-video="http://www.youtube.com/embed/2maA1-mvicY" src="" allowfullscreen="true" width="300" frameborder="0" height="250"/></p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE9+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p><h4>Supports non-latin Characters</h4><p>昮朐 魡 燚璒瘭 譾躒鑅, 皾籈譧 紵脭脧 逯郹酟 煃 瑐瑍, 踆跾踄 趡趛踠 顣飁 廞 熥獘 豥 蔰蝯蝺 廦廥彋 蕍蕧螛 溹溦 幨懅憴 妎岓岕 緁, 滍 蘹蠮 蟷蠉蟼 鱐鱍鱕, 阰刲 鞮鞢騉 烳牼翐 魡 骱 銇韎餀 媓幁惁 嵉愊惵 蛶觢, 犝獫 嶵嶯幯 縓罃蔾 魵 踄 罃蔾 獿譿躐 峷敊浭, 媓幁 黐曮禷 椵楘溍 輗 漀 摲摓 墐墆墏 捃挸栚 蛣袹跜, 岓岕 溿 斶檎檦 匢奾灱 逜郰傃</p>';
+     $scope.htmlcontent = $scope.orightml;*/
+    //$scope.disabled = false;
+
+
+    $timeout(function () {
+      // set firebase refference for messages - if user is logged in, set to match user uid, if there is no user, show public messages
+      var refArray = firebase.database().ref().child("chat/" + $rootScope.userUid);
+      // create a synchronized array
+      $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+    }, 100)
+  };
+
+  //This will contain our files  
+  var data = Array();
+
+  //Function to check whether or not this will work
+  var supported = function () {
+
+    //All of the stuff we need
+    if (window.File && window.FileReader && window.FileList && window.Blob && window.XMLHttpRequest) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  //The Input File has Been Loaded Into Memory!
+  var loaded = function (event) {
+    //Push the data into our array
+    //But don't start uploading just yet        
+    thumbnailImage = event.target.result;
+    file.thumbnailImage = event.target.result;
+    data.push(event.target.result);
+  };
+
+  var uploadFile = function (event) {
+    //Needs a Better Way to
+    //Link Data to Button
+    var id = $(this).attr('data');
+    $.ajax({
+      type: "POST",
+      //JSFiddle Echo Server
+      url: "/echo/html/",
+
+      data: {
+        "html": "<li><a target=\"_blank\" href=\"" + data[id] + "\">link</a></li>"
+      },
+      success: function (data) {
+        $("#ajax").append(data);
+      },
+      dataType: 'html'
+    });
+  };
+
+  var processFiles = function (event) {
+
+    //If not supported tell them to get a better browser
+    if (!supported) {
+      alert('upgrade your browser');
+      return;
+    }
+
+    //Our iterator's up here? as specified by JSLint      
+    var i;
+
+    //Get the FileList Object - http://goo.gl/AkgYa
+    var files = event.target.files;
+
+    //Loop through our files  
+    for (i = 0; i < files.length; i += 1) {
+
+      //Just for Clarity Create a New Variable
+      file = files[i];
+      // $scope.folderFile = file;
+      $scope.folderArray.push(file)
+
+      //A New Reader for Each File  
+      var reader = new FileReader();
+      //Done reading the file?.. Push the data to the data array
+      reader.onload = loaded;
+
+      // Read in the image file as base64
+      // You could do it in binary or text - http://goo.gl/4hYSd
+      reader.readAsDataURL(file);
+      /*
+      
+                       //Make Upload Button
+                       "<button class=\"upload\" data=\"",
+                       i,
+                       "\">Upload</button>",
+                       //Get Size in Kilobytes 
+                       "<span>",
+                       file.size / 1024,
+                       " kb</span>",
+      */
+
+      //Build the File Info HTML  
+      var fileInfo = ["<li>",
+        "<img src=\"" + thumbnailImage + "\" class='imgPreview'>",
+
+        file.name,
+        "</li>"].join('');
+
+      //Add the Info to the list
+      //$("#list").append(fileInfo);
+
+
+    }
+    //Add a Click Listener OUTSIDE of the loop
+    $(".upload").on("click", uploadFile);
+  };
+
+  //When the Input Changes Reprocess Files
+  $("#fileInput").on("change", processFiles);
+
+
+  $scope.getMessages();
+
+  // send message
+  $scope.send = function (message) {
+
+    $scope.getMessages();
+
+    // set a random image as user avatar - change this to match your structure
+    var randomIndex = Math.round(Math.random() * (4));
+    randomIndex++;
+    $scope.avatar = 'img/users/' + randomIndex + '.jpg';
+    // add new items to the array
+    // the message is automatically added to our Firebase database!
+    $scope.messages.$add({
+      text: message,
+      email: $rootScope.user,
+      user: $rootScope.userUid,
+      avatar: $scope.avatar
+    });
+    $scope.message = '';
+  };
+
+  function storeFolderImages(file) {
+
+    var innerDeferred = $q.defer();
+
+    //storeFolderImages(myfile, resolve);
+    var storageRef = firebase.storage().ref().child('folder').child('images').child(file.name);
+    // Upload file to Firebase Storage
+    var uploadTask = storageRef.putString(file.thumbnailImage, 'data_url');
+    uploadTask.on('state_changed', null, null, function () {
+      var downloadUrl = uploadTask.snapshot.downloadURL;
+      innerDeferred.resolve(downloadUrl);
+    })
+    // Set the download URL to the message box, so that the user can send it to the database
+    //$scope.userDisplayPic = downloadUrl;
+    return innerDeferred.promise;
+  };
+  $scope.saveFolder = function (folderInfo) {
+    var deferred = $q.defer();
+    console.log(folderInfo, $scope.folderArray)
+    var uploadPromiseFolderImgs = $scope.folderArray.map(function (myfile, index) {
+      var innerDeferred = $q.defer();
+
+      //storeFolderImages(myfile, resolve);
+      var storageRef = firebase.storage().ref().child('folder').child('images').child(file.name);
+      // Upload file to Firebase Storage
+      var uploadTask = storageRef.putString(file.thumbnailImage, 'data_url');
+      uploadTask.on('state_changed', null, null, function () {
+        var downloadUrl = uploadTask.snapshot.downloadURL;
+        innerDeferred.resolve(downloadUrl);
+      })
+      // Set the download URL to the message box, so that the user can send it to the database
+      //$scope.userDisplayPic = downloadUrl;
+      return innerDeferred.promise;
+    })
+    $q.all(uploadPromiseFolderImgs).then(function (imageResolved) {
+      console.log(imageResolved);
+      var imgArrNames = [];
+      var imagesObj = {};
+      for (var i = 0; i < imageResolved.length; ++i) {
+        imgArrNames[i] = "image-" + i;
+        var indexOfImgName = imgArrNames[i];
+        var indexOfImgReslved = imageResolved[i];
+        imagesObj[indexOfImgName] = indexOfImgReslved;
+      }
+      folderInfo.images = imagesObj;
+      var folderNode = $firebaseArray(folderRef);
+      folderNode.$add(folderInfo).then(function (success) {
+        console.log(success);
+      });
+      deferred.resolve(imageResolved)
+    }).catch(function (err) {
+      console.log(err);
+      deferred.reject(err);
+    })
+  }
+  $scope.saveData = function (user, msg, b64) {
+    var pdfIsTrue = false;
+    var userData = {};
+    userData = $scope.user;
+    userData.body = extractLinkFromBody(userData.body)
+    console.log(user, msg);
+    userData.body = msg;
+    userData.publish_date = new Date(userData.publish_date).getTime();
+    userData.author = $rootScope.user;
+    userData.category = $scope.categoryDropDown.selected;
+
+    imgObj.base64 = b64;
+    pdfDoc = pdfDoc[0].files[0];
+    if (pdfDoc) {
+      if (pdfDoc.name.indexOf('pdf') > -1) {
+        pdfIsTrue = true;
+      }
+    }
+    console.log(pdfDoc);
+
+    var uploadPromiseImgs = new Promise(function (resolve, reject) {
+      if (pdfIsTrue) {
+        $scope.storePDFDocToDB(pdfDoc, resolve);
+      } else {
+        $scope.storeImageToDB(imgObj, resolve);
+      }
+    });
+    Promise.all([uploadPromiseImgs]).then(function (data) {
+      userData.img = downloadUrl;
+      var ref = firebase.database().ref().child("userInfo");
+      var userNode = $firebaseArray(ref);
+      userNode.$add(userData).then(function (success) {
+        var addedObjDetails = success.path.o;
+        var addedObj = addedObjDetails[1];
+        $state.go('app.edit', { 'id': addedObj })
+        console.log(success);
+        console.log(addedObj[1]);
+      });
+    }).catch(function (err) {
+      console.log(err);
+    })
+  };
+  var imgObj = {};
+  $scope.myImage = '';
+  $scope.myCroppedImage = '';
+
+  var handleFileSelect = function (evt) {
+    var file = evt.currentTarget.files[0];
+    imgObj.name = file.name;
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function ($scope) {
+        $scope.myImage = evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+  angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
+
+})
+
+app.controller('WeatherCtrl', function ($scope, $ionicLoading, weatherService) {
+
+  $scope.getWeather = function () {
+    weatherService.get().then(function (data) {
       $scope.weather = data;
     });
   }
@@ -1072,7 +1498,7 @@ app.controller('WeatherCtrl', function($scope, $ionicLoading, weatherService) {
 })
 
 
-app.controller('ContactCtrl', function($scope) {
+app.controller('ContactCtrl', function ($scope) {
 
 
 })
@@ -1085,7 +1511,7 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
     template: 'Loading videos...'
   });
 
-  $window.initGapi = function() {
+  $window.initGapi = function () {
     $scope.$apply($scope.getChannel);
   };
 
@@ -1099,11 +1525,11 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
     });
   };
 
-  $scope.getVideoId = function() {
+  $scope.getVideoId = function () {
     $ionicLoading.show({
       template: 'Loading video...'
     });
-    document.getElementById('video').src = 'https://www.youtube.com/embed/'+$stateParams.id;
+    document.getElementById('video').src = 'https://www.youtube.com/embed/' + $stateParams.id;
     googleService.googleApiClientReady().then(function (data) {
       $scope.video = data.items[$stateParams.index];
       $ionicLoading.hide();
@@ -1116,23 +1542,23 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
 
 
 
-app.controller('MapsCtrl', function($scope) {
+app.controller('MapsCtrl', function ($scope) {
 
 
 })
 
 
-app.controller('AdmobCtrl', function($scope) {
+app.controller('AdmobCtrl', function ($scope) {
 
 
-  $scope.showBanner = function() {
-    if(AdMob) AdMob.showBanner();
+  $scope.showBanner = function () {
+    if (AdMob) AdMob.showBanner();
   }
-  $scope.hideBanner = function() {
-    if(AdMob) AdMob.hideBanner();
+  $scope.hideBanner = function () {
+    if (AdMob) AdMob.hideBanner();
   }
-  $scope.showInterstitial = function() {
-    if(AdMob) AdMob.showInterstitial();
+  $scope.showInterstitial = function () {
+    if (AdMob) AdMob.showInterstitial();
   }
 
 
@@ -1140,16 +1566,16 @@ app.controller('AdmobCtrl', function($scope) {
 
 })
 
-app.controller('AskanexpertCtrl', function($scope, $rootScope, $ionicLoading, FirebaseUser, Firebase, $firebaseObject, $firebaseArray) {
+app.controller('AskanexpertCtrl', function ($scope, $rootScope, $ionicLoading, FirebaseUser, Firebase, $firebaseObject, $firebaseArray) {
 
 
   $ionicLoading.show({
-      template: 'Loading Firebase data...'
-    });
+    template: 'Loading Firebase data...'
+  });
 
-    if (!Date.now) {
-    Date.now = function() { return new Date().getTime(); }
-}
+  if (!Date.now) {
+    Date.now = function () { return new Date().getTime(); }
+  }
 
   // FIREBASE
 
@@ -1161,25 +1587,25 @@ app.controller('AskanexpertCtrl', function($scope, $rootScope, $ionicLoading, Fi
   var syncObject = $firebaseObject(refObject);
   // synchronize the object with a three-way data binding
   syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
-    $ionicLoading.hide();
+  $ionicLoading.hide();
 
 
-    // array
-    var refArray = firebase.database().ref().child("questions");
-    // create a synchronized array
-    $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
-    // add new items to the array
-    // the message is automatically added to our Firebase database!
-    $scope.addMessage = function(message) {
-      $scope.newMessageText = null;
-      $scope.messages.$add({
-        question: message,
-        email: $rootScope.user,
-        date: Date(),
-        user: $rootScope.userUid
-      });
+  // array
+  var refArray = firebase.database().ref().child("questions");
+  // create a synchronized array
+  $scope.messages = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+  // add new items to the array
+  // the message is automatically added to our Firebase database!
+  $scope.addMessage = function (message) {
+    $scope.newMessageText = null;
+    $scope.messages.$add({
+      question: message,
+      email: $rootScope.user,
+      date: Date(),
+      user: $rootScope.userUid
+    });
 
 
-    };
+  };
 
 })
