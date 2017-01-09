@@ -1,0 +1,57 @@
+<ion-view view-title='Edit Folder' hide-back-button=''>
+  <ion-content class="text-center p20" overflow-scroll="true">
+
+    <h3 class="dark fw300 m0">Post to SBFC</h3>
+    <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
+
+    <div class="card" style="text-align:left;">
+      <div class="list" style="margin: 0 5%;">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input type="text" ng-model="editFolder.fname">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input type="text" ng-model="editFolder.lname">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email Address</span>
+          <input type="email" ng-model="editFolder.email">
+        </label>
+        <label class="item item-input" style="padding-left:0px; margin: auto 0px">
+          <span class="">Publish Date:</span>
+          <input class="date-picker" type="date" ng-model="editFolder.publish_date" data-date-format="miliseconds" style="width:200px !important;">
+        </label>
+        <!-- <ion-item style="max-width:200px; padding-left:0px; margin: auto 0px !important;"> -->
+        <ion-toggle ng-model="editFolder.active" toggle-class="toggle" style="max-width:200px; padding-left:0px; margin: auto 0px !important; height:50px;">Active: </ion-toggle>
+        <!-- </ion-item> -->
+
+<form>
+    <span class="fileUpload btn btn-default">
+        <span class="glyphicon glyphicon-upload"></span> Upload file
+        <input type="file" id="fileInput" name="files[]" multiple/>
+    </span>
+</form>
+<!--<input type="file" id="fileInput" name="files[]" multiple/>-->
+<ul id="list"></ul>
+<ul id="ajax"></ul>
+<ul>
+  <li ng-repeat="fle in editfolderArray">
+    <img src="{{fle.thumbnailImage?fle.thumbnailImage:fle}}" alt="fle.name" class="imgPreview">
+    {{fle.name}}
+    <button ng-click="deleteImg(fle)" class="button button-assertive">X</button>
+  </li>
+</ul>
+
+      </div>
+      <div style="text-align:center;">
+        <button class="btn button-positive p20" ng-click="saveFolder(newFolder)">Save</button>
+        <button class="btn button-warning p20" ui-sref="app.home">Cancel</button>
+      </div>
+      <div class="he20"></div>
+    </div>
+
+
+    <div class="he100"></div>
+  </ion-content>
+</ion-view>

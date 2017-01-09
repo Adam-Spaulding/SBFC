@@ -205,6 +205,17 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+    .state('app.editfolder', {
+      url: '/editfolder/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/edit-folder.html',
+          controller: 'EditFolderCtrl',
+          authRequired: true
+        }
+      }
+    })
+
     .state('app.articleslist', {
       url: '/articleslist/:id',
       views: {
