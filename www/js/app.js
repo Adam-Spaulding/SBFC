@@ -227,6 +227,27 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+    .state('app.dus', {
+      url: '/dus',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/dus.html',
+          controller: 'HomeCtrl',
+          authRequired: true
+        }
+      }
+    })
+
+    .state('app.dus_files', {
+      url: '/dus/files',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/dus_files.html',
+          controller: 'FileTransferCtrl',
+          authRequired: true
+        }
+      }
+    })
 
     .state('app.newslist', {
       url: '/newslist/:id',

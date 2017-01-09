@@ -256,6 +256,11 @@ input.date-picker {
   text-shadow: -1px 0 #f0ce98, 0 1px #f0ce98, 1px 0 #f0ce98, 0 -1px #f0ce98;
 }
 
+.folder-icon.icon.ion-android-folder {
+  color: #ffe9c8;
+  text-shadow: -2px 0 #f0ce98, 0 2px #f0ce98, 2px 0 #f0ce98, 0 -2px #f0ce98;
+}
+
 .list a i.active {
   position: absolute;
   top: 10px;
@@ -332,15 +337,12 @@ ion-modal-view ion-content p {
   display: none;
 }
 
-/*.list-content p:first-child {
-  display: block !important;
-  background-color: red;
-  float: none !important;
-  height: 200px;
-}*/
-
 ion-view.home-nav button {
   display: none;
+}
+
+.footer, .article-body {
+  margin-bottom: 60px;
 }
 
 .scroll {
