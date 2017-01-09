@@ -9,22 +9,37 @@
       <h3 class="dark fw300 m0">Share files with users</h3>
       <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
       <button class="btn add-button p20" ui-sref="app.addfolder">Add Folder</button>
-      <div class="item item-input-inset">
-        <label class="item-input-wrapper">
-          <input type="text" placeholder="Search" ng-model="query">
+      <div class="item item-input-inset filters">
+        <label class="item item-input"  style="width:100%;">
+          <div class="input-label">
+            Search for a Folder
+          </div>
+          <input type="text" placeholder="Enter a name or email address" ng-model="query">
         </label>
       </div>
-      <div class="row responsive-sm card">
-        <div class="col coloredCol"><h2>Username</h2></div>
-        <div class="col coloredCol"><h2>Email</h2></div>
-        <div class="col coloredCol"><h2>Active</h2></div>
+      <!-- <div class="list content row responsive-sm card" style="text-align:center;">
+        <div class=""><i class="folder-icon icon ion-android-folder fa-2x" style="color:transparent;"></i></div>
+        <div class="col coloredCol"><p>Name</p></div>
+        <div class="col coloredCol"><p>Email</p></div>
+        <div class="col coloredCol"><p>Active</p></div>
+      </div> -->
+      <!-- <div class="list content row responsive-sm card">
+        <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/add-folder/{{user.$id}}">
+        <div class=""><i class="folder-icon icon ion-android-folder fa-2x" style="color:black;"></i></div>
+        <div class="col coloredCol"><p>{{user.fname}} {{user.lname}}</p></div>
+        <div class="col coloredCol"><p>{{user.email}}</p></div>
+        <div class="col coloredCol"><p><i class="fa fa-check-square active {{item.active}}" aria-hidden="true"></i></p></div>
+      </a>
+      </div> -->
+      <div class="list content">
+          <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/add-folder/{{user.$id}}">
+            <div class=""><i class="folder-icon icon ion-android-folder fa-2x"></i></div>
+            <h4 class="fw500 m0 dark pt5"><b>{{user.fname}} {{user.lname}}</b></h4>
+            <h4 class="fw500 m0 dark pt5">{{user.email}}</h4>
+            <i class="fa fa-check-square {{user.active}}" aria-hidden="true"></i>
+          </a>
       </div>
-      <div class="row responsive-sm card" ng-repeat="user in usersFroFileTransfer | filter:query">
-        <div class=" " style="line-height: 1.5;"><i class="icon ion-android-folder" style="font-size: 2.5em;"></i></div>
-        <div class="col coloredCol"><h4>{{user.name}}</h4></div>
-        <div class="col coloredCol"><h4>{{user.email}}</h4></div>
-        <div class="col coloredCol"><h4>{{user.active}}</h4></div>
-      </div>
+
     </div>
 
     <div class="he50"></div>

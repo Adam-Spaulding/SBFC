@@ -216,10 +216,10 @@ app.controller('NewslistCtrl', function ($scope, $state, $ionicLoading, $statePa
     getNews(10);
   }
 
-  $scope.openUrl = function (link) {
-    window.open(link, '_system', 'location=yes');
-    return false;
-  }
+  // $scope.openUrl = function (link) {
+  //   window.open(link, '_system', 'location=yes');
+  //   return false;
+  // }
 
   $scope.openLink = function (item) {
     console.log(item);
@@ -811,23 +811,23 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
     });
   };
 
-  function extractLinkFromBody(text) {
-    var urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.replace(urlRegex, function (url) {
-      var indexOfATag = url.indexOf('<');
-      var slicedUrl = url.slice(0, indexOfATag);
-      /*console.log(slicedUrl)
-       return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
-      return '<a href="' + slicedUrl + '" onClick="window.open("' + slicedUrl + '");return false;">' + slicedUrl + '</a>';
-    });
-    // or alternatively
-    // return text.replace(urlRegex, '<a href="$1">$1</a>')
-  }
+  // function extractLinkFromBody(text) {
+  //   var urlRegex = /(https?:\/\/[^\s]+)/g;
+  //   return text.replace(urlRegex, function (url) {
+  //     var indexOfATag = url.indexOf('<');
+  //     var slicedUrl = url.slice(0, indexOfATag);
+  //     /*console.log(slicedUrl)
+  //      return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+  //     return '<a href="' + slicedUrl + '" onClick="window.open("' + slicedUrl + '");return false;">' + slicedUrl + '</a>';
+  //   });
+  //   // or alternatively
+  //   // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  // }
   $scope.saveData = function (user, msg, b64) {
     var pdfIsTrue = false;
     var userData = {};
     userData = $scope.user;
-    userData.body = extractLinkFromBody(userData.body)
+    // userData.body = extractLinkFromBody(userData.body)
     console.log(user, msg);
     userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
@@ -1038,18 +1038,18 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
     });
   };
 
-  function extractLinkFromBody(text) {
-    var urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.replace(urlRegex, function (url) {
-      var indexOfATag = url.indexOf('<');
-      var slicedUrl = url.slice(0, indexOfATag);
-      /*console.log(slicedUrl)
-      return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
-      return '<a href="' + slicedUrl + '" onClick="window.open("' + slicedUrl + '");return false;">' + slicedUrl + '</a>';
-    });
-    // or alternatively
-    // return text.replace(urlRegex, '<a href="$1">$1</a>')
-  }
+  // function extractLinkFromBody(text) {
+  //   var urlRegex = /(https?:\/\/[^\s]+)/g;
+  //   return text.replace(urlRegex, function (url) {
+  //     var indexOfATag = url.indexOf('<');
+  //     var slicedUrl = url.slice(0, indexOfATag);
+  //     /*console.log(slicedUrl)
+  //     return '<a href="' + slicedUrl + '">' + slicedUrl + '</a>'; */
+  //     return '<a href="' + slicedUrl + '" onClick="window.open("' + slicedUrl + '");return false;">' + slicedUrl + '</a>';
+  //   });
+  //   // or alternatively
+  //   // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  // }
   var optionsForInApp = {
     location: 'yes',
     clearcache: 'yes',
@@ -1070,9 +1070,9 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
   $scope.saveData = function (user, msg, b64) {
     var userData = {};
     userData = $scope.user;
-    if (userData.body.indexOf('<a>') == -1) {
-      userData.body = extractLinkFromBody(userData.body);
-    }
+    // if (userData.body.indexOf('<a>') == -1) {
+    //   userData.body = extractLinkFromBody(userData.body);
+    // }
     console.log(user, msg);
     //userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();
@@ -1135,7 +1135,7 @@ app.controller('FileTransferCtrl', function ($scope, $rootScope, $state, $stateP
 
 
   // array
-  var refArray = firebase.database().ref().child("users");
+  var refArray = firebase.database().ref().child("folder");
   // create a synchronized array
   var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
   // add new items to the array
@@ -1245,7 +1245,7 @@ app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, 
     }, 100)
   };
 
-  //This will contain our files  
+  //This will contain our files
   var data = Array();
 
   //Function to check whether or not this will work
@@ -1262,7 +1262,7 @@ app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, 
   //The Input File has Been Loaded Into Memory!
   var loaded = function (event) {
     //Push the data into our array
-    //But don't start uploading just yet        
+    //But don't start uploading just yet
     thumbnailImage = event.target.result;
     file.thumbnailImage = event.target.result;
     data.push(event.target.result);
@@ -1295,13 +1295,13 @@ app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, 
       return;
     }
 
-    //Our iterator's up here? as specified by JSLint      
+    //Our iterator's up here? as specified by JSLint
     var i;
 
     //Get the FileList Object - http://goo.gl/AkgYa
     var files = event.target.files;
 
-    //Loop through our files  
+    //Loop through our files
     for (i = 0; i < files.length; i += 1) {
 
       //Just for Clarity Create a New Variable
@@ -1309,7 +1309,7 @@ app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, 
       // $scope.folderFile = file;
       $scope.folderArray.push(file)
 
-      //A New Reader for Each File  
+      //A New Reader for Each File
       var reader = new FileReader();
       //Done reading the file?.. Push the data to the data array
       reader.onload = loaded;
@@ -1318,18 +1318,18 @@ app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, 
       // You could do it in binary or text - http://goo.gl/4hYSd
       reader.readAsDataURL(file);
       /*
-      
+
                        //Make Upload Button
                        "<button class=\"upload\" data=\"",
                        i,
                        "\">Upload</button>",
-                       //Get Size in Kilobytes 
+                       //Get Size in Kilobytes
                        "<span>",
                        file.size / 1024,
                        " kb</span>",
       */
 
-      //Build the File Info HTML  
+      //Build the File Info HTML
       var fileInfo = ["<li>",
         "<img src=\"" + thumbnailImage + "\" class='imgPreview'>",
 
@@ -1430,7 +1430,7 @@ app.controller('AddFolderCtrl', function ($scope, $rootScope, $state, $timeout, 
     var pdfIsTrue = false;
     var userData = {};
     userData = $scope.user;
-    userData.body = extractLinkFromBody(userData.body)
+    // userData.body = extractLinkFromBody(userData.body)
     console.log(user, msg);
     userData.body = msg;
     userData.publish_date = new Date(userData.publish_date).getTime();

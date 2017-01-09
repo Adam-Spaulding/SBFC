@@ -27,9 +27,18 @@ body {
 /*tables for file transfer*/
 .coloredCol {
   text-align:center;
-  /*
-  background-color:#eeeeee;
-  border:thin gray solid;*/
+  display: inline;
+  width: 25%;
+}
+
+.list.content a {
+  width: 100%;
+}
+
+.list.content a .col {
+  width: 33%;
+  text-align:center;
+  display: inline-block;
 }
 
 .btn {
@@ -222,7 +231,7 @@ input.date-picker {
 }
 
 .list a i {
-  top: 0;
+  top: 10px;
   position: absolute;
   right: 0;
   margin: 10px 10px 0 0;
@@ -231,19 +240,39 @@ input.date-picker {
 }
 
 .list a i.true {
-  color: #2ecc71;
+  color: #a5a1c6;
+  text-shadow: -1px 0 #7772a7, 0 1px #7772a7, 1px 0 #7772a7, 0 -1px #7772a7;
 }
 
 .list a i.false {
-  color: #eee;
+  color: #ebeef3;
+  text-shadow: -1px 0 #99aabf, 0 1px #99aabf, 1px 0 #99aabf, 0 -1px #99aabf;
+}
+
+.list a i.folder-icon {
+  left:10px;
+  right:100%;
+  color: #ffe9c8;
+  text-shadow: -1px 0 #f0ce98, 0 1px #f0ce98, 1px 0 #f0ce98, 0 -1px #f0ce98;
+}
+
+.list a i.active {
+  position: absolute;
+  top: 10px;
+  right: 90px;
+}
+
+.list.content.row.responsive-sm.card a div{
+  vertical-align: middle;
 }
 
 .add-button {
-  background-color: #2ecc71;
+  background-color: #a5a1c6;
   color: #fff;
-  top: 10px;
+  top: 20px;
   position: absolute;
   right: 0;
+  padding: 15px 25px !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
@@ -253,19 +282,6 @@ input.date-picker {
   color: #fff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-
-/*.bar-assertive {
-  width: 50px;
-  height: 50px;
-  border-radius: 45px;
-  padding:11px 14px;
-  right: 0px;
-  color: #fff !important;
-}
-
-ion-footer-bar {
-
-}*/
 
 .blog-article {
   position: fixed !important;
@@ -289,24 +305,6 @@ ion-modal-view ion-content p {
   margin:auto;
 }
 
-.responsive-iframe-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 100%;
-    overflow: hidden;
-}
-
-.responsive-iframe-container iframe,
-.vresponsive-iframe-container object,
-.vresponsive-iframe-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .wp-content .content p:first-child {
   display: none;
 }
@@ -315,14 +313,6 @@ ion-modal-view ion-content p {
   width: 100% !important;
   height: auto !important;
 }
-
-/*.list-content p, .list-content h2, .list-content span, .list-content ul, .list-content blockquote {
-  height: 0px;
-}*/
-
-/*.list-content p {
-  height: 0px;
-}*/
 
 .list-content p:first-child {
   display:block;
@@ -388,18 +378,19 @@ ion-view.home-nav button {
 .filters {
     background-color: #fafafa;
     /*border-radius: 5px;*/
-    padding: 10px;
+    padding: 25px 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin-bottom: 15px;
 }
 
 .list.content a {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-bottom: 2px solid #a5a1c6;
+  background-color: transparent !important;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .list.content a:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-bottom: 2px solid #f0ce98;
 }
 
 .list.content {

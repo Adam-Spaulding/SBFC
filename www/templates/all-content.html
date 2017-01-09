@@ -33,7 +33,7 @@
 		<div class="list content">
 		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:search | filter:select" href="#/app/edit/{{item.$id}}">
 		    	<img ng-src="{{item.img}}">
-		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
+		      <h4 class="fw500 m0 dark pt5"><b>{{item.title}}</b></h4>
           <h4 class="fw500 m0 dark pt5">Category: {{item.category}}</h4>
           <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">Published Date: {{item.publish_date | date : 'MMMM dd, yyyy'}}</h4>
 			    <h4 class="fw300 m0 dark" ng-bind-html="trustedHtml(item.body | limitTo: 116)"></h4>
