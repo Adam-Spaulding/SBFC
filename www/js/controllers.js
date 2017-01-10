@@ -1151,7 +1151,7 @@ app.controller('FileTransferCtrl', function ($scope, $rootScope, $state, $stateP
 
 })
 
-app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, $q, $firebaseObject) {
+app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, $q, $firebaseObject, ionicToast) {
 
   $scope.getUserStatus();
 
@@ -1420,7 +1420,10 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
       folderInfo.images = imagesObj;
       var folderNode = $firebaseArray(folderRef);
       folderNode.$add(folderInfo).then(function (success) {
-        console.log(success);
+        var addedObjectUid = success.path.o[1];
+        ionicToast.show('Successfully added a folder!.', 'bottom', false, 2500);
+        $state.go('app.editfolder', { 'id': addedObjectUid })
+        console.log(success.path.o[1]);
       });
       deferred.resolve(imageResolved)
     }).catch(function (err) {
@@ -1782,6 +1785,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
     delete editedObject.$resolved;
     delete editedObject.$priority;*/
     editFolderRef.$save().then(function(ref) {
+      ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
       console.log("Success:", ref);
     }, function(error) {
       console.log("Error:", error);
