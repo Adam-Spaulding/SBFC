@@ -100,7 +100,7 @@ $ionicConfigProvider.tabs.position('bottom');
       url: '/home',
       views: {
         'menuContent': {
-          templateUrl: 'templates/home.html',
+          templateUrl: 'templates/home-tiles.html',
           controller: 'FirebaseCtrl',
           authRequired: true
         }

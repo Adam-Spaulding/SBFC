@@ -37,7 +37,7 @@
 <ul id="ajax"></ul>
 <ul>
   <li ng-repeat="fle in editfolderArray">
-    <img src="{{fle.thumbnailImage?fle.thumbnailImage:fle}}" alt="fle.name" class="imgPreview">
+    <img src="{{fle}}" alt="fle.name" class="imgPreview">
     {{fle.name}}
     <button ng-click="deleteImg(fle)" class="button button-assertive">X</button>
   </li>
@@ -53,8 +53,13 @@
 
       </div>
       <div style="text-align:center;">
+<<<<<<< HEAD
         <button class="btn button-positive p20" ng-click="saveFolder(newFolder)">Save</button>
         <button class="btn button-warning p20" ui-sref="app.filetransfer">Cancel</button>
+=======
+        <button class="btn button-positive p20" ng-click="saveFolder(editFolder)">Save</button>
+        <button class="btn button-warning p20" ui-sref="app.home">Cancel</button>
+>>>>>>> edd992d6590873d370dc12ccddd5b9a72c5acff9
       </div>
       <div class="he20"></div>
     </div>
