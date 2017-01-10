@@ -1544,6 +1544,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
   var downloadUrlArray = [];
   var thumbnailImage;
   var file;
+  var uploadedFiles = [];
   $scope.folderArray = [];
   var newArrAfterRemovedImg = [];
   $scope.deleteImg = function (imgadd) {
@@ -1648,6 +1649,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
   var loaded = function (event) {
     //Push the data into our array
     //But don't start uploading just yet
+    $scope.editfolderArray.push(event.target.result)
     thumbnailImage = event.target.result;
     file.thumbnailImage = event.target.result;
     data.push(event.target.result);
@@ -1774,6 +1776,56 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
   };
   $scope.saveFolder = function (folderInfo) {
     var deferred = $q.defer();
+    var base64Array = [];
+    if ($scope.folderArray.length > 0) {
+      var uploadPromiseFolderImgs = $scope.folderArray.map(function (myfile, index) {
+        var innerDeferred = $q.defer();
+
+        //storeFolderImages(myfile, resolve);
+        var storageRef = firebase.storage().ref().child('folder').child('images').child(myfile.name);
+        // Upload file to Firebase Storage
+        var uploadTask = storageRef.putString(myfile.thumbnailImage, 'data_url');
+        uploadTask.on('state_changed', null, null, function () {
+          var downloadUrl = uploadTask.snapshot.downloadURL;
+          innerDeferred.resolve(downloadUrl);
+        })
+        // Set the download URL to the message box, so that the user can send it to the database
+        //$scope.userDisplayPic = downloadUrl;
+        return innerDeferred.promise;
+      })
+      $q.all(uploadPromiseFolderImgs).then(function (imageResolved) {
+        console.log(imageResolved);
+        var imgArrNames = [];
+        var imagesObj = {};
+        var j = 0;
+        var alreadyHaveImagesLength = Object.keys(editFolderRef.images).length;
+        for (var i = alreadyHaveImagesLength; i < imageResolved.length + alreadyHaveImagesLength; i++) {
+          var imgArrNames = "image-" + i;
+          var indexOfImgName = imgArrNames;
+          var indexOfImgReslved = imageResolved[j];
+          imagesObj[indexOfImgName] = indexOfImgReslved;
+          editFolderRef.images[imgArrNames] = imageResolved[j];
+          j++
+        }
+        editFolderRef.$save().then(function (ref) {
+          ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
+          console.log("Success:", ref);
+        }, function (error) {
+          console.log("Error:", error);
+        });
+        deferred.resolve(imageResolved)
+      }).catch(function (err) {
+        console.log(err);
+        deferred.reject(err);
+      })
+    } else {
+      editFolderRef.$save().then(function (ref) {
+        ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
+        console.log("Success:", ref);
+      }, function (error) {
+        console.log("Error:", error);
+      });
+    }
     /*var editedObject = {};
     editedObject = folderInfo;
     editedObject.images = editFolderRef.images;*/
@@ -1783,12 +1835,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
     delete editedObject.$id;
     delete editedObject.$resolved;
     delete editedObject.$priority;*/
-    editFolderRef.$save().then(function(ref) {
-      ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
-      console.log("Success:", ref);
-    }, function(error) {
-      console.log("Error:", error);
-    });
+    
     //firebase.database().ref('folder/' + uuid).set(editedObject);
     /*  var uploadPromiseFolderImgs = $scope.folderArray.map(function (myfile, index) {
       var innerDeferred = $q.defer();
