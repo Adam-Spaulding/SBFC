@@ -261,6 +261,26 @@ input.date-picker {
   text-shadow: -2px 0 #f0ce98, 0 2px #f0ce98, 2px 0 #f0ce98, 0 -2px #f0ce98;
 }
 
+.fa-shopping-cart {
+  color: #99AABF;
+  text-shadow: -1px 0 #68809D, 0 1px #68809D, 1px 0 #68809D, 0 -1px #68809D;
+}
+
+.fa-camera {
+  color: #ffe9c8;
+  text-shadow: -1px 0 #f0ce98, 0 1px #f0ce98, 1px 0 #f0ce98, 0 -1px #f0ce98;
+}
+
+.fa-map {
+  color: #A5A1C6;
+  text-shadow: -1px 0 #7772A7, 0 1px #7772A7, 1px 0 #7772A7, 0 -1px #7772A7;
+}
+
+.fa-calendar {
+  color: #95BFB3;
+  text-shadow: -1px 0 #649D8D, 0 1px #649D8D, 1px 0 #649D8D, 0 -1px #649D8D;
+}
+
 .list a i.active {
   position: absolute;
   top: 10px;

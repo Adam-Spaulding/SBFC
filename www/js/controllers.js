@@ -1532,7 +1532,6 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
 
   var folderRef = firebase.database().ref().child("folder");
 
-
   /* /datepicker */
 
   $scope.message = '';
@@ -1614,7 +1613,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
   $timeout(function () {
     $scope.message = '';
     console.log($scope.message);
-  }, 3000);
+  }, 5000);
   $scope.getMessages = function () {
 
     //$scope.version = textAngularManager.getVersion();

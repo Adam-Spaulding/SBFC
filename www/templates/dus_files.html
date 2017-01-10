@@ -8,11 +8,10 @@
     <div class="pt20 pb20">
 
       <div class="list content">
-          <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/add-folder/{{user.$id}}">
+          <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query | filter: {'email' : user} | filter: {'active' : 'true'}" href="#/app/editfolder/{{user.$id}}">
             <div class=""><i class="folder-icon icon ion-android-folder fa-2x"></i></div>
             <h4 class="fw500 m0 dark pt5"><b>{{user.fname}} {{user.lname}}</b></h4>
             <h4 class="fw500 m0 dark pt5">{{user.email}}</h4>
-            <i class="fa fa-check-square {{user.active}}" aria-hidden="true"></i>
             <ul>
               <li ng-repeat="fle in user.folderArray">
                 <img src="{{user.thumbnailImage}}" alt="fle.name" class="imgPreview">

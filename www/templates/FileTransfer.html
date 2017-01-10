@@ -17,22 +17,9 @@
           <input type="text" placeholder="Enter a name or email address" ng-model="query">
         </label>
       </div>
-      <!-- <div class="list content row responsive-sm card" style="text-align:center;">
-        <div class=""><i class="folder-icon icon ion-android-folder fa-2x" style="color:transparent;"></i></div>
-        <div class="col coloredCol"><p>Name</p></div>
-        <div class="col coloredCol"><p>Email</p></div>
-        <div class="col coloredCol"><p>Active</p></div>
-      </div> -->
-      <!-- <div class="list content row responsive-sm card">
-        <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/add-folder/{{user.$id}}">
-        <div class=""><i class="folder-icon icon ion-android-folder fa-2x" style="color:black;"></i></div>
-        <div class="col coloredCol"><p>{{user.fname}} {{user.lname}}</p></div>
-        <div class="col coloredCol"><p>{{user.email}}</p></div>
-        <div class="col coloredCol"><p><i class="fa fa-check-square active {{item.active}}" aria-hidden="true"></i></p></div>
-      </a>
-      </div> -->
+    
       <div class="list content">
-          <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/add-folder/{{user.$id}}">
+          <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/editfolder/{{user.$id}}">
             <div class=""><i class="folder-icon icon ion-android-folder fa-2x"></i></div>
             <h4 class="fw500 m0 dark pt5"><b>{{user.fname}} {{user.lname}}</b></h4>
             <h4 class="fw500 m0 dark pt5">{{user.email}}</h4>
