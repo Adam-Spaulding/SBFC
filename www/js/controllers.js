@@ -1412,9 +1412,9 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
       var imgArrNames = [];
       var imagesObj = {};
       for (var i = 0; i < imageResolved.length; ++i) {
-        imgArrNames[i] = "image-" + i;
-        var indexOfImgName = imgArrNames[i];
-        var indexOfImgReslved = imageResolved[i];
+        var imgArrNames = "image-" + i;
+        var indexOfImgName = imgArrNames;
+        var indexOfImgReslved = imageResolved[j];
         imagesObj[indexOfImgName] = indexOfImgReslved;
       }
       folderInfo.images = imagesObj;
@@ -1492,7 +1492,7 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
 
 })
 
-app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, $q, $firebaseObject) {
+app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, $q, $firebaseObject, ionicToast) {
 
   $scope.getUserStatus();
   $scope.editfolderArray = [];
@@ -1798,22 +1798,40 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
         var imgArrNames = [];
         var imagesObj = {};
         var j = 0;
-        var alreadyHaveImagesLength = Object.keys(editFolderRef.images).length;
-        for (var i = alreadyHaveImagesLength; i < imageResolved.length + alreadyHaveImagesLength; i++) {
-          var imgArrNames = "image-" + i;
-          var indexOfImgName = imgArrNames;
-          var indexOfImgReslved = imageResolved[j];
-          imagesObj[indexOfImgName] = indexOfImgReslved;
-          editFolderRef.images[imgArrNames] = imageResolved[j];
-          j++
+        if (editFolderRef.images) {
+          var alreadyHaveImagesLength = Object.keys(editFolderRef.images).length;
+          for (var i = alreadyHaveImagesLength; i < imageResolved.length + alreadyHaveImagesLength; i++) {
+            var imgArrNames = "image-" + i;
+            var indexOfImgName = imgArrNames;
+            var indexOfImgReslved = imageResolved[j];
+            imagesObj[indexOfImgName] = indexOfImgReslved;
+            editFolderRef.images[imgArrNames] = imageResolved[j];
+            j++
+          }
+          editFolderRef.$save().then(function (ref) {
+            ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
+            console.log("Success:", ref);
+          }, function (error) {
+            console.log("Error:", error);
+          });
+          deferred.resolve(imageResolved)
+        } else {
+          for (var i = 0; i < imageResolved.length; ++i) {
+            var imgArrNames = "image-" + i;
+            var indexOfImgName = imgArrNames;
+            var indexOfImgReslved = imageResolved[i];
+            imagesObj[indexOfImgName] = indexOfImgReslved;
+          }
+          editFolderRef.images = {};
+          editFolderRef.images = imagesObj;
+          editFolderRef.$save().then(function (ref) {
+            ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
+            console.log("Success:", ref);
+          }, function (error) {
+            console.log("Error:", error);
+          });
         }
-        editFolderRef.$save().then(function (ref) {
-          ionicToast.show('Successfully edited the folder!.', 'bottom', false, 2500);
-          console.log("Success:", ref);
-        }, function (error) {
-          console.log("Error:", error);
-        });
-        deferred.resolve(imageResolved)
+        
       }).catch(function (err) {
         console.log(err);
         deferred.reject(err);
