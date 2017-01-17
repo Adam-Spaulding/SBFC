@@ -189,69 +189,25 @@ app.controller('NewsCtrl', function ($scope, $ionicLoading, FeedSources, FeedLis
 
 });
 
-app.controller('NewslistCtrl', function ($scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
+app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
 
-  // NEWS SELECTED SOURCE INFORMATION
-  $scope.source = FeedSources[$stateParams.id];
-  $scope.itemDetails = {};
-  var currentRoute = $state.current.name;
-  if (currentRoute.indexOf('newslistdetails') > -1) {
-    $scope.itemDetails = JSON.parse(sessionStorage.itemDetails)
-  }
+  $scope.posts = [];
+  var wordpressUrl = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fseacoast.citymomsblog.com%2Ffeed%2F&api_key=4ttyqm0kfrvec25ygfqnw27nmdmqc4gkieabiii2&order_by=&order_dir=desc&count=20";
 
-  // NEWS FEED
-  var getNews = function (num) {
+    $http.get(wordpressUrl)
+      .success(function(response){
+        angular.forEach(response.items, function(child){
+          $scope.posts.push(child);
+        });
+      })
+      .error(function(response, status){
+        console.log("Error while received response. " + status + response);
+      });
 
-    $scope.news = [];
-    FeedList.get($scope.source.url, num).then(function (feeddata) {
-      var data = feeddata[0].entries;
-      for (x = 0; x < data.length; x++) {
-        $scope.news = data;
-      }
-      $ionicLoading.hide();
-    })
-
-  }
-  if (currentRoute.indexOf('newslistdetails') < 0) {
-    getNews(10);
-  }
-
-  // $scope.openUrl = function (link) {
-  //   window.open(link, '_system', 'location=yes');
-  //   return false;
-  // }
-
-  $scope.openLink = function (item) {
-    console.log(item);
-    sessionStorage.itemDetails = JSON.stringify(item);
-    $state.go('app.newslistdetails')
-  };
-
-  $ionicModal.fromTemplateUrl('templates/my-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function () {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function () {
-    $scope.modal.hide();
-  };
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function () {
-    $scope.modal.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function () {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function () {
-    // Execute action
-  });
-
+      $scope.openUrl = function(link) {
+          window.open(link, '_system', 'location=yes');
+          return false;
+        }
 
 
 })
@@ -1831,7 +1787,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
             console.log("Error:", error);
           });
         }
-        
+
       }).catch(function (err) {
         console.log(err);
         deferred.reject(err);
@@ -1853,7 +1809,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
     delete editedObject.$id;
     delete editedObject.$resolved;
     delete editedObject.$priority;*/
-    
+
     //firebase.database().ref('folder/' + uuid).set(editedObject);
     /*  var uploadPromiseFolderImgs = $scope.folderArray.map(function (myfile, index) {
       var innerDeferred = $q.defer();

@@ -5,13 +5,13 @@
 
     <div class="item item-avatar bg-white m5">
 		    	<img src="img/smb-grey.png">
-		      <h4 class="fw500 m0 dark pt5">{{source.title}}</h4>
-			  <h4 class="fw300 m0 dark">{{source.description}}</h4>
+		      <h4 class="fw500 m0 dark pt5">Seacoast Mom's Blog</h4>
+			  <h4 class="fw300 m0 dark">PASSIONATE ABOUT THE COMMUNITY AND THE MOMS WHO LIVE HERE</h4>
 		    </div>
 
 	<div class="pt20 pb20"> <!-- news feed list for selected source -->
-		<div class="list" ng-repeat="item in news">
-		    <a class="item bg-white" ng-click="openLink(item)">
+		<div class="list" ng-repeat="item in posts">
+		    <a class="item bg-white" ng-click="openUrl(item.link)">
           <div class="list-item">
             <!-- <span class="list-content" ng-bind-html="item.content | filter:img">{{item.content | filter:img}}</span> -->
             <div class="list-content">

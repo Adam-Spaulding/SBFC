@@ -11,11 +11,13 @@ app.factory('FeedLoader', function ($resource) {
 app.factory('FeedSources', function ($resource) {
     var feedSources = [
             {id: 0, title: 'Time', url: 'http://time.com/feed/', description: 'Current & Breaking News | National & World Updates', img: 'https://pbs.twimg.com/profile_images/1700796190/Picture_24.png'},
-              {id: 1, title: 'Mashable', url: 'http://mashable.com/feed/', description: 'Mashable is a global, multi-platform media and entertainment company.', img: 'http://instacurity.com/wp-content/uploads/2013/10/mashable-logo.png'},
-            {id: 2, title: 'Seacoast Moms Blog', url: 'https://seacoast.citymomsblog.com/feed/', description: 'The latest posts from the Seacoast Moms Blog.', img: '../img/smb-grey.png'}
+            {id: 1, title: 'Mashable', url: 'http://mashable.com/feed/', description: 'Mashable is a global, multi-platform media and entertainment company.', img: 'http://instacurity.com/wp-content/uploads/2013/10/mashable-logo.png'},
+            {id: 2, title: 'Seacoast Moms Blog', url: 'http://seacoast.citymomsblog.com/feed/', description: 'The latest posts from the Seacoast Moms Blog.', img: 'http://instacurity.com/wp-content/uploads/2013/10/mashable-logo.png'}
         ];
         return feedSources;
 });
+
+// https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%22https%3A%2F%2Fseacoast.citymomsblog.com%2Ffeed%22&format=json&diagnostics=true&callback=
 
 app.service('FeedList', function ($rootScope, FeedLoader, $q) {
     this.get = function(source, num) {
@@ -31,7 +33,6 @@ app.service('FeedList', function ($rootScope, FeedLoader, $q) {
         return deferred.promise;
     };
 });
-
 
 
 // WORDPRESS FEED SERVICES
