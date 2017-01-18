@@ -107,6 +107,18 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+    .state('app.feed', {
+      //cache: false,
+      url: '/feed',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/home.html',
+          controller: 'FirebaseCtrl',
+          authRequired: true
+        }
+      }
+    })
+
     .state('app.profile', {
       url: '/profile',
       views: {
@@ -210,6 +222,17 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/edit-folder.html',
+          controller: 'EditFolderCtrl',
+          authRequired: true
+        }
+      }
+    })
+
+    .state('app.readfolder', {
+      url: '/readfolder/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/read-folder.html',
           controller: 'EditFolderCtrl',
           authRequired: true
         }

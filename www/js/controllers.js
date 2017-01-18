@@ -189,7 +189,7 @@ app.controller('NewsCtrl', function ($scope, $ionicLoading, FeedSources, FeedLis
 
 });
 
-app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
+app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  $stateParams, $ionicModal, FeedSources, FeedList) {
 
   $scope.posts = [];
   var wordpressUrl = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fseacoast.citymomsblog.com%2Ffeed%2F&api_key=4ttyqm0kfrvec25ygfqnw27nmdmqc4gkieabiii2&order_by=&order_dir=desc&count=20";
@@ -371,17 +371,6 @@ $scope.trustedHtml = function (plainText) {
             return $sce.trustAsHtml(plainText);
         };
 
-// document.getElementById("InAppBrowser_link")
-//   document.onclick = function(e) {
-//       e = e || window.event;
-//       var element = e.target || e.srcElement;
-//       if(element.tagName = "A") {
-//         window.open(element.href, "_blank", "location=yes");
-//         return true;
-//       }
-//
-//     };;
-
   $scope.articleID = $stateParams.id;
   $scope.selectedArticle = {};
   // object
@@ -434,10 +423,10 @@ $scope.trustedHtml = function (plainText) {
             $scope.selectedArticle = d;
             var body = d.body;
             var tempBody = d.body;
-            body = body.replaceAll('href.*"', "");
-            gLink = tempBody.match(/href="([^"]*)/)[1];
-            body = body.replace("<a", "<label");
-            body = body.replace("</a>", "</label>");
+            // body = body.replaceAll('href.*"', "");
+            // gLink = tempBody.match(/href="([^"]*)/)[1];
+            // body = body.replace("<a", "<label");
+            // body = body.replace("</a>", "</label>");
             $scope.selectedArticle.body = body;
             console.log(gLink);
             //$scope.selectedArticle.body = "<a href='http://www.google.com' target='_blank'>Post</a>";
@@ -456,11 +445,11 @@ $scope.trustedHtml = function (plainText) {
     });
   };
 
-  $(document).on('click', function (evt) {
-    if ($(evt.target).is('label')) {
-      var ref = cordova.InAppBrowser.open(gLink, '_blank');
-    }
-  });
+  // $(document).on('click', function (evt) {
+  //   if ($(evt.target).is('label')) {
+  //     var ref = cordova.InAppBrowser.open(gLink, '_blank');
+  //   }
+  // });
 
 })
 
@@ -1393,7 +1382,7 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
     userData = $scope.user;
     // userData.body = extractLinkFromBody(userData.body)
     console.log(user, msg);
-    userData.body = msg;
+    userData.body = message;
     userData.publish_date = new Date(userData.publish_date).getTime();
     userData.author = $rootScope.user;
     userData.category = $scope.categoryDropDown.selected;

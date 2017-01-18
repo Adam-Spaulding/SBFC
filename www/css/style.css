@@ -481,15 +481,57 @@ h3.post-title {
   background-repeat: no-repeat;
   background-position:center;
   background-image: url('../img/logo.png');
-  background-size: 90% 90%;
-  height: 70px;
-  margin-top: -30px;
+  background-size: 120% 90%;
+  height: 100%;
+  margin-top: 0px;
   background-color: #c7d1dd;
   opacity: 1;
   border-radius: 50%;
-  padding-top: 30px;
+  padding-top: 40px;
 }
 
 .tabs-standard, .bar-header {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/*feed icons*/
+.list #ask-an-expert {
+  background-repeat: no-repeat;
+  background-image: url('../img/svg/faq.svg');
+  background-size: 50% 50%;
+  height: 100%;
+  background-position: -30% 45%;
+}
+
+.list #marketplace {
+  background-repeat: no-repeat;
+  background-image: url('../img/cart.png');
+  background-size: 15% 60%;
+  height: 100%;
+  background-position: 2% 45%;
+}
+
+.list #baby-photo {
+  background-repeat: no-repeat;
+  background-image: url('../img/svg/old_time_camera.svg');
+  background-size: 15% 60%;
+  height: 100%;
+  background-position: 2% 45%;
+}
+
+.list.card img {
+  position: relative;
+}
+
+.list.feed {
+  background-color: rgba(250, 250, 250, 0.75);
+  padding: 10px;
+  color: #363636;
+  margin: -15px 0px !important;
+  position: absolute;
+  bottom: 10px;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  min-height: 70px;
 }

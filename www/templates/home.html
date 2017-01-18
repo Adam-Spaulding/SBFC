@@ -1,4 +1,4 @@
-<ion-view class="home-nav" view-title='<img src="img/logo.png" height="50" class="">' hide-back-button='true'>
+<ion-view class="home-nav" view-title='The Feed' hide-back-button=''>
 
 
 <ion-content padding="true" class="has-header">
@@ -7,21 +7,21 @@
       <input type="text" placeholder="Search the headlines" ng-model="search.title">
     </label>
   </form>
-  <div class="list card" id="home3-card26" ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true'} | filter:search">
-    <ion-item id="home3-list-item16">{{item.category}}
-      <span class="item-note" ng-bind="item.publish_date | date : 'MMM dd, yy'">{{item.publish_date | date : 'MMM dd, yyyy'}}</span>
-    </ion-item>
-    <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-      <img class="" ng-src="{{item.img}}" style="width:100%; vertical-align: middle;"></img>
+  <a href="#/app/articleslist/{{item.$id}}">
+    <div class="list card" id="home3-card26" ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true'} | filter:search | limitTo:20">
+      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+        <img class="" ng-src="{{item.img}}" style="width:100%; vertical-align: middle;"></img>
+      </div>
+      <div class="list feed">
+          <a class="item item-avatar" href="#" id="{{item.category}}">
+            <!-- <img src="img/BBNE.png"> -->
+            <h2>{{item.title}}</h2>
+            <p class="">Posted {{item.publish_date | date : 'MMM dd, yyyy'}}</p>
+          </a>
+      </div>
+
     </div>
-    <a href="#/app/articleslist/{{item.$id}}">
-      <ion-item class="item-icon-right" id="home3-list-item21">
-        {{item.title}}
-        <p ng-bind-html="item.body | limitTo: 116">{{ item.body }}</p>
-        <i class="icon ion-chevron-right"></i>
-      </ion-item>
-    </a>
-  </div>
+  </a>
 </ion-content>
 
   </ion-content>

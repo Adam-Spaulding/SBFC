@@ -31,13 +31,15 @@
 
       <ion-tabs class="tabs-positive tabs-icon-top" ng-show="user != 'Anonymous'">
         <ion-tab title="Home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ui-sref="app.home"><ion-nav-view name="home-tab"></ion-nav-view></ion-tab>
-        <ion-tab ui-sref="app.home" class="custom-tab"></ion-tab>
+        <ion-tab title="Feed" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" ui-sref="app.feed"><ion-nav-view name="feed-tab"></ion-nav-view></ion-tab>
+        <ion-tab class="custom-tab"></ion-tab>
         <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
         <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
         <ion-tab title="maps" ui-sref="app.maps" hidden="true"></ion-tab>
         <ion-tab title="newslist" ui-sref="app.newslist" hidden="true"></ion-tab>
         <ion-tab title="calendar" ui-sref="app.calendar" hidden="true"></ion-tab>
         <ion-tab title="Marketplace" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline" ui-sref="app.marketplace"></ion-tab>
+        <ion-tab title="Profile" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" ng-click="getUserProfile(userUid)" ui-sref="app.profile"></ion-tab>
       </ion-tabs>
 
     </ion-nav-bar>
@@ -69,7 +71,7 @@
           News Feed
         </ion-item> -->
         <ion-item menu-close ui-sref="app.marketplace" class="">
-          <img src="img/smb.jpg" style="max-width:30px;"></img> Marketplace
+          Marketplace
         </ion-item>
         <ion-item menu-close href="#/app/ask-an-expert" class="">
           Ask an Expert
@@ -81,7 +83,7 @@
           Seacoast Moms Blog
         </ion-item>
         <ion-item menu-close href="#/app/dus" class="">
-          Diognostic Ultrasound Suite
+          Diagnostic Ultrasound Suite
         </ion-item>
         <ion-item menu-close href="#/app/home/maps" class="">
           Location
