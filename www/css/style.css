@@ -426,14 +426,18 @@ ion-view.home-nav button {
 }
 
 .marketplace-tile .wrapping-list {
-  background-color: rgba(54, 54, 54, 0.6);
-  color: #fff;
+  background-color: rgba(250, 250, 250, 0.6);
+  color: #363636;
   position: absolute;
+  padding-top: 10px;
   bottom: 0;
   left: 0;
   display: block;
   width: 100%;
   min-height: 50px;
+  border-radius: 400px / 50px;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }
 
 .blogPost  {
@@ -441,21 +445,27 @@ ion-view.home-nav button {
 }
 
 h3.post-title {
-  background-color: rgba(54, 54, 54, 0.6);
-  padding: 10px;
-  color: #fff;
+  background-color: rgba(250, 250, 250, 0.6);
+  /*padding-top: 25px !important;*/
+  color: #363636;
   margin: -5px 0px !important;
+  padding:30px 0px;
+  text-align: center;
   position: absolute;
   bottom: 10px;
   display: block;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   min-height: 70px;
+  border-radius: 400px / 60px;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }
 
 .article-body {
   font-size: 16px;
   line-height: 26px;
+  width: 100%;
 }
 
 .article-body a {
@@ -509,11 +519,38 @@ h3.post-title {
 
 .list #baby-photo {
   background-repeat: no-repeat;
-  background-image: url('../img/svg/old_time_camera.svg');
+  background-image: url('../img/svg/picture.svg');
   background-size: 50px;
   height: 100%;
   background-position: 6px;
 }
+
+.article-body.ask-an-expert {
+   background-repeat: no-repeat;
+   background-image: url('../img/svg/faq.svg');
+   background-size: 40px;
+   background-position: 90% 2%;
+   position: absolute;
+   right: 3px;
+ }
+
+ .article-body.baby-photo {
+   background-repeat: no-repeat;
+   background-image: url('../img/svg/picture.svg');
+   background-size: 40px;
+   background-position: 90% 2%;
+   position: absolute;
+   right: 3px;
+ }
+
+ .article-body.marketplace {
+   background-repeat: no-repeat;
+   background-image: url('../img/cart.png');
+   background-size: 40px;
+   background-position: 90% 2%;
+   position: absolute;
+   right: 3px;
+ }
 
 .list.card img {
   position: relative;
@@ -521,7 +558,7 @@ h3.post-title {
 
 .list.feed {
   background-color: rgba(250, 250, 250, 0.75);
-  padding: 10px;
+  padding: 5%;
   color: #363636;
   margin: -15px 0px !important;
   position: absolute;
@@ -530,8 +567,18 @@ h3.post-title {
   width: 100%;
   font-size: 18px;
   min-height: 70px;
+  border-radius: 400px / 60px;
+  /*text-align: center;*/
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  padding: auto 0px;
 }
 
+.list.feed h2 {
+  font-size: 16px;
+  white-space: normal;
+  color: #363636;
+}
 
 .imgPreview {
   width: 50%;
