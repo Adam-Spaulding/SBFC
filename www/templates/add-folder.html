@@ -8,15 +8,15 @@
       <div class="list" style="margin: 0 5%;">
         <label class="item item-input">
           <span class="input-label">First Name</span>
-          <input type="text" ng-model="newFolder.fname">
+          <input type="text" ng-model="newFolder.fname" placeholder="Enter an First Name">
         </label>
         <label class="item item-input">
           <span class="input-label">Last Name</span>
-          <input type="text" ng-model="newFolder.lname">
+          <input type="text" ng-model="newFolder.lname" placeholder="Enter an Last Name">
         </label>
         <label class="item item-input">
           <span class="input-label">Email Address</span>
-          <input type="email" ng-model="newFolder.email">
+          <input type="email" ng-model="newFolder.email" placeholder="Enter an Email">
         </label>
         <label class="item item-input" style="padding-left:0px; margin: auto 0px">
           <span class="">Publish Date:</span>
@@ -26,12 +26,6 @@
         <ion-toggle ng-model="newFolder.active" toggle-class="toggle" style="max-width:200px; padding-left:0px; margin: auto 0px !important; height:50px;">Active: </ion-toggle>
         <!-- </ion-item> -->
 
-<form>
-    <span class="fileUpload btn btn-default">
-        <span class="glyphicon glyphicon-upload"></span> Upload file
-        <input type="file" id="fileInput" name="files[]" multiple/>
-    </span>
-</form>
 <!--<input type="file" id="fileInput" name="files[]" multiple/>-->
 <ul id="list"></ul>
 <ul id="ajax"></ul>
@@ -41,6 +35,12 @@
     {{fle.name}}
   </li>
 </ul>
+<form>
+    <span class="fileUpload btn button-positive p20">
+        Add File
+        <input type="file" id="fileInput" name="files[]" multiple/>
+    </span>
+</form>
 
       </div>
       <div style="text-align:center;">
