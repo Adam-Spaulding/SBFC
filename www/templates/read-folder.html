@@ -1,19 +1,20 @@
 <ion-view view-title='My Folder' hide-back-button=''>
   <ion-content>
-    <div ng-repeat="fle in editfolderArray" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
-      <a href="#">
-        <div class="marketplace-tile" id="">
-        <div style="margin: 0px; text-align: center;">
-          <img class="" ng-src="{{fle}}" zoom-src="{{fle}}" zoom-view style="width:100%;"></img>
-          <span class="wrapping-list" id="">
-            Tap to view
-          </span>
-        </div>
 
-      </a>
+    <div ng-repeat="fle in editfolderArray" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
+
+      <!-- <a download="{{fle}}" href="{{fle}}" title="{{fle}}"> -->
+        <li class="marketplace-tile" id="" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = !isActive" >
+          <img class="" ng-src="{{fle}}" zoom-src="{{fle}}" zoom-view style="width:100%;"></img>
+        </li>
+      <!-- </a> -->
+      <!-- <span class="wrapping-list" id="">
+        Tap to zoom
+      </span> -->
+
     </div>
-  </div>
-</a>
+
+
 <!-- <ion-gallery ion-gallery-items="editfolderArray"></ion-gallery> -->
 	<div class="he50"></div>
 

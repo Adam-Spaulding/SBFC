@@ -19,10 +19,6 @@ body {
 .progress {
     margin-bottom: 0;
 }
-.imgPreview {
-  width: 50px;
-  height: 50px;
-}
 
 /*tables for file transfer*/
 .coloredCol {
@@ -52,7 +48,7 @@ body {
 }
 
 .button-positive {
-  background-color: #C7D1DD;
+  background-color: #a5a1c6;
   color: #fff;
 }
 
@@ -498,25 +494,25 @@ h3.post-title {
 .list #ask-an-expert {
   background-repeat: no-repeat;
   background-image: url('../img/svg/faq.svg');
-  background-size: 50% 50%;
+  background-size: 50px;
   height: 100%;
-  background-position: -30% 45%;
+  background-position: 6px;
 }
 
 .list #marketplace {
   background-repeat: no-repeat;
   background-image: url('../img/cart.png');
-  background-size: 15% 60%;
+  background-size: 50px;
   height: 100%;
-  background-position: 2% 45%;
+  background-position: 6px;
 }
 
 .list #baby-photo {
   background-repeat: no-repeat;
   background-image: url('../img/svg/old_time_camera.svg');
-  background-size: 15% 60%;
+  background-size: 50px;
   height: 100%;
-  background-position: 2% 45%;
+  background-position: 6px;
 }
 
 .list.card img {
@@ -534,4 +530,50 @@ h3.post-title {
   width: 100%;
   font-size: 18px;
   min-height: 70px;
+}
+
+
+.imgPreview {
+  width: 50%;
+  height: auto;
+  position: relative;
+}
+
+li.image {
+  width: 100%;
+    list-style: none;
+}
+
+li.image .button.button-warning {
+position: absolute;
+/*left: 0;*/
+right: 50%;
+font-size: 10px;
+text-transform: uppercase;
+
+}
+
+li.image.active .imgPreview {
+  width: 90%;
+  padding: auto;
+}
+
+li.image.active .button.button-warning {
+display: none;
+list-style: none;
+}
+
+li.image.active {
+  width: 100%;
+  transition: width 2s, height 4s;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right:0;
+  left: 0;
+  background-color: rgba(250, 250, 250, 0.8);
+  padding: auto;
+  padding-top: 10%;
+  text-align: center;
+  z-index: 999;
 }

@@ -26,23 +26,22 @@
         <ion-toggle ng-model="editFolder.active" toggle-class="toggle" style="max-width:200px; padding-left:0px; margin: auto 0px !important; height:50px;">Active: </ion-toggle>
         <!-- </ion-item> -->
 
-<form>
-    <span class="fileUpload btn btn-default">
-         Upload file
-        <input type="file" id="fileInput" name="files[]" multiple/>
-    </span>
-</form>
 <!--<input type="file" id="fileInput" name="files[]" multiple/>-->
 <ul id="list"></ul>
 <ul id="ajax"></ul>
 <ul>
-  <li ng-repeat="fle in editfolderArray">
-    <img src="{{fle}}" alt="fle.name" class="imgPreview">
+  <li ng-repeat="fle in editfolderArray" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = !isActive">
+    <img src="{{fle}}" alt="fle.name" class="imgPreview" />
     {{fle.name}}
-    <button ng-click="deleteImg(fle)" class="button button-assertive">X</button>
+    <button ng-click="deleteImg(fle)" class="button button-warning">Delete</button>
   </li>
 </ul>
-
+<form>
+    <span class="fileUpload btn button-positive p20">
+         Add a file
+        <input type="file" id="fileInput" name="files[]" multiple/>
+    </span>
+</form>
 
       </div>
       <div style="text-align:center;">

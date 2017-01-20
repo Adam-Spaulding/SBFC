@@ -53,7 +53,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
     if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus($rootScope.user)) { //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
       $state.transitionTo("app.login");
-      event.preventDefault();
+      // event.preventDefault();
     }
   });
 })
@@ -266,7 +266,7 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/dus.html',
-          controller: 'HomeCtrl',
+          controller: 'FileTransferCtrl',
           authRequired: true
         }
       }

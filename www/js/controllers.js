@@ -1051,7 +1051,7 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
   $scope.deleteEdited = function () {
     articleListRef.$remove().then(function (ref) {
       console.log("Successfully removed the Object:", ref);
-      $state.go('app.home')
+      $state.go('app.allcontent')
     }, function (error) {
       console.log("Error:", error);
     });
@@ -1076,7 +1076,6 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
 })
 
 app.controller('FileTransferCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
-
 
 
   // array
