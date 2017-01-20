@@ -1,7 +1,7 @@
 <ion-view view-title='My Folder' hide-back-button=''>
   <ion-content>
 
-    <div ng-repeat="fle in editfolderArray" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
+    <div ng-repeat="fle in editfolderArray track by $index" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
 
       <!-- <a download="{{fle}}" href="{{fle}}" title="{{fle}}"> -->
         <li class="marketplace-tile" id="" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = !isActive" >

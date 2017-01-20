@@ -1355,10 +1355,11 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
       console.log(imageResolved);
       var imgArrNames = [];
       var imagesObj = {};
+      var j = 0;
       for (var i = 0; i < imageResolved.length; ++i) {
         var imgArrNames = "image-" + i;
         var indexOfImgName = imgArrNames;
-        var indexOfImgReslved = imageResolved[j];
+        var indexOfImgReslved = imageResolved[ j ];
         imagesObj[indexOfImgName] = indexOfImgReslved;
       }
       folderInfo.images = imagesObj;
