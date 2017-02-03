@@ -9,7 +9,7 @@
 
       <div class="list content">
           <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query | filter: {'email' : user} | filter: {'active' : 'true'}" href="#/app/readfolder/{{user.$id}}">
-            <div class=""><i class="folder-icon icon ion-android-folder fa-2x"></i></div>
+            <img src="img/svg/folder.svg" style="max-width:70px;"></img>
             <h4 class="fw500 m0 dark pt5"><b>{{user.fname}} {{user.lname}}</b></h4>
             <h4 class="fw500 m0 dark pt5">{{user.email}}</h4>
             <ul>
@@ -17,7 +17,7 @@
                 <img src="{{user.thumbnailImage}}" alt="fle.name" class="imgPreview">
                 {{fle.name}}
               </li>
-              <div ng-hide="usersFroFileTransfer.length">There is no sites avaiable for you.</div> 
+              <div ng-hide="usersFroFileTransfer.length">There is no sites avaiable for you.</div>
             </ul>
           </a>
       </div>

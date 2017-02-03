@@ -6,7 +6,7 @@
 
 	<div class="">
     <a class="col card text-center p20" ng-repeat="user in usersFroFileTransfer | filter:query | filter: {'email' : user} | filter: {'active' : 'true'}" href="#/app/readfolder/{{user.$id}}">
-      <i class="folder-icon icon ion-android-folder fa-4x"></i>
+      <img src="img/svg/folder.svg" style="max-width:70px;"></img>
 			<h4 class="fw300 font-md">My Files</h4>
       <h4 class="fw300 font-md">{{user.fname}} {{user.lname}}</h4>
 			<!-- <p class="dark">Use the elements and plugins to create the awesomeness</p> -->

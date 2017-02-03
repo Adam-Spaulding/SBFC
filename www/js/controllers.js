@@ -205,7 +205,7 @@ app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  
       });
 
       $scope.openUrl = function(link) {
-          window.open(link, '_system', 'location=yes');
+          window.open(link, '_blank', 'location=yes');
           return false;
         }
 
