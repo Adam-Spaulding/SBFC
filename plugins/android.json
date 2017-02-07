@@ -39,18 +39,16 @@
         "cordova-plugin-apprate": {
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
-        "cordova-plugin-calendar": {
-            "CALENDAR_USAGE_DESCRIPTION": " ",
+        "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
-        "cordova-plugin-compat": {
+        "cordova-plugin-calendar": {
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
         "cordova-plugin-contacts": {
-            "CONTACTS_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.ionicframework.app981535"
         },
         "cordova-plugin-datepicker": {

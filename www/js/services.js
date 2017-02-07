@@ -69,20 +69,20 @@ app.service('Firebase', function() {
 
 app.service('ChatService', function() {
     this.checkAuthStatus = function(user,success,failure) {
-      if(user){
-        if(user == 'Anonymous'){
-          return(true)
-        }else{
-          return(false)
+        if(user){
+            if(user == 'Anonymous'){
+                console.log('Anonymous');
+                return(true)
+            }else{
+                console.log('user available');
+                return(false)
+            }
+        } else {
+            console.log('non user');
+            return(true)
         }
-      }else{
-        return(true)
-      }
     };
 });
-
-
-
 
 // FIREBASE USER MANAGEMENT
 
@@ -92,14 +92,12 @@ app.service('FirebaseUser', function($firebaseAuth) {
         var authObj = $firebaseAuth();
         var firebaseUser = authObj.$getAuth();
         if (firebaseUser) {
-          return firebaseUser;
+            return firebaseUser;
         } else {
-          return false;
+            return false;
         }
     }
 });
-
-
 
 // WEATHER SERVICE
 

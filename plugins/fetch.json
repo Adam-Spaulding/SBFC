@@ -1,16 +1,16 @@
 {
-    "cordova-plugin-inappbrowser": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-inappbrowser@1.0.1"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-firebase": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-firebase@0.1.19"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "onesignal-cordova-plugin": {
+        "source": {
+            "type": "registry",
+            "id": "onesignal-cordova-plugin"
         },
         "is_top_level": true,
         "variables": {}

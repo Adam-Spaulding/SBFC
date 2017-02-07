@@ -9,6 +9,17 @@ app = angular.module('revolution', ['ionic', 'revolution.controllers', 'ngSaniti
 
 
 app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCX_gH-ZsxFR4O4-91jJKAHGoTuHlIo1k0",
+    authDomain: "sbfc-4f832.firebaseapp.com",
+    databaseURL: "https://sbfc-4f832.firebaseio.com",
+    storageBucket: "sbfc-4f832.appspot.com",
+    messagingSenderId: "708872201881"
+  };
+  firebase.initializeApp(config);
+
   $ionicPlatform.ready(function() {
 
     $rootScope.$on('$locationChangeSuccess', function() {
@@ -17,24 +28,27 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
         $state.go('app.home');
       }, function (err) {
         console.log('route to LOGIN');
-         $state.go('app.login');
-      }
-    );
+        $state.go('app.login');
+      });
     })
 
-     // Enable to debug issues.
-  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+    // Enable to debug issues.
+    // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
-  var notificationOpenedCallback = function(jsonData) {
-    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-  };
+    var notificationOpenedCallback = function(jsonData) {
+      console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
 
-  window.plugins.OneSignal.init("7fe9fa6d-c066-4c9d-8583-8d931cfacb07",
-                                 {googleProjectNumber: "906792644102"},
-                                 notificationOpenedCallback);
+    window.plugins.OneSignal
+      .startInit("f01ab1b3-b33d-4033-b68e-5de0f66815f2")
+      .handleNotificationOpened(notificationOpenedCallback)
+      .endInit();
+    // window.plugins.OneSignal.init("7fe9fa6d-c066-4c9d-8583-8d931cfacb07",
+    //                                {googleProjectNumber: "906792644102"},
+    //                                notificationOpenedCallback);
 
-  // Show an alert box if a notification comes in when the user is in your app.
-  window.plugins.OneSignal.enableInAppAlertNotification(true);
+    // Show an alert box if a notification comes in when the user is in your app.
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
 
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -78,7 +92,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/login.html',
           controller: 'UserCtrl',
-          authRequired: false
+          authRequired: true
         }
       }
     })
@@ -89,7 +103,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/register.html',
           controller: 'UserCtrl',
-          authRequired: false
+          authRequired: true
 
         }
       }
@@ -541,7 +555,9 @@ $ionicConfigProvider.tabs.position('bottom');
   }
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+  // $urlRouterProvider.otherwise('/app/home');
+
+  $urlRouterProvider.otherwise('/app/login');
 })
 
 

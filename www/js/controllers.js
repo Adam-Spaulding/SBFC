@@ -117,6 +117,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
   $ionicSideMenuDelegate.canDragContent(false);
 
   $scope.start = function () {
+    console.log('Go to home');
     $state.go('app.home');
   };
 
@@ -447,7 +448,7 @@ $scope.trustedHtml = function (plainText) {
 
   // $(document).on('click', function (evt) {
   //   if ($(evt.target).is('label')) {
-  //     var ref = cordova.InAppBrowser.open(gLink, '_blank');
+  //     var inAppBrowserRef = window.open(gLink, '_system', 'location=yes', 'clearcache: yes', 'toolbar: no');
   //   }
   // });
 
@@ -830,7 +831,7 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
 })
 
 
-app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
+app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
 
 
   $scope.articleID = $stateParams.id;
@@ -1009,6 +1010,7 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
       .catch(function(event) {
         // error
       });*/
+    var inAppBrowserRef = window.open(url, '_system', 'location=yes', 'clearcache: yes', 'toolbar: no');
     console.log('lala kaka');
   };
 
@@ -1075,7 +1077,7 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
 
 })
 
-app.controller('FileTransferCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast, $cordovaInAppBrowser) {
+app.controller('FileTransferCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $ionicLoading, $firebaseAuth, $firebaseObject, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
 
 
   // array
