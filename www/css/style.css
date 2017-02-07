@@ -555,7 +555,7 @@ h3.post-title {
 .list.card img {
   position: relative;
 }
-
+/*
 .list.feed {
   background-color: rgba(250, 250, 250, 0.75);
   padding: 5%;
@@ -568,7 +568,6 @@ h3.post-title {
   font-size: 18px;
   min-height: 70px;
   border-radius: 400px / 60px;
-  /*text-align: center;*/
   border-bottom-right-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
   padding: auto 0px;
@@ -578,7 +577,7 @@ h3.post-title {
   font-size: 16px;
   white-space: normal;
   color: #363636;
-}
+}*/
 
 .imgPreview {
   width: 50%;
