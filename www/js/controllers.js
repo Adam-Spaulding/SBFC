@@ -117,7 +117,6 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
   $ionicSideMenuDelegate.canDragContent(false);
 
   $scope.start = function () {
-    console.log('Go to home');
     $state.go('app.home');
   };
 
@@ -126,6 +125,10 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
 
   // firebase register
   $scope.register = function (email, password, phone) {
+    if (email==null || password==null) {
+      alert('Email or Password must not be empty!');
+      return
+    }
     $scope.authObj.$createUserWithEmailAndPassword(email, password)
       .then(function (firebaseUser) {
 
@@ -144,6 +147,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
         $state.go('app.home');
       }).catch(function (error) {
         console.error("Error: ", error);
+        alert('User register failed!');
       });
   };
 
@@ -162,23 +166,25 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
       $state.go('app.home');
     }).catch(function (error) {
       console.error("Authentication failed:", error);
+      alert('User login failed!');
     });
   }
 
 
   // reset password
   $scope.reset = function (email) {
+    if (email==null) {
+      alert('Please input your email address!');
+      return
+    }
     $scope.authObj.$sendPasswordResetEmail(email).then(function () {
       alert("Password reset email sent successfully!");
       $state.go('app.login');
     }).catch(function (error) {
       console.error("Error: ", error);
+      alert('Password reset failed!');
     });
-
   }
-
-
-
 })
 
 app.controller('NewsCtrl', function ($scope, $ionicLoading, FeedSources, FeedList) {
@@ -199,28 +205,25 @@ app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  
   $scope.posts = [];
   var wordpressUrl = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fseacoast.citymomsblog.com%2Ffeed%2F&api_key=4ttyqm0kfrvec25ygfqnw27nmdmqc4gkieabiii2&order_by=&order_dir=desc&count=20";
 
-    $http.get(wordpressUrl)
-      .success(function(response){
-        angular.forEach(response.items, function(child){
-          $scope.posts.push(child);
-        });
-      })
-      .error(function(response, status){
-        console.log("Error while received response. " + status + response);
+  $http.get(wordpressUrl)
+    .success(function(response){
+      angular.forEach(response.items, function(child){
+        $scope.posts.push(child);
       });
+    })
+    .error(function(response, status){
+      console.log("Error while received response. " + status + response);
+    });
 
-      $scope.openUrl = function(link) {
-          window.open(link, '_blank', 'location=yes');
-          return false;
-        }
-
-
+    $scope.openUrl = function(link) {
+        window.open(link, '_blank', 'location=yes');
+        return false;
+    }
 })
 
 app.controller('HomeCtrl', function ($scope, $ionicLoading, $ionicSideMenuDelegate, $ionicScrollDelegate) {
 
   $ionicSideMenuDelegate.canDragContent(true);
-
 
   // TABS
   $scope.tab = 1;
@@ -234,7 +237,6 @@ app.controller('HomeCtrl', function ($scope, $ionicLoading, $ionicSideMenuDelega
   $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
   };
-
 
   // ACCORDIONS
   // initiate an array to hold all active tabs
@@ -264,19 +266,13 @@ app.controller('HomeCtrl', function ($scope, $ionicLoading, $ionicSideMenuDelega
       $scope.activeTabs.push(tab);
     }
   }
-
-
 })
-
-
-
 
 app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, $cordovaSocialSharing) {
 
   $ionicLoading.show({
     template: 'Loading posts...'
   });
-
 
   $scope.categShow = false;
   $scope.showCategories = function () {
@@ -287,7 +283,6 @@ app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, 
     }
   }
 
-
   // WORDPRESS CATEGORIES
   Blog.categories().then(
     function (data) {
@@ -297,9 +292,6 @@ app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, 
     function (error) {
     }
   )
-
-
-
 
   // WORDPRESS POSTS
   $scope.getPosts = function () {
@@ -313,7 +305,6 @@ app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, 
     )
   }
 
-
   // WORDPRESS SINGLE POST
   $scope.getPost = function () {
     Blog.post($stateParams.id).then(
@@ -325,7 +316,6 @@ app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, 
       }
     )
   }
-
 
   // SHARE
   $scope.shareTwitter = function (message, image) {
@@ -356,9 +346,6 @@ app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, 
       });
   }
 
-
-
-
 })
 
 var gLink = "";
@@ -372,9 +359,9 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   // FIREBASE
 // $scope.body = $sce.trustAsHtml(htmlBody);
 
-$scope.trustedHtml = function (plainText) {
-            return $sce.trustAsHtml(plainText);
-        };
+  $scope.trustedHtml = function (plainText) {
+    return $sce.trustAsHtml(plainText);
+  };
 
   $scope.articleID = $stateParams.id;
   $scope.selectedArticle = {};
@@ -466,9 +453,6 @@ app.controller('ElementsCtrl', function ($scope) {
 
 app.controller('PluginsCtrl', function ($scope, $ionicLoading, $ionicPlatform, $cordovaToast, $cordovaAppRate, $cordovaBarcodeScanner, $cordovaDevice) {
 
-
-
-
   // toast message
   $scope.showToast = function () {
     $ionicPlatform.ready(function () {
@@ -479,9 +463,6 @@ app.controller('PluginsCtrl', function ($scope, $ionicLoading, $ionicPlatform, $
       });
     })
   }
-
-
-
 
   // rate my app
   $scope.showApprate = function () {
@@ -495,8 +476,6 @@ app.controller('PluginsCtrl', function ($scope, $ionicLoading, $ionicPlatform, $
     })
 
   }
-
-
 
   // barcode scanner
   $scope.showBarcode = function () {
@@ -518,9 +497,6 @@ app.controller('PluginsCtrl', function ($scope, $ionicLoading, $ionicPlatform, $
     })
 
   }
-
-
-
 
   // device info
   $scope.showDeviceinfo = function () {
@@ -629,8 +605,6 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
   };
 
   var pdfDoc = angular.element(document.querySelector('#fileInput'));
-
-
 
   /* /datepicker */
 
