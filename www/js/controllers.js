@@ -150,6 +150,10 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
 
   // firebase login
   $scope.login = function (email, password) {
+    if (email==null || password==null) {
+      alert('Please input email and password exactly!');
+      return
+    }
     $scope.authObj.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
       //alert("Signed in!");
       $scope.getUserStatus();

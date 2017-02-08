@@ -71,14 +71,14 @@ app.service('ChatService', function() {
     this.checkAuthStatus = function(user,success,failure) {
         if(user){
             if(user == 'Anonymous'){
-                console.log('Anonymous');
+                // console.log('Anonymous');
                 return(true)
             }else{
-                console.log('user available');
+                // console.log('user available');
                 return(false)
             }
         } else {
-            console.log('non user');
+            // console.log('non user');
             return(true)
         }
     };

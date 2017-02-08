@@ -64,6 +64,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
     }
   });
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    console.log("transitionTo");
     if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus($rootScope.user)) { //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
       $state.transitionTo("app.login");
@@ -92,7 +93,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/login.html',
           controller: 'UserCtrl',
-          authRequired: true
+          authRequired: false
         }
       }
     })
@@ -103,7 +104,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/register.html',
           controller: 'UserCtrl',
-          authRequired: true
+          authRequired: false
 
         }
       }
@@ -150,7 +151,7 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/forgot.html',
           controller: 'UserCtrl',
-          authRequired: true
+          authRequired: false
         }
       }
     })
