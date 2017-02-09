@@ -37,10 +37,11 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
 
     var notificationOpenedCallback = function(jsonData) {
       console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+      alert('Notification opened:\n'+JSON.stringify(jsonData));
     };
 
     window.plugins.OneSignal
-      .startInit("f01ab1b3-b33d-4033-b68e-5de0f66815f2")
+      .startInit("a8d5aa58-4dd8-44f2-9407-5e702def4f9b")
       .handleNotificationOpened(notificationOpenedCallback)
       .endInit();
     // window.plugins.OneSignal.init("7fe9fa6d-c066-4c9d-8583-8d931cfacb07",
