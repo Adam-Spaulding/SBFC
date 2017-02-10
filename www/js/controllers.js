@@ -1919,7 +1919,7 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
     $ionicLoading.show({
       template: 'Loading video...'
     });
-    document.getElementById('video').src = 'https://www.youtube.com/embed/' + $stateParams.id;
+    document.getElementById('video').src = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $stateParams.id);
     googleService.googleApiClientReady().then(function (data) {
       $scope.video = data.items[$stateParams.index];
       $ionicLoading.hide();
