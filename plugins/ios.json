@@ -12,6 +12,9 @@
         },
         "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.app981534"
         }
     },
     "dependent_plugins": {
@@ -69,9 +72,6 @@
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.app981534"
-        },
-        "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
         "cordova-plugin-x-toast": {

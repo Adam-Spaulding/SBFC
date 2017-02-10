@@ -1,19 +1,23 @@
 <ion-view view-title='My Folder' hide-back-button=''>
   <ion-content>
 
-    <div ng-repeat="fle in editfolderArray track by $index" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
+    <span ng-repeat="fle in editfolderArray track by $index" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
 
       <!-- <a download="{{fle}}" href="{{fle}}" title="{{fle}}"> -->
-        <li class="marketplace-tile" id="" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = !isActive" >
-          <img class="" ng-src="{{fle}}" zoom-src="{{fle}}" zoom-view style="width:100%;"></img>
-          <a download="{{fle}}" href="{{fle}}" title="" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = !isActive" ><button><i class="ion-android-download" style="font-size:30px;"></i></button></a>
+        <li class="marketplace-tile" id="" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = isActive" >
+          <img class="" ng-src="{{fle}}" zoom-view style="width:100%;" ng-click="window.plugins.socialsharing.share(null, null, '{{fle}}', null)"></img>
+          <!-- <button ng-click="window.plugins.socialsharing.share(null, null, '{{fle}}', null)">image only</button> -->
+          <button onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)" type="submit"> original image only</button>
+          <button onclick="window.plugins.socialsharing.share(null, null, '{{fle}}', null)"> bind image only</button>
+          <button type="submit" ng-click="window.plugins.socialsharing.share(null, null, '{{fle}}', null)">ng click image only</button>
         </li>
+
       <!-- </a> -->
       <!-- <span class="wrapping-list" id="">
         Tap to zoom
       </span> -->
 
-    </div>
+    </span>
 
 
 <!-- <ion-gallery ion-gallery-items="editfolderArray"></ion-gallery> -->

@@ -177,7 +177,7 @@ app.service('googleService', ['$http', '$q', function ($http, $q) {
             var request = gapi.client.youtube.playlistItems.list({
                 part: 'snippet',
                 playlistId: 'PLonzNEfEob9SEtavgsRHmqMTIzqOuGpcz',  // your playlist id here
-                maxResults: 21
+                maxResults: 50
             });
             request.execute(function(response) {
                 deferred.resolve(response.result);
