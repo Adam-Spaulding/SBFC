@@ -82,34 +82,6 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $state, $ionic
     $scope.notifications.splice($scope.notifications.indexOf(item), 1);
   };
 
-  $scope.notifications = [{
-    id: 1,
-    user: 'Janice Burke',
-    text: 'Lorem ipsum dolor sit amet, per veri petentium iudicabit in.',
-    img: '1.jpg'
-  }, {
-    id: 2,
-    user: 'Raymond Powell',
-    text: 'Per tale expetendis signiferumque eu, mea partem causae vocent id.',
-    img: '2.jpg'
-  }, {
-    id: 3,
-    user: 'Danielle Beck',
-    text: 'Velit malorum eos ne, his ut probo possit contentiones.',
-    img: '3.jpg'
-  }, {
-    id: 4,
-    user: 'Ronald Hall',
-    text: 'Posse petentium imperdiet nec ex, ea sed detraxit molestiae.',
-    img: '4.jpg'
-  }, {
-    id: 5,
-    user: 'Catherine Hunt',
-    text: 'Semper urbanitas ullamcorper ut eam. Sint summo consequuntur ad nam, vix cu mucius alienum detracto, et eum zril labores abhorreant.',
-    img: '5.jpg'
-  }]
-
-
 })
 
 app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth) {

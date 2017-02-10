@@ -32,25 +32,32 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
       });
     })
 
+    $rootScope.notifications = [];
+
     // Enable to debug issues.
     // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+    window.plugins.OneSignal.enableSound(true);
+    window.plugins.OneSignal.enableVibrate(true);
 
-    var notificationOpenedCallback = function(jsonData) {
-      console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-      alert('Notification opened:\n'+JSON.stringify(jsonData));
+    var notificationOpenedCallback = function(result) {
+      // alert("Notification received:\n" + JSON.stringify(result));
+      // console.log('Did I receive a notification: ' + JSON.stringify(result));
+      var data = result.notification.payload;
+      if (data) {
+        var item = {};
+        item.notificationID = data.notificationID;
+        item.title = data.title;
+        item.subtitle = data.subtitle;
+        item.body = data.body;
+        $rootScope.notifications.push(item);
+      };
     };
 
     window.plugins.OneSignal
       .startInit("a8d5aa58-4dd8-44f2-9407-5e702def4f9b")
       .handleNotificationOpened(notificationOpenedCallback)
+      .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
       .endInit();
-    // window.plugins.OneSignal.init("7fe9fa6d-c066-4c9d-8583-8d931cfacb07",
-    //                                {googleProjectNumber: "906792644102"},
-    //                                notificationOpenedCallback);
-
-    // Show an alert box if a notification comes in when the user is in your app.
-    window.plugins.OneSignal.enableInAppAlertNotification(true);
-
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

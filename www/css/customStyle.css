@@ -657,35 +657,6 @@ ionic-content {
   margin-bottom:1300px;
 }
 
-Styling for our viewsCSS
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
 .image-list-thumb {
     padding: 2px 2px 2px 2px;
     height: 150px;
@@ -713,4 +684,14 @@ Styling for our viewsCSS
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center, center;
+}
+
+/* Thomas */
+.menu-right ion-item .item-content {
+  padding: 10px 20px !important;
+}
+
+.menu-right ion-item .item-content > h3{
+  margin-top: 7px !important;
+  color: #666;
 }

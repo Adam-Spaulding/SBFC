@@ -59,6 +59,12 @@
 
 .menu-right {
   right: 0;
+
+  ion-list {
+    .item-content {
+      padding: 10px 20px;
+    }
+  }
 }
 
 .aside-open.aside-resizing .menu-right {
