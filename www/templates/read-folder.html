@@ -1,24 +1,12 @@
 <ion-view view-title='My Folder' hide-back-button=''>
   <ion-content>
+      <h4 class="fw300 m0 p10 pt20 col">Tap the image for options</h4>
+    <span ng-repeat="fle in editfolderArray track by $index" class="dus-img" style="width:100%; display:inline;">
+      <!-- <button class="button" ng-click="onSocialSharing(fle)"><i class="ion-android-more-vertical fa-2x" style="color:#fff;"></i></button> -->
 
-    <span ng-repeat="fle in editfolderArray track by $index" class="" style="width:50%;display:inline-block; vertical-align: text-top; padding:0 auto;margin:0 auto;">
-
-      <!-- <a download="{{fle}}" href="{{fle}}" title="{{fle}}"> -->
-        <li class="marketplace-tile" id="" ng-class="{'image': !isActive, 'image active': isActive}" ng-init="isActive = false" ng-click="isActive = isActive" >
-          <img class="" ng-src="{{fle}}" zoom-view style="width:100%;" ng-click="window.plugins.socialsharing.share(null, null, '{{fle}}', null)"></img>
-          <!-- <button ng-click="window.plugins.socialsharing.share(null, null, '{{fle}}', null)">image only</button> -->
-          <button onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)" type="submit"> original image only</button>
-          <button onclick="window.plugins.socialsharing.share(null, null, '{{fle}}', null)"> bind image only</button>
-          <button type="submit" ng-click="window.plugins.socialsharing.share(null, null, '{{fle}}', null)">ng click image only</button>
-        </li>
-
-      <!-- </a> -->
-      <!-- <span class="wrapping-list" id="">
-        Tap to zoom
-      </span> -->
+      <img class="" ng-src="{{fle}}" ng-click="onSocialSharing(fle)" style="width:100%" />
 
     </span>
-
 
 <!-- <ion-gallery ion-gallery-items="editfolderArray"></ion-gallery> -->
 	<div class="he50"></div>

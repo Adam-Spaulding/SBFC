@@ -34,6 +34,9 @@
         <ion-tab title="Feed" ui-sref="app.feed" icon-on="ion-ios-list" icon-off="ion-ios-list-outline"><ion-nav-view name="feed-tab"></ion-nav-view></ion-tab>
         <ion-tab class="custom-tab"></ion-tab>
         <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
+        <ion-tab title="DUS" ui-sref="app.dus" hidden="true"></ion-tab>
+        <ion-tab title="contact" ui-sref="app.contact" hidden="true"></ion-tab>
+        <ion-tab title="ask-an-expert" ui-sref="app.ask-an-expert" hidden="true"></ion-tab>
         <ion-tab title="maps" ui-sref="app.maps" hidden="true"></ion-tab>
         <ion-tab title="newslist" ui-sref="app.newslist" hidden="true"></ion-tab>
         <ion-tab title="calendar" ui-sref="app.calendar" hidden="true"></ion-tab>
@@ -118,7 +121,7 @@
       <div class="he50"></div>
     </ion-content>
 
-    <div class="bar bar-footer bg-light">
+    <div class="bar bar-footer bg-light" style="background-color:#fff; z-index:999;">
       <div class="title font-xs text-left dark">Copyright <span class="fw900 energized">Seacoast Birth & Family Connection</span> 2017</div>
     </div>
   </ion-side-menu>
@@ -137,7 +140,7 @@
         <ion-item ng-repeat="item in notifications" item="item" class="item-remove-animate item-avatar ">
           <!-- <img src="img/users/{{item.img}}"> -->
       <h3 class="light m0 fw300">{{item.user}}</h3>
-      <p class="light m0">{{item.text}}</p>
+      <p class="light m0" style="text-wrap:none;">{{item.text}}</p>
           <ion-delete-button class="ion-minus-circled"
                              ng-click="onItemDelete(item)">
           </ion-delete-button>
@@ -159,7 +162,7 @@
       </ion-list>
       <div class="he50"></div>
     </ion-content>
-    <div class="bar bar-footer bg-dark">
+    <div class="bar bar-footer bg-dark" style="background-color:#fff; z-index:999;">
       <div class="title font-xs text-left dark">Copyright <span class="fw900 energized">Seacoast Birth & Family Connection</span> 2017</div>
     </div>
   </ion-side-menu>

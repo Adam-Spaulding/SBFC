@@ -445,12 +445,10 @@ ion-view.home-nav button {
 
 h3.post-title {
   background-color: rgba(250, 250, 250, 0.6);
-  padding-top: 25px !important;
   color: #363636;
-  margin: -5px 0px !important;
-  padding:30px 0 0 15px;
+  margin: 0px !important;
+  padding:15px;
   /*position: absolute;*/
-  bottom: 10px;
   display: block;
   width: 100%;
   font-size: 16px;
@@ -694,4 +692,17 @@ ionic-content {
 .menu-right ion-item .item-content > h3{
   margin-top: 7px !important;
   color: #666;
+}
+/*
+.dus-img img {
+  position: relative;
+}*/
+
+.dus-img button {
+  position: absolute;
+  z-index: 999;
+  border-radius: 50%;
+  right: 0;
+  margin: 5px;
+  background-color: rgba(250, 250, 250, 0.5);
 }

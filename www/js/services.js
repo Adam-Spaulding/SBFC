@@ -67,18 +67,19 @@ app.service('Firebase', function() {
 
 // Chat SERVICES
 
-app.service('ChatService', function() {
+app.service('ChatService', function($state, $location, ionicToast) {
     this.checkAuthStatus = function(user,success,failure) {
         if(user){
             if(user == 'Anonymous'){
                 // console.log('Anonymous');
+                $state.go('app.login');
                 return(true)
             }else{
-                // console.log('user available');
                 return(false)
             }
         } else {
-            // console.log('non user');
+            console.log('not a user');
+            $state.go('app.login');
             return(true)
         }
     };

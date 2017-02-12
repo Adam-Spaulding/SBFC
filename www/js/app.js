@@ -22,7 +22,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
 
   $ionicPlatform.ready(function() {
 
-    $rootScope.$on('$locationChangeSuccess', function() {
+    $rootScope.$on('$locationChangeSuccess', function($state) {
       ChatService.checkAuthStatus($rootScope.user, function (succ) {
         console.log('route to SUCCESS');
         $state.go('app.home');
@@ -54,7 +54,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
     };
 
     window.plugins.OneSignal
-      .startInit("a8d5aa58-4dd8-44f2-9407-5e702def4f9b")
+      .startInit("bbf1fde1-85f5-4d5d-8d49-a3cf529ccece")
       .handleNotificationOpened(notificationOpenedCallback)
       .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
       .endInit();
@@ -72,7 +72,7 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
     }
   });
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    console.log("transitionTo");
+    // console.log("transitionTo");
     if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus($rootScope.user)) { //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
       $state.transitionTo("app.login");
@@ -90,9 +90,9 @@ $ionicConfigProvider.tabs.position('bottom');
   .state('app', {
     url: '/app',
     abstract: true,
+    authRequired: false,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl',
-      authRequired: true
+    controller: 'AppCtrl'
   })
 
     .state('app.login', {
@@ -124,8 +124,8 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/home-tiles.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          authRequired: true,
+          controller: 'FirebaseCtrl'
         }
       }
     })
@@ -567,6 +567,7 @@ $ionicConfigProvider.tabs.position('bottom');
   // $urlRouterProvider.otherwise('/app/home');
 
   $urlRouterProvider.otherwise('/app/login');
+
 })
 
 

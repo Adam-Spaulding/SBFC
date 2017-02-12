@@ -2,7 +2,7 @@ function init() {
   window.initGapi(); // Calls the init function defined on the window
 }
 
-var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource']);
+var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource', 'ngTouch', 'ngAnimate']);
 
 app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $state, $ionicLoading, $ionicSideMenuDelegate, $ionicHistory, FirebaseUser, $firebaseAuth, $firebaseObject) {
 
@@ -188,7 +188,7 @@ app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  
     });
 
     $scope.openUrl = function(link) {
-        window.open(link, '_blank', 'location=yes');
+        window.open(link, '_blank', 'location=yes,toolbar=yes');
         return false;
     }
 })
@@ -324,9 +324,19 @@ var gLink = "";
 
 app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
-  $ionicLoading.show({
-    template: 'Loading Firebase data...'
-  });
+  $scope.show = function() {
+      $ionicLoading.show({
+        template: 'Loading...',
+        duration: 3000
+      }).then(function(){
+         console.log("The loading indicator is now displayed");
+      });
+    };
+    $scope.hide = function(){
+      $ionicLoading.hide().then(function(){
+         console.log("The loading indicator is now hidden");
+      });
+    };
 
   // FIREBASE
 // $scope.body = $sce.trustAsHtml(htmlBody);
@@ -1418,6 +1428,10 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
     published: '',
     publish_date: new Date(),
     title: ''
+  }
+
+  $scope.onSocialSharing = function(imgPath) {
+  window.plugins.socialsharing.share(null, null, imgPath, null);
   }
 
   /* datepicker */
