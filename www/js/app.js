@@ -75,8 +75,8 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
     // console.log("transitionTo");
     if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus($rootScope.user)) { //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
-      $state.transitionTo("app.login");
-      // event.preventDefault();
+      $state.transitionTo('app.login');
+      event.preventDefault();
     }
   });
 })

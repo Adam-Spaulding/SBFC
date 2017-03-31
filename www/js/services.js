@@ -72,7 +72,7 @@ app.service('ChatService', function($state, $location, ionicToast) {
         if(user){
             if(user == 'Anonymous'){
                 // console.log('Anonymous');
-                $state.go('app.login');
+                // $state.go('app.login');
                 return(true)
             }else{
                 return(false)

@@ -9,7 +9,7 @@
       </ion-nav-buttons>
 
       <ion-nav-buttons side="right">
-        <i ng-hide="isActive" class="ti-bell text-black font-xl p10" menu-toggle="right"></i>
+        <i ng-hide="isActive" class="ti-bell text-black font-xl p10" menu-toggle="right"><div ng-hide="$root.notifications.length === 0" class="badge pull-right">{{$root.notifications.length}}</div></i>
         <i ng-show="isActive" class="ti-close text-black font-xl p10" menu-toggle="right"></i>
       </ion-nav-buttons>
 
@@ -32,7 +32,7 @@
       <ion-tabs class="tabs-positive tabs-icon-top" ng-show="user != 'Anonymous'">
         <ion-tab title="Home" ui-sref="app.home" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ><ion-nav-view name="home-tab"></ion-nav-view></ion-tab>
         <ion-tab title="Feed" ui-sref="app.feed" icon-on="ion-ios-list" icon-off="ion-ios-list-outline"><ion-nav-view name="feed-tab"></ion-nav-view></ion-tab>
-        <ion-tab class="custom-tab"></ion-tab>
+        <ion-tab class="logo-tab"></ion-tab>
         <ion-tab title="MAC" ui-sref="app.macphotography" hidden="true"></ion-tab>
         <ion-tab title="DUS" ui-sref="app.dus" hidden="true"></ion-tab>
         <ion-tab title="contact" ui-sref="app.contact" hidden="true"></ion-tab>
@@ -90,7 +90,7 @@
         <ion-item menu-close href="#/app/home/maps" class="">
           Location
         </ion-item>
-        <ion-item menu-close href="#/app/home/calendar" class="">
+        <ion-item menu-close href="#" class="" onclick="window.open('https://calendar.google.com/calendar/embed?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=seacoastbirthandfamily%40gmail.com&amp;color=%231B887A&amp;ctz=America%2FNew_York', '_blank', 'location=no'); return false;">
           Calendar
         </ion-item>
         <ion-item menu-close href="#/app/home/contact" class="">
@@ -121,8 +121,8 @@
       <div class="he50"></div>
     </ion-content>
 
-    <div class="bar bar-footer bg-light" style="background-color:#fff; z-index:999;">
-      <div class="title font-xs text-left dark">Copyright <span class="fw900 energized">Seacoast Birth & Family Connection</span> 2017</div>
+    <div class="bar bar-footer bg-light">
+      <div class="title font-xs text-left dark" style="z-index:999;">Copyright <span class="fw900 energized">Seacoast Birth %26 Family Connection</span> 2017</div>
     </div>
   </ion-side-menu>
 
@@ -131,16 +131,14 @@
       <h5 class="light fw300 pl10">Notifications</h5>
       <div class="w100 pt10 pr10 text-right">
         <i class="ti-trash light font-xl ml20" ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></i>
-        <i class="ti-layout-list-thumb light font-xl ml20" ng-click="data.showDelete = false; data.showReorder = !data.showReorder"></i>
+        <!-- <i class="ti-layout-list-thumb light font-xl ml20" ng-click="data.showDelete = true; data.showReorder = !data.showReorder"></i> -->
       </div>
     </ion-header-bar>
     <ion-content class="bg-light">
-      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-
-        <ion-item ng-repeat="item in notifications" item="item" class="item-remove-animate item-avatar ">
-          <!-- <img src="img/users/{{item.img}}"> -->
-      <h3 class="light m0 fw300">{{item.user}}</h3>
-      <p class="light m0" style="text-wrap:none;">{{item.text}}</p>
+      <ion-list show-delete="!data.showDelete" show-reorder="!data.showReorder" class="disable-pointer-events">
+        <!-- <ion-item item="item" class="item-remove-animate item-avatar ">
+          <h3 class="light m0 fw300">Hello this is a title</h3>
+          <p class="light m0" style="white-space:normal !important;">this is a body this is a body this is a body this is a body this is a body this is a body </p>
           <ion-delete-button class="ion-minus-circled"
                              ng-click="onItemDelete(item)">
           </ion-delete-button>
@@ -148,22 +146,36 @@
                              ng-click="onItemDelete(item)">
             <i class="ti-trash font-xxl"></i>
           </ion-option-button>
-          <ion-option-button class="button-positive"
+        </ion-item> -->
+        <ion-item ng-repeat="item in $root.notifications" item="item" class="item-remove-animate item-avatar ">
+          <!-- <img src="img/users/{{item.img}}"> -->
+          <h3 class="light m0 fw300" style="white-space:normal !important;"><b>{{item.title}}</b></h3>
+          <p class="light m0" style="white-space:normal !important;">{{item.body}}</p>
+
+          <ion-delete-button class="ion-minus-circled"
+                             ng-click="onItemDelete(item)">
+          </ion-delete-button>
+          <ion-option-button class="button-energized"
+                             ng-click="onItemDelete(item)">
+            <i class="ti-trash font-xxl"></i>
+          </ion-option-button>
+          <!-- <ion-option-button class="button-positive"
                              ng-click="edit(item)">
             <i class="ti-ink-pen font-xxl"></i>
           </ion-option-button>
           <ion-option-button class="button-calm"
                              ng-click="share(item)">
             <i class="ti-share font-xxl"></i>
-          </ion-option-button>
-          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+          </ion-option-button> -->
+          <!-- <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button> -->
+          <hr>
         </ion-item>
 
       </ion-list>
       <div class="he50"></div>
     </ion-content>
-    <div class="bar bar-footer bg-dark" style="background-color:#fff; z-index:999;">
-      <div class="title font-xs text-left dark">Copyright <span class="fw900 energized">Seacoast Birth & Family Connection</span> 2017</div>
+    <div class="bar bar-footer bg-dark">
+      <div class="title font-xs text-left dark" style="z-index:999; background-color:#fff;">Copyright <span class="fw900 energized">Seacoast Birth %26 Family Connection</span> 2017</div>
     </div>
   </ion-side-menu>
 

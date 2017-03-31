@@ -1,7 +1,7 @@
 /**
  * Modified MIT License
  * 
- * Copyright 2015 OneSignal
+ * Copyright 2016 OneSignal
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,23 +31,22 @@
 
 @interface OneSignalPush : CDVPlugin {}
 
+- (void)setNotificationReceivedHandler:(CDVInvokedUrlCommand*)command;
+- (void)setNotificationOpenedHandler:(CDVInvokedUrlCommand*)command;
 - (void)init:(CDVInvokedUrlCommand*)command;
 - (void)getTags:(CDVInvokedUrlCommand*)command;
 - (void)getIds:(CDVInvokedUrlCommand*)command;
-- (void)getIds_GameThrive:(CDVInvokedUrlCommand*)command;
 - (void)sendTags:(CDVInvokedUrlCommand*)command;
 - (void)deleteTags:(CDVInvokedUrlCommand*)command;
 - (void)registerForPushNotifications:(CDVInvokedUrlCommand*)command;
-- (void)enableInAppAlertNotification:(CDVInvokedUrlCommand*)command;
 - (void)setSubscription:(CDVInvokedUrlCommand*)command;
 - (void)postNotification:(CDVInvokedUrlCommand*)command;
 - (void)setLogLevel:(CDVInvokedUrlCommand*)command;
 - (void)promptLocation:(CDVInvokedUrlCommand*)command;
-- (void)setEmail:(CDVInvokedUrlCommand*)command;
+- (void)syncHashedEmail:(CDVInvokedUrlCommand*)command;
 
 // Android Only
 - (void)enableVibrate:(CDVInvokedUrlCommand*)command;
 - (void)enableSound:(CDVInvokedUrlCommand*)command;
-- (void)enableNotificationsWhenActive:(CDVInvokedUrlCommand*)command;
 
 @end

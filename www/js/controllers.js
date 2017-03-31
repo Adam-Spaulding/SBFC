@@ -4,7 +4,7 @@ function init() {
 
 var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource', 'ngTouch', 'ngAnimate']);
 
-app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $state, $ionicLoading, $ionicSideMenuDelegate, $ionicHistory, FirebaseUser, $firebaseAuth, $firebaseObject) {
+app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray, $state, $ionicLoading, $ionicSideMenuDelegate, $ionicHistory, FirebaseUser, $firebaseAuth, $firebaseObject) {
 
   // side menu open/closed - changing navigation icons
   $scope.$watch(function () {
@@ -22,6 +22,11 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $state, $ionic
   $scope.back = function () {
     $ionicHistory.goBack();
   }
+
+  // array
+  var refArrayAlerts = firebase.database().ref().child("userInfo");
+  // create a synchronized array
+  $scope.alerts = $firebaseArray(refArrayAlerts);
 
   $scope.getUserStatus = function () {
     // get firebase user
@@ -127,7 +132,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
   // firebase login
   $scope.login = function (email, password) {
     if (email==null || password==null) {
-      alert('Please input email and password exactly!');
+      alert('That username or passowrd is not correct. Please try again.');
       return
     }
     $scope.authObj.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
@@ -146,11 +151,11 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
   // reset password
   $scope.reset = function (email) {
     if (email==null) {
-      alert('Please input your email address!');
+      alert('Please enter your email address');
       return
     }
     $scope.authObj.$sendPasswordResetEmail(email).then(function () {
-      alert("Password reset email sent successfully!");
+      alert("Success! The instructions will be in your email in a few moments.");
       $state.go('app.login');
     }).catch(function (error) {
       console.error("Error: ", error);
@@ -174,6 +179,10 @@ app.controller('NewsCtrl', function ($scope, $ionicLoading, FeedSources, FeedLis
 
 app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  $stateParams, $ionicModal, FeedSources, FeedList) {
 
+  $ionicLoading.show({
+    template: 'Please wait while we load the latest articles from the Seacoast Moms Blog...'
+  });
+
   $scope.posts = [];
   var wordpressUrl = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fseacoast.citymomsblog.com%2Ffeed%2F&api_key=4ttyqm0kfrvec25ygfqnw27nmdmqc4gkieabiii2&order_by=&order_dir=desc&count=20";
 
@@ -181,16 +190,20 @@ app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  
     .success(function(response){
       angular.forEach(response.items, function(child){
         $scope.posts.push(child);
+        $ionicLoading.hide();
       });
     })
     .error(function(response, status){
       console.log("Error while received response. " + status + response);
     });
 
+
+
     $scope.openUrl = function(link) {
         window.open(link, '_blank', 'location=yes,toolbar=yes');
         return false;
     }
+
 })
 
 app.controller('HomeCtrl', function ($scope, $ionicLoading, $ionicSideMenuDelegate, $ionicScrollDelegate) {
@@ -339,7 +352,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     };
 
   // FIREBASE
-// $scope.body = $sce.trustAsHtml(htmlBody);
+  // $scope.body = $sce.trustAsHtml(htmlBody);
 
   $scope.trustedHtml = function (plainText) {
     return $sce.trustAsHtml(plainText);
@@ -573,6 +586,7 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
 
   $scope.user = {
     published: '',
+    alert: '',
     publish_date: new Date(),
     title: ''
   }
@@ -799,6 +813,7 @@ app.controller('EditCtrl', function ($scope, $rootScope, $state, $stateParams, $
 
   $scope.user = {
     published: '',
+    alert: '',
     publish_date: new Date(),
     title: ''
   }
@@ -1063,6 +1078,7 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
 
   $scope.user = {
     published: '',
+    alert: '',
     publish_date: new Date(),
     title: ''
   }

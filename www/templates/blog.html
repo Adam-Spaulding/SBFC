@@ -6,7 +6,7 @@
 		<h4 class="fw300 m0 p10 pt20">From the blog</h4> <!-- wordpress feed -->
 		<div class="list">
 		    <a class="item item-avatar bg-white m5" href="#/app/post/{{item.id}}" ng-repeat="item in posts">
-		      <img ng-src="{{item.thumbnail}}">
+		      <img class="loading" ng-src="{{item.thumbnail}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
 			  <h4 class="fw300 font-xs m0 dark" ng-bind-html="item.excerpt"></h4>
 			  <p>in <span class="text-energized">{{item.categories[0].title}}</span> - read more</p>

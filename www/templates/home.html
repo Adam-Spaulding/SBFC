@@ -10,7 +10,7 @@
   <a ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true'} | filter:search | limitTo:20" href="#/app/articleslist/{{item.$id}}">
     <div class="list card" id="home3-card26">
       <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <img class="" ng-src="{{item.img}}" style="width:100%; vertical-align: middle;"></img>
+        <img class="loading" ng-src="{{item.img}}" style="width:100%; vertical-align: middle;"></img>
       </div>
       <div class="list feed">
           <div class="item item-avatar" href="#" id="{{item.category}}">
