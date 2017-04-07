@@ -80,8 +80,16 @@
   <allow-intent href="itms:*"/>
   <allow-intent href="itms-apps:*"/>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
-  <gap:plugin name="cordova-plugin-x-socialsharing" source="npm"/>
+  <feature name="SocialSharing">
+    <param name="android-package" value="nl.xservices.plugins.SocialSharing"/>
+  </feature>
+  <feature name="SocialSharing">
+    <param name="ios-package" value="SocialSharing"/>
+  </feature>
   <feature name="InAppBrowser">
     <param name="ios-package" value="CDVInAppBrowser"/>
+  </feature>
+  <feature name="InAppBrowser">
+    <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
   </feature>
 </widget>
