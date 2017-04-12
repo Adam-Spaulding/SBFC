@@ -1,0 +1,84 @@
+<ion-view view-title='User Management' hide-back-button=''>
+  <ion-content>
+    <!-- <a class="button button-block button-positive" href="#/app/add">
+      Ask a Question
+    </a> -->
+    <!-- news sources -->
+
+    <div class="pt20 pb20">
+      <h3 class="dark fw300 m0">User Management</h3>
+      <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
+      <button class="btn add-button p20">Save</button>
+      <button class="btn add-button p20" style="right:100px;">Export Users</button>
+      <div class="filters">
+        <label class="item item-input title-filter">
+          <div class="input-label">
+            Search for a User
+          </div>
+          <input type="text" placeholder="Enter a name or email address" ng-model="query">
+        </label>
+        <label class="item item-input item-select category-filter">
+          <div class="input-label">
+            Filter by Role
+          </div>
+          <select ng-model="select.category">
+              <option selected="selected"  value="!!">All Roles</option>
+              <option value="admin">Admin</option>
+              <option value="dus">DUS</option>
+              <option value="expert">Expert</option>
+          </select>
+        </label>
+      </div>
+
+      <table class="users-table">
+        <tr class="m5">
+          <th><h4>Users</h4></th>
+          <th><h4>Roles</h4></th>
+        </tr>
+        <tr ng-repeat="user in users | filter:query" class="bg-white m5">
+          <hr>
+          <td>
+            <h5 class="fw500 m0 dark pt5"><b>{{user.name}}</b></h5>
+            <h5 class="fw500 m0 dark pt5">Email Address: {{user.email}}</h5>
+            <p class="fw500 m0 dark pt5">Location: {{user.location}}</p>
+            <p class="fw500 m0 dark pt5">Phone Number: {{user.phone}}</p>
+          </td>
+          <td>
+            <!-- <p class="fw300 dark p10">Admin: {{user.admin}}</p>
+            <p class="fw300 dark p10">DUS: {{user.DUS}}</p>
+            <p class="fw300 dark p10">Expert: {{user.expert}}</p> -->
+            <!-- <input type="checkbox" id="cbox1" value="false">
+            <label for="cbox1">Admin</label> -->
+            <!-- <input type="checkbox" ng-model="user.admin" value="admin" checked="{{users.admin}}" ng-false-value="false" ng-click="updateAdmin"> -->
+            <ion-list>
+              <ion-item>
+                <ion-label>Admin</ion-label>
+                <ion-checkbox ng-model="user.admin" value="admin" checked="{{users.admin}}" ng-click="$scope.users.$save(admin)"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>DUS</ion-label>
+                <ion-checkbox ng-model="user.dus" value="admin" checked="{{users.admin}}" ng-click="$scope.users.$save(admin)"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>Expert</ion-label>
+                <ion-checkbox ng-model="user.expert" value="admin" checked="{{users.admin}}" ng-click="$scope.users.$save(admin)"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </td>
+        </tr>
+
+      </table>
+
+      <!-- <div class="list content">
+          <a class="item item-avatar bg-white m5" ng-repeat="user in users | filter:query" href="#/app/editfolder/{{user.$id}}">
+            <div class=""><i class="person-icon icon ion-person fa-2x"></i></div>
+
+          </a>
+      </div> -->
+
+    </div>
+
+    <div class="he50"></div>
+
+  </ion-content>
+</ion-view>

@@ -89,7 +89,7 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
 
 })
 
-app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth) {
+app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth, ionicToast) {
 
   $ionicSideMenuDelegate.canDragContent(false);
 
@@ -99,11 +99,11 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
 
   $scope.authObj = $firebaseAuth();
 
-
   // firebase register
   $scope.register = function (email, password, phone) {
-    if (email==null || password==null) {
-      alert('Email or Password must not be empty!');
+    if (email==null || password==null || phone==null) {
+      ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', true, 4500);
+      // alert('Email or Password must not be empty!');
       return
     }
     $scope.authObj.$createUserWithEmailAndPassword(email, password)
@@ -114,25 +114,31 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
         var users = $firebaseObject(refArray);
         users.email = firebaseUser.email;
         users.phone = phone;
+        users.user = ("true");
+        users.dus = ("false");
+        users.admin = ("false");
+        users.expert = ("false");
         users.$save().then(function (ref) {
-
         }, function (error) {
           console.log("Error:", error);
         });
 
-        alert('User created! You are signed in.');
+        ionicToast.show('Success! Please remember to complete your profile.', 'bottom', false, 2500);
         $state.go('app.home');
       }).catch(function (error) {
         console.error("Error: ", error);
-        alert('User register failed!');
+         ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', false, 4500);
+        // alert('User register failed!');
       });
   };
-
 
   // firebase login
   $scope.login = function (email, password) {
     if (email==null || password==null) {
-      alert('That username or passowrd is not correct. Please try again.');
+      ionicToast.show('The email or passowrd is not correct. Please try again.', 'bottom', true, 2500);
+      // alert('That username or passowrd is not correct. Please try again.');
+      localStorage.setItem("email", email)
+      localStorage.setItem("password", password)
       return
     }
     $scope.authObj.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
@@ -143,7 +149,8 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
       $state.go('app.home');
     }).catch(function (error) {
       console.error("Authentication failed:", error);
-      alert('User login failed!');
+      // alert('User login failed!');
+      ionicToast.show('The email or passowrd is not correct. Please try again.', 'bottom', true, 2500);
     });
   }
 
@@ -440,6 +447,44 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
 
 })
 
+app.controller('UsersCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
+
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+
+    if (!Date.now) {
+      Date.now = function () { return new Date().getTime(); }
+    }
+
+    // FIREBASE
+
+    // object
+    var URL = Firebase.url();
+
+    var refObject = firebase.database().ref().child("users"); // work with firebase url + object named 'data'
+    // download the data into a local object
+    var syncObject = $firebaseObject(refObject);
+    // synchronize the object with a three-way data binding
+    syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
+    $ionicLoading.hide();
+
+
+    // array
+    var refArray = firebase.database().ref().child("users");
+    // create a synchronized array
+    $scope.users = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+    // add new items to the array
+    // the message is automatically added to our Firebase database!
+    $scope.updateAdmin = function (users) {
+      // $scope.newMessageText = null;
+      $scope.users.$add({
+        admin: true
+      });
+
+    };
+
+})
 
 app.controller('ElementsCtrl', function ($scope) {
 
@@ -580,7 +625,7 @@ app.config(function ($cordovaAppRateProvider) {
 
 })
 
-app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig) {
+app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
 
   $scope.getUserStatus();
 
@@ -744,6 +789,7 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
   //   // return text.replace(urlRegex, '<a href="$1">$1</a>')
   // }
   $scope.saveData = function (user, msg, b64) {
+    ionicToast.show('Saving...', 'bottom', true, 2500);
     var pdfIsTrue = false;
     var userData = {};
     userData = $scope.user;
@@ -780,6 +826,7 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
         $state.go('app.edit', { 'id': addedObj })
         console.log(success);
         console.log(addedObj[1]);
+        ionicToast.show('Saved!', 'bottom', false, 2500);
       });
     }).catch(function (err) {
       console.log(err);
@@ -1962,7 +2009,7 @@ app.controller('AskanexpertCtrl', function ($scope, $rootScope, $ionicLoading, F
 
 
   $ionicLoading.show({
-    template: 'Loading Firebase data...'
+    template: 'Loading...'
   });
 
   if (!Date.now) {

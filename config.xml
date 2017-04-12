@@ -4,7 +4,7 @@
   <description>
         Seacoast Birth and Family Connection
     </description>
-  <author email="adam.spaulding@gmail.com" href="http://example.com.com/">
+  <author email="adam.spaulding@gmail.com" href="http://sbfconnection.com/">
       Adam Spaulding
     </author>
   <content src="index.html"/>
@@ -17,7 +17,7 @@
   <preference name="FadeSplashScreenDuration" value="1000"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="SplashScreen" value="screen"/>
+  <preference name="SplashScreen" value="1000"/>
   <preference name="AllowInlineMediaPlayback" value="true"/>
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
@@ -80,8 +80,17 @@
   <allow-intent href="itms:*"/>
   <allow-intent href="itms-apps:*"/>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
-  <gap:plugin name="cordova-plugin-x-socialsharing" source="npm"/>
+  <!-- for Android (you will find one in res/xml) -->
+  <feature name="SocialSharing">
+    <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+  </feature>
+  <feature name="SocialSharing">
+    <param name="ios-package" value="SocialSharing"/>
+  </feature>
   <feature name="InAppBrowser">
     <param name="ios-package" value="CDVInAppBrowser"/>
+  </feature>
+  <feature name="InAppBrowser">
+    <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
   </feature>
 </widget>

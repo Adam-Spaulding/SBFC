@@ -249,6 +249,13 @@ input.date-picker {
   left:10px;
   right:100%;
   color: #ffe9c8;
+  text-shadow: -1px 0 rgb(102,92,68), 0 1px rgb(102,92,68), 1px 0 rgb(102,92,68), 0 -1px rgb(102,92,68);
+}
+
+.list a i.person-icon {
+  left:10px;
+  right:100%;
+  color: #68809d;
   text-shadow: -1px 0 #f0ce98, 0 1px #f0ce98, 1px 0 #f0ce98, 0 -1px #f0ce98;
 }
 
@@ -732,4 +739,17 @@ ionic-content {
 .loading-sm {
   background: transparent url('../img/loading.gif') center no-repeat;
   min-height: 10px;
+}
+
+.users-table {
+  width: 100% !important;
+  background-color: #fafafa;
+  /* border-radius: 5px; */
+  padding: 25px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin-bottom: 15px;
+}
+
+.users-table td, .users-table th {
+  padding:0px 25px;
 }

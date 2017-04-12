@@ -147,7 +147,7 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html',
-          controller: 'UserCtrl',
+          controller: 'AppCtrl',
           authRequired: true
         }
       }
@@ -170,6 +170,17 @@ $ionicConfigProvider.tabs.position('bottom');
         'menuContent': {
           templateUrl: 'templates/macphotography.html',
           controller: 'HomeCtrl',
+          authRequired: true
+        }
+      }
+    })
+
+    .state('app.users', {
+      url: '/users',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/users.html',
+          controller: 'UsersCtrl',
           authRequired: true
         }
       }

@@ -30,6 +30,12 @@
         },
         "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.app981534"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.app981534"
         }
     },
     "dependent_plugins": {
@@ -77,13 +83,7 @@
         "cordova-plugin-pin-dialog": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.app981534"
-        },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.app981534"
-        },
-        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
         "de.appplant.cordova.plugin.local-notification": {
