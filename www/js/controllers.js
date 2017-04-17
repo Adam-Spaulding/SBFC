@@ -2,7 +2,7 @@ function init() {
   window.initGapi(); // Calls the init function defined on the window
 }
 
-var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource', 'ngTouch', 'ngAnimate']);
+var app = angular.module('revolution.controllers', ['firebase', 'ngCordova', 'ngMap', 'ngResource', 'ngAnimate']);
 
 app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray, $state, $ionicLoading, $ionicSideMenuDelegate, $ionicHistory, FirebaseUser, $firebaseAuth, $firebaseObject) {
 
@@ -483,6 +483,21 @@ app.controller('UsersCtrl', function ($scope, $ionicLoading, $filter, $ionicSlid
       });
 
     };
+
+    $scope.changeRoleSettings = function (user,role) {
+      var refArray = firebase.database().ref().child("users").child(user.$id);
+      var roleToChange = role;
+      var changesInUser = {};
+      changesInUser[role] = user[role];
+      refArray.update(changesInUser)
+      console.log('Push Notification Change', user);
+    };
+
+    $scope.emailNotificationChange = function () {
+      console.log('Email Notification Change', $scope.emailNotification);
+    };
+
+    $scope.pushNotification = { checked: true };
 
 })
 

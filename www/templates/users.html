@@ -53,15 +53,15 @@
             <ion-list>
               <ion-item>
                 <ion-label>Admin</ion-label>
-                <ion-checkbox ng-model="user.admin" value="admin" checked="{{users.admin}}" ng-click="$scope.users.$save(admin)"></ion-checkbox>
+                <ion-checkbox ng-model="user.admin" value="admin" checked="{{users.admin}}" ng-change="changeRoleSettings(user,'admin')"></ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-label>DUS</ion-label>
-                <ion-checkbox ng-model="user.dus" value="admin" checked="{{users.admin}}" ng-click="$scope.users.$save(admin)"></ion-checkbox>
+                <ion-checkbox ng-model="user.dus" value="dus" ng-change="changeRoleSettings(user,'dus')"></ion-checkbox>
               </ion-item>
               <ion-item>
                 <ion-label>Expert</ion-label>
-                <ion-checkbox ng-model="user.expert" value="admin" checked="{{users.admin}}" ng-click="$scope.users.$save(admin)"></ion-checkbox>
+                <ion-checkbox ng-model="user.expert" value="expert" ng-change="changeRoleSettings(user,'expert')"></ion-checkbox>
               </ion-item>
             </ion-list>
           </td>
