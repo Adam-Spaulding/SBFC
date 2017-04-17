@@ -23,9 +23,11 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   $ionicPlatform.ready(function() {
 
     $rootScope.$on('$locationChangeSuccess', function($state) {
-      ChatService.checkAuthStatus($rootScope.user, function (succ) {
+      var currentUser = localStorage.email || $rootScope.user;
+      $rootScope.user = currentUser;
+      ChatService.checkAuthStatus(currentUser, function (succ) {
         console.log('route to SUCCESS');
-        $state.go('app.home');
+        // $state.go('app.home');
       }, function (err) {
         console.log('route to LOGIN');
         $state.go('app.login');
@@ -73,7 +75,9 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   });
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     // console.log("transitionTo");
-    if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus($rootScope.user)) { //Assuming the AuthService holds authentication logic
+    var currentUser = localStorage.email || $rootScope.user;
+    $rootScope.user = currentUser;
+    if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus(currentUser)) { //Assuming the AuthService holds authentication logic
       // User isn’t authenticated
       $state.transitionTo('app.login');
       event.preventDefault();
@@ -565,7 +569,9 @@ $ionicConfigProvider.tabs.position('bottom');
     })
 
   function authenticate($rootScope, ChatService, $location) {
-    return ChatService.checkAuthStatus($rootScope.user, function (succ) {
+    var currentUser = localStorage.email  || $rootScope.user;
+    $rootScope.user = currentUser;
+    return ChatService.checkAuthStatus(currentUser, function (succ) {
       console.log('route to home');
       return true
     }, function (err) {

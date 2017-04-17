@@ -753,3 +753,7 @@ ionic-content {
 .users-table td, .users-table th {
   padding:0px 25px;
 }
+
+.replyBox {
+  width: 85%;margin-left: 35px;display: inline;
+}

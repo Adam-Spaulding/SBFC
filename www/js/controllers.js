@@ -146,6 +146,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
       $scope.getUserStatus();
       console.log($rootScope.user);
       // redirect to home screen
+      localStorage.setItem("email", firebaseUser.email);
       $state.go('app.home');
     }).catch(function (error) {
       console.error("Authentication failed:", error);
@@ -344,6 +345,8 @@ var gLink = "";
 
 app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
+  $scope.showReplyBox = null;
+
   $scope.show = function() {
       $ionicLoading.show({
         template: 'Loading...',
@@ -358,6 +361,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
       });
     };
 
+  
   // FIREBASE
   // $scope.body = $sce.trustAsHtml(htmlBody);
 
@@ -403,6 +407,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   };
   // array
   var refArray = firebase.database().ref().child("userInfo");
+
   // create a synchronized array
   var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
 
@@ -444,6 +449,55 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   //     var inAppBrowserRef = window.open(gLink, '_system', 'location=yes', 'clearcache: yes', 'toolbar: no');
   //   }
   // });
+  if($scope.articleID){
+       var refCommentArray = firebase.database().ref().child("comments").child($scope.articleID);
+       $scope.allComments = $firebaseArray(refCommentArray);
+  }
+
+
+  $scope.postComment = function(com){
+    var commentObj = {
+      comment: com,
+      email: localStorage.email,
+      date: new Date().toString()
+    }
+      refCommentArray.push(commentObj, function (error) {
+      if (error) {
+        console.log('Error has occured during saving process')
+      }
+      else {
+        $scope.userComment = '';
+        console.log("Data hss been saved succesfully")
+      }
+    });
+      console.log(commentObj)
+  }
+
+  $scope.replyComment = function(ind){
+    $scope.showReplyBox = ind;
+  }
+  $scope.isShowing = function(index){
+    return $scope.showReplyBox == index;
+  }
+
+  $scope.postReplyComment = function (comReply, parentComment) {
+    var commentReplyObj = {
+      comment: comReply,
+      email: localStorage.email,
+      date: new Date().toString()
+    }
+    var refCommentReplyArray = firebase.database().ref().child("comments").child($scope.articleID).child(parentComment.$id).child('reply')
+    refCommentReplyArray.push(commentReplyObj, function (error) {
+      if (error) {
+        console.log('Error has occured during saving process')
+      }
+      else {
+        $scope.reply.comment = '';
+        console.log("Data hss been saved succesfully")
+      }
+    });
+    console.log(comReply, parentComment)
+  }
 
 })
 
