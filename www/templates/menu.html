@@ -104,16 +104,16 @@
         <!-- <ion-item menu-close href="#/app/add" class=" hidden-admin">
           Post
         </ion-item> -->
-        <ion-item menu-close href="#/app/questions" class=" hidden-admin" ng-show="userProfile.expert != false">
+        <ion-item menu-close href="#/app/questions" class=" hidden-admin" ng-show="userProfile.expert === true">
           Submitted Questions
         </ion-item>
-        <ion-item menu-close href="#/app/allcontent" class=" hidden-admin" ng-show="userProfile.admin != false">
+        <ion-item menu-close href="#/app/allcontent" class=" hidden-admin" ng-show="userProfile.admin === true">
           Content Management
         </ion-item>
-        <ion-item menu-close href="#/app/filetransfer" class=" hidden-admin"  ng-show="userProfile.dus != false">
+        <ion-item menu-close href="#/app/filetransfer" class=" hidden-admin"  ng-show="userProfile.dus === true">
           File Transfer
         </ion-item>
-        <ion-item menu-close href="#/app/users" class=" hidden-admin"  ng-show="userProfile.admin != false">
+        <ion-item menu-close href="#/app/users" class=" hidden-admin"  ng-show="userProfile.admin === true">
           User Management
         </ion-item>
         <ion-item menu-close ng-click="logout()" ng-show="user != 'Anonymous'" class="">

@@ -1,5 +1,5 @@
 <ion-view view-title='User Management' hide-back-button=''>
-  <ion-content ng-show="userProfile.admin != false">
+  <ion-content ng-show="userProfile.admin === true">
     <!-- <a class="button button-block button-positive" href="#/app/add">
       Ask a Question
     </a> -->
@@ -17,7 +17,7 @@
           </div>
           <input type="text" placeholder="Enter a name or email address" ng-model="query">
         </label>
-        <label class="item item-input item-select category-filter">
+        <!-- <label class="item item-input item-select category-filter">
           <div class="input-label">
             Filter by Role
           </div>
@@ -27,7 +27,7 @@
               <option value="dus">DUS</option>
               <option value="expert">Expert</option>
           </select>
-        </label>
+        </label> -->
       </div>
 
       <table class="users-table">
