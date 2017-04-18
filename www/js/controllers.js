@@ -34,11 +34,13 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
     if (user) {
       $rootScope.user = user.email;
       $rootScope.userUid = user.uid;
+      // $rootScope.userExpert = user.expert;
     } else {
       $rootScope.user = 'Anonymous';
       $rootScope.userUid = 0;
     }
   }
+
 
   $scope.$watch(
     function ($scope) {
@@ -58,10 +60,17 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
 
 
   // USER PROFILE
-  $scope.getUserProfile = function (uid) {
+  $scope.goToProfile = function (uid) {
+    // var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
+    // $scope.userProfile = $firebaseObject(refArray);
+    $state.go('app.profile');
+  }
+
+  // USER PROFILE
+  $scope.getUserRoles = function (uid) {
     var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
     $scope.userProfile = $firebaseObject(refArray);
-    $state.go('app.profile');
+    // $state.go('app.profile');
   }
 
 
@@ -361,7 +370,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
       });
     };
 
-  
+
   // FIREBASE
   // $scope.body = $sce.trustAsHtml(htmlBody);
 
@@ -459,15 +468,15 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     var commentObj = {
       comment: com,
       email: localStorage.email,
-      date: new Date().toString()
+      date: new Date().getTime()
     }
       refCommentArray.push(commentObj, function (error) {
       if (error) {
         console.log('Error has occured during saving process')
       }
       else {
-        $scope.userComment = '';
-        console.log("Data hss been saved succesfully")
+        console.log("Data has been saved succesfully adam");
+        $scope.userComment = ''
       }
     });
       console.log(commentObj)
@@ -484,7 +493,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     var commentReplyObj = {
       comment: comReply,
       email: localStorage.email,
-      date: new Date().toString()
+      date: new Date().getTime()
     }
     var refCommentReplyArray = firebase.database().ref().child("comments").child($scope.articleID).child(parentComment.$id).child('reply')
     refCommentReplyArray.push(commentReplyObj, function (error) {

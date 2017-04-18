@@ -4,7 +4,7 @@
       <ion-nav-back-button></ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <i ng-hide="isActive" class="ti-align-justify text-black font-xl p10" menu-toggle="left"></i>
+        <i ng-hide="isActive" class="ti-align-justify text-black font-xl p10" menu-toggle="left" ng-click="getUserRoles(userUid)"></i>
         <i ng-show="isActive" class="ti-close text-black font-xl p10" menu-toggle="left"></i>
       </ion-nav-buttons>
 
@@ -42,7 +42,7 @@
         <ion-tab title="newslist" ui-sref="app.newslist" hidden="true"></ion-tab>
         <ion-tab title="calendar" ui-sref="app.calendar" hidden="true"></ion-tab>
         <ion-tab title="Marketplace" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline" ui-sref="app.marketplace"></ion-tab>
-        <ion-tab title="Profile" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" ng-click="getUserProfile(userUid)" ui-sref="app.profile"></ion-tab>
+        <ion-tab title="Profile" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" ui-sref="app.profile" ng-click="getUserRoles(userUid); goToProfile(userUid)"></ion-tab>
       </ion-tabs>
 
     </ion-nav-bar>
@@ -73,6 +73,7 @@
         <!-- <ion-item menu-close href="#/app/news" class="">
           News Feed
         </ion-item> -->
+        {{userUid.expert}}
         <ion-item menu-close ui-sref="app.marketplace" class="">
           Marketplace
         </ion-item>
@@ -103,16 +104,16 @@
         <!-- <ion-item menu-close href="#/app/add" class=" hidden-admin">
           Post
         </ion-item> -->
-        <ion-item menu-close href="#/app/questions" class=" hidden-admin">
+        <ion-item menu-close href="#/app/questions" class=" hidden-admin" ng-show="userProfile.expert != false">
           Submitted Questions
         </ion-item>
-        <ion-item menu-close href="#/app/allcontent" class=" hidden-admin">
+        <ion-item menu-close href="#/app/allcontent" class=" hidden-admin" ng-show="userProfile.admin != false">
           Content Management
         </ion-item>
-        <ion-item menu-close href="#/app/filetransfer" class=" hidden-admin">
+        <ion-item menu-close href="#/app/filetransfer" class=" hidden-admin"  ng-show="userProfile.dus != false">
           File Transfer
         </ion-item>
-        <ion-item menu-close href="#/app/users" class=" hidden-admin">
+        <ion-item menu-close href="#/app/users" class=" hidden-admin"  ng-show="userProfile.admin != false">
           User Management
         </ion-item>
         <ion-item menu-close ng-click="logout()" ng-show="user != 'Anonymous'" class="">

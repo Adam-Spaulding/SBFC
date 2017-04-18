@@ -1,6 +1,6 @@
 <ion-view view-title="Questions">
 
-  <ion-content class="p20">
+  <ion-content class="p20" ng-show="userProfile.expert != false">
     <h3>Submitted Questions</h3>
     <ul>
       <li ng-repeat="question in messages.slice().reverse()" class="text-left">

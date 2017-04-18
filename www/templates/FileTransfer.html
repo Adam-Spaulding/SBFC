@@ -1,5 +1,5 @@
 <ion-view view-title='DUS File Transfer' hide-back-button=''>
-  <ion-content>
+  <ion-content ng-show="userProfile.dus != false">
     <!-- <a class="button button-block button-positive" href="#/app/add">
       Ask a Question
     </a> -->
@@ -17,7 +17,7 @@
           <input type="text" placeholder="Enter a name or email address" ng-model="query">
         </label>
       </div>
-    
+
       <div class="list content">
           <a class="item item-avatar bg-white m5" ng-repeat="user in usersFroFileTransfer | filter:query" href="#/app/editfolder/{{user.$id}}">
             <div class=""><i class="folder-icon icon ion-android-folder fa-2x"></i></div>

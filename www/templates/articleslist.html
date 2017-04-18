@@ -16,31 +16,32 @@
 
           <div class="" ng-bind-html="trustedHtml(selectedArticle.body)"></div>
 
-    		 <div class="p20" ng-bind-html="post.content"></div>
+    		<div class="p20" ng-bind-html="post.content"></div>
     		<div class="p20">
+        
     		<h4 class="fw300 m0 pb20" ng-show="allComments.length > 0">Comments:</h4>
     			<ul>
     				<li ng-repeat="comment in allComments track by $index">
-    				<h5><strong>{{comment.email}}</strong></h5>
+    				<h5><strong>{{comment.email}}</strong> <br> <span ng-bind="comment.date | date : 'MMM d, y'">Posted on {{comment.date}}</span></h5>
     				<p ng-bind="comment.comment" style="margin-bottom: 0;"></p>
 						<a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
 						<div ng-if="comment.reply" ng-repeat="reply in comment.reply" style="width: 88%;margin-left: 38px;margin-bottom: 0;">
 							<h5><strong>{{reply.email}}</strong></h5>
 							<p ng-bind="reply.comment"></p>
-							<a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
+							<!-- <a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a> -->
 						</div>
 						<form ng-if="isShowing($index)" ng-submit="postReplyComment(reply.comment, comment)">
-							<textarea placeholder="Reply Comments" ng-model="reply.comment" class="replyBox"></textarea>
-							<button type="submit">Send</button>
+							<input type="text" placeholder="Reply Comments" ng-model="reply.comment" class="replyBox"></input>
+							<!-- <button type="submit">Submit</button> -->
 						</form>
     				</li>
     			</ul>
-    		</div> 
+    		</div>
 				<form ng-submit="postComment(userComment)">
 					<label class="item item-input">
-						<textarea placeholder="Comments" ng-model="userComment"></textarea>
+						<input type="textarea" placeholder="Add your comments!" ng-model="userComment" style="border: 1px solid grey;"></input>
 					</label>
-					<button class="btn button-positive p20" type="submit" >Send</button>
+					<!-- <button class="btn button-positive p20" type="submit">Send</button> -->
 			</form>
       </div>
     	</div>
