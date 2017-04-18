@@ -17,8 +17,9 @@
           <div class="" ng-bind-html="trustedHtml(selectedArticle.body)"></div>
 
     		<div class="p20" ng-bind-html="post.content"></div>
-    		<div class="p20">
-        
+    		<div class="p20" ng-show="selectedArticle.category === 'ask-an-expert'">
+
+        <div class="">
     		<h4 class="fw300 m0 pb20" ng-show="allComments.length > 0">Comments:</h4>
     			<ul>
     				<li ng-repeat="comment in allComments track by $index">
@@ -43,6 +44,7 @@
 					</label>
 					<!-- <button class="btn button-positive p20" type="submit">Send</button> -->
 			</form>
+      </div>
       </div>
     	</div>
     	<div class="he190"></div>
