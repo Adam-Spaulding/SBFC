@@ -703,7 +703,7 @@ app.config(function ($cordovaAppRateProvider) {
 
 })
 
-app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, FirebaseUser, ngQuillConfig, ionicToast) {
+app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, $location, FirebaseUser, ngQuillConfig, ionicToast) {
 
   $scope.getUserStatus();
 
@@ -713,6 +713,8 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
     publish_date: new Date(),
     title: ''
   }
+
+  // $scope.urlParam = $location.search();
 
   /* datepicker */
   $scope.valuationDate = new Date();
@@ -854,6 +856,17 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
     });
   };
 
+  $scope.location = $location;
+  $scope.$watch('location.search()', function() {
+      $scope.user.title = ($location.search()).target;
+      $scope.categoryDropDown.selected = ($location.search()).category;
+      $scope.user.published = ($location.search()).published;
+  }, true);
+
+  $scope.changeTarget = function(name) {
+      $location.search('target', name);
+  }
+
   // function extractLinkFromBody(text) {
   //   var urlRegex = /(https?:\/\/[^\s]+)/g;
   //   return text.replace(urlRegex, function (url) {
@@ -882,7 +895,7 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
     pdfDoc = pdfDoc[0].files[0];
     if (pdfDoc) {
       if (pdfDoc.name.indexOf('pdf') > -1) {
-        pdfIsTrue = true;
+        pdfIsTrue = false;
       }
     }
     console.log(pdfDoc);
@@ -908,6 +921,7 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
       });
     }).catch(function (err) {
       console.log(err);
+      ionicToast.show('Oops... something went wrong. Title, body, and Image are required.', 'bottom', false, 2500);
     })
   };
   var imgObj = {};

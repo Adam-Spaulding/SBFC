@@ -1,5 +1,5 @@
 <ion-view view-title='SBFC Content' hide-back-button=''>
-  <ion-content ng-show="userProfile.admin === true">
+  <ion-content ng-show="userProfile.admin === true || userProfile.expert === true">
     <!-- <a class="button button-block button-positive" href="#/app/add">
       Ask a Question
     </a> -->
@@ -8,7 +8,7 @@
     <div class="pt20 pb20">
       <h3 class="dark fw300 m0">Post to SBFC</h3>
       <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
-    <button class="btn add-button p20" ui-sref="app.add">Add Item</button>
+    <button class="btn add-button p20" ui-sref="app.add" ng-show="userProfile.admin === true">Add Item</button>
     <div class="filters">
       <label class="item item-input title-filter">
         <div class="input-label">
@@ -21,9 +21,9 @@
         <div class="input-label">
           Filter by Category
         </div>
-        <select ng-model="select.category">
-            <option selected="selected"  value="!!">All Categories</option>
-            <option value="ask-an-expert">Ask an Expert</option>
+        <select ng-disabled="userProfile.admin != true" ng-model="select.category">
+            <option value="!!">All Categories</option>
+            <option ng-selected="userProfile.admin != true" value="ask-an-expert">Ask an Expert</option>
             <option value="baby-photo">Baby Photo of the Month</option>
             <option value="marketplace">Marketplace</option>
         </select>
@@ -31,7 +31,7 @@
       </div>
 
 		<div class="list content">
-		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:search | filter:select" href="#/app/edit/{{item.$id}}">
+		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:search | filter:select | filter: (userProfile.admin != true  || '') && {category: 'ask-an-expert'}" href="#/app/edit/{{item.$id}}">
 		    	<img class="loading" ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5"><b>{{item.title}}</b></h4>
           <h4 class="fw500 m0 dark pt5">Category: {{item.category}}</h4>

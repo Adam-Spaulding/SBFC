@@ -757,3 +757,11 @@ ionic-content {
 .replyBox {
   width: 85%;margin-left: 35px;display: inline;
 }
+
+li.comment:hover {
+  background-color: #fafafa;
+}
+
+li.comment h5 a i:hover {
+  color: red;
+}

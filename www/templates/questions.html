@@ -6,7 +6,7 @@
       <li ng-repeat="question in messages.slice().reverse()" class="text-left">
         <div class="card" style="padding:10px 10px;">
           <span class="questions-actions">
-              <a target="_top">
+              <a href="/#/app/add?target={{question.question}}&category=ask-an-expert&published=true">
               <i class="fa fa-plus energized" aria-hidden="true"></i>
               </a>
               <a ng-click="messages.$remove(question)">

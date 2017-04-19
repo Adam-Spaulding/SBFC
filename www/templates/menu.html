@@ -107,7 +107,7 @@
         <ion-item menu-close href="#/app/questions" class=" hidden-admin" ng-show="userProfile.expert === true">
           Submitted Questions
         </ion-item>
-        <ion-item menu-close href="#/app/allcontent" class=" hidden-admin" ng-show="userProfile.admin === true">
+        <ion-item menu-close href="#/app/allcontent" class=" hidden-admin" ng-show="userProfile.admin === true || userProfile.expert === true">
           Content Management
         </ion-item>
         <ion-item menu-close href="#/app/filetransfer" class=" hidden-admin"  ng-show="userProfile.dus === true">
