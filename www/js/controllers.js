@@ -462,7 +462,18 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
        var refCommentArray = firebase.database().ref().child("comments").child($scope.articleID);
        $scope.allComments = $firebaseArray(refCommentArray);
   }
-
+  $scope.model = {
+    theField: 'hello'
+  };
+  $scope.reply = {
+    comment:''
+  };
+  $scope.mainUser = {
+    comment:''
+  };
+  $scope.someFunc = function(){
+    $scope.model.theField = '';
+  }
 
   $scope.postComment = function(com){
     var commentObj = {
@@ -470,16 +481,16 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
       email: localStorage.email,
       date: new Date().getTime()
     }
+    $scope.mainUser.comment = '';
       refCommentArray.push(commentObj, function (error) {
       if (error) {
         console.log('Error has occured during saving process')
       }
       else {
         console.log("Data has been saved succesfully adam");
-        $scope.userComment = ''
+        $scope.mainUser.comment = '';
       }
     });
-      console.log(commentObj)
   }
 
   $scope.replyComment = function(ind){
@@ -495,6 +506,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
       email: localStorage.email,
       date: new Date().getTime()
     }
+    $scope.reply.comment = '';
     var refCommentReplyArray = firebase.database().ref().child("comments").child($scope.articleID).child(parentComment.$id).child('reply')
     refCommentReplyArray.push(commentReplyObj, function (error) {
       if (error) {
@@ -505,7 +517,6 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
         console.log("Data hss been saved succesfully")
       }
     });
-    console.log(comReply, parentComment)
   }
 
 })

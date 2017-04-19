@@ -37,15 +37,17 @@
 							<!-- <a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a> -->
 						</div>
 						<form ng-if="isShowing($index)" ng-submit="postReplyComment(reply.comment, comment)">
-							<input type="text" placeholder="Reply Comments" ng-model="reply.comment" class="replyBox"></input>
+							<label class="item item-input">
+								<input type="text" placeholder="Reply Comments" data-ng-model="reply.comment" class="replyBox"/>
+							</label>
 							<!-- <button type="submit">Submit</button> -->
 						</form>
     				</li>
     			</ul>
     		</div>
-				<form ng-submit="postComment(userComment)">
+				<form ng-submit="postComment(mainUser.comment)">
 					<label class="item item-input">
-						<input type="textarea" placeholder="Add your comments!" ng-model="userComment" style="border: 1px solid grey;"></input>
+						<input type="textarea" placeholder="Add your comments!" data-ng-model="mainUser.comment" style="border: 1px solid grey;"/>
 					</label>
 					<!-- <button class="btn button-positive p20" type="submit">Send</button> -->
 			</form>
