@@ -122,11 +122,13 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
         var refArray = firebase.database().ref().child("users").child(firebaseUser.uid);
         var users = $firebaseObject(refArray);
         users.email = firebaseUser.email;
-        users.phone = phone;
+        users.phone = 'phone';
         users.user = ("true");
         users.dus = ("false");
         users.admin = ("false");
         users.expert = ("false");
+        users.location = 'location';
+        users.name = 'Name';
         users.$save().then(function (ref) {
         }, function (error) {
           console.log("Error:", error);

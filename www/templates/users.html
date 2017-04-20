@@ -8,8 +8,8 @@
     <div class="pt20 pb20">
       <h3 class="dark fw300 m0">User Management</h3>
       <p class="dark fw900 mb20 up">Only admins can see this screen.</p>
-      <button class="btn add-button p20">Save</button>
-      <button class="btn add-button p20" style="right:100px;">Export Users</button>
+      <!-- <button class="btn add-button p20">Save</button>
+      <button class="btn add-button p20" style="right:100px;">Export Users</button> -->
       <div class="filters">
         <label class="item item-input title-filter">
           <div class="input-label">
@@ -36,6 +36,7 @@
           <th><h4>Roles</h4></th>
         </tr>
         <tr ng-repeat="user in users | filter:query" class="bg-white m5">
+          <button class="btn add-button p20" type="button" ng-csv="users" csv-header="['Admin', 'DUS', 'email-address', 'expert', 'location', 'name', 'phone-number', 'User', 'User-ID']" filename="SBFC-User-List.csv">Export User Data</button>
           <hr>
           <td>
             <h5 class="fw500 m0 dark pt5"><b>{{user.name}}</b></h5>
