@@ -23,15 +23,15 @@
     		<h4 class="fw300 m0 pb20" ng-show="allComments.length > 0">Comments:</h4>
     			<ul>
     				<li class="comment" ng-repeat="comment in allComments track by $index">
-    				<h5><a ng-show="userProfile.admin === true" ng-click="allComments.$remove(comment)" style="cursor:pointer;">
+    				<h5><a ng-show="userProfile.admin === true" ng-click="removeComment('comment',comment)" style="cursor:pointer;">
               <i class="fa fa-trash energized" aria-hidden="true"></i>
             </a><strong>{{comment.email}}</strong> <br> <span ng-bind="comment.date | date : 'MMM d, y'">Posted on {{comment.date}}</span></h5>
 
             <p ng-bind="comment.comment" style="margin-bottom: 0;"></p>
 						<a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
-						<div ng-if="comment.reply" ng-repeat="reply in comment.reply track by $index" style="width: 88%;margin-left: 38px;margin-bottom: 0;">
+						<div ng-if="comment.reply" ng-repeat="(key, reply) in comment.reply track by $index" style="width: 88%;margin-left: 38px;margin-bottom: 0;">
 							<h5>
-                <a ng-show="userProfile.admin === true" ng-click="comment.reply.$remove(reply)" style="cursor:pointer;">
+                <a ng-show="userProfile.admin === true" ng-click="removeComment('reply',reply, comment.$id, key)" style="cursor:pointer;">
                   <i class="fa fa-trash energized" aria-hidden="true"></i>
                 </a>
                 <strong>{{reply.email}}</strong> <span ng-bind="reply.date | date : 'MMM d, y'">{{reply.date}}</span></h5>
