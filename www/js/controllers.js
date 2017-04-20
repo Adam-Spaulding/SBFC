@@ -418,7 +418,8 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   };
   // array
   var refArray = firebase.database().ref().child("userInfo");
-
+  var startDate = '1481306373397';
+  var endDate = new Date().getTime()+'';
   // create a synchronized array
   var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
 
@@ -448,6 +449,14 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
       console.log("Error:", error);
     });
 
+  $scope.getItemsFromThePast = function () {
+    return function (item, type) {
+      if (item) {
+        var today = new Date().getTime();
+        return item.publish_date <= today;
+      }
+    }
+  }
   $scope.addMessage = function (message) {
     $scope.newMessageText = null;
     $scope.articles.$add({
