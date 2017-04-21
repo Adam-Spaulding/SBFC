@@ -8,12 +8,12 @@
     </label>
   </form>
   <a ng-repeat="item in articles.slice().reverse() | filter:{ published: 'true'} | filter : getItemsFromThePast(item) | orderBy: 'publish_date':true | filter:search | limitTo:20" href="#/app/articleslist/{{item.$id}}">
-    <div class="list card" id="home3-card26">
+    <div class="list card feed" id="home3-card26">
       <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <img class="loading" ng-src="{{item.img}}" style="width:100%; vertical-align: middle;"></img>
+        <img class="loading" ng-src="{{item.img}}" id="{{item.category}}" style="width:100%; vertical-align: middle;"></img>
       </div>
       <div class="list feed">
-          <div class="item item-avatar" href="#" id="{{item.category}}">
+          <div class="item item-avatar" href="#">
             <!-- <img src="img/BBNE.png"> -->
             <h2>{{item.title | limitTo:60 }}{{item.title.length > 60 ? '...' : ''}}</h2>
             <p class="">Posted {{item.publish_date | date : 'MMM dd, yyyy'}}</p>

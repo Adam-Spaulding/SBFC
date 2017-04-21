@@ -14,7 +14,7 @@
       </div>
 		<div class="list">
 		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter : getItemsFromThePast(item) | orderBy: 'publish_date':true | filter:{ published: 'true' , category: 'ask-an-expert' } | limitTo:20" href="#/app/articleslist/{{item.$id}}">
-		    	<img class="loading-sm" ng-src="{{item.img}}">
+		    	<img class="loading-sm" ng-src="{{item.img}}" id="{{item.category}}">
 		      <h4 class="fw500 m0 dark pt5">{{item.title}}</h4>
           <h4 class="fw300 m0 dark" ng-bind="item.publish_date | date : 'MMMM dd, yyyy'">{{item.publish_date | date : 'MMMM dd, yyyy'}}</h4>
 			  <!-- <h4 class="fw300 m0 dark" ng-bind-html="trustedHtml(item.body | limitTo:10)"></h4> -->

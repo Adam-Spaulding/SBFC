@@ -382,6 +382,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
 
   $scope.articleID = $stateParams.id;
   $scope.selectedArticle = {};
+
   // object
   var URL = Firebase.url();
 

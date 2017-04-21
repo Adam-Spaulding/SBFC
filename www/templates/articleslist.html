@@ -5,7 +5,7 @@
     <!-- blog post -->
 
     	<div class="blogPost">
-    		<img ng-src="{{selectedArticle.img}}" class="loading img-full">
+    		<img ng-src="{{selectedArticle.img}}" class="loading img-full" id="{{selectedArticle.category}}">
         <!-- <a href="#/app/edit/{{selectedArticle.$id}}" class="pull-right p20 dark hidden-admin"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a> -->
         <h3 class="post-title">{{selectedArticle.title}}</h3>
 
@@ -39,7 +39,7 @@
 							<!-- <a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a> -->
 						</div>
 						<form ng-if="showReplyBox == $index" ng-hide="repliedToComment" ng-submit="postReplyComment(reply.comment, comment)">
-							<label class="item item-input">
+							<label class="item item-input comment">
 								<input type="text" placeholder="Write a reply and press enter" data-ng-model="reply.comment" class="replyBox"/>
 							</label>
 							<!-- <button type="submit">Submit</button> -->
@@ -48,7 +48,7 @@
     			</ul>
           <hr>
 				<form ng-submit="postComment(mainUser.comment)">
-					<label class="item item-input">
+					<label class="item item-input comment">
 						<input type="textarea" placeholder="Write a comment and press enter" data-ng-model="mainUser.comment"/>
 					</label>
 					<!-- <button class="btn button-positive p20" type="submit">Send</button> -->

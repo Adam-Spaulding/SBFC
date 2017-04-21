@@ -496,8 +496,29 @@ h3.post-title {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
+/*all content list*/
+.allcontent #ask-an-expert {
+  background-repeat: no-repeat;
+  background: #fff url('../img/svg/faq.svg') center no-repeat;
+  min-height: 15px;
+}
+
+.allcontent #marketplace {
+  background-repeat: no-repeat;
+  background: #fff url('../img/cart.png') center no-repeat;
+  background-size: 100%;
+  min-height: 15px;
+}
+
+.allcontent #baby-photo {
+  background-repeat: no-repeat;
+  background: #fff url('../img/svg/picture.svg') center no-repeat;
+  background-size: 100%;
+  min-height: 15px;
+}
+
 /*feed icons*/
-.list #ask-an-expert {
+.list.feed #ask-an-expert {
   background-repeat: no-repeat;
   background-image: url('../img/svg/faq.svg');
   background-size: 50px;
@@ -505,7 +526,7 @@ h3.post-title {
   background-position: 6px;
 }
 
-.list #marketplace {
+.list.feed #marketplace {
   background-repeat: no-repeat;
   background-image: url('../img/cart.png');
   background-size: 50px;
@@ -513,7 +534,7 @@ h3.post-title {
   background-position: 6px;
 }
 
-.list #baby-photo {
+.list.feed #baby-photo {
   background-repeat: no-repeat;
   background-image: url('../img/svg/picture.svg');
   background-size: 50px;
@@ -722,9 +743,32 @@ ionic-content {
   min-height: 60px;
 }
 
+/*disable for ask the expert*/
+.list.feed #ask-an-expert, .blogPost #ask-an-expert {
+  background: #fff url('../img/svg/faq.svg') center no-repeat;
+  min-height: 400px;
+}
+
+.list.feed #marketplace, .blogPost #marketplace {
+  background: #fff url('../img/cart.png') center no-repeat;
+  width: 100%;
+  background-size: 350px 350px;
+  height: 400px;
+}
+
+.list.feed #baby-photo, .blogPost #baby-photo {
+  background: #fff url('../img/svg/picture.svg') center no-repeat;
+  min-height: 400px;
+}
+
 .loading-sm {
   background: transparent url('../img/loading.gif') center no-repeat;
   min-height: 10px;
+}
+
+.loading-sm#ask-an-expert {
+  background: #fff url('../img/svg/faq.svg') center no-repeat !important;
+  border:0px solid #eee;
 }
 
 .users-table {
