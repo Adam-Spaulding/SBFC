@@ -357,7 +357,7 @@ var gLink = "";
 app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
   $scope.showReplyBox = null;
-
+  $scope.repliedToComment = true;
   $scope.show = function() {
       $ionicLoading.show({
         template: 'Loading...',
@@ -506,8 +506,10 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
 
   $scope.replyComment = function(ind){
     $scope.showReplyBox = ind;
+    $scope.repliedToComment = false;
   }
   $scope.isShowing = function(index){
+    // $scope.repliedToComment = false;
     return $scope.showReplyBox == index;
   }
 
@@ -518,6 +520,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
       date: new Date().getTime()
     }
     $scope.reply.comment = '';
+    $scope.repliedToComment = true;
     var refCommentReplyArray = firebase.database().ref().child("comments").child($scope.articleID).child(parentComment.$id).child('reply')
     refCommentReplyArray.push(commentReplyObj, function (error) {
       if (error) {
