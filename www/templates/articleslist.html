@@ -28,7 +28,11 @@
             </a><strong>{{comment.email}}</strong> <br> <span ng-bind="comment.date | date : 'MMM d, y'">Posted on {{comment.date}}</span></h5>
 
             <p ng-bind="comment.comment" style="margin-bottom: 0;"></p>
+<<<<<<< HEAD
 						<a class="reply-link" ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
+=======
+						<a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
+>>>>>>> 45f6f8ced30f733f67203a6d0d8a6358dc5a7fb1
 						<div ng-if="comment.reply" ng-repeat="(key, reply) in comment.reply track by $index" style="width: 88%;margin-left: 38px;margin-bottom: 0;">
 							<h5>
                 <a ng-show="userProfile.admin === true" ng-click="removeComment('reply',reply, comment.$id, key)" style="cursor:pointer;">
