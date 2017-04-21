@@ -110,7 +110,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
 
   // firebase register
   $scope.register = function (email, password, phone) {
-    if (email==null || password==null || phone==null) {
+    if (email == null || password == null || phone == null) {
       ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', true, 4500);
       // alert('Email or Password must not be empty!');
       return
@@ -138,14 +138,14 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
         $state.go('app.home');
       }).catch(function (error) {
         console.error("Error: ", error);
-         ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', false, 4500);
+        ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', false, 4500);
         // alert('User register failed!');
       });
   };
 
   // firebase login
   $scope.login = function (email, password) {
-    if (email==null || password==null) {
+    if (email == null || password == null) {
       ionicToast.show('The email or passowrd is not correct. Please try again.', 'bottom', true, 2500);
       // alert('That username or passowrd is not correct. Please try again.');
       localStorage.setItem("email", email)
@@ -169,7 +169,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
 
   // reset password
   $scope.reset = function (email) {
-    if (email==null) {
+    if (email == null) {
       alert('Please enter your email address');
       return
     }
@@ -196,7 +196,7 @@ app.controller('NewsCtrl', function ($scope, $ionicLoading, FeedSources, FeedLis
 
 });
 
-app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  $stateParams, $ionicModal, FeedSources, FeedList) {
+app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading, $stateParams, $ionicModal, FeedSources, FeedList) {
 
   $ionicLoading.show({
     template: 'Please wait while we load the latest articles from the Seacoast Moms Blog...'
@@ -206,22 +206,22 @@ app.controller('NewslistCtrl', function ($http, $scope, $state, $ionicLoading,  
   var wordpressUrl = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fseacoast.citymomsblog.com%2Ffeed%2F&api_key=4ttyqm0kfrvec25ygfqnw27nmdmqc4gkieabiii2&order_by=&order_dir=desc&count=20";
 
   $http.get(wordpressUrl)
-    .success(function(response){
-      angular.forEach(response.items, function(child){
+    .success(function (response) {
+      angular.forEach(response.items, function (child) {
         $scope.posts.push(child);
         $ionicLoading.hide();
       });
     })
-    .error(function(response, status){
+    .error(function (response, status) {
       console.log("Error while received response. " + status + response);
     });
 
 
 
-    $scope.openUrl = function(link) {
-        window.open(link, '_blank', 'location=yes,toolbar=yes');
-        return false;
-    }
+  $scope.openUrl = function (link) {
+    window.open(link, '_blank', 'location=yes,toolbar=yes');
+    return false;
+  }
 
 })
 
@@ -358,19 +358,19 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
 
   $scope.showReplyBox = null;
   $scope.repliedToComment = true;
-  $scope.show = function() {
-      $ionicLoading.show({
-        template: 'Loading...',
-        duration: 3000
-      }).then(function(){
-         console.log("The loading indicator is now displayed");
-      });
-    };
-    $scope.hide = function(){
-      $ionicLoading.hide().then(function(){
-         console.log("The loading indicator is now hidden");
-      });
-    };
+  $scope.show = function () {
+    $ionicLoading.show({
+      template: 'Loading...',
+      duration: 3000
+    }).then(function () {
+      console.log("The loading indicator is now displayed");
+    });
+  };
+  $scope.hide = function () {
+    $ionicLoading.hide().then(function () {
+      console.log("The loading indicator is now hidden");
+    });
+  };
 
 
   // FIREBASE
@@ -419,7 +419,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   // array
   var refArray = firebase.database().ref().child("userInfo");
   var startDate = '1481306373397';
-  var endDate = new Date().getTime()+'';
+  var endDate = new Date().getTime() + '';
   // create a synchronized array
   var articleListRef = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
 
@@ -469,31 +469,31 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   //     var inAppBrowserRef = window.open(gLink, '_system', 'location=yes', 'clearcache: yes', 'toolbar: no');
   //   }
   // });
-  if($scope.articleID){
-       var refCommentArray = firebase.database().ref().child("comments").child($scope.articleID);
-       $scope.allComments = $firebaseArray(refCommentArray);
+  if ($scope.articleID) {
+    var refCommentArray = firebase.database().ref().child("comments").child($scope.articleID);
+    $scope.allComments = $firebaseArray(refCommentArray);
   }
   $scope.model = {
     theField: 'hello'
   };
   $scope.reply = {
-    comment:''
+    comment: ''
   };
   $scope.mainUser = {
-    comment:''
+    comment: ''
   };
-  $scope.someFunc = function(){
+  $scope.someFunc = function () {
     $scope.model.theField = '';
   }
 
-  $scope.postComment = function(com){
+  $scope.postComment = function (com) {
     var commentObj = {
       comment: com,
       email: localStorage.email,
       date: new Date().getTime()
     }
     $scope.mainUser.comment = '';
-      refCommentArray.push(commentObj, function (error) {
+    refCommentArray.push(commentObj, function (error) {
       if (error) {
         console.log('Error has occured during saving process')
       }
@@ -504,11 +504,11 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     });
   }
 
-  $scope.replyComment = function(ind){
+  $scope.replyComment = function (ind) {
     $scope.showReplyBox = ind;
     $scope.repliedToComment = false;
   }
-  $scope.isShowing = function(index){
+  $scope.isShowing = function (index) {
     // $scope.repliedToComment = false;
     return $scope.showReplyBox == index;
   }
@@ -533,8 +533,8 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     });
   }
 
-  $scope.removeComment = function(type, commentInfo, parentInd, ind){
-    if(type == 'reply'){
+  $scope.removeComment = function (type, commentInfo, parentInd, ind) {
+    if (type == 'reply') {
       var refCommentReplyRemove = firebase.database().ref().child("comments").child($scope.articleID).child(parentInd).child('reply').child(ind);
       refCommentReplyRemove.remove()
         .then(function () {
@@ -543,8 +543,8 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
         .catch(function (error) {
           console.log("Remove failed: " + error.message)
         });
-      console.log('replied comment',commentInfo, ind)
-    }else{
+      console.log('replied comment', commentInfo, ind)
+    } else {
       var refCommentCommentRemove = firebase.database().ref().child("comments").child($scope.articleID).child(commentInfo.$id);
       refCommentCommentRemove.remove()
         .then(function () {
@@ -553,7 +553,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
         .catch(function (error) {
           console.log("Remove failed: " + error.message)
         });
-      console.log('comment',commentInfo)
+      console.log('comment', commentInfo)
     }
   }
 
@@ -561,55 +561,55 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
 
 app.controller('UsersCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
-    $ionicLoading.show({
-      template: 'Loading...'
+  $ionicLoading.show({
+    template: 'Loading...'
+  });
+
+  if (!Date.now) {
+    Date.now = function () { return new Date().getTime(); }
+  }
+
+  // FIREBASE
+
+  // object
+  var URL = Firebase.url();
+
+  var refObject = firebase.database().ref().child("users"); // work with firebase url + object named 'data'
+  // download the data into a local object
+  var syncObject = $firebaseObject(refObject);
+  // synchronize the object with a three-way data binding
+  syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
+  $ionicLoading.hide();
+
+
+  // array
+  var refArray = firebase.database().ref().child("users");
+  // create a synchronized array
+  $scope.users = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
+  // add new items to the array
+  // the message is automatically added to our Firebase database!
+  $scope.updateAdmin = function (users) {
+    // $scope.newMessageText = null;
+    $scope.users.$add({
+      admin: true
     });
 
-    if (!Date.now) {
-      Date.now = function () { return new Date().getTime(); }
-    }
+  };
 
-    // FIREBASE
+  $scope.changeRoleSettings = function (user, role) {
+    var refArray = firebase.database().ref().child("users").child(user.$id);
+    var roleToChange = role;
+    var changesInUser = {};
+    changesInUser[role] = user[role];
+    refArray.update(changesInUser)
+    console.log('Push Notification Change', user);
+  };
 
-    // object
-    var URL = Firebase.url();
+  $scope.emailNotificationChange = function () {
+    console.log('Email Notification Change', $scope.emailNotification);
+  };
 
-    var refObject = firebase.database().ref().child("users"); // work with firebase url + object named 'data'
-    // download the data into a local object
-    var syncObject = $firebaseObject(refObject);
-    // synchronize the object with a three-way data binding
-    syncObject.$bindTo($scope, "firebaseObject"); // $scope.firebaseObject is your data from Firebase - you can edit/save/remove
-    $ionicLoading.hide();
-
-
-    // array
-    var refArray = firebase.database().ref().child("users");
-    // create a synchronized array
-    $scope.users = $firebaseArray(refArray); // $scope.messages is your firebase array, you can add/remove/edit
-    // add new items to the array
-    // the message is automatically added to our Firebase database!
-    $scope.updateAdmin = function (users) {
-      // $scope.newMessageText = null;
-      $scope.users.$add({
-        admin: true
-      });
-
-    };
-
-    $scope.changeRoleSettings = function (user,role) {
-      var refArray = firebase.database().ref().child("users").child(user.$id);
-      var roleToChange = role;
-      var changesInUser = {};
-      changesInUser[role] = user[role];
-      refArray.update(changesInUser)
-      console.log('Push Notification Change', user);
-    };
-
-    $scope.emailNotificationChange = function () {
-      console.log('Email Notification Change', $scope.emailNotification);
-    };
-
-    $scope.pushNotification = { checked: true };
+  $scope.pushNotification = { checked: true };
 
 })
 
@@ -906,14 +906,14 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
   };
 
   $scope.location = $location;
-  $scope.$watch('location.search()', function() {
-      $scope.user.title = ($location.search()).target;
-      $scope.categoryDropDown.selected = ($location.search()).category;
-      $scope.user.published = ($location.search()).published;
+  $scope.$watch('location.search()', function () {
+    $scope.user.title = ($location.search()).target;
+    $scope.categoryDropDown.selected = ($location.search()).category;
+    $scope.user.published = ($location.search()).published;
   }, true);
 
-  $scope.changeTarget = function(name) {
-      $location.search('target', name);
+  $scope.changeTarget = function (name) {
+    $location.search('target', name);
   }
 
   // function extractLinkFromBody(text) {
@@ -928,6 +928,8 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
   //   // or alternatively
   //   // return text.replace(urlRegex, '<a href="$1">$1</a>')
   // }
+  var ref = firebase.database().ref().child("userInfo");
+  var userNode = $firebaseArray(ref);
   $scope.saveData = function (user, msg, b64) {
     ionicToast.show('Saving...', 'bottom', true, 2500);
     var pdfIsTrue = false;
@@ -948,18 +950,30 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
       }
     }
     console.log(pdfDoc);
+    if (pdfDoc) {
+      var uploadPromiseImgs = new Promise(function (resolve, reject) {
+        if (pdfIsTrue) {
+          $scope.storePDFDocToDB(pdfDoc, resolve);
+        } else {
+          $scope.storeImageToDB(imgObj, resolve);
+        }
+      });
+      Promise.all([uploadPromiseImgs]).then(function (data) {
+        userData.img = downloadUrl;
 
-    var uploadPromiseImgs = new Promise(function (resolve, reject) {
-      if (pdfIsTrue) {
-        $scope.storePDFDocToDB(pdfDoc, resolve);
-      } else {
-        $scope.storeImageToDB(imgObj, resolve);
-      }
-    });
-    Promise.all([uploadPromiseImgs]).then(function (data) {
-      userData.img = downloadUrl;
-      var ref = firebase.database().ref().child("userInfo");
-      var userNode = $firebaseArray(ref);
+        userNode.$add(userData).then(function (success) {
+          var addedObjDetails = success.path.o;
+          var addedObj = addedObjDetails[1];
+          $state.go('app.edit', { 'id': addedObj })
+          console.log(success);
+          console.log(addedObj[1]);
+          ionicToast.show('Saved!', 'bottom', false, 2500);
+        });
+      }).catch(function (err) {
+        console.log(err);
+        ionicToast.show('Oops... something went wrong. Title, body, and Image are required.', 'bottom', false, 2500);
+      })
+    } else {
       userNode.$add(userData).then(function (success) {
         var addedObjDetails = success.path.o;
         var addedObj = addedObjDetails[1];
@@ -968,10 +982,8 @@ app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ioni
         console.log(addedObj[1]);
         ionicToast.show('Saved!', 'bottom', false, 2500);
       });
-    }).catch(function (err) {
-      console.log(err);
-      ionicToast.show('Oops... something went wrong. Title, body, and Image are required.', 'bottom', false, 2500);
-    })
+    }
+
   };
   var imgObj = {};
   $scope.myImage = '';
@@ -1525,7 +1537,7 @@ app.controller('AddFolderCtrl', function ($scope, $stateParams, $rootScope, $sta
       for (var i = 0; i < imageResolved.length; ++i) {
         var imgArrNames = "image-" + i;
         var indexOfImgName = imgArrNames;
-        var indexOfImgReslved = imageResolved[ j ];
+        var indexOfImgReslved = imageResolved[j];
         imagesObj[indexOfImgName] = indexOfImgReslved;
       }
       folderInfo.images = imagesObj;
@@ -1634,8 +1646,8 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
     title: ''
   }
 
-  $scope.onSocialSharing = function(imgPath) {
-  window.plugins.socialsharing.share(null, null, imgPath, null);
+  $scope.onSocialSharing = function (imgPath) {
+    window.plugins.socialsharing.share(null, null, imgPath, null);
   }
 
   /* datepicker */
@@ -1667,7 +1679,7 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
       if (editFolderRef.images[key] == imgadd) {
         delete editFolderRef.images[key]
         var indexOfToBeDeleteImg = $scope.editfolderArray.indexOf(imgadd);
-        $scope.editfolderArray.splice(indexOfToBeDeleteImg,1);
+        $scope.editfolderArray.splice(indexOfToBeDeleteImg, 1);
         for (var key in editFolderRef.images) {
           newArrAfterRemovedImg.push(editFolderRef.images[key])
         }
