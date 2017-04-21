@@ -13,6 +13,7 @@
     "angularfire": "^2.1.0",
     "angular": "^1.5.8",
     "ionic-toast": "^0.4.1",
-    "ionic-zoom-view": "^2.0.0"
+    "ionic-zoom-view": "^2.0.0",
+    "ng-csv": "^0.3.6"
   }
 }

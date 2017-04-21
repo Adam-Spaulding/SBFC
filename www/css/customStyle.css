@@ -117,19 +117,6 @@ body {
   width:110%;
 }
 
-span.questions-actions {
-  text-align: right;
-  right: 0;
-  margin-right:10px;
-  position: absolute;
-}
-
-span.questions-actions a {
-  margin: 40px 0px;
-  padding: 10px 10px;
-  cursor: pointer;
-}
-
 .load-image input {
   width: 100%;
   color:#fff;
@@ -365,7 +352,7 @@ ion-view.home-nav button {
 }
 
 .footer, .article-body {
-  margin-bottom: 60px;
+  /*margin-bottom: 60px;*/
 }
 
 .scroll {
@@ -539,7 +526,6 @@ h3.post-title {
    background-image: url('../img/svg/faq.svg');
    background-size: 40px;
    background-position: 90% 2%;
-   position: absolute;
    right: 3px;
  }
 
@@ -764,4 +750,53 @@ li.comment:hover {
 
 li.comment h5 a i:hover {
   color: red;
+}
+
+.article-body {
+  margin-left: 0px;
+  display: block;
+}
+
+.article-comments {
+  background-color: #f5f5f5;
+  padding: 10px;
+
+}
+
+.item.item-input {
+  padding-left: 0px;
+}
+
+.item.item-input input {
+  font-size: 14px;
+  background-color: #fff;
+  padding: 8px 3px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+
+a.reply-link {
+  color: blue;
+  font-weight: bold;
+}
+
+a.add-question {
+  margin: 5px !important;
+  padding: 10px 10px;
+  cursor: pointer;
+  border:1px solid transparent;
+}
+
+a.add-question:hover {
+  border:1px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+/*span.questions-actions {
+  margin-bottom: 10px !important;
+}*/
+
+.question-card .card{
+  padding:10px 10px 20px 10px !important;
 }

@@ -36,6 +36,9 @@
         },
         "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
+        },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.ionicframework.app981534"
         }
     },
     "dependent_plugins": {

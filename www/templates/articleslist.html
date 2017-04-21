@@ -11,27 +11,27 @@
 
       </div>
       <div>
-        <div class="article-body {{selectedArticle.category}}" style="padding:10px;background-color:#fff;padding-bottom:100px;">
+        <div class="article-body {{selectedArticle.category}}" style="padding:10px;background-color:#fff;">
           <p class="fw500 dark">Posted on <span class="fw500 m0 dark pt5" ng-bind="selectedArticle.publish_date | date : 'MMMM dd, yyyy'">{{selectedArticle.publish_date | date : 'MMM dd, yyyy'}}</span></p>
 
           <div class="" ng-bind-html="trustedHtml(selectedArticle.body)"></div>
+        </div>
+    		<div class="p20" hidden ng-bind-html="post.content"></div>
+    		<div class="" ng-show="selectedArticle.category === 'ask-an-expert'">
 
-    		<div class="p20" ng-bind-html="post.content"></div>
-    		<div class="p20" ng-show="selectedArticle.category === 'ask-an-expert'">
-
-        <div class="">
-    		<h4 class="fw300 m0 pb20" ng-show="allComments.length > 0">Comments:</h4>
+        <div class="article-comments">
+    		<h4 class="fw300 m0 pb20" ng-show="allComments.length > 0">Comments</h4>
     			<ul>
     				<li class="comment" ng-repeat="comment in allComments track by $index">
-    				<h5><a ng-show="userProfile.admin === true" ng-click="allComments.$remove(comment)" style="cursor:pointer;">
+    				<h5><a ng-show="userProfile.admin === true" ng-click="removeComment('comment',comment)" style="cursor:pointer;">
               <i class="fa fa-trash energized" aria-hidden="true"></i>
             </a><strong>{{comment.email}}</strong> <br> <span ng-bind="comment.date | date : 'MMM d, y'">Posted on {{comment.date}}</span></h5>
 
             <p ng-bind="comment.comment" style="margin-bottom: 0;"></p>
-						<a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
-						<div ng-if="comment.reply" ng-repeat="reply in comment.reply track by $index" style="width: 88%;margin-left: 38px;margin-bottom: 0;">
+						<a class="reply-link" ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
+						<div ng-if="comment.reply" ng-repeat="(key, reply) in comment.reply track by $index" style="width: 88%;margin-left: 38px;margin-bottom: 0;">
 							<h5>
-                <a ng-show="userProfile.admin === true" ng-click="comment.reply.$remove(reply)" style="cursor:pointer;">
+                <a ng-show="userProfile.admin === true" ng-click="removeComment('reply',reply, comment.$id, key)" style="cursor:pointer;">
                   <i class="fa fa-trash energized" aria-hidden="true"></i>
                 </a>
                 <strong>{{reply.email}}</strong> <span ng-bind="reply.date | date : 'MMM d, y'">{{reply.date}}</span></h5>
@@ -40,21 +40,22 @@
 						</div>
 						<form ng-if="isShowing($index)" ng-submit="postReplyComment(reply.comment, comment)">
 							<label class="item item-input">
-								<input type="text" placeholder="Reply Comments" data-ng-model="reply.comment" class="replyBox"/>
+								<input type="text" placeholder="Write a reply and press enter" data-ng-model="reply.comment" class="replyBox"/>
 							</label>
 							<!-- <button type="submit">Submit</button> -->
 						</form>
     				</li>
     			</ul>
-    		</div>
+          <hr>
 				<form ng-submit="postComment(mainUser.comment)">
 					<label class="item item-input">
-						<input type="textarea" placeholder="Add your comments!" data-ng-model="mainUser.comment" style="border: 1px solid grey;"/>
+						<input type="textarea" placeholder="Write a comment and press enter" data-ng-model="mainUser.comment"/>
 					</label>
 					<!-- <button class="btn button-positive p20" type="submit">Send</button> -->
 			</form>
       </div>
       </div>
+
     	</div>
     	<div class="he190"></div>
 

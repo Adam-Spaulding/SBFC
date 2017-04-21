@@ -521,6 +521,30 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     });
   }
 
+  $scope.removeComment = function(type, commentInfo, parentInd, ind){
+    if(type == 'reply'){
+      var refCommentReplyRemove = firebase.database().ref().child("comments").child($scope.articleID).child(parentInd).child('reply').child(ind);
+      refCommentReplyRemove.remove()
+        .then(function () {
+          console.log("Remove succeeded.")
+        })
+        .catch(function (error) {
+          console.log("Remove failed: " + error.message)
+        });
+      console.log('replied comment',commentInfo, ind)
+    }else{
+      var refCommentCommentRemove = firebase.database().ref().child("comments").child($scope.articleID).child(commentInfo.$id);
+      refCommentCommentRemove.remove()
+        .then(function () {
+          console.log("Remove succeeded.")
+        })
+        .catch(function (error) {
+          console.log("Remove failed: " + error.message)
+        });
+      console.log('comment',commentInfo)
+    }
+  }
+
 })
 
 app.controller('UsersCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {

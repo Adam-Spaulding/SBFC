@@ -3,20 +3,23 @@
   <ion-content class="p20" ng-show="userProfile.expert === true">
     <h3>Submitted Questions</h3>
     <ul>
-      <li ng-repeat="question in messages.slice().reverse()" class="text-left">
+      <li ng-repeat="question in messages.slice().reverse()" class="text-left question-card">
         <div class="card" style="padding:10px 10px;">
-          <span class="questions-actions">
-              <a href="/#/app/add?target={{question.question}}&category=ask-an-expert&published=true">
-              <i class="fa fa-plus energized" aria-hidden="true"></i>
-              </a>
-              <a ng-click="messages.$remove(question)">
-              <i class="fa fa-trash energized" aria-hidden="true"></i>
-              </a>
 
-          </span>
           <p>Submitted on {{question.date}}</p>
           <h4>Submitted by {{question.email}}</h4>
           <p>{{question.question}}</p>
+          <span class="questions-actions">
+              <a class="add-question" href="/#/app/add?target={{question.question}}&category=ask-an-expert&published=true">
+              <i class="fa fa-plus energized" aria-hidden="true"></i> Respond to this question
+              </a>
+              <a class="add-question" href="mailto:{{question.email}}?Subject=Your%20SBFC%20Question&body=Your%20Question:%20{{question.question}}" target="_top">
+              <i class="fa fa-envelope energized" aria-hidden="true"></i> Email this person
+              </a>
+              <a class="add-question" ng-click="messages.$remove(question)" style="color:red;">
+              <i class="fa fa-trash" style="color:red;" aria-hidden="true"></i> Delete this question
+              </a>
+          </span>
         </div>
 
 

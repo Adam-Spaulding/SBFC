@@ -55,6 +55,17 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
       };
     };
 
+// start tracker
+// https://developers.google.com/analytics/devguides/collection/analyticsjs/
+
+$cordovaGoogleAnalytics.startTrackerWithId('UA-97705129-1');
+
+// set user id
+// https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
+
+$cordovaGoogleAnalytics.setUserId('USER_ID');
+
+
     window.plugins.OneSignal
       .startInit("bbf1fde1-85f5-4d5d-8d49-a3cf529ccece")
       .handleNotificationOpened(notificationOpenedCallback)
