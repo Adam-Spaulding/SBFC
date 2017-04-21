@@ -68,11 +68,11 @@ app.service('Firebase', function() {
 // Chat SERVICES
 
 app.service('ChatService', function($state, $location, ionicToast) {
-    this.checkAuthStatus = function(user,success,failure) {
-        if(user){
-            if(user == 'Anonymous'){
-                // console.log('Anonymous');
-                // $state.go('app.login');
+    this.checkAuthStatus = function(currentUser,success,failure) {
+        if(currentUser){
+            if(currentUser === 'Anonymous'){
+                console.log('Anonymous');
+                $state.go('app.login');
                 return(true)
             }else{
                 return(false)
@@ -96,6 +96,7 @@ app.service('FirebaseUser', function($firebaseAuth) {
             return firebaseUser;
         } else {
             return false;
+            console.log("not user")
         }
     }
 });

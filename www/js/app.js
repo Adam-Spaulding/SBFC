@@ -22,17 +22,18 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
 
   $ionicPlatform.ready(function() {
 
-    $rootScope.$on('$locationChangeSuccess', function($state) {
-      var currentUser = localStorage.email || $rootScope.user;
-      $rootScope.user = currentUser;
-      ChatService.checkAuthStatus(currentUser, function (succ) {
-        console.log('route to SUCCESS');
-        // $state.go('app.home');
-      }, function (err) {
-        console.log('route to LOGIN');
-        $state.go('app.login');
-      });
-    })
+    // $rootScope.$on('$locationChangeSuccess', function($state) {
+    //   var currentUser = localStorage.email || $rootScope.user;
+    //   $rootScope.user = currentUser;
+    //   ChatService.checkAuthStatus(currentUser, function (succ) {
+    //     console.log('route to SUCCESS');
+    //     // $state.go('app.home');
+    //   }, function (err) {
+    //     console.log('route to LOGIN');
+    //     event.preventDefault();
+    //     $state.go('app.login');
+    //   });
+    // })
 
     $rootScope.notifications = [];
 
@@ -84,14 +85,14 @@ $cordovaGoogleAnalytics.setUserId('USER_ID');
       StatusBar.styleDefault();
     }
   });
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+  if ("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     // console.log("transitionTo");
     var currentUser = localStorage.email || $rootScope.user;
     $rootScope.user = currentUser;
     if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus(currentUser)) { //Assuming the AuthService holds authentication logic
-      // User isn’t authenticated
-      $state.transitionTo('app.login');
+      console.log("User isn’t authenticated");
       event.preventDefault();
+      $state.transitionTo('app.login')
     }
   });
 })
@@ -139,7 +140,7 @@ $ionicConfigProvider.tabs.position('bottom');
       views: {
         'menuContent': {
           templateUrl: 'templates/home-tiles.html',
-          authRequired: true,
+          authRequired: 'true',
           controller: 'FirebaseCtrl'
         }
       }
@@ -148,11 +149,11 @@ $ionicConfigProvider.tabs.position('bottom');
     .state('app.feed', {
       //cache: false,
       url: '/feed',
+      authRequired: 'true',
       views: {
         'menuContent': {
           templateUrl: 'templates/home.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
@@ -582,7 +583,7 @@ $ionicConfigProvider.tabs.position('bottom');
   function authenticate($rootScope, ChatService, $location) {
     var currentUser = localStorage.email  || $rootScope.user;
     $rootScope.user = currentUser;
-    return ChatService.checkAuthStatus(currentUser, function (succ) {
+    return ChatService.checkAuthStatus(currentUseruser, function (succ) {
       console.log('route to home');
       return true
     }, function (err) {
@@ -594,7 +595,7 @@ $ionicConfigProvider.tabs.position('bottom');
   // if none of the above states are matched, use this as the fallback
   // $urlRouterProvider.otherwise('/app/home');
 
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('#/app/home');
 
 })
 

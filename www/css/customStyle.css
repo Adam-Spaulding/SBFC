@@ -763,11 +763,11 @@ li.comment h5 a i:hover {
 
 }
 
-.item.item-input {
+.item.item-input.comment {
   padding-left: 0px;
 }
 
-.item.item-input input {
+.item.item-input.comment input {
   font-size: 14px;
   background-color: #fff;
   padding: 8px 3px;
@@ -799,4 +799,31 @@ a.add-question:hover {
 
 .question-card .card{
   padding:10px 10px 20px 10px !important;
+}
+
+@media (max-width:499px){
+  a.add-question {
+    margin: 15px 0px !important;
+    width: 100%;
+    display: block;
+    border:1px solid #ccc !important;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border:1px solid transparent;
+  }
+}
+
+.advanced-wrapper {
+  -webkit-user-select: auto !important;
+  -khtml-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  -o-user-select: auto !important;
+  user-select: auto !important;
+}
+
+.toolbar.toolbar-container.ql-toolbar.ql-snow{
+  visibility: visible;
 }

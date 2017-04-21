@@ -31,7 +31,7 @@
       </div>
 
 		<div class="list content">
-		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | filter:search | filter:select | filter: (userProfile.admin != true  || '') && {category: 'ask-an-expert'}" href="#/app/edit/{{item.$id}}">
+		    <a class="item item-avatar bg-white m5" ng-repeat="item in articles.slice().reverse() | orderBy: 'publish_date':true | filter:search | filter:select | filter: (userProfile.admin != true  || '') && {category: 'ask-an-expert'}" href="#/app/edit/{{item.$id}}">
 		    	<img class="loading" ng-src="{{item.img}}">
 		      <h4 class="fw500 m0 dark pt5"><b>{{item.title}}</b></h4>
           <h4 class="fw500 m0 dark pt5">Category: {{item.category}}</h4>
