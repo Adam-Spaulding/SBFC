@@ -25,7 +25,7 @@
     				<li class="comment" ng-repeat="comment in allComments track by $index">
     				<h5><a ng-show="userProfile.admin === true" ng-click="removeComment('comment',comment)" style="cursor:pointer;">
               <i class="fa fa-trash energized" aria-hidden="true"></i>
-            </a><strong>{{comment.name || comment.email }}</strong> <br> <span ng-bind="comment.date | date : 'MMM d, y'">Posted on {{comment.date}}</span></h5>
+            </a><strong>{{comment.name}}</strong> <br> <span ng-bind="comment.date | date : 'MMM d, y'">Posted on {{comment.date}}</span></h5>
 
             <p ng-bind="comment.comment" style="margin-bottom: 0;"></p>
 						<a class="reply-link" ng-click="replyComment($index)" style="cursor: pointer;">Reply</a>
@@ -34,7 +34,7 @@
                 <a ng-show="userProfile.admin === true" ng-click="removeComment('reply',reply, comment.$id, key)" style="cursor:pointer;">
                   <i class="fa fa-trash energized" aria-hidden="true"></i>
                 </a>
-                <strong>{{reply.name || reply.email}}</strong> <span ng-bind="reply.date | date : 'MMM d, y'">{{reply.date}}</span></h5>
+                <strong>{{reply.name}}</strong> <span ng-bind="reply.date | date : 'MMM d, y'">{{reply.date}}</span></h5>
 							<p ng-bind="reply.comment"></p>
 							<!-- <a ng-click="replyComment($index)" style="cursor: pointer;">Reply</a> -->
 						</div>
