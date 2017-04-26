@@ -38,14 +38,14 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
       var currentUserProfile = $firebaseObject(refArray);
       currentUserProfile.$loaded().then(function(user){
         localStorage.setItem("email", user.email)
-        localStorage.setItem("name", user.name)
+        // localStorage.setItem("name", user.name)
         $rootScope.username = user.name;
       })
       // localStorage.setItem("email", email);
       // localStorage.setItem("password", password);
     } else {
-      // $rootScope.user = 'Anonymous';
-      // $rootScope.userUid = 0;
+      $rootScope.user = 'Anonymous';
+      $rootScope.userUid = 0;
     }
   }
 
@@ -68,8 +68,8 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
 
   // USER PROFILE
   $scope.goToProfile = function (uid) {
-    // var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
-    // $scope.userProfile = $firebaseObject(refArray);
+    var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
+    $scope.userProfile = $firebaseObject(refArray);
     $state.go('app.profile');
   }
 
@@ -118,8 +118,8 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
 
   // firebase register
   $scope.register = function (email, password, phone, name) {
-    if (email == null || password == null || phone == null) {
-      ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', true, 4500);
+    if (email == null || password == null || phone == null || name == null) {
+      ionicToast.show('Please enter your name, a valid email, password, and phone number.', 'bottom', true, 4500);
       // alert('Email or Password must not be empty!');
       return
     }
