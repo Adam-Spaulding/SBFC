@@ -73,6 +73,7 @@ app.service('ChatService', function($state, $location, ionicToast, $firebaseAuth
       var user = authObj.$getAuth();
         if (user){
           console.log('hey ' + user);
+          return false
         } else {
             console.log('not logged in');
             // $state.go('app.login');

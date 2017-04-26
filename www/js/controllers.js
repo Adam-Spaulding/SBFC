@@ -34,7 +34,13 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
     if(user) {
       $rootScope.user = user.email;
       $rootScope.userUid = user.uid;
-      $rootScope.userUid = user.name;
+      var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
+      var currentUserProfile = $firebaseObject(refArray);
+      currentUserProfile.$loaded().then(function(user){
+        localStorage.setItem("email", user.email)
+        localStorage.setItem("name", user.name)
+        $rootScope.username = user.name;
+      })
       // localStorage.setItem("email", email);
       // localStorage.setItem("password", password);
     } else {
@@ -43,13 +49,13 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
     }
   }
 
-  $scope.$watch(
-    function ($scope) {
-      return ($scope.getUserStatus());
-    },
-    function (newValue) {
-    }
-  );
+  // $scope.$watch(
+  //   function ($scope) {
+  //     return ($scope.getUserStatus());
+  //   },
+  //   function (newValue) {
+  //   }
+  // );
 
   $scope.logout = function () {
     $firebaseAuth().$signOut();
@@ -150,9 +156,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
     if (email == null || password == null) {
       ionicToast.show('The email or passowrd is not correct. Please try again.', 'bottom', true, 2500);
       // alert('That username or passowrd is not correct. Please try again.');
-      localStorage.setItem("email", email)
-      localStorage.setItem("name", users.name)
-      localStorage.setItem("password", password)
+
       return
     }
     $scope.authObj.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
@@ -161,8 +165,17 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
       console.log($rootScope.user);
       // redirect to home screen
       localStorage.setItem("email", firebaseUser.email);
+      $rootScope.user = firebaseUser.email;
+      $rootScope.userUid = firebaseUser.uid;
+      var refArray = firebase.database().ref().child("users").child($rootScope.userUid);
+      var currentUserProfile = $firebaseObject(refArray);
+      currentUserProfile.$loaded().then(function (user) {
+        localStorage.setItem("email", user.email)
+        localStorage.setItem("name", user.name)
+        $rootScope.username = user.name;
+        $state.go('app.home');
+      })
       // localStorage.setItem("name", users.name);
-      $state.go('app.home');
     }).catch(function (error) {
       console.error("Authentication failed:", error);
       // alert('User login failed!');
@@ -515,8 +528,8 @@ app.controller('FirebaseCtrl', function ($rootScope, $scope, $ionicLoading, $fil
   $scope.postComment = function (com) {
     var commentObj = {
       comment: com,
-      name: $rootScope.userUid = user.name,
       email: localStorage.email,
+      name: localStorage.username || localStorage.name,
       date: new Date().getTime()
     }
     $scope.mainUser.comment = '';
@@ -544,10 +557,12 @@ app.controller('FirebaseCtrl', function ($rootScope, $scope, $ionicLoading, $fil
     var commentReplyObj = {
       comment: comReply,
       email: localStorage.email,
+      name: localStorage.username || localStorage.name,
       date: new Date().getTime()
     }
     $scope.reply.comment = '';
     $scope.repliedToComment = true;
+    console.log("Data hss been saved succesfully ",$rootScope)
     var refCommentReplyArray = firebase.database().ref().child("comments").child($scope.articleID).child(parentComment.$id).child('reply')
     refCommentReplyArray.push(commentReplyObj, function (error) {
       if (error) {
