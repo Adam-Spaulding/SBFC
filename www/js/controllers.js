@@ -28,19 +28,20 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
   // create a synchronized array
   $scope.alerts = $firebaseArray(refArrayAlerts);
 
-  $scope.getUserStatus = function () {
+  $scope.getUserStatus = function() {
     // get firebase user
     var user = FirebaseUser.status();
-    if (user) {
+    if(user) {
       $rootScope.user = user.email;
       $rootScope.userUid = user.uid;
-      // $rootScope.userExpert = user.expert;
+      $rootScope.userUid = user.name;
+      // localStorage.setItem("email", email);
+      // localStorage.setItem("password", password);
     } else {
-      $rootScope.user = 'Anonymous';
-      $rootScope.userUid = 0;
+      // $rootScope.user = 'Anonymous';
+      // $rootScope.userUid = 0;
     }
   }
-
 
   $scope.$watch(
     function ($scope) {
@@ -98,7 +99,8 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
 
 })
 
-app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth, ionicToast) {
+app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, $ionicSideMenuDelegate, $firebaseObject, $firebaseAuth, $firebaseArray, ionicToast) {
+
 
   $ionicSideMenuDelegate.canDragContent(false);
 
@@ -109,13 +111,13 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
   $scope.authObj = $firebaseAuth();
 
   // firebase register
-  $scope.register = function (email, password, phone) {
+  $scope.register = function (email, password, phone, name) {
     if (email == null || password == null || phone == null) {
       ionicToast.show('Please enter a valid email, password, and phone number.', 'bottom', true, 4500);
       // alert('Email or Password must not be empty!');
       return
     }
-    $scope.authObj.$createUserWithEmailAndPassword(email, password)
+    $scope.authObj.$createUserWithEmailAndPassword(email, password, name)
       .then(function (firebaseUser) {
 
         // create 'user' array same id - to store user profile
@@ -128,7 +130,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
         users.admin = ("false");
         users.expert = ("false");
         users.location = 'location';
-        users.name = 'Name';
+        users.name = name;
         users.$save().then(function (ref) {
         }, function (error) {
           console.log("Error:", error);
@@ -149,6 +151,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
       ionicToast.show('The email or passowrd is not correct. Please try again.', 'bottom', true, 2500);
       // alert('That username or passowrd is not correct. Please try again.');
       localStorage.setItem("email", email)
+      localStorage.setItem("name", users.name)
       localStorage.setItem("password", password)
       return
     }
@@ -158,6 +161,7 @@ app.controller('UserCtrl', function ($scope, $rootScope, $state, $ionicLoading, 
       console.log($rootScope.user);
       // redirect to home screen
       localStorage.setItem("email", firebaseUser.email);
+      // localStorage.setItem("name", users.name);
       $state.go('app.home');
     }).catch(function (error) {
       console.error("Authentication failed:", error);
@@ -354,7 +358,7 @@ app.controller('BlogCtrl', function ($scope, $ionicLoading, $stateParams, Blog, 
 
 var gLink = "";
 
-app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
+app.controller('FirebaseCtrl', function ($rootScope, $scope, $ionicLoading, $filter, $ionicSlideBoxDelegate, Firebase, $firebaseObject, $firebaseArray, $stateParams, $sce) {
 
   $scope.showReplyBox = null;
   $scope.repliedToComment = true;
@@ -372,6 +376,27 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
     });
   };
 
+  // array
+  var refArrayAlerts = firebase.database().ref().child("userInfo");
+  // create a synchronized array
+  $scope.alerts = $firebaseArray(refArrayAlerts);
+
+  // $scope.getUserStatus = function () {
+  //   // get firebase user
+  //   var user = FirebaseUser.status();
+  //   if (user) {
+  //     $rootScope.user = user.email;
+  //     $rootScope.userUid = user.uid;
+  //     console.log(user.email)
+  //     // $state.go('app.home');
+  //     // $rootScope.userExpert = user.expert;
+  //   } else {
+  //     $rootScope.user = 'Anonymous';
+  //     $rootScope.userUid = 0;
+  //     $state.go('app.login');
+  //     console.log(user)
+  //   }
+  // }
 
   // FIREBASE
   // $scope.body = $sce.trustAsHtml(htmlBody);
@@ -490,6 +515,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
   $scope.postComment = function (com) {
     var commentObj = {
       comment: com,
+      name: $rootScope.userUid = user.name,
       email: localStorage.email,
       date: new Date().getTime()
     }
@@ -499,7 +525,7 @@ app.controller('FirebaseCtrl', function ($scope, $ionicLoading, $filter, $ionicS
         console.log('Error has occured during saving process')
       }
       else {
-        console.log("Data has been saved succesfully adam");
+        console.log("Data has been saved succesfully");
         $scope.mainUser.comment = '';
       }
     });
@@ -755,7 +781,9 @@ app.config(function ($cordovaAppRateProvider) {
 
 app.controller('ChatCtrl', function ($scope, $rootScope, $state, $timeout, $ionicLoading, $firebaseAuth, $firebaseArray, $location, FirebaseUser, ngQuillConfig, ionicToast) {
 
-  $scope.getUserStatus();
+  $scope.getUserStatus = function () {
+    console.log("hey adam")
+  };
 
   $scope.user = {
     published: '',
@@ -1648,8 +1676,15 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
   }
 
   $scope.onSocialSharing = function (imgPath) {
-    window.plugins.socialsharing.share(null, null, imgPath, null);
+    window.plugins.socialsharing.share(null, imgPath, imgPath, null);
   }
+
+
+  // <button onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)">message and image</button>
+  //
+  // <button onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, image and link</button>
+  //
+  // <button onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, subject, image and link</button>
 
   /* datepicker */
   $scope.valuationDate = new Date();

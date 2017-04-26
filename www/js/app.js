@@ -6,9 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 app = angular.module('revolution', ['ionic', 'revolution.controllers', 'ngSanitize', 'textAngular', 'ngQuill', 'ngImgCrop', 'ionic-toast', 'ngCsv'])
 
-
-
-app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
+app.run(function($ionicPlatform, $rootScope, $state, ChatService, $firebaseAuth) {
 
   // Initialize Firebase
   var config = {
@@ -21,19 +19,6 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
   firebase.initializeApp(config);
 
   $ionicPlatform.ready(function() {
-
-    // $rootScope.$on('$locationChangeSuccess', function($state) {
-    //   var currentUser = localStorage.email || $rootScope.user;
-    //   $rootScope.user = currentUser;
-    //   ChatService.checkAuthStatus(currentUser, function (succ) {
-    //     console.log('route to SUCCESS');
-    //     // $state.go('app.home');
-    //   }, function (err) {
-    //     console.log('route to LOGIN');
-    //     event.preventDefault();
-    //     $state.go('app.login');
-    //   });
-    // })
 
     $rootScope.notifications = [];
 
@@ -59,12 +44,12 @@ app.run(function($ionicPlatform, $rootScope, $state, ChatService) {
 // start tracker
 // https://developers.google.com/analytics/devguides/collection/analyticsjs/
 
-$cordovaGoogleAnalytics.startTrackerWithId('UA-97705129-1');
+    $cordovaGoogleAnalytics.startTrackerWithId('UA-97705129-1');
 
 // set user id
 // https://developers.google.com/analytics/devguides/collection/analyticsjs/user-id
 
-$cordovaGoogleAnalytics.setUserId('USER_ID');
+    $cordovaGoogleAnalytics.setUserId('USER_ID');
 
 
     window.plugins.OneSignal
@@ -85,14 +70,14 @@ $cordovaGoogleAnalytics.setUserId('USER_ID');
       StatusBar.styleDefault();
     }
   });
-  if ("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+
+  $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, currentUser){
     // console.log("transitionTo");
-    var currentUser = localStorage.email || $rootScope.user;
-    $rootScope.user = currentUser;
-    if (toState.views.menuContent.authRequired && ChatService.checkAuthStatus(currentUser)) { //Assuming the AuthService holds authentication logic
-      console.log("User isn’t authenticated");
-      event.preventDefault();
-      $state.transitionTo('app.login')
+    // $rootScope.user = currentUser;
+    if (toState.authRequired && ChatService.checkAuthStatus(currentUser)) { //Assuming the AuthService holds authentication logic
+      // console.log("User isn’t authenticated");
+      $state.transitionTo('app.login');
+      event.preventDefault()
     }
   });
 })
@@ -113,43 +98,41 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.login', {
       url: '/login',
+      // cache: false,
+      authRequired: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/login.html',
-          controller: 'UserCtrl',
-          authRequired: false
+          controller: 'UserCtrl'
         }
       }
     })
 
     .state('app.register', {
       url: '/register',
+      authRequired: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/register.html',
-          controller: 'UserCtrl',
-          authRequired: false
-
+          controller: 'UserCtrl'
         }
       }
     })
 
     .state('app.home', {
-      //cache: false,
       url: '/home',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/home-tiles.html',
-          authRequired: 'true',
-          controller: 'FirebaseCtrl'
+          controller: 'HomeCtrl'
         }
       }
     })
 
     .state('app.feed', {
-      //cache: false,
       url: '/feed',
-      authRequired: 'true',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/home.html',
@@ -160,186 +143,195 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.profile', {
       url: '/profile',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html',
-          controller: 'AppCtrl',
-          authRequired: true
+          controller: 'AppCtrl'
         }
       }
     })
 
     .state('app.forgot', {
       url: '/forgot',
+      authRequired: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/forgot.html',
-          controller: 'UserCtrl',
-          authRequired: false
+          controller: 'UserCtrl'
         }
       }
     })
 
     .state('app.macphotography', {
       url: '/home/macphotography',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/macphotography.html',
-          controller: 'HomeCtrl',
-          authRequired: true
+          controller: 'HomeCtrl'
         }
       }
     })
 
     .state('app.users', {
       url: '/users',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/users.html',
-          controller: 'UsersCtrl',
-          authRequired: true
+          controller: 'UsersCtrl'
         }
       }
     })
 
     .state('app.ask-an-expert', {
       url: '/ask-an-expert',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/ask-an-expert.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
 
+// notworking
     .state('app.allcontent', {
       url: '/allcontent',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/all-content.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
 
+// notworking
     .state('app.babypicture', {
       url: '/babypicture',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/babypicture.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
 
     .state('app.marketplace', {
       url: '/marketplace',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/marketplace.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
+
+
+// notworking
     .state('app.filetransfer', {
       url: '/filetransfer',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/FileTransfer.html',
-          controller: 'FileTransferCtrl',
-          authRequired: true
+          controller: 'FileTransferCtrl'
         }
       }
     })
 
+// notworking
     .state('app.addfolder', {
       url: '/addfolder',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/add-folder.html',
-          controller: 'AddFolderCtrl',
-          authRequired: true
+          controller: 'AddFolderCtrl'
         }
       }
     })
 
+
+// notworking
     .state('app.editfolder', {
       url: '/editfolder/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/edit-folder.html',
-          controller: 'EditFolderCtrl',
-          authRequired: true
+          controller: 'EditFolderCtrl'
         }
       }
     })
 
+// notworking
     .state('app.readfolder', {
       url: '/readfolder/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/read-folder.html',
-          controller: 'EditFolderCtrl',
-          authRequired: true
+          controller: 'EditFolderCtrl'
         }
       }
     })
 
     .state('app.articleslist', {
       url: '/articleslist/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/articleslist.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
 
     .state('app.news', {
       url: '/news',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/news.html',
-          controller: 'NewsCtrl',
-          authRequired: true
+          controller: 'NewsCtrl'
         }
       }
     })
 
     .state('app.dus', {
       url: '/dus',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/dus.html',
-          controller: 'FileTransferCtrl',
-          authRequired: true
+          controller: 'FileTransferCtrl'
         }
       }
     })
 
     .state('app.dus_files', {
       url: '/dus/files',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/dus_files.html',
-          controller: 'FileTransferCtrl',
-          authRequired: true
+          controller: 'FileTransferCtrl'
         }
       }
     })
 
     .state('app.newslist', {
       url: '/newslist/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/newslist.html',
-          controller: 'NewslistCtrl',
-          authRequired: true
+          controller: 'NewslistCtrl'
         }
       }
     })
@@ -347,17 +339,18 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.newslistdetails', {
       url: '/newslistdetails',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/newslistdetails.html',
-          controller: 'NewslistCtrl',
-          authRequired: true
+          controller: 'NewslistCtrl'
         }
       }
     })
 
     .state('app.smb', {
       url: '/smb',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/seacoastmomsblog.html',
@@ -368,6 +361,7 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.smblist', {
       url: '/smblist/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/seacoastmomsbloglist.html',
@@ -378,33 +372,33 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.blog', {
       url: '/blog/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/blog.html',
-          controller: 'BlogCtrl',
-          authRequired: true
+          controller: 'BlogCtrl'
         }
       }
     })
 
     .state('app.post', {
       url: '/post/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/post.html',
-          controller: 'BlogCtrl',
-          authRequired: true
+          controller: 'BlogCtrl'
         }
       }
     })
 
     .state('app.firebase', {
       url: '/firebase',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/firebase.html',
-          controller: 'FirebaseCtrl',
-          authRequired: true
+          controller: 'FirebaseCtrl'
         }
       }
     })
@@ -422,180 +416,164 @@ $ionicConfigProvider.tabs.position('bottom');
 
     .state('app.elements', {
       url: '/elements',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/elements.html',
-          controller: 'ElementsCtrl',
-          authRequired: true
+          controller: 'ElementsCtrl'
         }
       }
     })
 
     .state('app.plugins', {
       url: '/plugins',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/plugins.html',
-          controller: 'PluginsCtrl',
-          authRequired: true
-        }
-      }
-    })
-
-    .state('app.chat', {
-      cache: false,
-      url: '/chat',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/chat.html',
-          controller: 'ChatCtrl',
-          authRequired: true
+          controller: 'PluginsCtrl'
         }
       }
     })
 
     .state('app.add', {
-      cache: false,
       url: '/add',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/add.html',
-          controller: 'ChatCtrl',
-          authRequired: true
+          controller: 'ChatCtrl'
         }
       }
     })
 
     .state('app.submit-ask-an-expert', {
-      cache: false,
       url: '/submit-ask-an-expert',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/submit-ask-an-expert.html',
-          controller: 'AskanexpertCtrl',
-          authRequired: true
+          controller: 'AskanexpertCtrl'
         }
       }
     })
 
     .state('app.questions', {
-      cache: false,
       url: '/questions',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/questions.html',
-          controller: 'AskanexpertCtrl',
-          authRequired: true
+          controller: 'AskanexpertCtrl'
         }
       }
     })
 
     .state('app.edit', {
-      cache: false,
       url: '/edit/:id',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/edit.html',
-          controller: 'EditCtrl',
-          authRequired: true
+          controller: 'EditCtrl'
         }
       }
     })
 
     .state('app.weather', {
-      cache: false,
       url: '/weather',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/weather.html',
-          controller: 'WeatherCtrl',
-          authRequired: true
+          controller: 'WeatherCtrl'
         }
       }
     })
 
     .state('app.contact', {
       url: '/home/contact',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/contact.html',
-          controller: 'HomeCtrl',
-          authRequired: true
+          controller: 'HomeCtrl'
         }
       }
     })
 
     .state('app.calendar', {
       url: '/home/calendar',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/calendar.html',
-          controller: 'HomeCtrl',
-          authRequired: true
+          controller: 'HomeCtrl'
         }
       }
     })
 
     .state('app.youtube', {
       url: '/videos',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/youtube.html',
-          controller: 'YoutubeCtrl',
-          authRequired: true
+          controller: 'YoutubeCtrl'
         }
       }
     })
 
     .state('app.video', {
       url: '/video/:id/:index',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/youtubevideo.html',
-          controller: 'YoutubeCtrl',
-          authRequired: true
+          controller: 'YoutubeCtrl'
         }
       }
     })
 
     .state('app.maps', {
       url: '/home/maps',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/maps.html',
-          controller: 'MapsCtrl',
-          authRequired: true
+          controller: 'MapsCtrl'
         }
       }
     })
 
     .state('app.admob', {
       url: '/admob',
+      authRequired: true,
       views: {
         'menuContent': {
           templateUrl: 'templates/admob.html',
-          controller: 'AdmobCtrl',
-          authRequired: true
+          controller: 'AdmobCtrl'
         }
       }
     })
 
-  function authenticate($rootScope, ChatService, $location) {
-    var currentUser = localStorage.email  || $rootScope.user;
-    $rootScope.user = currentUser;
-    return ChatService.checkAuthStatus(currentUseruser, function (succ) {
-      console.log('route to home');
-      return true
-    }, function (err) {
-      console.log('route to LOGIN');
-       $location.path('/login');
-    })
-  }
+  // function authenticate($rootScope, ChatService, $location, $state) {
+  //   var currentUser = localStorage.email  || $rootScope.user;
+  //   $rootScope.user = currentUser;
+  //   return ChatService.checkAuthStatus(currentUser, function (succ) {
+  //     console.log('route to home');
+  //     $state.go('app.home');
+  //     return true
+  //   }, function (err) {
+  //     console.log('route to LOGIN');
+  //     //  $state.go('app.login');
+  //   })
+  // }
 
   // if none of the above states are matched, use this as the fallback
-  // $urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/home');
 
-  $urlRouterProvider.otherwise('#/app/home');
+  // $urlRouterProvider.otherwise('/app/home');
 
 })
 

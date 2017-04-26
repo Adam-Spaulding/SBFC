@@ -12,6 +12,9 @@
 		<h4 class="fw300 m0 light"><img src="img/logo.png" style="max-width:500px; width:100%;"></h4>
 		<div class="list list-inset">
           <label class="item item-input input-transparent">
+              <input type="text" placeholder="Name" ng-model="name">
+          </label>
+          <label class="item item-input input-transparent">
               <input type="email" placeholder="Email" ng-model="email">
           </label>
           <label class="item item-input input-transparent mt10">
@@ -22,7 +25,7 @@
           </label>
       </div>
       <div class="p10">
-        <button class="button button-block button-energized up" ng-click="register(email, password, phone)">Register</button>
+        <button class="button button-block button-energized up" ng-click="register(email, password, phone, name)">Register</button>
         <p class="dark mt30">Already have an account?</p>
         <a class="button button-outline button-dark button-block up" href="#/app/login">Login</a>
         </div>

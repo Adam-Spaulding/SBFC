@@ -67,20 +67,16 @@ app.service('Firebase', function() {
 
 // Chat SERVICES
 
-app.service('ChatService', function($state, $location, ionicToast) {
-    this.checkAuthStatus = function(currentUser,success,failure) {
-        if(currentUser){
-            if(currentUser === 'Anonymous'){
-                console.log('Anonymous');
-                $state.go('app.login');
-                return(true)
-            }else{
-                return(false)
-            }
+app.service('ChatService', function($state, $location, ionicToast, $firebaseAuth) {
+    this.checkAuthStatus = function(user,success,failure) {
+      var authObj = $firebaseAuth();
+      var user = authObj.$getAuth();
+        if (user){
+          console.log('hey ' + user);
         } else {
-            console.log('not a user');
-            $state.go('app.login');
-            return(true)
+            console.log('not logged in');
+            // $state.go('app.login');
+            return true
         }
     };
 });
@@ -94,9 +90,12 @@ app.service('FirebaseUser', function($firebaseAuth) {
         var firebaseUser = authObj.$getAuth();
         if (firebaseUser) {
             return firebaseUser;
+            console.log('hey bud');
+            $state.go('app.home')
         } else {
-            return false;
-            console.log("not user")
+            return (false);
+            console.log("not a user");
+            // $state.go('app.login')
         }
     }
 });

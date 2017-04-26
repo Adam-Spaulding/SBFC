@@ -92,4 +92,5 @@
   <feature name="InAppBrowser">
     <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
   </feature>
+  
 </widget>

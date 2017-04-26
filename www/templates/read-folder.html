@@ -3,9 +3,11 @@
       <h4 class="fw300 m0 p10 pt20 col">Tap the image for options</h4>
     <span ng-repeat="fle in editfolderArray track by $index" class="dus-img" style="width:100%; display:inline;">
       <!-- <button class="button" ng-click="onSocialSharing(fle)"><i class="ion-android-more-vertical fa-2x" style="color:#fff;"></i></button> -->
-
       <img class="" ng-src="{{fle}}" ng-click="onSocialSharing(fle)" style="width:100%" />
-
+      <!-- <form class="platform-andorid" method="get" action="{{fle}}">
+        <button type="submit">Download!</button>
+      </form> -->
+      <!-- <a class="platform-andorid" href="{{fle}}" download="{{fle}}">Download</a> -->
     </span>
 
 <!-- <ion-gallery ion-gallery-items="editfolderArray"></ion-gallery> -->

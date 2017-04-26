@@ -1,3 +1,5 @@
+var cordova = require('cordova');
+
 function SocialSharing() {
 }
 
@@ -118,3 +120,5 @@ SocialSharing.install = function () {
   window.plugins.socialsharing = new SocialSharing();
   return window.plugins.socialsharing;
 };
+
+cordova.addConstructor(SocialSharing.install);

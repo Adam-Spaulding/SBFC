@@ -10,7 +10,8 @@
 	<div class="relative z-hi text-center pt70 ml40 mr40 pb70">
 		<!-- <h1 class="fw300 m0 light">Welcome</h1> -->
 		<h4 class="fw300 m0 light"><img src="img/logo.png" style="max-width:500px; width:100%;"></h4>
-		<div class="list list-inset ">
+    <div>
+    <div class="list list-inset ">
           <label class="item item-input input-transparent">
               <input type="email" placeholder="Email" ng-model="email">
           </label>
@@ -25,7 +26,14 @@
         <a class="button button-outline button-block button-clear button-energized up" href="#/app/forgot">Forgot password</a>
           <!-- <a class="button button-block button-clear button-light up" href="#/app/home">Skip login</a> -->
       </div>
+    </div>
+    <div class="skip" ng-show="user != 'Anonymous'">
+      <p class="dark mt30">Welcome back {{user}}</p>
+      <a class="button button-block button-energized up" href="#/app/home">Enter</a>
+    </div>
 	</div>
+
+
 
 
   </ion-content>
