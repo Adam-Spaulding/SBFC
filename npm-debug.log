@@ -17,134 +17,108 @@
 12 silly mapToRegistry uri https://registry.npmjs.org/ios-deploy
 13 verbose request uri https://registry.npmjs.org/ios-deploy
 14 verbose request no auth needed
-15 info attempt registry request try #1 at 10:27:23 PM
-16 verbose request id 45f2d434c0a35a82
-17 verbose etag W/"58042da1-9e49"
-18 verbose lastModified Mon, 17 Oct 2016 01:47:13 GMT
+15 info attempt registry request try #1 at 10:57:46 PM
+16 verbose request id fc3f46f612b7d1c3
+17 verbose etag W/"589653e6-a556"
+18 verbose lastModified Sat, 04 Feb 2017 22:21:26 GMT
 19 http request GET https://registry.npmjs.org/ios-deploy
-20 http 200 https://registry.npmjs.org/ios-deploy
-21 verbose headers { server: 'nginx/1.10.1',
-21 verbose headers   'content-type': 'application/json',
-21 verbose headers   'last-modified': 'Sat, 04 Feb 2017 22:21:26 GMT',
-21 verbose headers   etag: 'W/"589653e6-a556"',
-21 verbose headers   'content-encoding': 'gzip',
-21 verbose headers   'cache-control': 'max-age=300',
-21 verbose headers   'content-length': '6437',
-21 verbose headers   'accept-ranges': 'bytes',
-21 verbose headers   date: 'Fri, 21 Apr 2017 02:27:23 GMT',
+20 http 304 https://registry.npmjs.org/ios-deploy
+21 verbose headers { date: 'Wed, 03 May 2017 02:57:47 GMT',
 21 verbose headers   via: '1.1 varnish',
-21 verbose headers   age: '0',
+21 verbose headers   'cache-control': 'max-age=300',
+21 verbose headers   etag: 'W/"589653e6-a556"',
+21 verbose headers   age: '14',
 21 verbose headers   connection: 'keep-alive',
-21 verbose headers   'x-served-by': 'cache-bos8230-BOS',
-21 verbose headers   'x-cache': 'MISS',
-21 verbose headers   'x-cache-hits': '0',
-21 verbose headers   'x-timer': 'S1492741644.610979,VS0,VE13',
+21 verbose headers   'x-served-by': 'cache-bos8225-BOS',
+21 verbose headers   'x-cache': 'HIT',
+21 verbose headers   'x-cache-hits': '1',
+21 verbose headers   'x-timer': 'S1493780267.088042,VS0,VE0',
 21 verbose headers   vary: 'Accept-Encoding' }
-22 silly get cb [ 200,
-22 silly get   { server: 'nginx/1.10.1',
-22 silly get     'content-type': 'application/json',
-22 silly get     'last-modified': 'Sat, 04 Feb 2017 22:21:26 GMT',
-22 silly get     etag: 'W/"589653e6-a556"',
-22 silly get     'content-encoding': 'gzip',
-22 silly get     'cache-control': 'max-age=300',
-22 silly get     'content-length': '6437',
-22 silly get     'accept-ranges': 'bytes',
-22 silly get     date: 'Fri, 21 Apr 2017 02:27:23 GMT',
+22 silly get cb [ 304,
+22 silly get   { date: 'Wed, 03 May 2017 02:57:47 GMT',
 22 silly get     via: '1.1 varnish',
-22 silly get     age: '0',
+22 silly get     'cache-control': 'max-age=300',
+22 silly get     etag: 'W/"589653e6-a556"',
+22 silly get     age: '14',
 22 silly get     connection: 'keep-alive',
-22 silly get     'x-served-by': 'cache-bos8230-BOS',
-22 silly get     'x-cache': 'MISS',
-22 silly get     'x-cache-hits': '0',
-22 silly get     'x-timer': 'S1492741644.610979,VS0,VE13',
+22 silly get     'x-served-by': 'cache-bos8225-BOS',
+22 silly get     'x-cache': 'HIT',
+22 silly get     'x-cache-hits': '1',
+22 silly get     'x-timer': 'S1493780267.088042,VS0,VE0',
 22 silly get     vary: 'Accept-Encoding' } ]
-23 verbose get saving ios-deploy to /Users/Adam/.npm/registry.npmjs.org/ios-deploy/.cache.json
-24 verbose correctMkdir /Users/Adam/.npm correctMkdir not in flight; initializing
-25 silly install normalizeTree
-26 silly loadCurrentTree Finishing
-27 silly loadIdealTree Starting
-28 silly install loadIdealTree
-29 silly cloneCurrentTree Starting
-30 silly install cloneCurrentTreeToIdealTree
-31 silly cloneCurrentTree Finishing
-32 silly loadShrinkwrap Starting
-33 silly install loadShrinkwrap
-34 silly loadShrinkwrap Finishing
-35 silly loadAllDepsIntoIdealTree Starting
-36 silly install loadAllDepsIntoIdealTree
-37 silly resolveWithNewModule ios-deploy@1.9.1 checking installable status
-38 silly cache add args [ 'ios-deploy', null ]
-39 verbose cache add spec ios-deploy
-40 silly cache add parsed spec Result {
-40 silly cache add   raw: 'ios-deploy',
-40 silly cache add   scope: null,
-40 silly cache add   name: 'ios-deploy',
-40 silly cache add   rawSpec: '',
-40 silly cache add   spec: 'latest',
-40 silly cache add   type: 'tag' }
-41 silly addNamed ios-deploy@latest
-42 verbose addNamed "latest" is being treated as a dist-tag for ios-deploy
-43 info addNameTag [ 'ios-deploy', 'latest' ]
-44 silly mapToRegistry name ios-deploy
-45 silly mapToRegistry using default registry
-46 silly mapToRegistry registry https://registry.npmjs.org/
-47 silly mapToRegistry uri https://registry.npmjs.org/ios-deploy
-48 verbose addNameTag registry:https://registry.npmjs.org/ios-deploy not in flight; fetching
-49 verbose get https://registry.npmjs.org/ios-deploy not expired, no request
-50 silly addNameTag next cb for ios-deploy with tag latest
-51 silly addNamed ios-deploy@1.9.1
-52 verbose addNamed "1.9.1" is a plain semver version for ios-deploy
-53 silly mapToRegistry name ios-deploy
-54 silly mapToRegistry using default registry
-55 silly mapToRegistry registry https://registry.npmjs.org/
-56 silly mapToRegistry uri https://registry.npmjs.org/ios-deploy
-57 verbose addRemoteTarball https://registry.npmjs.org/ios-deploy/-/ios-deploy-1.9.1.tgz not in flight; adding
-58 verbose addRemoteTarball [ 'https://registry.npmjs.org/ios-deploy/-/ios-deploy-1.9.1.tgz',
-58 verbose addRemoteTarball   'e7dec9508bb464a1f2d546bb07fada41d2708e66' ]
-59 info retry fetch attempt 1 at 10:27:23 PM
-60 info attempt registry request try #1 at 10:27:23 PM
-61 http fetch GET https://registry.npmjs.org/ios-deploy/-/ios-deploy-1.9.1.tgz
-62 http fetch 200 https://registry.npmjs.org/ios-deploy/-/ios-deploy-1.9.1.tgz
-63 silly fetchAndShaCheck shasum e7dec9508bb464a1f2d546bb07fada41d2708e66
-64 verbose addTmpTarball /var/folders/kl/blrbxsj574xdgmqmkflr6j_40000gp/T/npm-30838-8416d8de/registry.npmjs.org/ios-deploy/-/ios-deploy-1.9.1.tgz not in flight; adding
-65 verbose addTmpTarball already have metadata; skipping unpack for ios-deploy@1.9.1
-66 verbose correctMkdir /Users/Adam/.npm correctMkdir not in flight; initializing
-67 silly cache afterAdd ios-deploy@1.9.1
-68 verbose afterAdd /Users/Adam/.npm/ios-deploy/1.9.1/package/package.json not in flight; writing
-69 verbose correctMkdir /Users/Adam/.npm correctMkdir not in flight; initializing
-70 verbose afterAdd /Users/Adam/.npm/ios-deploy/1.9.1/package/package.json written
-71 silly loadAllDepsIntoIdealTree Finishing
-72 silly idealTree:prePrune lib
-72 silly idealTree:prePrune └── ios-deploy@1.9.1
-73 silly loadIdealTree Finishing
-74 silly currentTree lib
-75 silly idealTree lib
-75 silly idealTree └── ios-deploy@1.9.1
-76 silly generateActionsToTake Starting
-77 silly install generateActionsToTake
-78 warn checkPermissions Missing write access to /usr/local/lib/node_modules
-79 silly rollbackFailedOptional Starting
-80 silly rollbackFailedOptional Finishing
-81 silly runTopLevelLifecycles Starting
-82 silly runTopLevelLifecycles Finishing
-83 silly install printInstalled
-84 verbose stack Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
-84 verbose stack     at Error (native)
-85 verbose cwd /Users/Adam/Google Drive/sbfc/appIonicCLI
-86 error Darwin 16.4.0
-87 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "ios-deploy"
-88 error node v4.2.6
-89 error npm  v3.7.3
-90 error path /usr/local/lib/node_modules
-91 error code EACCES
-92 error errno -13
-93 error syscall access
-94 error Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
-94 error     at Error (native)
-94 error  { [Error: EACCES: permission denied, access '/usr/local/lib/node_modules']
-94 error   errno: -13,
-94 error   code: 'EACCES',
-94 error   syscall: 'access',
-94 error   path: '/usr/local/lib/node_modules' }
-95 error Please try running this command again as root/Administrator.
-96 verbose exit [ -13, true ]
+23 verbose etag https://registry.npmjs.org/ios-deploy from cache
+24 verbose get saving ios-deploy to /Users/Adam/.npm/registry.npmjs.org/ios-deploy/.cache.json
+25 verbose correctMkdir /Users/Adam/.npm correctMkdir not in flight; initializing
+26 silly install normalizeTree
+27 silly loadCurrentTree Finishing
+28 silly loadIdealTree Starting
+29 silly install loadIdealTree
+30 silly cloneCurrentTree Starting
+31 silly install cloneCurrentTreeToIdealTree
+32 silly cloneCurrentTree Finishing
+33 silly loadShrinkwrap Starting
+34 silly install loadShrinkwrap
+35 silly loadShrinkwrap Finishing
+36 silly loadAllDepsIntoIdealTree Starting
+37 silly install loadAllDepsIntoIdealTree
+38 silly resolveWithNewModule ios-deploy@1.9.1 checking installable status
+39 silly cache add args [ 'ios-deploy', null ]
+40 verbose cache add spec ios-deploy
+41 silly cache add parsed spec Result {
+41 silly cache add   raw: 'ios-deploy',
+41 silly cache add   scope: null,
+41 silly cache add   name: 'ios-deploy',
+41 silly cache add   rawSpec: '',
+41 silly cache add   spec: 'latest',
+41 silly cache add   type: 'tag' }
+42 silly addNamed ios-deploy@latest
+43 verbose addNamed "latest" is being treated as a dist-tag for ios-deploy
+44 info addNameTag [ 'ios-deploy', 'latest' ]
+45 silly mapToRegistry name ios-deploy
+46 silly mapToRegistry using default registry
+47 silly mapToRegistry registry https://registry.npmjs.org/
+48 silly mapToRegistry uri https://registry.npmjs.org/ios-deploy
+49 verbose addNameTag registry:https://registry.npmjs.org/ios-deploy not in flight; fetching
+50 verbose get https://registry.npmjs.org/ios-deploy not expired, no request
+51 silly addNameTag next cb for ios-deploy with tag latest
+52 silly addNamed ios-deploy@1.9.1
+53 verbose addNamed "1.9.1" is a plain semver version for ios-deploy
+54 silly cache afterAdd ios-deploy@1.9.1
+55 verbose afterAdd /Users/Adam/.npm/ios-deploy/1.9.1/package/package.json not in flight; writing
+56 verbose correctMkdir /Users/Adam/.npm correctMkdir not in flight; initializing
+57 verbose afterAdd /Users/Adam/.npm/ios-deploy/1.9.1/package/package.json written
+58 silly loadAllDepsIntoIdealTree Finishing
+59 silly idealTree:prePrune lib
+59 silly idealTree:prePrune └── ios-deploy@1.9.1
+60 silly loadIdealTree Finishing
+61 silly currentTree lib
+62 silly idealTree lib
+62 silly idealTree └── ios-deploy@1.9.1
+63 silly generateActionsToTake Starting
+64 silly install generateActionsToTake
+65 warn checkPermissions Missing write access to /usr/local/lib/node_modules
+66 silly rollbackFailedOptional Starting
+67 silly rollbackFailedOptional Finishing
+68 silly runTopLevelLifecycles Starting
+69 silly runTopLevelLifecycles Finishing
+70 silly install printInstalled
+71 verbose stack Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+71 verbose stack     at Error (native)
+72 verbose cwd /Users/Adam/Google Drive/sbfc/appIonicCLI
+73 error Darwin 16.4.0
+74 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "ios-deploy"
+75 error node v4.2.6
+76 error npm  v3.7.3
+77 error path /usr/local/lib/node_modules
+78 error code EACCES
+79 error errno -13
+80 error syscall access
+81 error Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+81 error     at Error (native)
+81 error  { [Error: EACCES: permission denied, access '/usr/local/lib/node_modules']
+81 error   errno: -13,
+81 error   code: 'EACCES',
+81 error   syscall: 'access',
+81 error   path: '/usr/local/lib/node_modules' }
+82 error Please try running this command again as root/Administrator.
+83 verbose exit [ -13, true ]

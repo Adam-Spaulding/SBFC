@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.app981534" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget
+  id="com.ionicframework.app981534"
+  version="0.0.1"
+  xmlns="http://www.w3.org/ns/widgets"
+  xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>SBFC</name>
   <description>
         Seacoast Birth and Family Connection
@@ -80,6 +84,7 @@
   <allow-intent href="itms:*"/>
   <allow-intent href="itms-apps:*"/>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
+  <!-- for Android (you will find one in res/xml) -->
   <feature name="SocialSharing">
     <param name="android-package" value="nl.xservices.plugins.SocialSharing"/>
   </feature>
@@ -92,5 +97,6 @@
   <feature name="InAppBrowser">
     <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
   </feature>
-  
+<!-- <gap:plugin name="nl.x-services.plugins.socialsharing" /> -->
+
 </widget>
