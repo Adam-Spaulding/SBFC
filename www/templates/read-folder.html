@@ -1,11 +1,12 @@
 <ion-view view-title='My Folder' hide-back-button=''>
   <ion-content>
-    <button style="display:block;" onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)">SHARE</button>
+    <!-- <button style="display:block;" onclick="window.plugins.socialsharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)">SHARE</button> -->
     <!-- <button style="display:block;" onclick="window.plugins.socialsharing.shareViaTwitter('hi', ['https://img0.etsystatic.com/127/1/10671252/il_340x270.930572852_ngna.jpg'], null, function(msg) {alert(msg)}, function(err) {alert(err)})">url img via Facebook</button> -->
       <h4 class="fw300 m0 p10 pt20 col">Tap the image for options</h4>
     <span ng-repeat="fle in editfolderArray track by $index" class="dus-img" style="width:100%; display:inline;">
       <!-- <button class="button" ng-click="onSocialSharing(fle)"><i class="ion-android-more-vertical fa-2x" style="color:#fff;"></i></button> -->
-      <img class="" ng-src="{{fle}}" ng-click="onSocialSharing(fle)" style="width:100%" />
+      <!-- <img class="" ng-src="{{fle}}" ng-click="onSocialSharing(fle)" style="width:100%" /> -->
+      <img class="" ng-src="{{fle}}" onclick="window.plugins.socialsharing.share(null, null, {{fle}}, null)" style="width:100%" />
       <!-- <a style="display:block; padding:20px; font-size:30px; margin:20px;" onclick="window.plugins.socialsharing.shareViaFacebook( null, ['{{fle}}'], null, function(msg))">url img via Facebook</a> -->
     </span>
 

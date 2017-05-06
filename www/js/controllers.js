@@ -23,6 +23,11 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
     $ionicHistory.goBack();
   }
 
+  document.body.onoffline = function() {
+     alert('It looks like you are not conected to the internet. Please check back when you get online.');
+     $scope.connection = 'offline'
+  }
+
   // array
   var refArrayAlerts = firebase.database().ref().child("userInfo");
   // create a synchronized array

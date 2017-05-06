@@ -14,7 +14,7 @@
         <div class="article-body {{selectedArticle.category}}" style="padding:10px;background-color:#fff;">
           <p class="fw500 dark">Posted on <span class="fw500 m0 dark pt5" ng-bind="selectedArticle.publish_date | date : 'MMMM dd, yyyy'">{{selectedArticle.publish_date | date : 'MMM dd, yyyy'}}</span></p>
 
-          <div class="" ng-bind-html="trustedHtml(selectedArticle.body)"></div>
+          <div class="body" ng-bind-html="trustedHtml(selectedArticle.body)"></div>
         </div>
     		<div class="p20" hidden ng-bind-html="post.content"></div>
     		<div class="" ng-show="selectedArticle.category === 'ask-an-expert'">
@@ -57,7 +57,7 @@
       </div>
 
     	</div>
-    	<div class="he190"></div>
+    	<div class="he190">&nbsp;</div>
 
   </ion-content>
 </ion-view>

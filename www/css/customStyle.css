@@ -320,6 +320,11 @@ ion-modal-view ion-content p {
   margin:auto;
 }
 
+ion-content {
+  /*height: 40% !important;*/
+  bottom: 55px !important;
+}
+
 .wp-content .content p:first-child {
   display: none;
 }
@@ -871,3 +876,15 @@ a.add-question:hover {
 .toolbar.toolbar-container.ql-toolbar.ql-snow{
   visibility: visible;
 }
+
+/*.he190 {
+  height: 190px;
+  padding-bottom: 190px;
+  background-color: pink;
+  width: 100%;
+  position: relative;
+}*/
+
+/*.article-body .body {
+  margin-bottom: 76px !important;
+}*/
