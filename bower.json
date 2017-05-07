@@ -15,5 +15,8 @@
     "ionic-toast": "^0.4.1",
     "ionic-zoom-view": "^2.0.0",
     "ng-csv": "^0.3.6"
+  },
+  "resolutions": {
+    "angular": "^1.5.8"
   }
 }

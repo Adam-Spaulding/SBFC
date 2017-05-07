@@ -4,6 +4,3 @@
 node_modules/
 .idea/
 platforms/
-#plugins/
-www/lib
-
