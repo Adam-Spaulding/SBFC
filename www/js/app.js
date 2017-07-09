@@ -207,6 +207,17 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+    .state('app.image-capture', {
+      url: '/image-capture',
+      authRequired: true,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/image-capture.html',
+          controller: 'stopWatchController'
+        }
+      }
+    })
+
 // notworking
     .state('app.allcontent', {
       url: '/allcontent',
