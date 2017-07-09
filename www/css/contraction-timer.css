@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+.topbanner{
+  margin:0 1em;
+  padding:0 1em
+}
+
+.topbanner h1{
+  text-align:center;
+}
+
+.topbanner p{
+  text-align:center
+}
+
+.mainarea{
+  margin:1em;
+  padding:1em;
+  font-size:medium;
+  /*border-width:
+  1px;border-style:solid;*/
+  /*border-color:#aaa;
+  background-color:#ddd;*/
+}
+
+.mainarea h2{
+  font-size:medium;
+}
+
+.mainarea button{
+  border:0;
+  margin:0;
+  padding:0;
+  background-color:transparent;
+}
+
+#nowtext{
+  font-size:xx-large;
+  /*font-family: 'Orbitron', sans-serif;
+  unicode-range: U+0-9;*/
+}
+
+#togglebutton image{
+  text-align:center;
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+/*.bottominfo{
+  margin:1em;
+  padding:1em;
+  font-size:medium;
+  border-width:1px;
+  border-style:solid;
+  border-color:#aaa;
+  background-color:#ddd;
+}*/
+
+.contractionlist{
+  float:left;
+  width:300px;
+  margin:1em;
+  padding:1em;
+  border-width:1px;
+  border-style:solid;
+  /*border-color:#aaa;
+  background-color:#ddd;*/
+}
+
+.contractionlist h2{
+  font-size:medium;
+  text-align:center;
+}
+
+.contractionlist ul{
+  list-style-type:none;
+  padding:0 1em;
+}
+
+#contractionlist ul li {
+  text-align: center;
+  font-size: 20px;
+  height: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #68809d;
+}
+
+#contractionlist p {
+  text-align: right;
+  margin: 0 15px 15px 0;
+  padding: 15px 0;
+}
+
+.contractions-header, .contractions-averages, .timer-info {
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  background-color: #fff;
+  color: #68809d;
+  padding-top: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.contractions-averages p {
+  font-size: 18px;
+  border-top: 1px solid #68809d;
+  padding: 16px 0;
+}
+
+.contractions-averages h3, #contractionlist h3, .timer-info {
+    padding: 16px 0;
+}
+
+.timer-info {
+  margin-bottom: 15px;
+}
+
+.timer-info #nowtext {
+  font-size: 18px;
+}
+
+.timer-info #lasttext {
+  font-size: 16px;
+}

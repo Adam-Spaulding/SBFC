@@ -23,11 +23,6 @@ app.controller('AppCtrl', function ($scope, $rootScope, $timeout, $firebaseArray
     $ionicHistory.goBack();
   }
 
-  document.body.onoffline = function() {
-     alert('It looks like you are not conected to the internet. Please check back when you get online.');
-     $scope.connection = 'offline'
-  }
-
   // array
   var refArrayAlerts = firebase.database().ref().child("userInfo");
   // create a synchronized array
@@ -1711,7 +1706,6 @@ app.controller('EditFolderCtrl', function ($scope, $stateParams, $rootScope, $st
   }
 
 
-
   // <button onclick="window.plugins.socialsharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)">message and image</button>
   //
   // <button onclick="window.plugins.socialsharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, image and link</button>
@@ -2200,7 +2194,21 @@ app.controller('YoutubeCtrl', function ($scope, $window, $sce, googleService, $s
 
 });
 
-
+app.controller('stopWatchController', function()  {
+"use strict";var MINUTE_MILLISECONDS=1000*60;var HOUR_MILLISECONDS=MINUTE_MILLISECONDS*60;var DAY_MILLISECONDS=HOUR_MILLISECONDS*24;var contractionList;function supports_html5_storage(){try{return"localStorage" in window&&window.localStorage!==null}catch(a){return false}}
+function replaceElement(b,c){var a=document.getElementById(b);a.innerHTML=c}
+function load(){var a;if(supports_html5_storage()){if(localStorage.contractionList.length>0){contractionList=JSON.parse(localStorage.contractionList)}else{contractionList=[]}for(a=0;a<contractionList.length;++a){var b=contractionList[a];b.starttime=new Date(b.starttime);if(b.stoptime!==undefined){b.stoptime=new Date(b.stoptime)}}}}
+function initializeContractionList(){if(contractionList===undefined){if(supports_html5_storage()){if(localStorage.contractionList===undefined){localStorage.contractionList=""}load()}else{contractionList=[]}}}
+function save(){if(supports_html5_storage()){localStorage.contractionList=JSON.stringify(contractionList)}}
+function resetContractionList(){if(supports_html5_storage()){localStorage.removeItem("contractionList")}contractionList=[];save();initializeContractionList()}
+function Contraction(){this.starttime=new Date();this.inprogress=1}
+function compareContractions(d,c){return d.starttime<c.starttime}
+function reverseCompareContractions(d,c){return d.starttime>c.starttime}
+function latestContraction(){return contractionList[contractionList.length-1]}
+function inContraction(){if(contractionList.length<=0){return false}return latestContraction().inprogress}
+function Statistics(b,c,a){this.duration=b;this.period=c;this.count=a}
+function statisticsForLast(b){var m=0;var g=0;var j=0;var a=new Date();var h=a-b;var e=0;var o=0;var f;for(f=0;f<contractionList.length;++f){var l=contractionList[f];if(l.starttime>h){if(!l.inprogress){m+=(l.stoptime - l.starttime);e++}if(f>0){var n=l.starttime-contractionList[f-1].starttime;if(n<(2*HOUR_MILLISECONDS)){g+=n;o++}}j++}}var d=m;var k=g;if(e>1){d=m/e}if(o>1){k=g/o}return new Statistics(d,k,j)}function formatDuration(c){if(c<0){return"-"+formatDuration(-1*c)}var f=Math.floor(c/1000);var d=Math.floor(f/60);var e=f%60;if(e<10){e="0"+e}if(d<60){return d+":"+e}var b=Math.floor(d/60);var a=d%60;if(a<10){a="0"+a}return b+":"+a+":"+e}function formatDurationAndPeriod(a,b){return formatDuration(a)+", "+formatDuration(b)+" apart"}var MONTH_NAMES=["January","February","March","April","May","June","July","August","September","October","November","December"];function formatContraction(h){var b="";var e=new Date();if((e-h.starttime)>(6*HOUR_MILLISECONDS)){b=MONTH_NAMES[h.starttime.getMonth()]+" "+h.starttime.getDate()+" "}var a=h.starttime.getHours();var d="AM";if(a>=12){a-=12;d="PM"}if(a==0){a=12}var g=h.starttime.getMinutes();if(g<10){g="0"+g}var f=a+":"+g+" "+d;if(h.inprogress){return b+f+" [inprogress]"}return b+f+" ["+formatDuration(h.stoptime-h.starttime)+"]"}function updateDisplayQuick(){if(contractionList.length===0){replaceElement("nowtext","")}else{var b=latestContraction();var a=new Date();if(b.inprogress){replaceElement("nowtext","Current Contraction Time "+formatDuration(a-b.starttime))}else{replaceElement("nowtext",formatDuration(a-b.starttime)+" Since Last Contraction Started")}}}function setToggleButtonImage(){var d=$("#togglebuttonimage");var c=$("#togglebutton");var b=$("#undobuttonimage");var a=$("#undobutton");if(inContraction()){d.attr("src","img/stop.png");c.mousedown(function(){d.attr("src","img/stop-highlighted.png")}).mouseup(function(){d.attr("src","img/stop.png")}).mouseout(function(){d.attr("src","img/stop.png")});b.attr("src","img/undostart.png");a.mousedown(function(){b.attr("src","img/undostart-highlighted.png")}).mouseup(function(){b.attr("src","img/undostart.png")}).mouseout(function(){b.attr("src","img/undostart.png")})}else{d.attr("src","img/start.png");c.mousedown(function(){d.attr("src","img/start-highlighted.png")}).mouseup(function(){d.attr("src","img/start.png")}).mouseout(function(){d.attr("src","img/start.png")});b.attr("src","img/undostop.png");a.mousedown(function(){b.attr("src","img/undostop-highlighted.png")}).mouseup(function(){b.attr("src","img/undostop.png")}).mouseout(function(){b.attr("src","img/undostop.png")})}}function updateDisplayFull(){var g;updateDisplayQuick();setToggleButtonImage();if(contractionList.length===0){replaceElement("lasttext","")}else{g=latestContraction();replaceElement("lasttext","My Last Contraction Started at "+formatContraction(g))}var b=statisticsForLast(20*MINUTE_MILLISECONDS);replaceElement("twentyminutetext",formatDurationAndPeriod(b.duration,b.period));replaceElement("twentyminutecount",b.count);var f=statisticsForLast(HOUR_MILLISECONDS);replaceElement("sixtyminutetext",formatDurationAndPeriod(f.duration,f.period));replaceElement("sixtyminutecount",f.count);var e=statisticsForLast(DAY_MILLISECONDS);replaceElement("twentyfourhourtext",formatDurationAndPeriod(e.duration,e.period));replaceElement("twentyfourhourcount",e.count);var d="</ul><p>"+contractionList.length+" total</p>";var a;for(a=0;a<contractionList.length;++a){g=contractionList[a];d="<li>"+formatContraction(g)+"</li>"+d}d="<ul>"+d;replaceElement("contractionlist",d)}var timer;var loopcount;function cancelTimer(){clearInterval(timer)}function handleTimer(){if(loopcount<30){updateDisplayQuick()}else{updateDisplayFull();loopcount=0}}function setTimer(){cancelTimer();timer=setInterval(handleTimer,1000);loopcount=0}function pushedToggle(){var a;if(inContraction()){a=latestContraction();a.stoptime=new Date();a.inprogress=0}else{a=new Contraction();contractionList.push(a)}save();updateDisplayFull()}function pushedUndoLastToggle(){var a;if(contractionList.length<=0){return}if(inContraction()){a=contractionList.pop()}else{a=latestContraction();a.inprogress=1}save();updateDisplayFull()}function pushedResetAllData(){var a=window.confirm("Reset all data?  Cannot be undone!");if(a){resetContractionList();updateDisplayFull()}}$(function(){initializeContractionList();updateDisplayFull();setTimer();$(window).focus(function(){updateDisplayFull();setTimer()}).blur(function(){cancelTimer()});$("#togglebutton").click(function(){pushedToggle()});$("#undobutton").click(function(){pushedUndoLastToggle()});$("#resetbutton").click(function(){pushedResetAllData()});var a=$("#resetbuttonimage");var b=$("#resetbutton");a.attr("src","img/reset.png");b.mousedown(function(){a.attr("src","img/reset-highlighted.png")}).mouseup(function(){a.attr("src","img/reset.png")}).mouseout(function(){a.attr("src","img/reset.png")})});var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-18708700-1"]);_gaq.push(["_trackPageview"]);(function(){var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();
+})
 
 app.controller('MapsCtrl', function ($scope) {
 

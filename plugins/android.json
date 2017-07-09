@@ -19,6 +19,9 @@
         "cordova-plugin-firebase": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.ionicframework.app981534"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
@@ -35,9 +38,6 @@
             "PACKAGE_NAME": "com.ionicframework.app981534"
         },
         "onesignal-cordova-plugin": {
-            "PACKAGE_NAME": "com.ionicframework.app981534"
-        },
-        "cordova-plugin-google-analytics": {
             "PACKAGE_NAME": "com.ionicframework.app981534"
         }
     },

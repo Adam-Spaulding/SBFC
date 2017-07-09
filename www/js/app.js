@@ -196,6 +196,17 @@ $ionicConfigProvider.tabs.position('bottom');
       }
     })
 
+    .state('app.contraction-timer', {
+      url: '/contraction-timer',
+      authRequired: true,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/contraction-timer.html',
+          controller: 'stopWatchController'
+        }
+      }
+    })
+
 // notworking
     .state('app.allcontent', {
       url: '/allcontent',
